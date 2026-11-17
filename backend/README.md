@@ -9,7 +9,7 @@ REST API for **TrayectorIA**, an AI-powered job networking platform that connect
 - **Two roles** (candidate and company) with JWT authentication and refresh tokens
 - **Candidate profile:** experience, education, skills and languages
 - **Job offers** with applications and status tracking; saved offers
-- **AI-generated CVs** from the candidate profile (Spring AI + OpenAI)
+- **AI-generated CVs** from the candidate profile (OpenAI via Spring AI, or Google Gemini)
 - **AI mock interviews** based on the instructions of a job offer, with chat-style messages
 - **Company stats** dashboard endpoint
 - Voice interviews: planned (the endpoint only exposes a feature flag)
@@ -19,7 +19,7 @@ REST API for **TrayectorIA**, an AI-powered job networking platform that connect
 - Kotlin 1.9, Java 21, Spring Boot 3.5
 - Spring Security + JWT, role-based access
 - Spring Data JPA, PostgreSQL, Flyway migrations, MapStruct
-- Spring AI with the OpenAI API
+- Spring AI with the OpenAI API, or the Gemini API (selected with `AI_PROVIDER=openai|gemini`)
 - SpringDoc OpenAPI (Swagger UI)
 - JUnit 5 + Testcontainers integration tests
 - Gradle (Kotlin DSL), Docker, Railway deploy config
@@ -31,7 +31,7 @@ Requirements: JDK 21 and Docker.
 ```bash
 git clone https://github.com/leandro-mc/trayectoria-backend.git
 cd trayectoria-backend
-cp .env.example .env     # DB, JWT secret, OpenAI key
+cp .env.example .env     # DB, JWT secret, AI provider + key
 docker-compose up -d     # PostgreSQL only
 ./gradlew bootRun        # Windows: gradlew.bat bootRun
 ```

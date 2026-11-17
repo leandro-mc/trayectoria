@@ -34,7 +34,7 @@ This monorepo contains both halves of the project, with the full commit history 
 
 - **Use-case oriented backend:** one class per use case in `application/`, AI behind an output port, JPA and security in `infrastructure/`, controllers and MapStruct mappers in `web/`.
 - **Database migrations with Flyway** and integration tests with **JUnit 5 + Testcontainers**.
-- **Spring AI + OpenAI** for CV generation and interview simulation.
+- **Pluggable AI provider:** CV generation and interview simulation sit behind a port, with two interchangeable implementations: **OpenAI** (via Spring AI, the default) and **Google Gemini**. Switch with a single setting, `AI_PROVIDER=openai|gemini`.
 - **Frontend organised by feature:** each domain module (auth, candidate, company, jobs, applications, ai…) owns its `api/`, `components/`, `hooks/` and `schemas/`. Data flow: component → custom hook (TanStack Query) → API function → Axios client → backend.
 - Forms validated with React Hook Form + Zod; server state with TanStack Query; client state with Zustand.
 - Interactive API documentation with SpringDoc / Swagger UI, plus Docker and Railway deploy configuration.
@@ -48,7 +48,7 @@ This monorepo contains both halves of the project, with the full commit history 
 └──────────────────────┘                        └─────────────┬──────────────┘     └────────────┘
                                                               │
                                                               ▼
-                                                        OpenAI API (CV + interviews)
+                                                        OpenAI or Gemini API (CV + interviews)
 ```
 
 ## Run with Docker (recommended)
@@ -81,7 +81,18 @@ Then open **http://localhost:3000**. The first build downloads dependencies and 
 | Swagger UI | http://localhost:8080/api/swagger-ui/index.html |
 | PostgreSQL | `localhost:5434` (`trayectoria` / `trayectoria`) |
 
-**AI features:** everything works without an OpenAI key, and the demo CVs and interviews are already loaded. To generate new CVs or run new mock interviews, copy [`.env.example`](.env.example) to `.env` and set `OPENAI_API_KEY`.
+**AI features:** everything works without an AI key, and the demo CVs and interviews are already loaded. To generate new CVs or run new mock interviews, copy [`.env.example`](.env.example) to `.env` and pick a provider:
+
+```bash
+# OpenAI (default)
+OPENAI_API_KEY=sk-...
+
+# or Google Gemini (free key at https://aistudio.google.com/apikey)
+AI_PROVIDER=gemini
+GEMINI_API_KEY=...
+```
+
+Then `docker compose up -d` again. The model can be changed with `OPENAI_MODEL` / `GEMINI_MODEL`.
 
 Useful commands:
 
@@ -96,7 +107,7 @@ Ports, DB credentials, the JWT secret and `SEED_DEMO_DATA=false` (start with an 
 
 ## Run without Docker
 
-Requirements: JDK 21, Docker (for PostgreSQL only) and Node.js 20+. An OpenAI API key is needed for the AI features.
+Requirements: JDK 21, Docker (for PostgreSQL only) and Node.js 20+. An API key for OpenAI or Gemini is needed for the AI features (`AI_PROVIDER`).
 
 ```bash
 git clone https://github.com/leandro-mc/trayectoria.git
@@ -104,7 +115,7 @@ cd trayectoria
 
 # 1. Backend  (API on http://localhost:8080/api, Swagger UI at /api/swagger-ui/index.html)
 cd backend
-cp .env.example .env          # DB, JWT secret, OpenAI key
+cp .env.example .env          # DB, JWT secret, AI provider + key
 docker compose up -d          # PostgreSQL only
 ./gradlew bootRun
 

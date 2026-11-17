@@ -34,7 +34,7 @@ Este monorepo contiene las dos partes del proyecto, conservando el historial com
 
 - **Backend orientado a casos de uso:** una clase por caso de uso en `application/`, la IA detrás de un puerto de salida, JPA y seguridad en `infrastructure/`, controladores y mappers MapStruct en `web/`.
 - **Migraciones de base de datos con Flyway** y tests de integración con **JUnit 5 + Testcontainers**.
-- **Spring AI + OpenAI** para la generación de CV y la simulación de entrevistas.
+- **Proveedor de IA intercambiable:** la generación de CV y la simulación de entrevistas están detrás de un puerto, con dos implementaciones: **OpenAI** (vía Spring AI, la opción por defecto) y **Google Gemini**. Se elige con una sola variable, `AI_PROVIDER=openai|gemini`.
 - **Frontend organizado por feature:** cada módulo de dominio (auth, candidate, company, jobs, applications, ai…) tiene su propio `api/`, `components/`, `hooks/` y `schemas/`. Flujo de datos: componente → hook propio (TanStack Query) → función de API → cliente Axios → backend.
 - Formularios validados con React Hook Form + Zod; estado de servidor con TanStack Query; estado de cliente con Zustand.
 - Documentación interactiva de la API con SpringDoc / Swagger UI, más configuración de Docker y despliegue en Railway.
@@ -48,7 +48,7 @@ Este monorepo contiene las dos partes del proyecto, conservando el historial com
 └──────────────────────┘                        └─────────────┬──────────────┘     └────────────┘
                                                               │
                                                               ▼
-                                                        API de OpenAI (CV + entrevistas)
+                                                        API de OpenAI o Gemini (CV + entrevistas)
 ```
 
 ## Ejecutar con Docker (recomendado)
@@ -81,7 +81,18 @@ Después abrí **http://localhost:3000**. El primer build descarga dependencias 
 | Swagger UI | http://localhost:8080/api/swagger-ui/index.html |
 | PostgreSQL | `localhost:5434` (`trayectoria` / `trayectoria`) |
 
-**Funciones de IA:** todo funciona sin clave de OpenAI y los CVs y entrevistas de demo ya vienen cargados. Para generar CVs nuevos o hacer entrevistas simuladas nuevas, copiá [`.env.example`](.env.example) a `.env` y completá `OPENAI_API_KEY`.
+**Funciones de IA:** todo funciona sin clave de IA y los CVs y entrevistas de demo ya vienen cargados. Para generar CVs nuevos o hacer entrevistas simuladas nuevas, copiá [`.env.example`](.env.example) a `.env` y elegí un proveedor:
+
+```bash
+# OpenAI (por defecto)
+OPENAI_API_KEY=sk-...
+
+# o Google Gemini (clave gratuita en https://aistudio.google.com/apikey)
+AI_PROVIDER=gemini
+GEMINI_API_KEY=...
+```
+
+Después `docker compose up -d` de nuevo. El modelo se cambia con `OPENAI_MODEL` / `GEMINI_MODEL`.
 
 Comandos útiles:
 
@@ -96,7 +107,7 @@ Los puertos, las credenciales de la BD, el secreto JWT y `SEED_DEMO_DATA=false` 
 
 ## Ejecutar sin Docker
 
-Requisitos: JDK 21, Docker (solo para PostgreSQL) y Node.js 20+. Para las funciones de IA hace falta una API key de OpenAI.
+Requisitos: JDK 21, Docker (solo para PostgreSQL) y Node.js 20+. Para las funciones de IA hace falta una API key de OpenAI o Gemini (`AI_PROVIDER`).
 
 ```bash
 git clone https://github.com/leandro-mc/trayectoria.git
@@ -104,7 +115,7 @@ cd trayectoria
 
 # 1. Backend  (API en http://localhost:8080/api, Swagger UI en /api/swagger-ui/index.html)
 cd backend
-cp .env.example .env          # BD, secreto JWT, clave de OpenAI
+cp .env.example .env          # BD, secreto JWT, proveedor de IA + clave
 docker compose up -d          # solo PostgreSQL
 ./gradlew bootRun
 

@@ -4,7 +4,8 @@
 #    docker compose up --build        # db + api + web + demo data
 #    open http://localhost:3000
 #
-#  Optional: copy .env.example to .env to set OPENAI_API_KEY (AI
+#  Optional: copy .env.example to .env to set OPENAI_API_KEY or
+#  GEMINI_API_KEY + AI_PROVIDER=gemini (AI
 #  features), change ports, credentials or the JWT secret.
 #  Stop:             docker compose down
 #  Stop + wipe data: docker compose down -v
@@ -50,6 +51,10 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY:-sk-not-configured}
       SPRING_AI_OPENAI_API_KEY: ${OPENAI_API_KEY:-sk-not-configured}
       OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+      # AI provider: openai (default) or gemini. Gemini needs GEMINI_API_KEY.
+      AI_PROVIDER: ${AI_PROVIDER:-openai}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.5-flash}
       # Optional (avatars/logos upload)
       CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-}
       CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-}
@@ -102,7 +107,7 @@ services:
 
   # One-shot job 2/2: adds pre-written AI content (a tailored CV and two mock
   # interviews) directly in the database, so those screens have data even
-  # without an OpenAI key. Never fails the stack if something goes wrong.
+  # without an AI key. Never fails the stack if something goes wrong.
   seed-ai:
     image: postgres:16-alpine
     depends_on:
