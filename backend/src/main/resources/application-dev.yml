@@ -28,7 +28,7 @@ spring:
 
   ai:
     openai:
-      api-key: ${OPENAI_API_KEY:}
+      api-key: ${OPENAI_API_KEY:sk-not-configured}
 
 jwt:
   secret: ${JWT_SECRET}

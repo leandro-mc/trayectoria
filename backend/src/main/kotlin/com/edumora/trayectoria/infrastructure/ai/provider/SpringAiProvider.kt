@@ -4,6 +4,7 @@ import com.edumora.trayectoria.application.port.output.AiGenerationPort
 import com.edumora.trayectoria.shared.exception.InternalException
 import org.slf4j.LoggerFactory
 import org.springframework.ai.chat.client.ChatClient
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.stereotype.Component
 
 /**
@@ -16,11 +17,15 @@ import org.springframework.stereotype.Component
  * This is infrastructure, not business logic.
  * @Service semantically indicates "use case / domain logic."
  *
+ * Active by default; set `app.ai.provider=gemini` (env AI_PROVIDER=gemini)
+ * to use GeminiProvider instead.
+ *
  * Thread safety:
  * Spring AI's ChatClient is thread-safe — it is a stateless singleton.
  * There are no setStrategy() methods or instance variables that change at runtime.
  */
 @Component
+@ConditionalOnProperty(prefix = "app.ai", name = ["provider"], havingValue = "openai", matchIfMissing = true)
 class SpringAiProvider(
     chatClientBuilder: ChatClient.Builder
 ) : AiGenerationPort {

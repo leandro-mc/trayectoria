@@ -5,6 +5,18 @@ spring:
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}   # Default to 'dev' profile if not set
 
+  # Placeholder so the OpenAI auto-configuration can start even when OpenAI is not
+  # used (e.g. AI_PROVIDER=gemini). Real calls need a real OPENAI_API_KEY.
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY:sk-not-configured}
+
+  # Timeouts for outgoing HTTP calls made with Spring's RestClient (used by the Gemini provider)
+  http:
+    client:
+      connect-timeout: 10s
+      read-timeout: 90s
+
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}
@@ -79,3 +91,17 @@ logging:
     org.flywaydb: INFO
     com.edumora.trayectoria: DEBUG
     org.springframework.security: DEBUG
+
+# ── AI provider ──────────────────────────────────────────────────
+# Which implementation of AiGenerationPort is used: openai (default) | gemini
+app:
+  ai:
+    provider: ${AI_PROVIDER:openai}
+
+# Used only when AI_PROVIDER=gemini
+gemini:
+  api-key: ${GEMINI_API_KEY:}
+  model: ${GEMINI_MODEL:gemini-2.5-flash}
+  base-url: ${GEMINI_BASE_URL:https://generativelanguage.googleapis.com/v1beta}
+  max-output-tokens: ${GEMINI_MAX_TOKENS:8192}
+  temperature: ${GEMINI_TEMPERATURE:0.7}
