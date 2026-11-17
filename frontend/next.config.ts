@@ -1,6 +1,10 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  // Docker builds set NEXT_OUTPUT=standalone to produce a minimal self-contained server.
+  // Regular `npm run dev` / `npm run build` are unaffected.
+  output: process.env.NEXT_OUTPUT === 'standalone' ? 'standalone' : undefined,
+
   // Allow requests from local network devices (phones, tablets, etc.)
   allowedDevOrigins: [
     "http://192.168.100.33:3000",
