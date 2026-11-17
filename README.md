@@ -51,9 +51,52 @@ This monorepo contains both halves of the project, with the full commit history 
                                                         OpenAI API (CV + interviews)
 ```
 
-## Run it locally
+## Run with Docker (recommended)
 
-Requirements: JDK 21, Docker and Node.js 20+. An OpenAI API key is needed for the AI features.
+The only requirement is **Docker** (with Compose). No JDK, Gradle or Node needed.
+
+```bash
+git clone https://github.com/leandro-mc/trayectoria.git
+cd trayectoria
+docker compose up --build
+```
+
+Then open **http://localhost:3000**. The first build downloads dependencies and takes a few minutes. On the first start two one-shot services load fictional demo data (companies, candidates with full profiles, job offers, applications in every status, saved offers, and pre-written AI content), so every screen has something to show right away.
+
+**Demo accounts** (password for all of them: `Demo1234!`)
+
+| Role | Email | What you'll see |
+|---|---|---|
+| Candidate | `sofia@demo.trayectoria.dev` | Full profile, 4 applications, saved offers, tailored CVs and 2 mock interviews |
+| Candidate | `mateo@demo.trayectoria.dev` | Backend junior profile, 3 applications, a tailored CV |
+| Candidate | `camila@demo.trayectoria.dev` | QA / data profile, 3 applications |
+| Company | `nimbus@demo.trayectoria.dev` | 4 offers (one in draft), applicants to review |
+| Company | `verde@demo.trayectoria.dev` | 3 offers, applicants in different statuses |
+| Company | `cordillera@demo.trayectoria.dev` | 3 offers (one closed) |
+
+| Service | URL |
+|---|---|
+| Web app | http://localhost:3000 |
+| API | http://localhost:8080/api |
+| Swagger UI | http://localhost:8080/api/swagger-ui/index.html |
+| PostgreSQL | `localhost:5434` (`trayectoria` / `trayectoria`) |
+
+**AI features:** everything works without an OpenAI key, and the demo CVs and interviews are already loaded. To generate new CVs or run new mock interviews, copy [`.env.example`](.env.example) to `.env` and set `OPENAI_API_KEY`.
+
+Useful commands:
+
+```bash
+docker compose up --build -d      # run in the background
+docker compose logs -f backend    # follow the API logs
+docker compose down               # stop (data is kept in a volume)
+docker compose down -v            # stop and wipe the database; demo data is reloaded on the next up
+```
+
+Ports, DB credentials, the JWT secret and `SEED_DEMO_DATA=false` (start with an empty database) are configured in `.env`. The seed is idempotent and can also be run by hand against any running instance: `node seed/seed.mjs` (API) and `psql -f seed/ai-demo.sql` (AI content).
+
+## Run without Docker
+
+Requirements: JDK 21, Docker (for PostgreSQL only) and Node.js 20+. An OpenAI API key is needed for the AI features.
 
 ```bash
 git clone https://github.com/leandro-mc/trayectoria.git
