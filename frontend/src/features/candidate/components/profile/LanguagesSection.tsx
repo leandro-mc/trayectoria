@@ -8,9 +8,9 @@ import { useLanguages, useAddLanguage, useDeleteLanguage } from '../../hooks/use
 import { languageSchema, type LanguageFormValues } from '../../schemas/candidate.schemas'
 import { LANGUAGE_LEVELS } from '@/config/constants'
 import { Spinner } from '@/components/ui/spinner'
+import { NativeSelect } from '@/components/ui/native-select'
+import { Input } from '@/components/ui/input'
 
-const inputClass = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
-const selectClass = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
 
 export function LanguagesSection() {
   const { data: languages = [], isLoading } = useLanguages()
@@ -54,21 +54,20 @@ export function LanguagesSection() {
         {showForm && (
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col sm:flex-row gap-3 p-4 rounded-xl bg-neutral-50 dark:bg-neutral-800/50 border border-input">
             <div className="flex-1">
-              <input
+              <Input
                 {...register('language')}
                 placeholder="Ej: Inglés, Portugués"
                 disabled={adding}
-                className={inputClass}
               />
               {errors.language && <p className="mt-1 text-xs text-danger-500">{errors.language.message}</p>}
             </div>
             <div className="w-full sm:w-40">
-              <select {...register('level')} disabled={adding} className={selectClass}>
+              <NativeSelect {...register('level')} disabled={adding}>
                 <option value="">Nivel</option>
                 {LANGUAGE_LEVELS.map((lvl) => (
                   <option key={lvl} value={lvl}>{lvl}</option>
                 ))}
-              </select>
+              </NativeSelect>
             </div>
             <div className="flex gap-2">
               <button

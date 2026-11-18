@@ -9,6 +9,8 @@ import { profileSchema, type ProfileFormValues } from '../../schemas/candidate.s
 import { extractApiError } from '@/lib/utils/format'
 import { Spinner } from '@/components/ui/spinner'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/components/ui/input'
 
 //  Reusable field wrapper 
 
@@ -30,8 +32,6 @@ function Field({
   )
 }
 
-const inputClass = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
-const textareaClass = 'w-full px-3 py-2.5 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 resize-none'
 
 //  Component 
 
@@ -100,36 +100,35 @@ export function ProfileForm() {
       {/* Name row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="Nombre" error={errors.firstName?.message}>
-          <input {...register('firstName')} placeholder="Tu nombre" disabled={isPending} className={inputClass} />
+          <Input {...register('firstName')} placeholder="Tu nombre" disabled={isPending} />
         </Field>
         <Field label="Apellido" error={errors.lastName?.message}>
-          <input {...register('lastName')} placeholder="Tu apellido" disabled={isPending} className={inputClass} />
+          <Input {...register('lastName')} placeholder="Tu apellido" disabled={isPending} />
         </Field>
       </div>
 
       {/* Phone + location */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label="Teléfono" error={errors.phone?.message}>
-          <input {...register('phone')} placeholder="+506 8888-8888" disabled={isPending} className={inputClass} />
+          <Input {...register('phone')} placeholder="+506 8888-8888" disabled={isPending} />
         </Field>
         <Field label="Ubicación" error={errors.location?.message}>
-          <input {...register('location')} placeholder="San José, Costa Rica" disabled={isPending} className={inputClass} />
+          <Input {...register('location')} placeholder="San José, Costa Rica" disabled={isPending} />
         </Field>
       </div>
 
       {/* Birthdate */}
       <Field label="Fecha de nacimiento" error={errors.birthdate?.message}>
-        <input type="date" {...register('birthdate')} disabled={isPending} className={inputClass} />
+        <Input type="date" {...register('birthdate')} disabled={isPending} />
       </Field>
 
       {/* Bio */}
       <Field label="Biografía" error={errors.bio?.message}>
-        <textarea
+        <Textarea
           {...register('bio')}
           rows={3}
           placeholder="Contá brevemente sobre vos, tu experiencia y objetivos profesionales..."
           disabled={isPending}
-          className={textareaClass}
         />
       </Field>
 
@@ -138,13 +137,13 @@ export function ProfileForm() {
         <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-4">Links</p>
         <div className="space-y-4">
           <Field label="LinkedIn" error={errors.linkedinUrl?.message}>
-            <input {...register('linkedinUrl')} placeholder="https://linkedin.com/in/tu-perfil" disabled={isPending} className={inputClass} />
+            <Input {...register('linkedinUrl')} placeholder="https://linkedin.com/in/tu-perfil" disabled={isPending} />
           </Field>
           <Field label="GitHub" error={errors.githubUrl?.message}>
-            <input {...register('githubUrl')} placeholder="https://github.com/tu-usuario" disabled={isPending} className={inputClass} />
+            <Input {...register('githubUrl')} placeholder="https://github.com/tu-usuario" disabled={isPending} />
           </Field>
           <Field label="Portfolio" error={errors.portfolioUrl?.message}>
-            <input {...register('portfolioUrl')} placeholder="https://tu-portfolio.com" disabled={isPending} className={inputClass} />
+            <Input {...register('portfolioUrl')} placeholder="https://tu-portfolio.com" disabled={isPending} />
           </Field>
         </div>
       </div>

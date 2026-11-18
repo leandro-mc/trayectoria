@@ -4,6 +4,7 @@ import { Search, X } from 'lucide-react'
 import { WORK_MODE_LABELS, JOB_TYPE_LABELS } from '@/config/constants'
 import type { WorkMode, JobType } from '@/types/global.types'
 import type { ListJobOffersParams } from '../types/jobs.types'
+import { Input } from '@/components/ui/input'
 
 interface JobOfferFiltersProps {
   filters:   ListJobOffersParams
@@ -79,14 +80,13 @@ export function JobOfferFilters({ filters, onChange }: JobOfferFiltersProps) {
         </p>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 pointer-events-none" />
-          <input
+          <Input
             type="text"
             value={filters.keyword ?? ''}
             onChange={(e) =>
               onChange({ ...filters, keyword: e.target.value || undefined, page: 0 })
             }
-            placeholder="Título del puesto..."
-            className="w-full h-9 pl-9 pr-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+            placeholder="Título del puesto..." className="h-9 pl-9 pr-3"
           />
         </div>
       </div>

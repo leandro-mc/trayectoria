@@ -10,6 +10,8 @@ import { useRegisterCompany } from '../hooks/useAuth'
 import { extractApiError } from '@/lib/utils/format'
 import { ROUTES } from '@/config/routes'
 import { Spinner } from '@/components/ui/spinner'
+import { Input } from '@/components/ui/input'
+import { FormLabel, FieldError } from '@/components/shared/forms/FormField'
 
 export function RegisterCompanyForm() {
   const [showPassword, setShowPassword]       = useState(false)
@@ -68,56 +70,49 @@ export function RegisterCompanyForm() {
 
           {/* Company name */}
           <div>
-            <label htmlFor="companyName" className="block text-sm font-medium text-secondary-foreground mb-1.5">
+            <FormLabel htmlFor="companyName">
               Nombre de la empresa
-            </label>
-            <input
+            </FormLabel>
+            <Input
               id="companyName"
               type="text"
               autoComplete="organization"
               placeholder="Ej: TechCorp S.A."
               disabled={isPending}
               {...register('companyName')}
-              className="w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
             />
-            {errors.companyName && (
-              <p className="mt-1.5 text-xs text-danger-500">{errors.companyName.message}</p>
-            )}
+            <FieldError error={errors.companyName} />
           </div>
 
           {/* Email */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-secondary-foreground mb-1.5">
+            <FormLabel htmlFor="email">
               Email corporativo
-            </label>
-            <input
+            </FormLabel>
+            <Input
               id="email"
               type="email"
               autoComplete="email"
               placeholder="contacto@empresa.com"
               disabled={isPending}
               {...register('email')}
-              className="w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
             />
-            {errors.email && (
-              <p className="mt-1.5 text-xs text-danger-500">{errors.email.message}</p>
-            )}
+            <FieldError error={errors.email} />
           </div>
 
           {/* Password */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-secondary-foreground mb-1.5">
+            <FormLabel htmlFor="password">
               Contraseña
-            </label>
+            </FormLabel>
             <div className="relative">
-              <input
+              <Input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 autoComplete="new-password"
                 placeholder="Mínimo 8 caracteres"
                 disabled={isPending}
-                {...register('password')}
-                className="w-full h-10 px-3 pr-10 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
+                {...register('password')} className="pr-10"
               />
               <button
                 type="button"
@@ -128,25 +123,22 @@ export function RegisterCompanyForm() {
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
-            {errors.password && (
-              <p className="mt-1.5 text-xs text-danger-500">{errors.password.message}</p>
-            )}
+            <FieldError error={errors.password} />
           </div>
 
           {/* Confirm password */}
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-secondary-foreground mb-1.5">
+            <FormLabel htmlFor="confirmPassword">
               Confirmar contraseña
-            </label>
+            </FormLabel>
             <div className="relative">
-              <input
+              <Input
                 id="confirmPassword"
                 type={showConfirmPassword ? 'text' : 'password'}
                 autoComplete="new-password"
                 placeholder="Repetí tu contraseña"
                 disabled={isPending}
-                {...register('confirmPassword')}
-                className="w-full h-10 px-3 pr-10 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
+                {...register('confirmPassword')} className="pr-10"
               />
               <button
                 type="button"
@@ -157,9 +149,7 @@ export function RegisterCompanyForm() {
                 {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
-            {errors.confirmPassword && (
-              <p className="mt-1.5 text-xs text-danger-500">{errors.confirmPassword.message}</p>
-            )}
+            <FieldError error={errors.confirmPassword} />
           </div>
 
           {/* Submit */}

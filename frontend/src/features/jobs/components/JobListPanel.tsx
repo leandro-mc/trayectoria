@@ -10,6 +10,7 @@ import { WORK_MODE_LABELS, JOB_TYPE_LABELS } from '@/config/constants'
 import type { WorkMode, JobType } from '@/types/global.types'
 import { cn } from '@/lib/utils/cn'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Input } from '@/components/ui/input'
 
 //  Filter pill 
 
@@ -84,12 +85,11 @@ export function JobListPanel() {
         {/* Search */}
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 pointer-events-none" />
-          <input
+          <Input
             type="text"
             value={keyword}
             onChange={(e) => setFilter('q', e.target.value)}
-            placeholder="Buscar por título..."
-            className="w-full h-9 pl-9 pr-8 rounded-lg border border-input bg-neutral-50 dark:bg-neutral-800 text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+            placeholder="Buscar por título..." className="h-9 pl-9 pr-8 bg-neutral-50 dark:bg-neutral-800"
           />
           {keyword && (
             <button

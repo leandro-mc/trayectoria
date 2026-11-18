@@ -6,6 +6,7 @@ import { useSkillsCatalog } from '../hooks/useSkillsCatalog'
 import type { SkillResponse } from '@/types/api.types'
 import { cn } from '@/lib/utils/cn'
 import { Spinner } from '@/components/ui/spinner'
+import { Input } from '@/components/ui/input'
 
 interface SkillPickerProps {
   // Skills the candidate already has
@@ -86,7 +87,7 @@ export function SkillPicker({
             {isLoading && search.length >= 2 && (
               <Spinner className="size-4 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" />
             )}
-            <input
+            <Input
               ref={inputRef}
               type="text"
               value={search}
@@ -95,8 +96,7 @@ export function SkillPicker({
                 setOpen(true)
               }}
               onFocus={() => setOpen(true)}
-              placeholder="Buscar y agregar skills..."
-              className="w-full h-10 pl-9 pr-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              placeholder="Buscar y agregar skills..." className="pl-9 pr-3"
             />
           </div>
 

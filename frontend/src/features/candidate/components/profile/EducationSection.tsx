@@ -14,8 +14,8 @@ import { educationSchema, type EducationFormValues } from '../../schemas/candida
 import { formatPeriod } from '@/lib/utils/date'
 import type { EducationResponse } from '../../types/candidate.types'
 import { Spinner } from '@/components/ui/spinner'
+import { Input } from '@/components/ui/input'
 
-const inputClass = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
 
 function EducationForm({ initial, onClose }: { initial?: EducationResponse; onClose: () => void }) {
   const { mutate: add,    isPending: adding   } = useAddEducation()
@@ -63,25 +63,25 @@ function EducationForm({ initial, onClose }: { initial?: EducationResponse; onCl
         <form onSubmit={handleSubmit(onSubmit)} className="p-5 space-y-4 flex-1">
           <div>
             <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Institución *</label>
-            <input {...register('institution')} placeholder="Universidad o institución" disabled={isPending} className={inputClass} />
+            <Input {...register('institution')} placeholder="Universidad o institución" disabled={isPending} />
             {errors.institution && <p className="mt-1 text-xs text-danger-500">{errors.institution.message}</p>}
           </div>
           <div>
             <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Título / Grado</label>
-            <input {...register('degree')} placeholder="Ej: Licenciatura, Bachillerato" disabled={isPending} className={inputClass} />
+            <Input {...register('degree')} placeholder="Ej: Licenciatura, Bachillerato" disabled={isPending} />
           </div>
           <div>
             <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Campo de estudio</label>
-            <input {...register('fieldOfStudy')} placeholder="Ej: Ingeniería en Sistemas" disabled={isPending} className={inputClass} />
+            <Input {...register('fieldOfStudy')} placeholder="Ej: Ingeniería en Sistemas" disabled={isPending} />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Inicio</label>
-              <input type="date" {...register('startDate')} disabled={isPending} className={inputClass} />
+              <Input type="date" {...register('startDate')} disabled={isPending} />
             </div>
             <div>
               <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Fin</label>
-              <input type="date" {...register('endDate')} disabled={isPending} className={inputClass} />
+              <Input type="date" {...register('endDate')} disabled={isPending} />
             </div>
           </div>
           <div className="flex gap-3 pt-2">

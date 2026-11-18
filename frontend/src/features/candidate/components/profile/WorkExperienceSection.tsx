@@ -17,6 +17,8 @@ import {
 import { formatPeriod } from '@/lib/utils/date'
 import type { WorkExperienceResponse } from '../../types/candidate.types'
 import { Spinner } from '@/components/ui/spinner'
+import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/components/ui/input'
 
 //  Form Sheet 
 
@@ -25,8 +27,6 @@ interface ExperienceFormProps {
   onClose:   () => void
 }
 
-const inputClass = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
-const textareaClass = 'w-full px-3 py-2.5 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 resize-none'
 
 function ExperienceForm({ initial, onClose }: ExperienceFormProps) {
   const { mutate: add,    isPending: adding   } = useAddExperience()
@@ -81,26 +81,26 @@ function ExperienceForm({ initial, onClose }: ExperienceFormProps) {
         <form onSubmit={handleSubmit(onSubmit)} className="p-5 space-y-4 flex-1">
           <div>
             <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Empresa *</label>
-            <input {...register('company')} placeholder="Nombre de la empresa" disabled={isPending} className={inputClass} />
+            <Input {...register('company')} placeholder="Nombre de la empresa" disabled={isPending} />
             {errors.company && <p className="mt-1 text-xs text-danger-500">{errors.company.message}</p>}
           </div>
           <div>
             <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Cargo *</label>
-            <input {...register('position')} placeholder="Tu cargo o rol" disabled={isPending} className={inputClass} />
+            <Input {...register('position')} placeholder="Tu cargo o rol" disabled={isPending} />
             {errors.position && <p className="mt-1 text-xs text-danger-500">{errors.position.message}</p>}
           </div>
           <div>
             <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Descripción</label>
-            <textarea {...register('description')} rows={3} placeholder="Describí tus responsabilidades y logros..." disabled={isPending} className={textareaClass} />
+            <Textarea {...register('description')} rows={3} placeholder="Describí tus responsabilidades y logros..." disabled={isPending} />
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Inicio</label>
-              <input type="date" {...register('startDate')} disabled={isPending} className={inputClass} />
+              <Input type="date" {...register('startDate')} disabled={isPending} />
             </div>
             <div>
               <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Fin</label>
-              <input type="date" {...register('endDate')} disabled={isPending || isCurrent} className={inputClass} />
+              <Input type="date" {...register('endDate')} disabled={isPending || isCurrent} />
             </div>
           </div>
           <label className="flex items-center gap-2.5 cursor-pointer">

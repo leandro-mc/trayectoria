@@ -10,9 +10,9 @@ import { extractApiError } from '@/lib/utils/format'
 import { getInitials } from '@/lib/utils/format'
 import { Spinner } from '@/components/ui/spinner'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/components/ui/input'
 
-const inputClass    = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
-const textareaClass = 'w-full px-3 py-2.5 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 resize-none'
 
 function Field({
   label, error, children,
@@ -138,49 +138,44 @@ export function CompanyProfileForm() {
       {/*  Fields  */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <Field label="Nombre de la empresa" error={errors.companyName?.message}>
-          <input
+          <Input
             {...register('companyName')}
             placeholder="Nombre de tu empresa"
             disabled={isPending}
-            className={inputClass}
           />
         </Field>
         <Field label="Industria" error={errors.industry?.message}>
-          <input
+          <Input
             {...register('industry')}
             placeholder="Ej: Tecnología, Finanzas, Salud"
             disabled={isPending}
-            className={inputClass}
           />
         </Field>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <Field label="Sitio web" error={errors.website?.message}>
-          <input
+          <Input
             {...register('website')}
             placeholder="https://tuempresa.com"
             disabled={isPending}
-            className={inputClass}
           />
         </Field>
         <Field label="Ubicación" error={errors.location?.message}>
-          <input
+          <Input
             {...register('location')}
             placeholder="San José, Costa Rica"
             disabled={isPending}
-            className={inputClass}
           />
         </Field>
       </div>
 
       <Field label="Sobre la empresa" error={errors.about?.message}>
-        <textarea
+        <Textarea
           {...register('about')}
           rows={4}
           placeholder="Describí brevemente tu empresa, cultura, misión..."
           disabled={isPending}
-          className={textareaClass}
         />
       </Field>
 

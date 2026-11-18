@@ -9,6 +9,7 @@ import type { GeneratedCurriculumResponse } from '../types/curricula.types'
 import { Spinner } from '@/components/ui/spinner'
 import { IconTile } from '@/components/shared/brand/IconTile'
 import { Button } from '@/components/ui/button'
+import { NativeSelect } from '@/components/ui/native-select'
 
 interface GenerateCurriculumModalProps {
   onClose:   () => void
@@ -69,11 +70,10 @@ export function GenerateCurriculumModal({ onClose, onSuccess }: GenerateCurricul
             <label className="block text-sm font-medium text-secondary-foreground mb-1.5">
               ¿Para qué oferta?
             </label>
-            <select
+            <NativeSelect
               value={selectedJobId}
               onChange={(e) => setSelectedJobId(e.target.value ? Number(e.target.value) : '')}
               disabled={isPending || loadingOffers}
-              className="w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:opacity-50"
             >
               <option value="">Seleccioná una oferta...</option>
               {offersData?.content
@@ -83,7 +83,7 @@ export function GenerateCurriculumModal({ onClose, onSuccess }: GenerateCurricul
                     {offer.title} — {offer.companyName ?? 'Empresa'}
                   </option>
                 ))}
-            </select>
+            </NativeSelect>
           </div>
 
           {/* Info card */}

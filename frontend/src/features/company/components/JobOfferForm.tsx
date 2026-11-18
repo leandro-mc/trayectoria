@@ -14,6 +14,9 @@ import { ROUTES } from '@/config/routes'
 import type { JobOfferResponse } from '@/features/jobs/types/jobs.types'
 import type { SkillResponse } from '@/types/api.types'
 import { Spinner } from '@/components/ui/spinner'
+import { Textarea } from '@/components/ui/textarea'
+import { Input } from '@/components/ui/input'
+import { NativeSelect } from '@/components/ui/native-select'
 
 //  Reusable field wrapper 
 
@@ -39,9 +42,6 @@ function Field({
   )
 }
 
-const inputClass    = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
-const textareaClass = 'w-full px-3 py-2.5 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 resize-none'
-const selectClass   = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
 
 //  Section wrapper 
 
@@ -192,47 +192,44 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
       {/*  Basic info  */}
       <Section title="Información básica">
         <Field label="Título del puesto" required error={errors.title?.message}>
-          <input
+          <Input
             {...register('title')}
             placeholder="Ej: Desarrollador Backend Senior"
             disabled={isPending}
-            className={inputClass}
           />
         </Field>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <Field label="Modalidad" error={errors.workMode?.message}>
-            <select {...register('workMode')} disabled={isPending} className={selectClass}>
+            <NativeSelect {...register('workMode')} disabled={isPending}>
               <option value="">Sin especificar</option>
               <option value="REMOTE">Remoto</option>
               <option value="HYBRID">Híbrido</option>
               <option value="ON_SITE">Presencial</option>
-            </select>
+            </NativeSelect>
           </Field>
           <Field label="Tipo de jornada" error={errors.jobType?.message}>
-            <select {...register('jobType')} disabled={isPending} className={selectClass}>
+            <NativeSelect {...register('jobType')} disabled={isPending}>
               <option value="">Sin especificar</option>
               <option value="FULL_TIME">Tiempo completo</option>
               <option value="PART_TIME">Medio tiempo</option>
               <option value="INTERNSHIP">Pasantía</option>
-            </select>
+            </NativeSelect>
           </Field>
           <Field label="Ubicación" error={errors.location?.message}>
-            <input
+            <Input
               {...register('location')}
               placeholder="San José, Costa Rica"
               disabled={isPending}
-              className={inputClass}
             />
           </Field>
         </div>
 
         <Field label="Fecha de cierre" hint="Dejar vacío si no tiene fecha límite">
-          <input
+          <Input
             type="date"
             {...register('expiresAt')}
             disabled={isPending}
-            className={inputClass}
           />
         </Field>
       </Section>
@@ -240,39 +237,35 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
       {/*  Content sections  */}
       <Section title="Contenido de la oferta">
         <Field label="Descripción">
-          <textarea
+          <Textarea
             {...register('description')}
             rows={4}
             placeholder="Descripción general del puesto y la empresa..."
             disabled={isPending}
-            className={textareaClass}
           />
         </Field>
         <Field label="Responsabilidades">
-          <textarea
+          <Textarea
             {...register('responsibilities')}
             rows={4}
             placeholder="¿Qué hará la persona en este rol? Podés usar viñetas (- item)"
             disabled={isPending}
-            className={textareaClass}
           />
         </Field>
         <Field label="Requisitos">
-          <textarea
+          <Textarea
             {...register('requirements')}
             rows={4}
             placeholder="Experiencia, tecnologías, educación requeridos..."
             disabled={isPending}
-            className={textareaClass}
           />
         </Field>
         <Field label="Beneficios">
-          <textarea
+          <Textarea
             {...register('benefits')}
             rows={3}
             placeholder="Salario, seguro, horario flexible, home office..."
             disabled={isPending}
-            className={textareaClass}
           />
         </Field>
       </Section>
@@ -314,12 +307,11 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
                 Instrucciones para la IA
               </span>
             </div>
-            <textarea
+            <Textarea
               {...register('interviewInstructions')}
               rows={3}
               placeholder="Indicaciones específicas para la entrevista: tono, áreas a evaluar, preguntas obligatorias..."
               disabled={isPending}
-              className={textareaClass}
             />
           </div>
         )}

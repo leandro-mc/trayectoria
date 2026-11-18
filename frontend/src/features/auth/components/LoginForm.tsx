@@ -10,6 +10,8 @@ import { useLogin } from '../hooks/useAuth'
 import { extractApiError } from '@/lib/utils/format'
 import { ROUTES } from '@/config/routes'
 import { Spinner } from '@/components/ui/spinner'
+import { Input } from '@/components/ui/input'
+import { FormLabel, FieldError } from '@/components/shared/forms/FormField'
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
@@ -61,49 +63,39 @@ export function LoginForm() {
 
           {/* Email */}
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-secondary-foreground mb-1.5"
-            >
+            <FormLabel htmlFor="email">
               Email
-            </label>
-            <input
+            </FormLabel>
+            <Input
               id="email"
               type="email"
               autoComplete="email"
               placeholder="tu@email.com"
               disabled={isPending}
               {...register('email')}
-              className="w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
             />
-            {errors.email && (
-              <p className="mt-1.5 text-xs text-danger-500">{errors.email.message}</p>
-            )}
+            <FieldError error={errors.email} />
           </div>
 
           {/* Password */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-secondary-foreground"
-              >
+              <FormLabel htmlFor="password" className="mb-0">
                 Contraseña
-              </label>
+              </FormLabel>
               {/* Phase 2: forgot password */}
               <span className="text-xs text-neutral-400 cursor-not-allowed" title="Próximamente">
                 ¿Olvidaste tu contraseña?
               </span>
             </div>
             <div className="relative">
-              <input
+              <Input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 autoComplete="current-password"
                 placeholder="••••••••"
                 disabled={isPending}
-                {...register('password')}
-                className="w-full h-10 px-3 pr-10 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                {...register('password')} className="pr-10"
               />
               <button
                 type="button"
@@ -117,9 +109,7 @@ export function LoginForm() {
                 }
               </button>
             </div>
-            {errors.password && (
-              <p className="mt-1.5 text-xs text-danger-500">{errors.password.message}</p>
-            )}
+            <FieldError error={errors.password} />
           </div>
 
           {/* Submit */}

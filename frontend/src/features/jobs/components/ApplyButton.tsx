@@ -7,6 +7,7 @@ import { useApply, useHasApplied } from '@/features/applications/hooks/useApplic
 import { useCurricula } from '@/features/ai/curricula/hooks/useCurricula'
 import { AuthGateModal } from './AuthGateModal'
 import { Spinner } from '@/components/ui/spinner'
+import { NativeSelect } from '@/components/ui/native-select'
 
 interface ApplyButtonProps {
   jobOfferId:  number
@@ -142,10 +143,9 @@ export function ApplyButton({
                       <FileText className="w-3.5 h-3.5 text-brand-text" />
                       Adjuntar currículum con IA
                     </label>
-                    <select
+                    <NativeSelect
                       value={selectedCvId}
-                      onChange={(e) => setSelectedCvId(e.target.value ? Number(e.target.value) : '')}
-                      className="w-full h-9 px-3 rounded-lg border border-input bg-raised text-foreground text-xs focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      onChange={(e) => setSelectedCvId(e.target.value ? Number(e.target.value) : '')} className="h-9 text-xs"
                     >
                       <option value="">Solo mi perfil (sin CV adjunto)</option>
                       {matchingCurricula.map((cv) => (
@@ -153,7 +153,7 @@ export function ApplyButton({
                           ✨ CV para esta oferta — {new Date(cv.createdAt).toLocaleDateString('es', { day: 'numeric', month: 'short' })}
                         </option>
                       ))}
-                    </select>
+                    </NativeSelect>
                   </div>
                 ) : (
                   <div className="mt-4 mb-5 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-input">
