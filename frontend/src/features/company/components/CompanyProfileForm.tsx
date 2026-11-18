@@ -9,15 +9,15 @@ import { companyProfileSchema, type CompanyProfileFormValues } from '../schemas/
 import { extractApiError } from '@/lib/utils/format'
 import { getInitials } from '@/lib/utils/format'
 
-const inputClass    = 'w-full h-10 px-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
-const textareaClass = 'w-full px-3 py-2.5 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 resize-none'
+const inputClass    = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
+const textareaClass = 'w-full px-3 py-2.5 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 resize-none'
 
 function Field({
   label, error, children,
 }: { label: string; error?: string; children: React.ReactNode }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
+      <label className="block text-sm font-medium text-secondary-foreground mb-1.5">
         {label}
       </label>
       {children}
@@ -83,17 +83,17 @@ export function CompanyProfileForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
       {/*  Logo + company name header  */}
-      <div className="flex items-center gap-5 p-5 rounded-xl bg-neutral-50 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-700">
+      <div className="flex items-center gap-5 p-5 rounded-xl bg-neutral-50 dark:bg-neutral-800/50 border border-input">
         {/* Logo */}
         <div className="relative shrink-0">
           {profile?.logoUrl ? (
             <img
               src={profile.logoUrl}
               alt={displayName}
-              className="w-20 h-20 rounded-xl object-cover border-2 border-neutral-200 dark:border-neutral-700"
+              className="w-20 h-20 rounded-xl object-cover border-2 border-input"
             />
           ) : (
-            <div className="w-20 h-20 rounded-xl bg-brand-100 dark:bg-brand-900/40 flex items-center justify-center text-2xl font-bold text-brand-600 dark:text-brand-400 border-2 border-neutral-200 dark:border-neutral-700">
+            <div className="w-20 h-20 rounded-xl bg-brand-tint-strong flex items-center justify-center text-2xl font-bold text-brand-text border-2 border-input">
               {getInitials(displayName)}
             </div>
           )}
@@ -119,16 +119,16 @@ export function CompanyProfileForm() {
         </div>
 
         <div>
-          <p className="text-base font-bold text-neutral-900 dark:text-neutral-100">
+          <p className="text-base font-bold text-foreground">
             {displayName || 'Tu empresa'}
           </p>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">{profile?.email}</p>
+          <p className="text-sm text-muted-foreground">{profile?.email}</p>
         </div>
       </div>
 
       {/*  API error  */}
       {error && (
-        <div className="px-4 py-3 rounded-lg bg-danger-50 dark:bg-danger-900/20 border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
+        <div className="px-4 py-3 rounded-lg bg-danger-tint border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
           {extractApiError(error)}
         </div>
       )}

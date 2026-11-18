@@ -41,24 +41,24 @@ export function RegisterCompanyForm() {
 
   return (
     <div className="w-full max-w-[480px]">
-      <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 shadow-card">
+      <div className="bg-card border border-border rounded-2xl p-8 shadow-card">
 
         {/* Header */}
         <div className="mb-8">
           <div className="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-900/30 flex items-center justify-center mb-4">
             <Building2 className="w-6 h-6 text-brand-500" />
           </div>
-          <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-1">
+          <h1 className="text-2xl font-bold text-foreground mb-1">
             Registrá tu empresa
           </h1>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+          <p className="text-sm text-muted-foreground">
             Publicá ofertas y encontrá el talento que necesitás
           </p>
         </div>
 
         {/* API error */}
         {apiError && (
-          <div className="mb-5 px-4 py-3 rounded-lg bg-danger-50 dark:bg-danger-900/20 border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
+          <div className="mb-5 px-4 py-3 rounded-lg bg-danger-tint border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
             {apiError}
           </div>
         )}
@@ -67,7 +67,7 @@ export function RegisterCompanyForm() {
 
           {/* Company name */}
           <div>
-            <label htmlFor="companyName" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
+            <label htmlFor="companyName" className="block text-sm font-medium text-secondary-foreground mb-1.5">
               Nombre de la empresa
             </label>
             <input
@@ -77,7 +77,7 @@ export function RegisterCompanyForm() {
               placeholder="Ej: TechCorp S.A."
               disabled={isPending}
               {...register('companyName')}
-              className="w-full h-10 px-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
+              className="w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
             />
             {errors.companyName && (
               <p className="mt-1.5 text-xs text-danger-500">{errors.companyName.message}</p>
@@ -86,7 +86,7 @@ export function RegisterCompanyForm() {
 
           {/* Email */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
+            <label htmlFor="email" className="block text-sm font-medium text-secondary-foreground mb-1.5">
               Email corporativo
             </label>
             <input
@@ -96,7 +96,7 @@ export function RegisterCompanyForm() {
               placeholder="contacto@empresa.com"
               disabled={isPending}
               {...register('email')}
-              className="w-full h-10 px-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
+              className="w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
             />
             {errors.email && (
               <p className="mt-1.5 text-xs text-danger-500">{errors.email.message}</p>
@@ -105,7 +105,7 @@ export function RegisterCompanyForm() {
 
           {/* Password */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
+            <label htmlFor="password" className="block text-sm font-medium text-secondary-foreground mb-1.5">
               Contraseña
             </label>
             <div className="relative">
@@ -116,7 +116,7 @@ export function RegisterCompanyForm() {
                 placeholder="Mínimo 8 caracteres"
                 disabled={isPending}
                 {...register('password')}
-                className="w-full h-10 px-3 pr-10 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
+                className="w-full h-10 px-3 pr-10 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
               />
               <button
                 type="button"
@@ -134,7 +134,7 @@ export function RegisterCompanyForm() {
 
           {/* Confirm password */}
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-secondary-foreground mb-1.5">
               Confirmar contraseña
             </label>
             <div className="relative">
@@ -145,7 +145,7 @@ export function RegisterCompanyForm() {
                 placeholder="Repetí tu contraseña"
                 disabled={isPending}
                 {...register('confirmPassword')}
-                className="w-full h-10 px-3 pr-10 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
+                className="w-full h-10 px-3 pr-10 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
               />
               <button
                 type="button"
@@ -174,12 +174,12 @@ export function RegisterCompanyForm() {
         </form>
 
         {/* Register type switcher */}
-        <div className="mt-5 pt-5 border-t border-neutral-100 dark:border-neutral-800">
-          <p className="text-xs text-neutral-400 dark:text-neutral-500 text-center">
+        <div className="mt-5 pt-5 border-t border-border-soft">
+          <p className="text-xs text-subtle text-center">
             ¿Buscás trabajo?{' '}
             <Link
               href={ROUTES.registerCandidate}
-              className="text-brand-600 dark:text-brand-400 font-medium hover:underline"
+              className="text-brand-text font-medium hover:underline"
             >
               Registrate como candidato
             </Link>
@@ -188,11 +188,11 @@ export function RegisterCompanyForm() {
 
       </div>
 
-      <p className="text-center text-sm text-neutral-500 dark:text-neutral-400 mt-6">
+      <p className="text-center text-sm text-muted-foreground mt-6">
         ¿Ya tenés cuenta?{' '}
         <Link
           href={ROUTES.login}
-          className="text-brand-600 dark:text-brand-400 font-medium hover:underline"
+          className="text-brand-text font-medium hover:underline"
         >
           Iniciá sesión
         </Link>

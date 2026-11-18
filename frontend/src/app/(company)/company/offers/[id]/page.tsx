@@ -23,8 +23,8 @@ import type { WorkMode, JobType, JobStatus } from '@/types/global.types'
 
 const STATUS_STYLES: Record<JobStatus, string> = {
   ACTIVE: 'bg-success-50 text-success-600 dark:bg-success-900/20 dark:text-success-400',
-  DRAFT:  'bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400',
-  CLOSED: 'bg-danger-50 text-danger-500 dark:bg-danger-900/20 dark:text-danger-400',
+  DRAFT:  'bg-muted text-muted-foreground',
+  CLOSED: 'bg-danger-tint text-danger-500 dark:text-danger-400',
 }
 const STATUS_LABELS: Record<JobStatus, string> = {
   ACTIVE: 'Activa',
@@ -42,7 +42,7 @@ function MetaPill({
   label: string
 }) {
   return (
-    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-xs font-medium text-neutral-600 dark:text-neutral-400">
+    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted text-xs font-medium text-body">
       <Icon className="w-3.5 h-3.5" />
       {label}
     </span>
@@ -55,10 +55,10 @@ function ContentSection({ title, content }: { title: string; content: string | n
   if (!content) return null
   return (
     <div>
-      <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
+      <h3 className="text-sm font-semibold text-foreground mb-2">
         {title}
       </h3>
-      <p className="text-sm text-neutral-600 dark:text-neutral-400 whitespace-pre-line leading-relaxed">
+      <p className="text-sm text-body whitespace-pre-line leading-relaxed">
         {content}
       </p>
     </div>
@@ -83,7 +83,7 @@ export default function OfferDetailPage({ params }: PageProps) {
   if (!offer) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
-        <p className="text-neutral-500 dark:text-neutral-400 mb-4">Oferta no encontrada.</p>
+        <p className="text-muted-foreground mb-4">Oferta no encontrada.</p>
         <button onClick={() => router.push(ROUTES.offers)} className="text-brand-500 text-sm font-medium hover:underline">
           Volver a mis ofertas
         </button>
@@ -105,7 +105,7 @@ export default function OfferDetailPage({ params }: PageProps) {
           <div className="flex items-center gap-2">
             <Link
               href={ROUTES.offerApplications(offerId)}
-              className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-400 text-sm font-medium transition-colors"
+              className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg border border-input bg-card hover:bg-hover text-body text-sm font-medium transition-colors"
             >
               <Users className="w-4 h-4" />
               Postulantes
@@ -124,7 +124,7 @@ export default function OfferDetailPage({ params }: PageProps) {
       <div className="space-y-5">
 
         {/*  Hero card  */}
-        <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-card p-6">
+        <div className="bg-card border border-border rounded-xl shadow-card p-6">
 
           {/* Status + meta row */}
           <div className="flex flex-wrap items-center gap-2 mb-5">
@@ -161,7 +161,7 @@ export default function OfferDetailPage({ params }: PageProps) {
               {offer.skills.map((skill) => (
                 <span
                   key={skill.id}
-                  className="px-2.5 py-1 rounded-lg bg-brand-50 dark:bg-brand-900/20 text-xs font-medium text-brand-600 dark:text-brand-400"
+                  className="px-2.5 py-1 rounded-lg bg-brand-tint text-xs font-medium text-brand-text"
                 >
                   {skill.name}
                 </span>
@@ -172,7 +172,7 @@ export default function OfferDetailPage({ params }: PageProps) {
 
         {/*  Content  */}
         {(offer.description || offer.responsibilities || offer.requirements || offer.benefits) && (
-          <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-card p-6 space-y-6">
+          <div className="bg-card border border-border rounded-xl shadow-card p-6 space-y-6">
             <ContentSection title="Descripción"        content={offer.description}     />
             <ContentSection title="Responsabilidades"  content={offer.responsibilities} />
             <ContentSection title="Requisitos"         content={offer.requirements}    />
@@ -181,10 +181,10 @@ export default function OfferDetailPage({ params }: PageProps) {
         )}
 
         {/*  Interview section  */}
-        <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-card p-6">
+        <div className="bg-card border border-border rounded-xl shadow-card p-6">
           <div className="flex items-center gap-2 mb-4">
             <Sparkles className="w-4 h-4 text-brand-500" />
-            <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+            <h3 className="text-sm font-semibold text-foreground">
               Entrevista con IA
             </h3>
           </div>
@@ -198,10 +198,10 @@ export default function OfferDetailPage({ params }: PageProps) {
 
               {instructions?.interviewInstructions ? (
                 <div className="p-4 rounded-xl bg-brand-50 dark:bg-brand-900/10 border border-brand-200 dark:border-brand-800">
-                  <p className="text-xs font-semibold text-brand-600 dark:text-brand-400 mb-2">
+                  <p className="text-xs font-semibold text-brand-text mb-2">
                     Instrucciones para la IA
                   </p>
-                  <p className="text-sm text-neutral-700 dark:text-neutral-300 whitespace-pre-line leading-relaxed">
+                  <p className="text-sm text-secondary-foreground whitespace-pre-line leading-relaxed">
                     {instructions.interviewInstructions}
                   </p>
                 </div>

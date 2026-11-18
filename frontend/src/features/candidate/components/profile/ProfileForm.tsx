@@ -19,7 +19,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
+      <label className="block text-sm font-medium text-secondary-foreground mb-1.5">
         {label}
       </label>
       {children}
@@ -28,8 +28,8 @@ function Field({
   )
 }
 
-const inputClass = 'w-full h-10 px-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
-const textareaClass = 'w-full px-3 py-2.5 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 resize-none'
+const inputClass = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
+const textareaClass = 'w-full px-3 py-2.5 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 resize-none'
 
 //  Component 
 
@@ -90,7 +90,7 @@ export function ProfileForm() {
 
       {/* API error */}
       {error && (
-        <div className="px-4 py-3 rounded-lg bg-danger-50 dark:bg-danger-900/20 border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
+        <div className="px-4 py-3 rounded-lg bg-danger-tint border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
           {extractApiError(error)}
         </div>
       )}
@@ -132,7 +132,7 @@ export function ProfileForm() {
       </Field>
 
       {/* Links */}
-      <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800">
+      <div className="pt-2 border-t border-border-soft">
         <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-4">Links</p>
         <div className="space-y-4">
           <Field label="LinkedIn" error={errors.linkedinUrl?.message}>

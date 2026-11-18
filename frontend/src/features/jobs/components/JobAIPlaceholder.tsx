@@ -40,7 +40,7 @@ export function JobAIPlaceholder() {
   const Icon   = config.icon
 
   return (
-    <div className="flex flex-col items-center justify-center h-full bg-white dark:bg-neutral-900 p-8">
+    <div className="flex flex-col items-center justify-center h-full bg-card p-8">
 
       {/* AI badge */}
       <div
@@ -52,16 +52,16 @@ export function JobAIPlaceholder() {
 
       {/* Content */}
       <div className="max-w-sm text-center">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-900/20 border border-brand-200 dark:border-brand-800 text-brand-600 dark:text-brand-400 text-xs font-medium mb-4">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-tint border border-brand-200 dark:border-brand-800 text-brand-text text-xs font-medium mb-4">
           <Sparkles className="w-3 h-3" />
           Powered by AI
         </div>
 
-        <h3 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-3">
+        <h3 className="text-lg font-bold text-foreground mb-3">
           {config.title}
         </h3>
 
-        <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mb-6">
+        <p className="text-sm text-muted-foreground leading-relaxed mb-6">
           {config.description}
         </p>
 

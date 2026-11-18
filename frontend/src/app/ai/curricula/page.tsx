@@ -33,9 +33,9 @@ function CurriculumPanel({ id, onClear }: { id: number; onClear: () => void }) {
   }
 
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-neutral-900">
+    <div className="flex flex-col h-full bg-card">
       {/* Panel header */}
-      <div className="flex items-start justify-between px-5 py-4 border-b border-neutral-200 dark:border-neutral-800 shrink-0">
+      <div className="flex items-start justify-between px-5 py-4 border-b border-border shrink-0">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span
@@ -46,14 +46,14 @@ function CurriculumPanel({ id, onClear }: { id: number; onClear: () => void }) {
               Generado con IA
             </span>
           </div>
-          <h2 className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
+          <h2 className="text-sm font-bold text-foreground">
             {cv.jobOfferTitle ?? 'Currículum'}
           </h2>
         </div>
         <button
           onClick={handleDelete}
           disabled={deleting}
-          className="p-2 rounded-lg hover:bg-danger-50 dark:hover:bg-danger-900/20 text-neutral-400 hover:text-danger-500 disabled:opacity-50 transition-colors"
+          className="p-2 rounded-lg hover:bg-danger-tint text-neutral-400 hover:text-danger-500 disabled:opacity-50 transition-colors"
           title="Eliminar"
         >
           {deleting
@@ -74,12 +74,12 @@ function CurriculumPanel({ id, onClear }: { id: number; onClear: () => void }) {
 
 function EmptyRight() {
   return (
-    <div className="hidden lg:flex flex-1 items-center justify-center bg-neutral-50 dark:bg-neutral-950">
+    <div className="hidden lg:flex flex-1 items-center justify-center bg-background">
       <div className="text-center">
-        <div className="w-14 h-14 rounded-2xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mx-auto mb-3">
-          <Search className="w-7 h-7 text-neutral-300 dark:text-neutral-600" />
+        <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-3">
+          <Search className="w-7 h-7 text-faint" />
         </div>
-        <p className="text-sm font-medium text-neutral-400 dark:text-neutral-500">
+        <p className="text-sm font-medium text-subtle">
           Seleccioná un currículum para verlo
         </p>
       </div>
@@ -97,7 +97,7 @@ function CurriculaPageContent() {
 
       {/* Left panel — hidden on mobile when item selected */}
       <div className={cn(
-        'flex-col overflow-hidden border-r border-neutral-200 dark:border-neutral-800',
+        'flex-col overflow-hidden border-r border-border',
         selectedId !== null
           ? 'hidden lg:flex lg:w-[38%]'
           : 'flex w-full lg:w-[38%]',
@@ -115,7 +115,7 @@ function CurriculaPageContent() {
           {/* Mobile back button */}
           <button
             onClick={clearSelection}
-            className="lg:hidden flex items-center gap-2 px-4 py-3 text-xs font-medium text-neutral-500 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shrink-0 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors"
+            className="lg:hidden flex items-center gap-2 px-4 py-3 text-xs font-medium text-neutral-500 border-b border-border bg-card shrink-0 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors"
           >
             ← Volver al listado
           </button>

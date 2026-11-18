@@ -13,7 +13,7 @@ import { ROUTES } from '@/config/routes'
 
 function CardSkeleton() {
   return (
-    <div className="animate-pulse p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 space-y-3">
+    <div className="animate-pulse p-4 rounded-xl border border-border bg-card space-y-3">
       <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-3/4" />
       <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded w-1/2" />
       <div className="flex gap-2">
@@ -34,7 +34,7 @@ function UnsaveButton({ jobOfferId, onUnsave }: {
     <button
       onClick={(e) => { e.stopPropagation(); onUnsave(jobOfferId) }}
       title="Quitar de guardadas"
-      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-danger-300 dark:hover:border-danger-700 hover:bg-danger-50 dark:hover:bg-danger-900/20 text-neutral-400 hover:text-danger-500 text-xs font-medium transition-colors shrink-0"
+      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-input hover:border-danger-300 dark:hover:border-danger-700 hover:bg-danger-tint text-neutral-400 hover:text-danger-500 text-xs font-medium transition-colors shrink-0"
     >
       <BookmarkX className="w-3.5 h-3.5" />
       Quitar
@@ -53,10 +53,10 @@ export function SavedListPanel() {
     <div className="flex flex-col h-full">
 
       {/*  Header  */}
-      <div className="px-3 pt-3 pb-2.5 border-b border-neutral-100 dark:border-neutral-800 shrink-0 bg-white dark:bg-neutral-900">
+      <div className="px-3 pt-3 pb-2.5 border-b border-border-soft shrink-0 bg-card">
         <div className="flex items-center gap-2 mb-1">
           <Bookmark className="w-4 h-4 text-brand-500 shrink-0" />
-          <h2 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+          <h2 className="text-sm font-semibold text-foreground">
             Ofertas guardadas
           </h2>
         </div>
@@ -77,10 +77,10 @@ export function SavedListPanel() {
 
         {!isLoading && data?.content.length === 0 && (
           <div className="flex flex-col items-center py-16 text-center">
-            <div className="w-12 h-12 rounded-2xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mx-auto mb-3">
-              <Bookmark className="w-6 h-6 text-neutral-300 dark:text-neutral-600" />
+            <div className="w-12 h-12 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-3">
+              <Bookmark className="w-6 h-6 text-faint" />
             </div>
-            <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400 mb-1">
+            <p className="text-sm font-medium text-muted-foreground mb-1">
               No tenés ofertas guardadas
             </p>
             <a
@@ -117,7 +117,7 @@ export function SavedListPanel() {
 
       {/*  Pagination  */}
       {data && data.totalPages > 1 && (
-        <div className="flex items-center justify-between px-4 py-3 border-t border-neutral-100 dark:border-neutral-800 shrink-0 bg-white dark:bg-neutral-900">
+        <div className="flex items-center justify-between px-4 py-3 border-t border-border-soft shrink-0 bg-card">
           <button
             disabled={page === 0}
             onClick={() => setPage(page - 1)}

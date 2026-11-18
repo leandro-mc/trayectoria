@@ -27,7 +27,7 @@ function Field({
 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
+      <label className="block text-sm font-medium text-secondary-foreground mb-1.5">
         {label}
         {required && <span className="text-danger-500 ml-0.5">*</span>}
       </label>
@@ -38,16 +38,16 @@ function Field({
   )
 }
 
-const inputClass    = 'w-full h-10 px-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
-const textareaClass = 'w-full px-3 py-2.5 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 resize-none'
-const selectClass   = 'w-full h-10 px-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
+const inputClass    = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
+const textareaClass = 'w-full px-3 py-2.5 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 resize-none'
+const selectClass   = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
 
 //  Section wrapper 
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-card p-6 space-y-5">
-      <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 pb-3 border-b border-neutral-100 dark:border-neutral-800">
+    <div className="bg-card border border-border rounded-xl shadow-card p-6 space-y-5">
+      <h3 className="text-sm font-semibold text-foreground pb-3 border-b border-border-soft">
         {title}
       </h3>
       {children}
@@ -183,7 +183,7 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
 
       {/*  API error  */}
       {apiError && (
-        <div className="px-4 py-3 rounded-lg bg-danger-50 dark:bg-danger-900/20 border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
+        <div className="px-4 py-3 rounded-lg bg-danger-tint border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
           {extractApiError(apiError)}
         </div>
       )}
@@ -296,7 +296,7 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
             className="mt-0.5 w-4 h-4 rounded border-neutral-300 text-brand-500 focus:ring-brand-500"
           />
           <div>
-            <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+            <p className="text-sm font-medium text-secondary-foreground">
               Requerir entrevista simulada con IA
             </p>
             <p className="text-xs text-neutral-400 mt-0.5">
@@ -309,7 +309,7 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
           <div className="mt-4 p-4 rounded-xl bg-brand-50 dark:bg-brand-900/10 border border-brand-200 dark:border-brand-800">
             <div className="flex items-center gap-2 mb-3">
               <Sparkles className="w-4 h-4 text-brand-500" />
-              <span className="text-xs font-semibold text-brand-600 dark:text-brand-400">
+              <span className="text-xs font-semibold text-brand-text">
                 Instrucciones para la IA
               </span>
             </div>
@@ -330,7 +330,7 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
           type="button"
           onClick={() => router.push(ROUTES.offers)}
           disabled={isPending}
-          className="h-10 px-5 rounded-lg border border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-400 text-sm font-medium hover:bg-neutral-50 dark:hover:bg-neutral-800 disabled:opacity-50 transition-colors"
+          className="h-10 px-5 rounded-lg border border-input text-body text-sm font-medium hover:bg-hover disabled:opacity-50 transition-colors"
         >
           Cancelar
         </button>

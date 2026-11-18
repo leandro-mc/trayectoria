@@ -36,21 +36,21 @@ export function LoginForm() {
     <div className="w-full max-w-[480px]">
 
       {/*  Card  */}
-      <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 shadow-card">
+      <div className="bg-card border border-border rounded-2xl p-8 shadow-card">
 
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-1">
+          <h1 className="text-2xl font-bold text-foreground mb-1">
             Bienvenido de vuelta
           </h1>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+          <p className="text-sm text-muted-foreground">
             Ingresá a tu cuenta para continuar
           </p>
         </div>
 
         {/* API error banner */}
         {apiError && (
-          <div className="mb-5 px-4 py-3 rounded-lg bg-danger-50 dark:bg-danger-900/20 border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
+          <div className="mb-5 px-4 py-3 rounded-lg bg-danger-tint border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
             {apiError}
           </div>
         )}
@@ -62,7 +62,7 @@ export function LoginForm() {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5"
+              className="block text-sm font-medium text-secondary-foreground mb-1.5"
             >
               Email
             </label>
@@ -73,7 +73,7 @@ export function LoginForm() {
               placeholder="tu@email.com"
               disabled={isPending}
               {...register('email')}
-              className="w-full h-10 px-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
             />
             {errors.email && (
               <p className="mt-1.5 text-xs text-danger-500">{errors.email.message}</p>
@@ -85,7 +85,7 @@ export function LoginForm() {
             <div className="flex items-center justify-between mb-1.5">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
+                className="block text-sm font-medium text-secondary-foreground"
               >
                 Contraseña
               </label>
@@ -102,7 +102,7 @@ export function LoginForm() {
                 placeholder="••••••••"
                 disabled={isPending}
                 {...register('password')}
-                className="w-full h-10 px-3 pr-10 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full h-10 px-3 pr-10 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
               />
               <button
                 type="button"
@@ -136,10 +136,10 @@ export function LoginForm() {
         {/* Divider */}
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-neutral-200 dark:border-neutral-800" />
+            <div className="w-full border-t border-border" />
           </div>
           <div className="relative flex justify-center">
-            <span className="bg-white dark:bg-neutral-900 px-3 text-xs text-neutral-400">
+            <span className="bg-card px-3 text-xs text-neutral-400">
               o continuá con
             </span>
           </div>
@@ -149,7 +149,7 @@ export function LoginForm() {
         <button
           type="button"
           disabled
-          className="w-full h-10 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-400 text-sm font-medium flex items-center justify-center gap-2 cursor-not-allowed opacity-50"
+          className="w-full h-10 rounded-lg border border-input bg-raised text-neutral-400 text-sm font-medium flex items-center justify-center gap-2 cursor-not-allowed opacity-50"
           title="Próximamente"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -164,11 +164,11 @@ export function LoginForm() {
       </div>
 
       {/* Footer link */}
-      <p className="text-center text-sm text-neutral-500 dark:text-neutral-400 mt-6">
+      <p className="text-center text-sm text-muted-foreground mt-6">
         ¿No tenés cuenta?{' '}
         <Link
           href={ROUTES.register}
-          className="text-brand-600 dark:text-brand-400 font-medium hover:underline"
+          className="text-brand-text font-medium hover:underline"
         >
           Registrate
         </Link>

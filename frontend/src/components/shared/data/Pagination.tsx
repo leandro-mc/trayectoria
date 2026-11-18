@@ -46,7 +46,7 @@ export function Pagination({
 
   return (
     <div className={cn('flex items-center justify-between', className)}>
-      <p className="text-sm text-neutral-500 dark:text-neutral-400">
+      <p className="text-sm text-muted-foreground">
         {totalElements} resultado{totalElements !== 1 ? 's' : ''}
       </p>
 

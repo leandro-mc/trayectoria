@@ -23,18 +23,18 @@ function MetricCard({
     accent === 'brand'   ? 'bg-brand-50 dark:bg-brand-900/30' :
     accent === 'warning' ? 'bg-warning-50 dark:bg-warning-900/20' :
     accent === 'success' ? 'bg-success-50 dark:bg-success-900/20' :
-    'bg-neutral-100 dark:bg-neutral-800'
+    'bg-muted'
 
   const iconColor =
     accent === 'brand'   ? 'text-brand-500' :
     accent === 'warning' ? 'text-warning-500' :
     accent === 'success' ? 'text-success-600' :
-    'text-neutral-500 dark:text-neutral-400'
+    'text-muted-foreground'
 
   const card = (
-    <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl p-5 shadow-card hover:shadow-card-hover transition-shadow">
+    <div className="bg-card border border-border rounded-xl p-5 shadow-card hover:shadow-card-hover transition-shadow">
       <div className="flex items-center justify-between mb-4">
-        <p className="text-sm text-neutral-500 dark:text-neutral-400 font-medium">
+        <p className="text-sm text-muted-foreground font-medium">
           {label}
         </p>
         <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${iconBg}`}>
@@ -46,7 +46,7 @@ function MetricCard({
         // Skeleton while loading
         <div className="h-8 w-16 bg-neutral-200 dark:bg-neutral-800 rounded-lg animate-pulse" />
       ) : (
-        <p className="text-3xl font-bold text-neutral-900 dark:text-neutral-100 tabular-nums">
+        <p className="text-3xl font-bold text-foreground tabular-nums">
           {value.toLocaleString()}
         </p>
       )}

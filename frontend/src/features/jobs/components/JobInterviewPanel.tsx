@@ -21,7 +21,7 @@ function StartingSkeleton() {
       >
         <Sparkles className="w-5 h-5 text-white" />
       </div>
-      <p className="text-sm text-brand-600 dark:text-brand-400 font-medium animate-pulse">
+      <p className="text-sm text-brand-text font-medium animate-pulse">
         Preparando tu entrevista…
       </p>
       <div className="w-full max-w-xs space-y-2">
@@ -95,10 +95,10 @@ export function JobInterviewPanel() {
   const isLoading = loadingList || (starting && !activeInterviewId)
 
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-neutral-900">
+    <div className="flex flex-col h-full bg-card">
 
       {/* Header */}
-      <div className="flex items-center gap-2 px-5 py-3.5 border-b border-neutral-200 dark:border-neutral-800 shrink-0">
+      <div className="flex items-center gap-2 px-5 py-3.5 border-b border-border shrink-0">
         <div
           className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
           style={{ background: 'linear-gradient(135deg,#A855F7,#6366F1)' }}

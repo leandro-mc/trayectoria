@@ -24,7 +24,7 @@ function CheckboxGroup<T extends string>({
 }: CheckboxGroupProps<T>) {
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-2">
+      <p className="text-xs font-semibold uppercase tracking-widest text-subtle mb-2">
         {label}
       </p>
       <div className="space-y-1.5">
@@ -39,7 +39,7 @@ function CheckboxGroup<T extends string>({
               onChange={() => onChange(selected === value ? undefined : value)}
               className="w-4 h-4 rounded border-neutral-300 dark:border-neutral-600 text-brand-500 focus:ring-brand-500 focus:ring-offset-0"
             />
-            <span className="text-sm text-neutral-600 dark:text-neutral-400 group-hover:text-neutral-900 dark:group-hover:text-neutral-200 transition-colors">
+            <span className="text-sm text-body group-hover:text-neutral-900 dark:group-hover:text-neutral-200 transition-colors">
               {optLabel}
             </span>
           </label>
@@ -74,7 +74,7 @@ export function JobOfferFilters({ filters, onChange }: JobOfferFiltersProps) {
 
       {/*  Search  */}
       <div>
-        <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-2">
+        <p className="text-xs font-semibold uppercase tracking-widest text-subtle mb-2">
           Buscar
         </p>
         <div className="relative">
@@ -86,7 +86,7 @@ export function JobOfferFilters({ filters, onChange }: JobOfferFiltersProps) {
               onChange({ ...filters, keyword: e.target.value || undefined, page: 0 })
             }
             placeholder="Título del puesto..."
-            className="w-full h-9 pl-9 pr-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+            className="w-full h-9 pl-9 pr-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
           />
         </div>
       </div>

@@ -32,7 +32,7 @@ export default function EditOfferPage({ params }: EditOfferPageProps) {
         actions={
           <Link
             href={ROUTES.offerDetail(offerId)}
-            className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-400 text-sm font-medium transition-colors"
+            className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg border border-input bg-card hover:bg-hover text-body text-sm font-medium transition-colors"
           >
             <Eye className="w-4 h-4" />
             Ver oferta

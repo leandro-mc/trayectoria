@@ -52,7 +52,7 @@ function StepIndicator({ current }: StepIndicatorProps) {
               <span
                 className={`text-xs font-medium transition-colors ${
                   isActive || isDone
-                    ? 'text-neutral-700 dark:text-neutral-300'
+                    ? 'text-secondary-foreground'
                     : 'text-neutral-400 dark:text-neutral-600'
                 }`}
               >
@@ -89,7 +89,7 @@ function Step1({ onNext }: Step1Props) {
 
       {/* Email */}
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
+        <label htmlFor="email" className="block text-sm font-medium text-secondary-foreground mb-1.5">
           Email
         </label>
         <input
@@ -98,7 +98,7 @@ function Step1({ onNext }: Step1Props) {
           autoComplete="email"
           placeholder="tu@email.com"
           {...register('email')}
-          className="w-full h-10 px-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+          className="w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
         />
         {errors.email && (
           <p className="mt-1.5 text-xs text-danger-500">{errors.email.message}</p>
@@ -107,7 +107,7 @@ function Step1({ onNext }: Step1Props) {
 
       {/* Password */}
       <div>
-        <label htmlFor="password" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
+        <label htmlFor="password" className="block text-sm font-medium text-secondary-foreground mb-1.5">
           Contraseña
         </label>
         <div className="relative">
@@ -117,7 +117,7 @@ function Step1({ onNext }: Step1Props) {
             autoComplete="new-password"
             placeholder="Mínimo 8 caracteres"
             {...register('password')}
-            className="w-full h-10 px-3 pr-10 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+            className="w-full h-10 px-3 pr-10 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
           />
           <button
             type="button"
@@ -135,7 +135,7 @@ function Step1({ onNext }: Step1Props) {
 
       {/* Confirm password */}
       <div>
-        <label htmlFor="confirmPassword" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
+        <label htmlFor="confirmPassword" className="block text-sm font-medium text-secondary-foreground mb-1.5">
           Confirmar contraseña
         </label>
         <div className="relative">
@@ -145,7 +145,7 @@ function Step1({ onNext }: Step1Props) {
             autoComplete="new-password"
             placeholder="Repetí tu contraseña"
             {...register('confirmPassword')}
-            className="w-full h-10 px-3 pr-10 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+            className="w-full h-10 px-3 pr-10 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
           />
           <button
             type="button"
@@ -194,14 +194,14 @@ function Step2({ onSubmit, onBack, isPending, apiError }: Step2Props) {
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
 
       {apiError && (
-        <div className="px-4 py-3 rounded-lg bg-danger-50 dark:bg-danger-900/20 border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
+        <div className="px-4 py-3 rounded-lg bg-danger-tint border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
           {apiError}
         </div>
       )}
 
       {/* First name */}
       <div>
-        <label htmlFor="firstName" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
+        <label htmlFor="firstName" className="block text-sm font-medium text-secondary-foreground mb-1.5">
           Nombre
         </label>
         <input
@@ -212,7 +212,7 @@ function Step2({ onSubmit, onBack, isPending, apiError }: Step2Props) {
           autoFocus
           disabled={isPending}
           {...register('firstName')}
-          className="w-full h-10 px-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
+          className="w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
         />
         {errors.firstName && (
           <p className="mt-1.5 text-xs text-danger-500">{errors.firstName.message}</p>
@@ -221,7 +221,7 @@ function Step2({ onSubmit, onBack, isPending, apiError }: Step2Props) {
 
       {/* Last name */}
       <div>
-        <label htmlFor="lastName" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
+        <label htmlFor="lastName" className="block text-sm font-medium text-secondary-foreground mb-1.5">
           Apellido
         </label>
         <input
@@ -231,7 +231,7 @@ function Step2({ onSubmit, onBack, isPending, apiError }: Step2Props) {
           placeholder="Tu apellido"
           disabled={isPending}
           {...register('lastName')}
-          className="w-full h-10 px-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
+          className="w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50"
         />
         {errors.lastName && (
           <p className="mt-1.5 text-xs text-danger-500">{errors.lastName.message}</p>
@@ -244,7 +244,7 @@ function Step2({ onSubmit, onBack, isPending, apiError }: Step2Props) {
           type="button"
           onClick={onBack}
           disabled={isPending}
-          className="h-10 px-4 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-400 text-sm font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
+          className="h-10 px-4 rounded-lg border border-input bg-card hover:bg-hover text-body text-sm font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
           Atrás
@@ -306,15 +306,15 @@ export function RegisterCandidateForm() {
 
   return (
     <div className="w-full max-w-[480px]">
-      <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 shadow-card">
+      <div className="bg-card border border-border rounded-2xl p-8 shadow-card">
 
         <StepIndicator current={step} />
 
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-1">
+          <h1 className="text-2xl font-bold text-foreground mb-1">
             {titles[step].heading}
           </h1>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+          <p className="text-sm text-muted-foreground">
             {titles[step].sub}
           </p>
         </div>
@@ -334,11 +334,11 @@ export function RegisterCandidateForm() {
 
       </div>
 
-      <p className="text-center text-sm text-neutral-500 dark:text-neutral-400 mt-6">
+      <p className="text-center text-sm text-muted-foreground mt-6">
         ¿Ya tenés cuenta?{' '}
         <Link
           href={ROUTES.login}
-          className="text-brand-600 dark:text-brand-400 font-medium hover:underline"
+          className="text-brand-text font-medium hover:underline"
         >
           Iniciá sesión
         </Link>

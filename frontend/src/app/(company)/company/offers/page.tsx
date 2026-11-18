@@ -26,8 +26,8 @@ import type { JobOfferSummaryResponse } from '@/features/jobs/types/jobs.types'
 
 const STATUS_STYLES: Record<string, string> = {
   ACTIVE: 'bg-success-50 text-success-600 dark:bg-success-900/20 dark:text-success-400',
-  DRAFT:  'bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400',
-  CLOSED: 'bg-danger-50 text-danger-500 dark:bg-danger-900/20 dark:text-danger-400',
+  DRAFT:  'bg-muted text-muted-foreground',
+  CLOSED: 'bg-danger-tint text-danger-500 dark:text-danger-400',
 }
 const STATUS_LABELS: Record<string, string> = {
   ACTIVE: 'Activa',
@@ -51,7 +51,7 @@ function ApplicantCount({ offerId }: { offerId: number }) {
   return (
     <Link
       href={ROUTES.offerApplications(offerId)}
-      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-brand-50 dark:hover:bg-brand-900/20 text-xs font-semibold text-neutral-600 dark:text-neutral-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors"
+      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-muted hover:bg-brand-tint text-xs font-semibold text-body hover:text-brand-text transition-colors"
       title="Ver postulantes"
     >
       <Users className="w-3.5 h-3.5" />
@@ -83,11 +83,11 @@ function OfferRow({ offer }: { offer: JobOfferSummaryResponse }) {
 
   return (
     // No overflow-hidden here — dropdowns need to escape the row
-    <div className="flex items-center gap-3 px-5 py-4 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors group">
+    <div className="flex items-center gap-3 px-5 py-4 hover:bg-hover transition-colors group">
 
       {/* Title + meta */}
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
+        <p className="text-sm font-semibold text-foreground truncate">
           {offer.title}
         </p>
         <p className="text-xs text-neutral-400 mt-0.5">
@@ -117,13 +117,13 @@ function OfferRow({ offer }: { offer: JobOfferSummaryResponse }) {
         {statusOpen && (
           <>
             <div className="fixed inset-0 z-10" onClick={() => setStatusOpen(false)} />
-            <div className="absolute right-0 top-full mt-1 z-20 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-modal py-1 min-w-[130px]">
+            <div className="absolute right-0 top-full mt-1 z-20 bg-card border border-border rounded-xl shadow-modal py-1 min-w-[130px]">
               {otherStatuses.map((s) => (
                 <button
                   key={s}
                   onClick={() => { updateStatus({ id: offer.id, status: s }); setStatusOpen(false) }}
                   disabled={updatingStatus}
-                  className="w-full text-left px-3 py-2 text-sm hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 flex items-center gap-2 disabled:opacity-50"
+                  className="w-full text-left px-3 py-2 text-sm hover:bg-hover text-secondary-foreground flex items-center gap-2 disabled:opacity-50"
                 >
                   {updatingStatus
                     ? <Loader2 className="w-3 h-3 animate-spin" />
@@ -144,7 +144,7 @@ function OfferRow({ offer }: { offer: JobOfferSummaryResponse }) {
       <div className="relative shrink-0">
         <button
           onClick={() => setMenuOpen((o) => !o)}
-          className="p-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-400 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
+          className="p-1.5 rounded-lg hover:bg-muted text-neutral-400 transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100"
         >
           <MoreHorizontal className="w-4 h-4" />
         </button>
@@ -152,24 +152,24 @@ function OfferRow({ offer }: { offer: JobOfferSummaryResponse }) {
         {menuOpen && (
           <>
             <div className="fixed inset-0 z-10" onClick={() => setMenuOpen(false)} />
-            <div className="absolute right-0 top-full mt-1 z-20 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-modal py-1 min-w-[150px]">
+            <div className="absolute right-0 top-full mt-1 z-20 bg-card border border-border rounded-xl shadow-modal py-1 min-w-[150px]">
               <button
                 onClick={() => { router.push(ROUTES.offerApplications(offer.id)); setMenuOpen(false) }}
-                className="w-full text-left px-3 py-2 text-sm hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 flex items-center gap-2"
+                className="w-full text-left px-3 py-2 text-sm hover:bg-hover text-secondary-foreground flex items-center gap-2"
               >
                 <Users className="w-3.5 h-3.5" />
                 Ver postulantes
               </button>
               <button
                 onClick={() => { router.push(ROUTES.editOffer(offer.id)); setMenuOpen(false) }}
-                className="w-full text-left px-3 py-2 text-sm hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 flex items-center gap-2"
+                className="w-full text-left px-3 py-2 text-sm hover:bg-hover text-secondary-foreground flex items-center gap-2"
               >
                 <Eye className="w-3.5 h-3.5" />
                 Ver oferta
               </button>
               <button
                 onClick={() => { router.push(ROUTES.editOffer(offer.id)); setMenuOpen(false) }}
-                className="w-full text-left px-3 py-2 text-sm hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 flex items-center gap-2"
+                className="w-full text-left px-3 py-2 text-sm hover:bg-hover text-secondary-foreground flex items-center gap-2"
               >
                 <Pencil className="w-3.5 h-3.5" />
                 Editar oferta
@@ -177,7 +177,7 @@ function OfferRow({ offer }: { offer: JobOfferSummaryResponse }) {
               <button
                 onClick={handleDelete}
                 disabled={deleting}
-                className="w-full text-left px-3 py-2 text-sm hover:bg-danger-50 dark:hover:bg-danger-900/20 text-danger-500 flex items-center gap-2 disabled:opacity-50"
+                className="w-full text-left px-3 py-2 text-sm hover:bg-danger-tint text-danger-500 flex items-center gap-2 disabled:opacity-50"
               >
                 {deleting
                   ? <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -219,10 +219,10 @@ export default function CompanyOffersPage() {
         No overflow-hidden on the card — rows have absolute dropdowns that need
         to escape the container. Rounded corners are preserved with rounded-xl.
       */}
-      <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-card">
+      <div className="bg-card border border-border rounded-xl shadow-card">
 
         {isLoading && (
-          <div className="divide-y divide-neutral-100 dark:divide-neutral-800 animate-pulse">
+          <div className="divide-y divide-border-soft animate-pulse">
             {Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="flex items-center gap-4 px-5 py-4">
                 <div className="flex-1 space-y-2">
@@ -247,7 +247,7 @@ export default function CompanyOffersPage() {
         )}
 
         {!isLoading && (data?.content.length ?? 0) > 0 && (
-          <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
+          <div className="divide-y divide-border-soft">
             {data!.content.map((offer) => (
               <OfferRow key={offer.id} offer={offer} />
             ))}

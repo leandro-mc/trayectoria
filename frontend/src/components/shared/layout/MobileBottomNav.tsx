@@ -79,7 +79,7 @@ function MoreSheet({ onClose }: { onClose: () => void }) {
       />
 
       {/* Sheet */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-neutral-900 rounded-t-2xl shadow-modal pb-safe">
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-card rounded-t-2xl shadow-modal pb-safe">
 
         {/* Handle */}
         <div className="flex justify-center pt-3 pb-1">
@@ -89,17 +89,17 @@ function MoreSheet({ onClose }: { onClose: () => void }) {
         {/* Close */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-4 p-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-400 transition-colors"
+          className="absolute top-3 right-4 p-1.5 rounded-lg hover:bg-muted text-neutral-400 transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
 
         {/* User info */}
-        <div className="px-5 py-4 border-b border-neutral-100 dark:border-neutral-800">
+        <div className="px-5 py-4 border-b border-border-soft">
           <p className="text-xs text-neutral-400">
             {user?.role === 'CANDIDATE' ? 'Candidato' : 'Empresa'}
           </p>
-          <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate mt-0.5">
+          <p className="text-sm font-semibold text-foreground truncate mt-0.5">
             {user?.email}
           </p>
         </div>
@@ -109,9 +109,9 @@ function MoreSheet({ onClose }: { onClose: () => void }) {
           {/* Theme toggle */}
           <button
             onClick={cycleTheme}
-            className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors text-left"
+            className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-hover transition-colors text-left"
           >
-            <div className="w-9 h-9 rounded-xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center shrink-0">
+            <div className="w-9 h-9 rounded-xl bg-muted flex items-center justify-center shrink-0">
               <ThemeIcon className="w-4.5 h-4.5 text-neutral-600 dark:text-neutral-300" />
             </div>
             <div>
@@ -127,9 +127,9 @@ function MoreSheet({ onClose }: { onClose: () => void }) {
           {/* Logout */}
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-danger-50 dark:hover:bg-danger-900/20 transition-colors text-left group"
+            className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-danger-tint transition-colors text-left group"
           >
-            <div className="w-9 h-9 rounded-xl bg-danger-50 dark:bg-danger-900/20 flex items-center justify-center shrink-0">
+            <div className="w-9 h-9 rounded-xl bg-danger-tint flex items-center justify-center shrink-0">
               <LogOut className="w-4.5 h-4.5 text-danger-500" />
             </div>
             <p className="text-sm font-medium text-danger-500">
@@ -161,8 +161,8 @@ function NavItem({
       className={cn(
         'flex-1 flex flex-col items-center justify-center gap-0.5 h-full transition-colors',
         isActive
-          ? 'text-brand-600 dark:text-brand-400'
-          : 'text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300',
+          ? 'text-brand-text'
+          : 'text-subtle hover:text-secondary-foreground',
       )}
     >
       <Icon className="w-5 h-5" />
@@ -182,7 +182,7 @@ export function MobileBottomNav() {
 
   return (
     <>
-      <nav className="lg:hidden shrink-0 bg-white dark:bg-neutral-900 border-t border-neutral-200 dark:border-neutral-800">
+      <nav className="lg:hidden shrink-0 bg-card border-t border-border">
         {/* Fixed height bar */}
         <div className="flex items-center h-16">
           {/* Dynamic nav items */}
@@ -204,7 +204,7 @@ export function MobileBottomNav() {
           {/* More button — always last */}
           <button
             onClick={() => setSheetOpen(true)}
-            className="flex-1 flex flex-col items-center justify-center gap-0.5 h-full transition-colors text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300"
+            className="flex-1 flex flex-col items-center justify-center gap-0.5 h-full transition-colors text-subtle hover:text-secondary-foreground"
           >
             <MoreHorizontal className="w-5 h-5" />
             <span className="text-[10px] font-medium">Más</span>
@@ -212,7 +212,7 @@ export function MobileBottomNav() {
         </div>
 
         {/* iOS safe area fill */}
-        <div className="h-safe-bottom bg-white dark:bg-neutral-900" />
+        <div className="h-safe-bottom bg-card" />
       </nav>
 
       {sheetOpen && <MoreSheet onClose={() => setSheetOpen(false)} />}

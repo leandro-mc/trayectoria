@@ -82,7 +82,7 @@ export function ApplyButton({
         className={[
           'inline-flex items-center gap-1.5 h-9 px-4 rounded-lg text-xs font-semibold transition-colors',
           isDisabled
-            ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-500 cursor-not-allowed'
+            ? 'bg-muted text-subtle cursor-not-allowed'
             : 'bg-brand-500 hover:bg-brand-600 text-white',
         ].join(' ')}
       >
@@ -102,12 +102,12 @@ export function ApplyButton({
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-black/40 dark:bg-black/60" onClick={handleClose} />
-          <div className="relative z-10 w-full max-w-sm bg-white dark:bg-neutral-900 rounded-2xl shadow-modal p-6">
+          <div className="relative z-10 w-full max-w-sm bg-card rounded-2xl shadow-modal p-6">
 
             <button
               onClick={handleClose}
               disabled={isPending}
-              className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-400 transition-colors disabled:opacity-50"
+              className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-muted text-neutral-400 transition-colors disabled:opacity-50"
             >
               <X className="w-4 h-4" />
             </button>
@@ -115,10 +115,10 @@ export function ApplyButton({
             {applied ? (
               <div className="text-center py-4">
                 <CheckCircle2 className="w-12 h-12 text-success-500 mx-auto mb-3" />
-                <p className="text-base font-bold text-neutral-900 dark:text-neutral-100">
+                <p className="text-base font-bold text-foreground">
                   ¡Postulación enviada!
                 </p>
-                <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+                <p className="text-sm text-muted-foreground mt-1">
                   {selectedCvId
                     ? 'Se adjuntó tu currículum personalizado ✨'
                     : 'La empresa recibirá tu perfil completo'
@@ -127,24 +127,24 @@ export function ApplyButton({
               </div>
             ) : (
               <>
-                <h3 className="text-base font-bold text-neutral-900 dark:text-neutral-100 mb-1">
+                <h3 className="text-base font-bold text-foreground mb-1">
                   Confirmar postulación
                 </h3>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">{jobTitle}</p>
+                <p className="text-sm text-body">{jobTitle}</p>
                 {companyName && (
                   <p className="text-xs text-neutral-400 mt-0.5 mb-4">{companyName}</p>
                 )}
 
                 {matchingCurricula.length > 0 ? (
                   <div className="mt-4 mb-5">
-                    <label className="flex items-center gap-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
+                    <label className="flex items-center gap-1.5 text-xs font-semibold text-secondary-foreground mb-2">
                       <Sparkles className="w-3.5 h-3.5 text-brand-500" />
                       Adjuntar currículum con IA
                     </label>
                     <select
                       value={selectedCvId}
                       onChange={(e) => setSelectedCvId(e.target.value ? Number(e.target.value) : '')}
-                      className="w-full h-9 px-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-xs focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      className="w-full h-9 px-3 rounded-lg border border-input bg-raised text-foreground text-xs focus:outline-none focus:ring-2 focus:ring-brand-500"
                     >
                       <option value="">Solo mi perfil (sin CV adjunto)</option>
                       {matchingCurricula.map((cv) => (
@@ -155,8 +155,8 @@ export function ApplyButton({
                     </select>
                   </div>
                 ) : (
-                  <div className="mt-4 mb-5 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                    <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                  <div className="mt-4 mb-5 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-input">
+                    <p className="text-xs text-muted-foreground">
                       Se enviará tu perfil completo. Podés generar un{' '}
                       <span className="text-brand-500 font-medium">CV personalizado ✨</span>{' '}
                       para esta oferta desde el panel de la oferta.
@@ -168,7 +168,7 @@ export function ApplyButton({
                   <button
                     onClick={handleClose}
                     disabled={isPending}
-                    className="flex-1 h-10 rounded-xl border border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-400 text-sm font-medium hover:bg-neutral-50 dark:hover:bg-neutral-800 disabled:opacity-50 transition-colors"
+                    className="flex-1 h-10 rounded-xl border border-input text-body text-sm font-medium hover:bg-hover disabled:opacity-50 transition-colors"
                   >
                     Cancelar
                   </button>

@@ -36,8 +36,8 @@ export function SidebarLink({
       className={cn(
         'relative flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors group',
         isActive
-          ? 'bg-brand-50 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400'
-          : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800 hover:text-neutral-900 dark:hover:text-neutral-100',
+          ? 'bg-brand-tint text-brand-text'
+          : 'text-body hover:bg-muted hover:text-foreground',
         collapsed && 'justify-center px-2',
       )}
     >

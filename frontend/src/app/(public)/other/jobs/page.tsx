@@ -27,15 +27,15 @@ export default function PublicJobsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+    <div className="min-h-screen bg-background">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
 
         {/*  Page header  */}
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 mb-1">
+          <h1 className="text-2xl font-bold text-foreground mb-1">
             Ofertas de trabajo
           </h1>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400">
+          <p className="text-sm text-muted-foreground">
             Encontrá tu próxima oportunidad laboral
           </p>
         </div>
@@ -45,7 +45,7 @@ export default function PublicJobsPage() {
 
           {/* Filters sidebar */}
           <div className="w-full lg:w-64 shrink-0">
-            <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl p-5 shadow-card lg:sticky lg:top-6">
+            <div className="bg-card border border-border rounded-xl p-5 shadow-card lg:sticky lg:top-6">
               <JobOfferFilters filters={filters} onChange={handleFiltersChange} />
             </div>
           </div>
@@ -55,7 +55,7 @@ export default function PublicJobsPage() {
 
             {/* Count */}
             {data && !isLoading && (
-              <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
+              <p className="text-sm text-muted-foreground mb-4">
                 {data.totalElements}{' '}
                 {data.totalElements === 1 ? 'oferta encontrada' : 'ofertas encontradas'}
               </p>

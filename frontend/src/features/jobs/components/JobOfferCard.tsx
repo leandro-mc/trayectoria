@@ -14,9 +14,9 @@ const WORK_MODE_ICONS = {
 } as const
 
 const WORK_MODE_COLORS: Record<string, string> = {
-  REMOTE:  'bg-brand-50 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400',
+  REMOTE:  'bg-brand-tint text-brand-text',
   HYBRID:  'bg-warning-50 text-warning-600',
-  ON_SITE: 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400',
+  ON_SITE: 'bg-muted text-body',
 }
 
 interface JobOfferCardProps {
@@ -44,7 +44,7 @@ export function JobOfferCard({
         onClick ? 'cursor-pointer' : '',
         selected
           ? 'border-brand-400 dark:border-brand-500 bg-brand-50/60 dark:bg-brand-900/10 shadow-md'
-          : 'border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-card hover:shadow-card-hover hover:border-neutral-300 dark:hover:border-neutral-700',
+          : 'border-border bg-card shadow-card hover:shadow-card-hover hover:border-neutral-300 dark:hover:border-neutral-700',
       )}
     >
       {/* Header */}
@@ -54,11 +54,11 @@ export function JobOfferCard({
             'text-sm font-semibold truncate',
             selected
               ? 'text-brand-700 dark:text-brand-300'
-              : 'text-neutral-900 dark:text-neutral-100',
+              : 'text-foreground',
           )}>
             {offer.title}
           </p>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate mt-0.5">
+          <p className="text-xs text-muted-foreground truncate mt-0.5">
             {offer.companyName ?? 'Empresa'}
           </p>
         </div>
@@ -72,7 +72,7 @@ export function JobOfferCard({
       {/* Meta row */}
       <div className="flex flex-wrap items-center gap-2">
         {offer.location && (
-          <span className="inline-flex items-center gap-1 text-xs text-neutral-400 dark:text-neutral-500">
+          <span className="inline-flex items-center gap-1 text-xs text-subtle">
             <MapPin className="w-3 h-3" />
             {offer.location}
           </span>
@@ -89,7 +89,7 @@ export function JobOfferCard({
         )}
 
         {offer.jobType && (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-muted text-muted-foreground">
             <Clock className="w-3 h-3" />
             {JOB_TYPE_LABELS[offer.jobType]}
           </span>
@@ -102,13 +102,13 @@ export function JobOfferCard({
           {offer.skills.slice(0, 4).map((skill) => (
             <span
               key={skill.id}
-              className="px-2 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-xs text-neutral-600 dark:text-neutral-400"
+              className="px-2 py-0.5 rounded-md bg-muted text-xs text-body"
             >
               {skill.name}
             </span>
           ))}
           {offer.skills.length > 4 && (
-            <span className="px-2 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-xs text-neutral-400">
+            <span className="px-2 py-0.5 rounded-md bg-muted text-xs text-neutral-400">
               +{offer.skills.length - 4}
             </span>
           )}
@@ -117,7 +117,7 @@ export function JobOfferCard({
 
       {/* Footer */}
       <div className="flex items-center justify-between gap-2 mt-auto pt-1">
-        <span className="text-xs text-neutral-400 dark:text-neutral-500">
+        <span className="text-xs text-subtle">
           {formatRelativeDate(offer.createdAt)}
         </span>
 

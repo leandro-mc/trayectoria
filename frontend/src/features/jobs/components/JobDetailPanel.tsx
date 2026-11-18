@@ -65,7 +65,7 @@ export function JobDetailPanel() {
   if (error || !offer) {
     return (
       <div className="flex flex-col items-center justify-center h-full text-center p-8">
-        <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
+        <p className="text-sm font-medium text-muted-foreground">
           No se pudo cargar la oferta
         </p>
         <button
@@ -97,7 +97,7 @@ export function JobDetailPanel() {
     <div className="flex flex-col h-full overflow-hidden">
 
       {/*  Sticky header  */}
-      <div className="shrink-0 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-5 pt-4 pb-0">
+      <div className="shrink-0 border-b border-border bg-card px-5 pt-4 pb-0">
 
         {/* Mobile back button */}
         <button
@@ -110,10 +110,10 @@ export function JobDetailPanel() {
 
         {/* Company + title */}
         <div className="mb-3">
-          <p className="text-xs font-medium text-neutral-400 dark:text-neutral-500 mb-1">
+          <p className="text-xs font-medium text-subtle mb-1">
             {offer.companyName ?? 'Empresa'}
           </p>
-          <h2 className="text-lg font-bold text-neutral-900 dark:text-neutral-100 leading-tight">
+          <h2 className="text-lg font-bold text-foreground leading-tight">
             {offer.title}
           </h2>
         </div>
@@ -121,19 +121,19 @@ export function JobDetailPanel() {
         {/* Meta badges */}
         <div className="flex flex-wrap gap-2 mb-4">
           {offer.location && (
-            <span className="inline-flex items-center gap-1 text-xs text-neutral-500 dark:text-neutral-400">
+            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
               <MapPin className="w-3.5 h-3.5" />
               {offer.location}
             </span>
           )}
           {offer.workMode && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-brand-50 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-brand-tint text-brand-text">
               <Wifi className="w-3 h-3" />
               {WORK_MODE_LABELS[offer.workMode]}
             </span>
           )}
           {offer.jobType && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-muted text-muted-foreground">
               <Briefcase className="w-3 h-3" />
               {JOB_TYPE_LABELS[offer.jobType]}
             </span>
@@ -152,7 +152,7 @@ export function JobDetailPanel() {
             {offer.skills.map((skill) => (
               <span
                 key={skill.id}
-                className="px-2.5 py-1 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-xs font-medium text-neutral-600 dark:text-neutral-400"
+                className="px-2.5 py-1 rounded-lg bg-muted text-xs font-medium text-body"
               >
                 {skill.name}
               </span>
@@ -176,14 +176,14 @@ export function JobDetailPanel() {
                 <>
                 <button
                   onClick={() => setMode('cv')}
-                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-brand-300 dark:border-brand-800 text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-colors"
+                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-brand-300 dark:border-brand-800 text-brand-text hover:bg-brand-tint transition-colors"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   CV personalizado
                 </button>
                 <button
                   onClick={() => setMode('interview')}
-                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-brand-300 dark:border-brand-800 text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-colors"
+                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-brand-300 dark:border-brand-800 text-brand-text hover:bg-brand-tint transition-colors"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
                   Entrevista IA
@@ -203,8 +203,8 @@ export function JobDetailPanel() {
                 className={cn(
                   'px-4 py-2 text-xs font-medium border-b-2 transition-colors whitespace-nowrap',
                   resolvedTab === tab.key
-                    ? 'border-brand-500 text-brand-600 dark:text-brand-400'
-                    : 'border-transparent text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-300',
+                    ? 'border-brand-500 text-brand-text'
+                    : 'border-transparent text-muted-foreground hover:text-secondary-foreground',
                 )}
               >
                 {tab.label}
@@ -215,17 +215,17 @@ export function JobDetailPanel() {
       </div>
 
       {/*  Scrollable content  */}
-      <div className="flex-1 overflow-y-auto px-5 py-5 bg-white dark:bg-neutral-900">
+      <div className="flex-1 overflow-y-auto px-5 py-5 bg-card">
         {availableTabs.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
-            <FileText className="w-8 h-8 text-neutral-300 dark:text-neutral-600 mb-2" />
+            <FileText className="w-8 h-8 text-faint mb-2" />
             <p className="text-sm text-neutral-400">
               Esta oferta no tiene descripción detallada
             </p>
           </div>
         ) : (
           tabContent[resolvedTab] ? (
-            <div className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed whitespace-pre-wrap">
+            <div className="text-sm text-secondary-foreground leading-relaxed whitespace-pre-wrap">
               {tabContent[resolvedTab]}
             </div>
           ) : (

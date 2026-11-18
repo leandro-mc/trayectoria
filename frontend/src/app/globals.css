@@ -2,7 +2,7 @@
 @import "@fontsource-variable/instrument-sans";
 @import "@fontsource-variable/fraunces";
 
-@theme {
+@theme static {
   /*  Brand — Rojo mate (ladrillo)
       Single accent for the whole product: actions, links, focus, active states.  */
   --color-brand-50:  #FBF3F1;
@@ -89,6 +89,113 @@
   }
 }
 
+/*  Semantic tokens
+    Components use these (bg-card, text-foreground, border-border…) instead of
+    pairing a light and a dark shade by hand. The .dark class on <html> flips
+    them all at once, so a component never needs a `dark:` colour pair.
+    Names follow the shadcn/ui convention so ui/* primitives work unchanged.  */
+
+:root {
+  --background:           var(--color-neutral-50);
+  --foreground:           var(--color-neutral-900);
+  --card:                 var(--color-neutral-0);
+  --card-foreground:      var(--color-neutral-900);
+  --popover:              var(--color-neutral-0);
+  --popover-foreground:   var(--color-neutral-900);
+
+  --primary:              var(--color-brand-600);
+  --primary-foreground:   var(--color-neutral-0);
+  --secondary:            var(--color-neutral-100);
+  --secondary-foreground: var(--color-neutral-700);
+  --accent:               var(--color-brand-50);
+  --accent-foreground:    var(--color-brand-700);
+  --destructive:          var(--color-danger-600);
+
+  --muted:                var(--color-neutral-100);
+  --muted-foreground:     var(--color-neutral-500);
+  --body:                 var(--color-neutral-600);   /* running text */
+  --subtle:               var(--color-neutral-400);   /* placeholders, hints */
+
+  --border:               var(--color-neutral-200);
+  --input:                var(--color-neutral-200);
+  --ring:                 var(--color-brand-500);
+
+  --brand-text:           var(--color-brand-600);     /* brand-coloured text and icons */
+  --brand-tint:           var(--color-brand-50);      /* soft brand surface */
+  --brand-tint-strong:    var(--color-brand-100);
+  --danger-tint:          var(--color-danger-50);
+  --raised:               var(--color-neutral-0);     /* inputs, popovers on top of a card */
+  --hover:                var(--color-neutral-50);    /* row / item hover */
+  --border-soft:          var(--color-neutral-100);   /* dividers inside a card */
+  --faint:                var(--color-neutral-300);   /* decorative icons */
+}
+
+.dark {
+  --background:           var(--color-neutral-950);
+  --foreground:           var(--color-neutral-100);
+  --card:                 var(--color-neutral-900);
+  --card-foreground:      var(--color-neutral-100);
+  --popover:              var(--color-neutral-900);
+  --popover-foreground:   var(--color-neutral-100);
+
+  --primary:              var(--color-brand-500);
+  --primary-foreground:   var(--color-neutral-0);
+  --secondary:            var(--color-neutral-800);
+  --secondary-foreground: var(--color-neutral-300);
+  --accent:               var(--color-brand-900);
+  --accent-foreground:    var(--color-brand-200);
+  --destructive:          var(--color-danger-500);
+
+  --muted:                var(--color-neutral-800);
+  --muted-foreground:     var(--color-neutral-400);
+  --body:                 var(--color-neutral-400);
+  --subtle:               var(--color-neutral-500);
+
+  --border:               var(--color-neutral-800);
+  --input:                var(--color-neutral-700);
+  --ring:                 var(--color-brand-400);
+
+  --brand-text:           var(--color-brand-400);
+  --brand-tint:           color-mix(in oklab, var(--color-brand-900) 20%, transparent);
+  --brand-tint-strong:    color-mix(in oklab, var(--color-brand-900) 40%, transparent);
+  --danger-tint:          color-mix(in oklab, var(--color-danger-900) 20%, transparent);
+  --raised:               var(--color-neutral-800);
+  --hover:                var(--color-neutral-800);
+  --border-soft:          var(--color-neutral-800);
+  --faint:                var(--color-neutral-600);
+}
+
+@theme inline {
+  --color-background:           var(--background);
+  --color-foreground:           var(--foreground);
+  --color-card:                 var(--card);
+  --color-card-foreground:      var(--card-foreground);
+  --color-popover:              var(--popover);
+  --color-popover-foreground:   var(--popover-foreground);
+  --color-primary:              var(--primary);
+  --color-primary-foreground:   var(--primary-foreground);
+  --color-secondary:            var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent:               var(--accent);
+  --color-accent-foreground:    var(--accent-foreground);
+  --color-destructive:          var(--destructive);
+  --color-muted:                var(--muted);
+  --color-muted-foreground:     var(--muted-foreground);
+  --color-body:                 var(--body);
+  --color-subtle:               var(--subtle);
+  --color-border:               var(--border);
+  --color-input:                var(--input);
+  --color-ring:                 var(--ring);
+  --color-brand-text:           var(--brand-text);
+  --color-brand-tint:           var(--brand-tint);
+  --color-brand-tint-strong:    var(--brand-tint-strong);
+  --color-danger-tint:          var(--danger-tint);
+  --color-raised:               var(--raised);
+  --color-hover:                var(--hover);
+  --color-border-soft:          var(--border-soft);
+  --color-faint:                var(--faint);
+}
+
 /*  Dark mode via class on <html> 
    ThemeSync in Providers.tsx toggles .dark based on Zustand store.
 */
@@ -111,6 +218,8 @@ h1, h2, h3 {
 }
 
 body {
+  background-color: var(--background);
+  color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

@@ -65,19 +65,19 @@ function ApplicationRow({
       className={cn(
         'flex items-center gap-3 px-4 py-3.5 transition-colors cursor-pointer',
         isSelected
-          ? 'bg-brand-50 dark:bg-brand-900/20'
-          : 'hover:bg-neutral-50 dark:hover:bg-neutral-800/50',
+          ? 'bg-brand-tint'
+          : 'hover:bg-hover',
       )}
       onClick={onSelect}
     >
       {/* Avatar */}
-      <div className="w-8 h-8 rounded-full bg-brand-100 dark:bg-brand-900/40 flex items-center justify-center text-xs font-bold text-brand-600 dark:text-brand-400 shrink-0">
+      <div className="w-8 h-8 rounded-full bg-brand-tint-strong flex items-center justify-center text-xs font-bold text-brand-text shrink-0">
         {(application.candidateFirstName?.[0] ?? application.candidateEmail?.[0] ?? '?').toUpperCase()}
       </div>
 
       {/* Info */}
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
+        <p className="text-sm font-semibold text-foreground truncate">
           {candidateName}
         </p>
         <p className="text-xs text-neutral-400 mt-0.5">
@@ -107,7 +107,7 @@ function ApplicationRow({
         {statusOpen && (
           <>
             <div className="fixed inset-0 z-30" onClick={() => setStatusOpen(false)} />
-            <div className="absolute right-0 top-full mt-1 z-40 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-modal py-1 min-w-[150px]">
+            <div className="absolute right-0 top-full mt-1 z-40 bg-card border border-border rounded-xl shadow-modal py-1 min-w-[150px]">
               {availableStatuses.map((s) => (
                 <button
                   key={s}
@@ -116,7 +116,7 @@ function ApplicationRow({
                     setStatusOpen(false)
                   }}
                   disabled={isPending}
-                  className="w-full text-left px-3 py-2 text-sm hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 flex items-center gap-2.5 disabled:opacity-50"
+                  className="w-full text-left px-3 py-2 text-sm hover:bg-hover text-secondary-foreground flex items-center gap-2.5 disabled:opacity-50"
                 >
                   {isPending
                     ? <Loader2 className="w-3 h-3 animate-spin shrink-0" />
@@ -177,7 +177,7 @@ export default function OfferApplicationsPage({ params }: PageProps) {
           actions={
             <Link
               href={ROUTES.offers}
-              className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-600 dark:text-neutral-400 text-sm font-medium transition-colors"
+              className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg border border-input bg-card hover:bg-hover text-body text-sm font-medium transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               Mis ofertas
@@ -194,8 +194,8 @@ export default function OfferApplicationsPage({ params }: PageProps) {
               className={cn(
                 'px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors',
                 activeTab === tab.value
-                  ? 'bg-brand-50 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400'
-                  : 'text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800',
+                  ? 'bg-brand-tint text-brand-text'
+                  : 'text-muted-foreground hover:bg-muted',
               )}
             >
               {tab.label}
@@ -212,10 +212,10 @@ export default function OfferApplicationsPage({ params }: PageProps) {
           'flex flex-col min-h-0',
           selectedApp ? 'hidden lg:flex lg:w-[40%]' : 'flex w-full lg:w-[40%]',
         )}>
-          <div className="flex-1 min-h-0 overflow-y-auto bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl">
+          <div className="flex-1 min-h-0 overflow-y-auto bg-card border border-border rounded-xl">
 
             {isLoading && (
-              <div className="divide-y divide-neutral-100 dark:divide-neutral-800 animate-pulse">
+              <div className="divide-y divide-border-soft animate-pulse">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <div key={i} className="flex items-center gap-3 px-4 py-3.5">
                     <div className="w-8 h-8 rounded-full bg-neutral-200 dark:bg-neutral-800 shrink-0" />
@@ -246,7 +246,7 @@ export default function OfferApplicationsPage({ params }: PageProps) {
             )}
 
             {!isLoading && filtered.length > 0 && (
-              <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
+              <div className="divide-y divide-border-soft">
                 {filtered.map((app) => (
                   <ApplicationRow
                     key={app.id}
@@ -259,7 +259,7 @@ export default function OfferApplicationsPage({ params }: PageProps) {
             )}
 
             {data && data.totalPages > 1 && (
-              <div className="p-4 border-t border-neutral-100 dark:border-neutral-800">
+              <div className="p-4 border-t border-border-soft">
                 <Pagination
                   page={data.page}
                   totalPages={data.totalPages}
@@ -277,21 +277,21 @@ export default function OfferApplicationsPage({ params }: PageProps) {
             {/* Mobile back */}
             <button
               onClick={() => setSelectedId(null)}
-              className="lg:hidden flex items-center gap-2 px-4 py-3 text-xs font-medium text-neutral-500 border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 rounded-t-xl hover:text-neutral-800 transition-colors shrink-0"
+              className="lg:hidden flex items-center gap-2 px-4 py-3 text-xs font-medium text-neutral-500 border border-input bg-card rounded-t-xl hover:text-neutral-800 transition-colors shrink-0"
             >
               ← Volver al listado
             </button>
-            <div className="flex-1 min-h-0 overflow-hidden border border-neutral-200 dark:border-neutral-800 rounded-xl lg:rounded-xl rounded-tl-none lg:rounded-tl-xl">
+            <div className="flex-1 min-h-0 overflow-hidden border border-border rounded-xl lg:rounded-xl rounded-tl-none lg:rounded-tl-xl">
               <CandidateProfilePanel application={selectedApp} />
             </div>
           </div>
         ) : (
-          <div className="hidden lg:flex flex-1 items-center justify-center bg-neutral-50 dark:bg-neutral-950 rounded-xl border border-neutral-200 dark:border-neutral-800">
+          <div className="hidden lg:flex flex-1 items-center justify-center bg-background rounded-xl border border-border">
             <div className="text-center">
-              <div className="w-14 h-14 rounded-2xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mx-auto mb-3">
-                <Search className="w-7 h-7 text-neutral-300 dark:text-neutral-600" />
+              <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-3">
+                <Search className="w-7 h-7 text-faint" />
               </div>
-              <p className="text-sm font-medium text-neutral-400 dark:text-neutral-500">
+              <p className="text-sm font-medium text-subtle">
                 Seleccioná un postulante para ver su perfil
               </p>
             </div>

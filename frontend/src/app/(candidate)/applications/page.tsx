@@ -48,8 +48,8 @@ export default function ApplicationsPage() {
             className={[
               'px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors',
               activeTab === tab.value
-                ? 'bg-brand-50 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400'
-                : 'text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800',
+                ? 'bg-brand-tint text-brand-text'
+                : 'text-muted-foreground hover:bg-muted',
             ].join(' ')}
           >
             {tab.label}
@@ -80,16 +80,16 @@ export default function ApplicationsPage() {
           {filtered.map((app) => (
             <div
               key={app.id}
-              className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl p-5 shadow-card flex items-start gap-4"
+              className="bg-card border border-border rounded-xl p-5 shadow-card flex items-start gap-4"
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-3 mb-1">
                   <div>
-                    <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                    <p className="text-sm font-semibold text-foreground">
                       {app.jobOfferTitle}
                     </p>
                     {app.companyName && (
-                      <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                      <p className="text-xs text-muted-foreground">
                         {app.companyName}
                       </p>
                     )}
@@ -106,7 +106,7 @@ export default function ApplicationsPage() {
               <div className="flex items-center gap-1 shrink-0">
                 <Link
                   href={ROUTES.publicJob(app.jobOfferId)}
-                  className="p-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                  className="p-1.5 rounded-lg hover:bg-muted text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
                   title="Ver oferta"
                 >
                   <ExternalLink className="w-4 h-4" />
@@ -115,7 +115,7 @@ export default function ApplicationsPage() {
                   <button
                     onClick={() => withdraw(app.id)}
                     disabled={withdrawing}
-                    className="p-1.5 rounded-lg hover:bg-danger-50 dark:hover:bg-danger-900/20 text-neutral-400 hover:text-danger-500 transition-colors disabled:opacity-50"
+                    className="p-1.5 rounded-lg hover:bg-danger-tint text-neutral-400 hover:text-danger-500 transition-colors disabled:opacity-50"
                     title="Retirar postulación"
                   >
                     <Trash2 className="w-4 h-4" />

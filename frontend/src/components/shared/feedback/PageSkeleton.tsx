@@ -3,7 +3,7 @@
 /** Generic card-shaped skeleton */
 export function CardSkeleton({ lines = 3 }: { lines?: number }) {
   return (
-    <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl p-5 shadow-card animate-pulse">
+    <div className="bg-card border border-border rounded-xl p-5 shadow-card animate-pulse">
       <div className="h-5 bg-neutral-200 dark:bg-neutral-800 rounded w-3/4 mb-3" />
       <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-1/2 mb-4" />
       {Array.from({ length: lines - 2 }).map((_, i) => (

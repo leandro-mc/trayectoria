@@ -19,10 +19,10 @@ export function AuthGateModal({ action, onClose }: AuthGateModalProps) {
       />
 
       {/* Modal */}
-      <div className="relative z-10 w-full max-w-sm bg-white dark:bg-neutral-900 rounded-2xl shadow-modal p-6">
+      <div className="relative z-10 w-full max-w-sm bg-card rounded-2xl shadow-modal p-6">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-400 transition-colors"
+          className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-muted text-neutral-400 transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
@@ -35,10 +35,10 @@ export function AuthGateModal({ action, onClose }: AuthGateModalProps) {
           <Sparkles className="w-6 h-6 text-white" />
         </div>
 
-        <h3 className="text-base font-bold text-neutral-900 dark:text-neutral-100 mb-2">
+        <h3 className="text-base font-bold text-foreground mb-2">
           Necesitás una cuenta
         </h3>
-        <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-6">
+        <p className="text-sm text-muted-foreground mb-6">
           Para {action} en TrayectorIA, creá tu cuenta gratis o iniciá sesión.
         </p>
 
@@ -53,7 +53,7 @@ export function AuthGateModal({ action, onClose }: AuthGateModalProps) {
           </Link>
           <Link
             href={ROUTES.login}
-            className="flex items-center justify-center gap-2 h-10 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 text-sm font-medium transition-colors"
+            className="flex items-center justify-center gap-2 h-10 rounded-xl border border-input bg-card hover:bg-hover text-secondary-foreground text-sm font-medium transition-colors"
             onClick={onClose}
           >
             <LogIn className="w-4 h-4" />

@@ -19,7 +19,7 @@ export function PublicNavbar({ hideAuthButtons = false }: PublicNavbarProps) {
   const dashboardHref   = role === 'COMPANY' ? ROUTES.companyDashboard : ROUTES.dashboard
 
   return (
-    <header className="sticky top-0 z-20 h-14 sm:h-16 flex items-center justify-between px-3 sm:px-6 border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm">
+    <header className="sticky top-0 z-20 h-14 sm:h-16 flex items-center justify-between px-3 sm:px-6 border-b border-border bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm">
 
       {/* Logo */}
       <Link href={ROUTES.publicJobs} className="flex items-center gap-2.5 group">
@@ -29,7 +29,7 @@ export function PublicNavbar({ hideAuthButtons = false }: PublicNavbarProps) {
         >
           <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
         </div>
-        <span className="text-sm sm:text-base font-bold text-neutral-900 dark:text-neutral-100 tracking-tight">
+        <span className="text-sm sm:text-base font-bold text-foreground tracking-tight">
           TrayectorIA
         </span>
       </Link>
@@ -37,7 +37,7 @@ export function PublicNavbar({ hideAuthButtons = false }: PublicNavbarProps) {
       {/* Center nav */}
       {pathname === ROUTES.publicJobs && (
         <nav className="hidden md:flex items-center gap-1">          
-          <span className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors bg-brand-50 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400">
+          <span className="px-3 py-1.5 rounded-lg text-sm font-medium transition-colors bg-brand-tint text-brand-text">
             Ofertas
           </span>
         </nav>
@@ -60,7 +60,7 @@ export function PublicNavbar({ hideAuthButtons = false }: PublicNavbarProps) {
             <>
               <Link
                 href={ROUTES.login}
-                className="inline-flex h-8 sm:h-9 px-2.5 sm:px-4 items-center rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm font-medium transition-colors"
+                className="inline-flex h-8 sm:h-9 px-2.5 sm:px-4 items-center rounded-lg border border-input bg-card hover:bg-hover text-secondary-foreground text-xs sm:text-sm font-medium transition-colors"
               >
                 Iniciar sesión
               </Link>

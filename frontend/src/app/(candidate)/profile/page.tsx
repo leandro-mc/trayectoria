@@ -21,8 +21,8 @@ export default function ProfilePage() {
       <ProfileHeader />
 
       {/* Basic info form */}
-      <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-card p-6 mb-6">
-        <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-5">
+      <div className="bg-card border border-border rounded-xl shadow-card p-6 mb-6">
+        <h3 className="text-sm font-semibold text-foreground mb-5">
           Información personal
         </h3>
         <ProfileForm />

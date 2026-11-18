@@ -9,7 +9,7 @@ interface CandidateLayoutProps {
 export default function CandidateLayout({ children }: CandidateLayoutProps) {
   return (
     // h-dvh: iOS Safari-safe. h-screen = 100vh que incluye la address bar → nav se va abajo.
-    <div className="flex h-dvh bg-neutral-50 dark:bg-neutral-950 overflow-hidden">
+    <div className="flex h-dvh bg-background overflow-hidden">
 
       {/* Desktop sidebar — display:none en mobile */}
       <CandidateSidebar />

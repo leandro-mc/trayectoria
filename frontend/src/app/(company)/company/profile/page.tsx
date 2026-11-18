@@ -11,7 +11,7 @@ export default function CompanyProfilePage() {
         title="Perfil de empresa"
         description="Esta información aparece en todas tus ofertas de trabajo"
       />
-      <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-card p-6">
+      <div className="bg-card border border-border rounded-xl shadow-card p-6">
         <CompanyProfileForm />
       </div>
     </div>

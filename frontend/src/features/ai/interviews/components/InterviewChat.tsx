@@ -34,7 +34,7 @@ function MessageBubble({
         className={cn(
           'w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5',
           isUser
-            ? 'bg-brand-100 dark:bg-brand-900/40 text-brand-600 dark:text-brand-400 text-xs font-bold'
+            ? 'bg-brand-tint-strong text-brand-text text-xs font-bold'
             : 'text-white',
         )}
         style={!isUser ? { background: 'linear-gradient(135deg,#A855F7,#6366F1)' } : undefined}
@@ -45,7 +45,7 @@ function MessageBubble({
         'max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed',
         isUser
           ? 'bg-brand-500 text-white rounded-tr-sm'
-          : 'bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 rounded-tl-sm',
+          : 'bg-raised border border-input text-neutral-800 dark:text-neutral-200 rounded-tl-sm',
       )}>
         <p className="whitespace-pre-wrap">{content}</p>
         <p className={cn('text-[10px] mt-1.5', isUser ? 'text-brand-200' : 'text-neutral-400')}>
@@ -65,7 +65,7 @@ function TypingIndicator() {
       >
         <Sparkles className="w-3.5 h-3.5" />
       </div>
-      <div className="bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
+      <div className="bg-raised border border-input rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
         {[0, 150, 300].map((delay) => (
           <span
             key={delay}
@@ -80,7 +80,7 @@ function TypingIndicator() {
 
 function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
   return (
-    <div className="mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-800 space-y-4">
+    <div className="mt-4 pt-4 border-t border-border space-y-4">
 
       {/* Score + recommendation */}
       <div
@@ -89,11 +89,11 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
       >
         <div className="flex items-center justify-center gap-2 mb-2">
           <Star className="w-4 h-4 text-brand-500" />
-          <span className="text-xs font-semibold text-brand-600 dark:text-brand-400 uppercase tracking-wide">
+          <span className="text-xs font-semibold text-brand-text uppercase tracking-wide">
             Feedback de la IA
           </span>
         </div>
-        <p className="text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+        <p className="text-4xl font-bold text-foreground">
           {feedback.overallScore}
           <span className="text-xl text-neutral-400 font-normal">/10</span>
         </p>
@@ -106,9 +106,9 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
       </div>
 
       {/* Summary */}
-      <div className="p-4 bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700">
+      <div className="p-4 bg-raised rounded-xl border border-input">
         <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wide mb-2">Resumen</p>
-        <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+        <p className="text-sm text-secondary-foreground leading-relaxed">
           {feedback.summary}
         </p>
       </div>
@@ -122,7 +122,7 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
           </div>
           <ul className="space-y-2">
             {feedback.strengths.map((s, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300">
+              <li key={i} className="flex items-start gap-2 text-sm text-secondary-foreground">
                 <CheckCircle2 className="w-3.5 h-3.5 text-success-500 mt-0.5 shrink-0" />
                 {s}
               </li>
@@ -140,7 +140,7 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
           </div>
           <ul className="space-y-2">
             {feedback.areasForImprovement.map((a, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300">
+              <li key={i} className="flex items-start gap-2 text-sm text-secondary-foreground">
                 <AlertCircle className="w-3.5 h-3.5 text-warning-500 mt-0.5 shrink-0" />
                 {a}
               </li>
@@ -150,11 +150,11 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
       )}
 
       {/* Detailed */}
-      <div className="p-4 bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700">
-        <p className="text-xs font-semibold text-brand-600 dark:text-brand-400 uppercase tracking-wide mb-2">
+      <div className="p-4 bg-raised rounded-xl border border-input">
+        <p className="text-xs font-semibold text-brand-text uppercase tracking-wide mb-2">
           Feedback detallado
         </p>
-        <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+        <p className="text-sm text-secondary-foreground leading-relaxed">
           {feedback.details}
         </p>
       </div>
@@ -232,7 +232,7 @@ export function InterviewChat({
           <button
             onClick={handleComplete}
             disabled={completing || interview.messages.length < 2}
-            className="inline-flex items-center gap-1.5 h-7 px-3 rounded-lg text-xs font-medium border border-neutral-200 dark:border-neutral-700 text-neutral-500 dark:text-neutral-400 hover:bg-neutral-50 dark:hover:bg-neutral-800 disabled:opacity-40 transition-colors"
+            className="inline-flex items-center gap-1.5 h-7 px-3 rounded-lg text-xs font-medium border border-input text-muted-foreground hover:bg-hover disabled:opacity-40 transition-colors"
           >
             {completing && <Loader2 className="w-3 h-3 animate-spin" />}
             Finalizar entrevista
@@ -243,7 +243,7 @@ export function InterviewChat({
       {/* Messages */}
       <div
         ref={scrollRef}
-        className={cn('overflow-y-auto px-4 py-3 space-y-4 bg-neutral-50 dark:bg-neutral-950', messagesClassName)}
+        className={cn('overflow-y-auto px-4 py-3 space-y-4 bg-background', messagesClassName)}
       >
         {interview.messages.map((msg) => (
           <MessageBubble
@@ -260,7 +260,7 @@ export function InterviewChat({
         {isCompleted && !sending && !feedback && (
           <div className="flex flex-col items-center py-4 text-center">
             <CheckCircle2 className="w-7 h-7 text-success-500 mb-2" />
-            <p className="text-sm font-medium text-neutral-600 dark:text-neutral-400">
+            <p className="text-sm font-medium text-body">
               Entrevista completada
             </p>
           </div>
@@ -272,7 +272,7 @@ export function InterviewChat({
 
       {/* Input — hidden when completed */}
       {!isCompleted && (
-        <div className="shrink-0 border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-4 py-3">
+        <div className="shrink-0 border-t border-border bg-card px-4 py-3">
           <div className="flex items-end gap-2">
             <textarea
               ref={textareaRef}
@@ -282,7 +282,7 @@ export function InterviewChat({
               disabled={sending}
               placeholder="Escribí tu respuesta… (Enter para enviar)"
               rows={1}
-              className="flex-1 resize-none rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 px-3.5 py-2.5 text-sm text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 overflow-y-auto"
+              className="flex-1 resize-none rounded-xl border border-input bg-neutral-50 dark:bg-neutral-800 px-3.5 py-2.5 text-sm text-foreground placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 overflow-y-auto"
               style={{ minHeight: '42px', maxHeight: '128px' }}
               onInput={(e) => {
                 const el = e.currentTarget
@@ -305,7 +305,7 @@ export function InterviewChat({
             <button
               disabled
               title="Próximamente — entrevista por voz"
-              className="w-10 h-10 rounded-xl border border-neutral-200 dark:border-neutral-700 flex items-center justify-center text-neutral-300 dark:text-neutral-600 cursor-not-allowed shrink-0"
+              className="w-10 h-10 rounded-xl border border-input flex items-center justify-center text-faint cursor-not-allowed shrink-0"
             >
               <Mic className="w-4 h-4" />
             </button>

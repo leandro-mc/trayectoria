@@ -34,7 +34,7 @@ function GeneratingSkeleton({ label }: { label: string }) {
         >
           <Sparkles className="w-3 h-3 text-white" />
         </div>
-        <span className="text-sm font-medium text-brand-600 dark:text-brand-400 animate-pulse">
+        <span className="text-sm font-medium text-brand-text animate-pulse">
           {label}
         </span>
       </div>
@@ -155,10 +155,10 @@ export function JobCVPanel() {
   const showSkeleton = !showContent && !showError
 
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-neutral-900">
+    <div className="flex flex-col h-full bg-card">
 
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-3.5 border-b border-neutral-200 dark:border-neutral-800 shrink-0">
+      <div className="flex items-center justify-between px-5 py-3.5 border-b border-border shrink-0">
         <div className="flex items-center gap-2">
           <div
             className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
@@ -175,7 +175,7 @@ export function JobCVPanel() {
           <button
             onClick={handleRegenerate}
             disabled={generating}
-            className="inline-flex items-center gap-1.5 h-7 px-2.5 rounded-lg text-xs font-medium text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-50 dark:hover:bg-neutral-800 disabled:opacity-50 transition-colors"
+            className="inline-flex items-center gap-1.5 h-7 px-2.5 rounded-lg text-xs font-medium text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 border border-input hover:bg-hover disabled:opacity-50 transition-colors"
           >
             <RefreshCw className={`w-3 h-3 ${generating ? 'animate-spin' : ''}`} />
             Regenerar
@@ -203,7 +203,7 @@ export function JobCVPanel() {
 
         {showError && (
           <div className="flex flex-col items-center justify-center h-full gap-3 p-6 text-center">
-            <p className="text-sm text-neutral-500 dark:text-neutral-400">
+            <p className="text-sm text-muted-foreground">
               No se pudo generar el currículum. Verificá que tu perfil esté completo.
             </p>
             <button

@@ -46,14 +46,14 @@ function AITabs() {
   const isInterviews = pathname === ROUTES.interviews
 
   return (
-    <div className="flex border-b border-neutral-200 dark:border-neutral-800 shrink-0">
+    <div className="flex border-b border-border shrink-0">
       <a
         href={ROUTES.curricula}
         className={cn(
           'flex-1 flex items-center justify-center gap-1.5 py-3 text-xs font-semibold border-b-2 transition-colors',
           isCurricula
-            ? 'border-brand-500 text-brand-600 dark:text-brand-400'
-            : 'border-transparent text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300',
+            ? 'border-brand-500 text-brand-text'
+            : 'border-transparent text-subtle hover:text-secondary-foreground',
         )}
       >
         <FileText className="w-3.5 h-3.5" />
@@ -64,8 +64,8 @@ function AITabs() {
         className={cn(
           'flex-1 flex items-center justify-center gap-1.5 py-3 text-xs font-semibold border-b-2 transition-colors',
           isInterviews
-            ? 'border-brand-500 text-brand-600 dark:text-brand-400'
-            : 'border-transparent text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300',
+            ? 'border-brand-500 text-brand-text'
+            : 'border-transparent text-subtle hover:text-secondary-foreground',
         )}
       >
         <MessageSquare className="w-3.5 h-3.5" />
@@ -90,7 +90,7 @@ function CurriculaList({
     return (
       <div className="p-4 space-y-3 animate-pulse">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="h-16 rounded-xl bg-neutral-100 dark:bg-neutral-800" />
+          <div key={i} className="h-16 rounded-xl bg-muted" />
         ))}
       </div>
     )
@@ -99,10 +99,10 @@ function CurriculaList({
   if (curricula.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
-        <div className="w-12 h-12 rounded-2xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mb-3">
+        <div className="w-12 h-12 rounded-2xl bg-muted flex items-center justify-center mb-3">
           <FileText className="w-6 h-6 text-neutral-400" />
         </div>
-        <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+        <p className="text-sm font-medium text-secondary-foreground mb-1">
           Sin currículums
         </p>
         <p className="text-xs text-neutral-400 leading-relaxed">
@@ -113,7 +113,7 @@ function CurriculaList({
   }
 
   return (
-    <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
+    <div className="divide-y divide-border-soft">
       {curricula.map((cv: GeneratedCurriculumResponse) => (
         <button
           key={cv.id}
@@ -121,8 +121,8 @@ function CurriculaList({
           className={cn(
             'w-full flex items-center gap-3 px-4 py-3.5 text-left transition-colors',
             selectedId === cv.id
-              ? 'bg-brand-50 dark:bg-brand-900/20'
-              : 'hover:bg-neutral-50 dark:hover:bg-neutral-800/50',
+              ? 'bg-brand-tint'
+              : 'hover:bg-hover',
           )}
         >
           <div
@@ -139,7 +139,7 @@ function CurriculaList({
           </div>
           <ChevronRight className={cn(
             'w-3.5 h-3.5 shrink-0 transition-colors',
-            selectedId === cv.id ? 'text-brand-500' : 'text-neutral-300 dark:text-neutral-600',
+            selectedId === cv.id ? 'text-brand-500' : 'text-faint',
           )} />
         </button>
       ))}
@@ -162,7 +162,7 @@ function InterviewsList({
     return (
       <div className="p-4 space-y-3 animate-pulse">
         {[1, 2].map((i) => (
-          <div key={i} className="h-16 rounded-xl bg-neutral-100 dark:bg-neutral-800" />
+          <div key={i} className="h-16 rounded-xl bg-muted" />
         ))}
       </div>
     )
@@ -171,10 +171,10 @@ function InterviewsList({
   if (interviews.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
-        <div className="w-12 h-12 rounded-2xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mb-3">
+        <div className="w-12 h-12 rounded-2xl bg-muted flex items-center justify-center mb-3">
           <MessageSquare className="w-6 h-6 text-neutral-400" />
         </div>
-        <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+        <p className="text-sm font-medium text-secondary-foreground mb-1">
           Sin entrevistas
         </p>
         <p className="text-xs text-neutral-400 leading-relaxed">
@@ -185,7 +185,7 @@ function InterviewsList({
   }
 
   return (
-    <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
+    <div className="divide-y divide-border-soft">
       {interviews.map((iv: SimulatedInterviewResponse) => {
         const isCompleted = iv.status === 'COMPLETED'
         return (
@@ -195,13 +195,13 @@ function InterviewsList({
             className={cn(
               'w-full flex items-center gap-3 px-4 py-3.5 text-left transition-colors',
               selectedId === iv.id
-                ? 'bg-brand-50 dark:bg-brand-900/20'
-                : 'hover:bg-neutral-50 dark:hover:bg-neutral-800/50',
+                ? 'bg-brand-tint'
+                : 'hover:bg-hover',
             )}
           >
             <div className={cn(
               'w-8 h-8 rounded-lg flex items-center justify-center shrink-0',
-              isCompleted ? 'bg-success-50 dark:bg-success-900/20' : 'bg-brand-50 dark:bg-brand-900/20',
+              isCompleted ? 'bg-success-50 dark:bg-success-900/20' : 'bg-brand-tint',
             )}>
               {isCompleted
                 ? <CheckCircle2 className="w-4 h-4 text-success-500" />
@@ -222,7 +222,7 @@ function InterviewsList({
             </div>
             <ChevronRight className={cn(
               'w-3.5 h-3.5 shrink-0 transition-colors',
-              selectedId === iv.id ? 'text-brand-500' : 'text-neutral-300 dark:text-neutral-600',
+              selectedId === iv.id ? 'text-brand-500' : 'text-faint',
             )} />
           </button>
         )
@@ -241,7 +241,7 @@ interface AILeftPanelProps {
 
 export function AILeftPanel({ section, selectedId, onSelect }: AILeftPanelProps) {
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-neutral-900">
+    <div className="flex flex-col h-full bg-card">
       <AITabs />
       <div className="flex-1 min-h-0 overflow-y-auto">
         {section === 'curricula'

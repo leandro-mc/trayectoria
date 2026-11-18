@@ -23,7 +23,7 @@ export function JobsShell({ children }: JobsShellProps) {
 
   if (isCandidate || isCompany) {
     return (
-      <div className="flex h-dvh bg-neutral-50 dark:bg-neutral-950 overflow-hidden">
+      <div className="flex h-dvh bg-background overflow-hidden">
         {isCompany ? <CompanySidebar /> : <CandidateSidebar />}        
          {/*
           flex-col so MobileBottomNav sits at the bottom in normal flow.
@@ -40,7 +40,7 @@ export function JobsShell({ children }: JobsShellProps) {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-neutral-50 dark:bg-neutral-950 overflow-hidden">
+    <div className="h-screen flex flex-col bg-background overflow-hidden">
       <PublicNavbar />
       <div className="flex-1 min-w-0 overflow-hidden flex flex-col">
         {children}

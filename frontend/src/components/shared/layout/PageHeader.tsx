@@ -18,11 +18,11 @@ export function PageHeader({
   return (
     <div className={cn('flex items-start justify-between gap-4 mb-8', className)}>
       <div>
-        <h1 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100 tracking-tight">
+        <h1 className="text-2xl font-bold text-foreground tracking-tight">
           {title}
         </h1>
         {description && (
-          <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+          <p className="mt-1 text-sm text-muted-foreground">
             {description}
           </p>
         )}

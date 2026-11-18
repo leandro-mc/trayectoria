@@ -36,17 +36,17 @@ export function GenerateCurriculumModal({ onClose, onSuccess }: GenerateCurricul
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/40 dark:bg-black/60" onClick={() => !isPending && onClose()} />
 
-      <div className="relative z-10 w-full max-w-md bg-white dark:bg-neutral-900 rounded-2xl shadow-modal">
+      <div className="relative z-10 w-full max-w-md bg-card rounded-2xl shadow-modal">
 
         {/* Header */}
-        <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-neutral-100 dark:border-neutral-800">
+        <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-border-soft">
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
               style={{ background: 'linear-gradient(135deg, #A855F7, #6366F1)' }}>
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h2 className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
+              <h2 className="text-sm font-bold text-foreground">
                 Generar currículum con IA
               </h2>
               <p className="text-xs text-neutral-400">
@@ -57,7 +57,7 @@ export function GenerateCurriculumModal({ onClose, onSuccess }: GenerateCurricul
           <button
             onClick={onClose}
             disabled={isPending}
-            className="p-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-400 disabled:opacity-50 transition-colors"
+            className="p-1.5 rounded-lg hover:bg-muted text-neutral-400 disabled:opacity-50 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -66,14 +66,14 @@ export function GenerateCurriculumModal({ onClose, onSuccess }: GenerateCurricul
         {/* Body */}
         <div className="px-6 py-5 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1.5">
+            <label className="block text-sm font-medium text-secondary-foreground mb-1.5">
               ¿Para qué oferta?
             </label>
             <select
               value={selectedJobId}
               onChange={(e) => setSelectedJobId(e.target.value ? Number(e.target.value) : '')}
               disabled={isPending || loadingOffers}
-              className="w-full h-10 px-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:opacity-50"
+              className="w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:opacity-50"
             >
               <option value="">Seleccioná una oferta...</option>
               {offersData?.content
@@ -87,8 +87,8 @@ export function GenerateCurriculumModal({ onClose, onSuccess }: GenerateCurricul
           </div>
 
           {/* Info card */}
-          <div className="p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-            <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+          <div className="p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-input">
+            <p className="text-xs text-muted-foreground leading-relaxed">
               La IA analizará tu perfil completo y los requisitos de la oferta para generar un currículum personalizado que maximice tus chances.
             </p>
           </div>
@@ -103,7 +103,7 @@ export function GenerateCurriculumModal({ onClose, onSuccess }: GenerateCurricul
           <button
             onClick={onClose}
             disabled={isPending}
-            className="flex-1 h-10 rounded-xl border border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-400 text-sm font-medium hover:bg-neutral-50 dark:hover:bg-neutral-800 disabled:opacity-50 transition-colors"
+            className="flex-1 h-10 rounded-xl border border-input text-body text-sm font-medium hover:bg-hover disabled:opacity-50 transition-colors"
           >
             Cancelar
           </button>

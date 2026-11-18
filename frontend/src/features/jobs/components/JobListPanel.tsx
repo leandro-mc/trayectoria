@@ -22,7 +22,7 @@ function FilterPill({
         'px-2.5 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-colors border',
         active
           ? 'bg-brand-500 border-brand-500 text-white'
-          : 'bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-400 hover:border-brand-300 dark:hover:border-brand-700',
+          : 'bg-card border-input text-body hover:border-brand-300 dark:hover:border-brand-700',
       )}
     >
       {label}
@@ -34,7 +34,7 @@ function FilterPill({
 
 function CardSkeleton() {
   return (
-    <div className="animate-pulse p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 space-y-3">
+    <div className="animate-pulse p-4 rounded-xl border border-border bg-card space-y-3">
       <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-3/4" />
       <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded w-1/2" />
       <div className="flex gap-2">
@@ -78,7 +78,7 @@ export function JobListPanel() {
     <div className="flex flex-col h-full">
 
       {/*  Search + filters  */}
-      <div className="px-3 pt-3 pb-2 space-y-2 border-b border-neutral-100 dark:border-neutral-800 shrink-0 bg-white dark:bg-neutral-900">
+      <div className="px-3 pt-3 pb-2 space-y-2 border-b border-border-soft shrink-0 bg-card">
 
         {/* Search */}
         <div className="relative">
@@ -88,7 +88,7 @@ export function JobListPanel() {
             value={keyword}
             onChange={(e) => setFilter('q', e.target.value)}
             placeholder="Buscar por título..."
-            className="w-full h-9 pl-9 pr-8 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+            className="w-full h-9 pl-9 pr-8 rounded-lg border border-input bg-neutral-50 dark:bg-neutral-800 text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
           />
           {keyword && (
             <button
@@ -125,7 +125,7 @@ export function JobListPanel() {
           {hasFilters && (
             <button
               onClick={clearFilters}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium text-danger-500 hover:bg-danger-50 dark:hover:bg-danger-900/20 transition-colors whitespace-nowrap border border-danger-200 dark:border-danger-800"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium text-danger-500 hover:bg-danger-tint transition-colors whitespace-nowrap border border-danger-200 dark:border-danger-800"
             >
               <X className="w-3 h-3" />
               Limpiar
@@ -155,8 +155,8 @@ export function JobListPanel() {
 
         {!isLoading && data?.content.length === 0 && (
           <div className="flex flex-col items-center py-16 text-center">
-            <SlidersHorizontal className="w-8 h-8 text-neutral-300 dark:text-neutral-600 mb-2" />
-            <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
+            <SlidersHorizontal className="w-8 h-8 text-faint mb-2" />
+            <p className="text-sm font-medium text-muted-foreground">
               Sin resultados
             </p>
             <p className="text-xs text-neutral-400 mt-1">
@@ -178,7 +178,7 @@ export function JobListPanel() {
 
       {/*  Pagination  */}
       {data && data.totalPages > 1 && (
-        <div className="flex items-center justify-between px-4 py-3 border-t border-neutral-100 dark:border-neutral-800 shrink-0 bg-white dark:bg-neutral-900">
+        <div className="flex items-center justify-between px-4 py-3 border-t border-border-soft shrink-0 bg-card">
           <button
             disabled={page === 0}
             onClick={() => setPage(page - 1)}

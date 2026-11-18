@@ -59,7 +59,7 @@ export function SkillPicker({
           {selected.map((skill) => (
             <span
               key={skill.id}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-brand-50 dark:bg-brand-900/20 border border-brand-200 dark:border-brand-800 text-xs font-medium text-brand-700 dark:text-brand-300"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-brand-tint border border-brand-200 dark:border-brand-800 text-xs font-medium text-brand-700 dark:text-brand-300"
             >
               {skill.name}
               {!disabled && (
@@ -95,13 +95,13 @@ export function SkillPicker({
               }}
               onFocus={() => setOpen(true)}
               placeholder="Buscar y agregar skills..."
-              className="w-full h-10 pl-9 pr-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+              className="w-full h-10 pl-9 pr-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
             />
           </div>
 
           {/* Dropdown */}
           {open && suggestions.length > 0 && (
-            <div className="absolute z-10 top-full left-0 right-0 mt-1 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-modal overflow-hidden">
+            <div className="absolute z-10 top-full left-0 right-0 mt-1 bg-card border border-border rounded-xl shadow-modal overflow-hidden">
               <ul className="max-h-52 overflow-y-auto py-1">
                 {suggestions.slice(0, 10).map((skill) => (
                   <li key={skill.id}>
@@ -114,7 +114,7 @@ export function SkillPicker({
                       }}
                       className={cn(
                         'w-full text-left px-4 py-2.5 text-sm flex items-center justify-between gap-3',
-                        'hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-colors',
+                        'hover:bg-brand-tint transition-colors',
                         'text-neutral-800 dark:text-neutral-200',
                       )}
                     >
@@ -133,7 +133,7 @@ export function SkillPicker({
 
           {/* No results */}
           {open && search.length >= 2 && !isLoading && suggestions.length === 0 && (
-            <div className="absolute z-10 top-full left-0 right-0 mt-1 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-card p-4 text-center">
+            <div className="absolute z-10 top-full left-0 right-0 mt-1 bg-card border border-border rounded-xl shadow-card p-4 text-center">
               <p className="text-sm text-neutral-400">
                 No se encontraron skills para “{search}”
               </p>

@@ -18,10 +18,10 @@ export function SkillsSection() {
   }
 
   return (
-    <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-card">
-      <div className="px-6 py-4 border-b border-neutral-100 dark:border-neutral-800">
-        <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">Skills</h3>
-        <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+    <div className="bg-card border border-border rounded-xl shadow-card">
+      <div className="px-6 py-4 border-b border-border-soft">
+        <h3 className="text-sm font-semibold text-foreground">Skills</h3>
+        <p className="text-xs text-muted-foreground mt-0.5">
           Buscá y agregá tus habilidades técnicas y blandas
         </p>
       </div>
@@ -31,7 +31,7 @@ export function SkillsSection() {
             {[80, 60, 100, 70, 90].map((w) => (
               <div
                 key={w}
-                className="h-7 rounded-lg bg-neutral-100 dark:bg-neutral-800"
+                className="h-7 rounded-lg bg-muted"
                 style={{ width: `${w}px` }}
               />
             ))}
