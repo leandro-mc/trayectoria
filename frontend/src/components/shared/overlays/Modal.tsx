@@ -19,6 +19,7 @@ import { cn } from '@/lib/utils'
  * variant="dialog"     centred card (default)
  * variant="sheet"      full-height panel docked to the right
  * variant="responsive" bottom sheet on phones, centred card from `sm` up
+ * variant="bottom"     bottom sheet at every width (mobile "more" menu)
  */
 const SIZES = { sm: 'sm:max-w-sm', md: 'sm:max-w-md', lg: 'sm:max-w-2xl' } as const
 
@@ -30,6 +31,8 @@ const CONTENT = {
   responsive:
     'inset-x-0 bottom-0 flex max-h-[92dvh] flex-col rounded-t-2xl ' +
     'sm:inset-auto sm:left-1/2 sm:top-1/2 sm:max-h-[85dvh] sm:w-full sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-2xl',
+  bottom:
+    'inset-x-0 bottom-0 flex max-h-[92dvh] flex-col rounded-t-2xl pb-safe',
 } as const
 
 interface ModalProps {
@@ -57,7 +60,7 @@ export function Modal({
           className={cn(
             'fixed z-50 bg-card shadow-modal outline-none',
             CONTENT[variant],
-            variant !== 'sheet' && SIZES[size],
+            (variant === 'dialog' || variant === 'responsive') && SIZES[size],
             className,
           )}
         >

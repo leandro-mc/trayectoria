@@ -30,7 +30,7 @@ export function ThemeToggle() {
         <Button
           variant="ghost"
           size="icon"
-          className="h-9 w-9 text-neutral-500 hover:text-foreground"
+          className="text-muted-foreground hover:text-foreground"
           aria-label="Cambiar tema"
         >
           <CurrentIcon className="w-4 h-4" />

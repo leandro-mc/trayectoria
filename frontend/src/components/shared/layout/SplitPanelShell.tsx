@@ -1,50 +1,24 @@
 'use client'
 
 import type { ReactNode } from 'react'
-import { CandidateSidebar } from '@/components/shared/layout/CandidateSidebar'
-import { MobileBottomNav } from '@/components/shared/layout/MobileBottomNav'
-import { PublicNavbar } from '@/components/shared/layout/PublicNavbar'
+import { AppShell } from './AppShell'
+import { PublicNavbar } from './PublicNavbar'
 import { useAuthStore } from '@/stores/auth.store'
-import { CompanySidebar } from '@/components/shared/layout/CompanySidebar'
 
-// Shell for the split-panel pages. Jobs is accessible to everyone.
-// - CANDIDATE   -> full candidate shell with sidebar (panel fijo, acciones activas)
-// - COMPANY     -> public navbar (pueden ver ofertas, no postularse)
-// - No auth     -> public navbar (pueden ver, se les pide login al actuar)
-
-interface SplitPanelShellProps {
-  children: ReactNode
-}
-
-export function SplitPanelShell({ children }: SplitPanelShellProps) {
+/**
+ * Shell for the full-height split-panel pages. /jobs is open to everyone:
+ * - signed in (either role) -> app shell with sidebar; the panels scroll on their own
+ * - anonymous               -> public navbar; actions ask for login when needed
+ */
+export function SplitPanelShell({ children }: { children: ReactNode }) {
   const role = useAuthStore((s) => s.user?.role)
-  const isCandidate = role === 'CANDIDATE'
-  const isCompany   = role === 'COMPANY'
 
-  if (isCandidate || isCompany) {
-    return (
-      <div className="flex h-dvh bg-background overflow-hidden">
-        {isCompany ? <CompanySidebar /> : <CandidateSidebar />}        
-         {/*
-          flex-col so MobileBottomNav sits at the bottom in normal flow.
-          The split panels (JobListPanel, JobDetailPanel) handle their own scroll internally.
-        */}
-        <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
-          <div className="flex-1 min-w-0 overflow-hidden">
-            {children}
-          </div>
-          <MobileBottomNav />
-        </div>
-      </div>
-    )
-  }
+  if (role) return <AppShell role={role} layout="panels">{children}</AppShell>
 
   return (
-    <div className="h-screen flex flex-col bg-background overflow-hidden">
+    <div className="flex h-screen flex-col overflow-hidden bg-background">
       <PublicNavbar />
-      <div className="flex-1 min-w-0 overflow-hidden flex flex-col">
-        {children}
-      </div>
+      <main className="flex min-w-0 flex-1 flex-col overflow-hidden">{children}</main>
     </div>
   )
 }

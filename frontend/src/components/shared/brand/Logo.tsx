@@ -18,7 +18,7 @@ export function Logo({ href, collapsed = false, className }: LogoProps) {
     >
       <span
         aria-hidden="true"
-        className="grid size-8 shrink-0 place-items-center rounded-md bg-brand-600 font-display text-lg font-semibold leading-none text-white transition-colors group-hover:bg-brand-700"
+        className="grid size-8 shrink-0 place-items-center rounded-md bg-primary font-display text-lg font-semibold leading-none text-primary-foreground transition-colors group-hover:bg-primary/90"
       >
         T
       </span>

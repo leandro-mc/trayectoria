@@ -28,7 +28,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
 
       {/*  Footer  */}
       <footer className="py-4 text-center border-t border-border">
-        <p className="text-xs text-neutral-400 dark:text-neutral-600">
+        <p className="text-xs text-muted-foreground">
           © {new Date().getFullYear()} TrayectorIA. Todos los derechos reservados.
         </p>
       </footer>

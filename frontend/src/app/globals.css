@@ -213,8 +213,8 @@
 
 @variant dark (&:where(.dark, .dark *));
 
-/*  Font  */
-
+/*  Notch / home-indicator padding for bottom-docked surfaces (no-op on desktop).  */
+@utility pb-safe { padding-bottom: env(safe-area-inset-bottom); }
 
 /*  Base  */
 
