@@ -8,11 +8,10 @@ import { Mail, FileText } from 'lucide-react'
 import { useCurriculum, useBaseCurriculum,} from '@/features/ai/curricula/hooks/useCurricula'
 import { CurriculumDisplay } from '@/features/ai/curricula/components/CurriculumDisplay'
 import { formatDate } from '@/lib/utils/date'
-import { cn } from '@/lib/utils/cn'
-import { APPLICATION_STATUS_LABELS, APPLICATION_STATUS_COLORS,} from '@/config/constants'
 import type { JobApplicationResponse } from '../types/applications.types'
 import { Skeleton } from '@/components/ui/skeleton'
 import { IconTile } from '@/components/shared/brand/IconTile'
+import { ApplicationStatusBadge } from '@/components/shared/data/StatusBadge'
 
 //  Curriculum loaders 
 
@@ -124,12 +123,7 @@ export function CandidateProfilePanel({ application }: CandidateProfilePanelProp
         </div>
 
         <div className="flex items-center gap-2 mt-3 flex-wrap">
-          <span className={cn(
-            'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium',
-            APPLICATION_STATUS_COLORS[status],
-          )}>
-            {APPLICATION_STATUS_LABELS[status]}
-          </span>
+          <ApplicationStatusBadge status={status} />
           <span className="text-xs text-neutral-400">
             Postulado {formatDate(appliedAt)}
           </span>

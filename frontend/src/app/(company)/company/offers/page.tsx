@@ -20,19 +20,8 @@ import { cn } from '@/lib/utils/cn'
 import type { JobOfferSummaryResponse } from '@/features/jobs/types/jobs.types'
 import { Spinner } from '@/components/ui/spinner'
 import { Skeleton } from '@/components/ui/skeleton'
-
-//  Status config 
-
-const STATUS_STYLES: Record<string, string> = {
-  ACTIVE: 'bg-success-50 text-success-600 dark:bg-success-900/20 dark:text-success-400',
-  DRAFT:  'bg-muted text-muted-foreground',
-  CLOSED: 'bg-danger-tint text-danger-500 dark:text-danger-400',
-}
-const STATUS_LABELS: Record<string, string> = {
-  ACTIVE: 'Activa',
-  DRAFT:  'Borrador',
-  CLOSED: 'Cerrada',
-}
+import { badgeVariants } from '@/components/ui/badge'
+import { JOB_STATUS_LABELS, JOB_STATUS_TONE } from '@/config/constants'
 
 //  Applicant count badge
 
@@ -104,12 +93,9 @@ function OfferRow({ offer }: { offer: JobOfferSummaryResponse }) {
       <div className="relative shrink-0">
         <button
           onClick={() => setStatusOpen((o) => !o)}
-          className={cn(
-            'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors',
-            STATUS_STYLES[offer.status],
-          )}
+          className={cn(badgeVariants({ variant: JOB_STATUS_TONE[offer.status] }), 'cursor-pointer gap-1.5 px-2.5 py-1')}
         >
-          {STATUS_LABELS[offer.status]}
+          {JOB_STATUS_LABELS[offer.status]}
           <ChevronDown className="w-3 h-3" />
         </button>
 
@@ -131,7 +117,7 @@ function OfferRow({ offer }: { offer: JobOfferSummaryResponse }) {
                         s === 'CLOSED' ? 'bg-danger-500'  : 'bg-neutral-400',
                       )} />
                   }
-                  {STATUS_LABELS[s]}
+                  {JOB_STATUS_LABELS[s]}
                 </button>
               ))}
             </div>

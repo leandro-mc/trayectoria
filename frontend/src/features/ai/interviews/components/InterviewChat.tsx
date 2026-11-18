@@ -7,15 +7,12 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import { Send, CheckCircle2, Mic, TrendingUp, AlertCircle, ThumbsUp } from 'lucide-react'
 import { useSendMessage, useCompleteInterview } from '../hooks/useInterviews'
 import { saveFeedback } from '../utils/feedback-cache'
-import {
-  INTERVIEW_RECOMMENDATION_LABELS,
-  INTERVIEW_RECOMMENDATION_COLORS,
-} from '@/config/constants'
 import { formatDate } from '@/lib/utils/date'
 import { cn } from '@/lib/utils/cn'
 import type { SimulatedInterviewResponse, InterviewFeedback } from '../types/interviews.types'
 import { Spinner } from '@/components/ui/spinner'
 import { Button } from '@/components/ui/button'
+import { RecommendationBadge } from '@/components/shared/data/StatusBadge'
 
 //  Sub-components 
 
@@ -94,12 +91,7 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
           {feedback.overallScore}
           <span className="text-xl text-neutral-400 font-normal">/10</span>
         </p>
-        <span className={cn(
-          'inline-block mt-2 px-3 py-1 rounded-full text-xs font-medium',
-          INTERVIEW_RECOMMENDATION_COLORS[feedback.recommendation],
-        )}>
-          {INTERVIEW_RECOMMENDATION_LABELS[feedback.recommendation]}
-        </span>
+        <RecommendationBadge recommendation={feedback.recommendation} className="mt-2" />
       </div>
 
       {/* Summary */}

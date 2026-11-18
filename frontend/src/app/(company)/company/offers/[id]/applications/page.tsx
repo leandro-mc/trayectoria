@@ -15,7 +15,7 @@ import { CandidateProfilePanel } from '@/features/applications/components/Candid
 import { useJobOffer } from '@/features/jobs/hooks/useJobOffers'
 import {
   APPLICATION_STATUS_LABELS,
-  APPLICATION_STATUS_COLORS,
+  APPLICATION_STATUS_TONE,
 } from '@/config/constants'
 import { formatDate } from '@/lib/utils/date'
 import { ROUTES } from '@/config/routes'
@@ -24,6 +24,7 @@ import type { JobApplicationResponse } from '@/features/applications/types/appli
 import type { ApplicationStatus } from '@/types/global.types'
 import { Spinner } from '@/components/ui/spinner'
 import { Skeleton } from '@/components/ui/skeleton'
+import { badgeVariants } from '@/components/ui/badge'
 
 //  Status filter tabs 
 
@@ -97,10 +98,7 @@ function ApplicationRow({
       >
         <button
           onClick={() => setStatusOpen((o) => !o)}
-          className={cn(
-            'inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium transition-colors',
-            APPLICATION_STATUS_COLORS[application.status],
-          )}
+          className={cn(badgeVariants({ variant: APPLICATION_STATUS_TONE[application.status] }), 'cursor-pointer gap-1 py-1')}
         >
           {APPLICATION_STATUS_LABELS[application.status]}
           <ChevronDown className="w-3 h-3" />

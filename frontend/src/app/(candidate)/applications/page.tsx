@@ -7,14 +7,11 @@ import { EmptyState } from '@/components/shared/feedback/EmptyState'
 import { CardSkeleton } from '@/components/shared/feedback/PageSkeleton'
 import { Pagination } from '@/components/shared/data/Pagination'
 import { useMyApplications, useWithdrawApplication } from '@/features/applications/hooks/useApplications'
-import {
-  APPLICATION_STATUS_LABELS,
-  APPLICATION_STATUS_COLORS,
-} from '@/config/constants'
 import { formatDate } from '@/lib/utils/date'
 import { ROUTES } from '@/config/routes'
 import type { ApplicationStatus } from '@/types/global.types'
 import Link from 'next/link'
+import { ApplicationStatusBadge } from '@/components/shared/data/StatusBadge'
 
 const STATUS_TABS: { label: string; value: ApplicationStatus | 'ALL' }[] = [
   { label: 'Todas',       value: 'ALL'       },
@@ -94,9 +91,7 @@ export default function ApplicationsPage() {
                       </p>
                     )}
                   </div>
-                  <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium shrink-0 ${APPLICATION_STATUS_COLORS[app.status]}`}>
-                    {APPLICATION_STATUS_LABELS[app.status]}
-                  </span>
+                  <ApplicationStatusBadge status={app.status} className="shrink-0" />
                 </div>
                 <p className="text-xs text-neutral-400 mt-2">
                   Postulado el {formatDate(app.appliedAt)}
