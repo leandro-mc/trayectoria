@@ -34,7 +34,7 @@ function GeneratingSkeleton({ label }: { label: string }) {
         >
           <Sparkles className="w-3 h-3 text-white" />
         </div>
-        <span className="text-sm font-medium text-ai-600 dark:text-ai-400 animate-pulse">
+        <span className="text-sm font-medium text-brand-600 dark:text-brand-400 animate-pulse">
           {label}
         </span>
       </div>

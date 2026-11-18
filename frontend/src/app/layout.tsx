@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import '@fontsource-variable/inter'
 import './globals.css'
 import { Providers } from '@/components/shared/layout/Providers'
 

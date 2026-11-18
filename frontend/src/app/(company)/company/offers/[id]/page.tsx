@@ -22,9 +22,9 @@ import type { WorkMode, JobType, JobStatus } from '@/types/global.types'
 //  Status badge 
 
 const STATUS_STYLES: Record<JobStatus, string> = {
-  ACTIVE: 'bg-success-50 text-success-600 dark:bg-green-900/20 dark:text-green-400',
+  ACTIVE: 'bg-success-50 text-success-600 dark:bg-success-900/20 dark:text-success-400',
   DRAFT:  'bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400',
-  CLOSED: 'bg-danger-50 text-danger-500 dark:bg-red-900/20 dark:text-red-400',
+  CLOSED: 'bg-danger-50 text-danger-500 dark:bg-danger-900/20 dark:text-danger-400',
 }
 const STATUS_LABELS: Record<JobStatus, string> = {
   ACTIVE: 'Activa',
@@ -183,7 +183,7 @@ export default function OfferDetailPage({ params }: PageProps) {
         {/*  Interview section  */}
         <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-card p-6">
           <div className="flex items-center gap-2 mb-4">
-            <Sparkles className="w-4 h-4 text-ai-500" />
+            <Sparkles className="w-4 h-4 text-brand-500" />
             <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
               Entrevista con IA
             </h3>
@@ -197,8 +197,8 @@ export default function OfferDetailPage({ params }: PageProps) {
               </div>
 
               {instructions?.interviewInstructions ? (
-                <div className="p-4 rounded-xl bg-ai-50 dark:bg-ai-900/10 border border-ai-200 dark:border-ai-800">
-                  <p className="text-xs font-semibold text-ai-600 dark:text-ai-400 mb-2">
+                <div className="p-4 rounded-xl bg-brand-50 dark:bg-brand-900/10 border border-brand-200 dark:border-brand-800">
+                  <p className="text-xs font-semibold text-brand-600 dark:text-brand-400 mb-2">
                     Instrucciones para la IA
                   </p>
                   <p className="text-sm text-neutral-700 dark:text-neutral-300 whitespace-pre-line leading-relaxed">

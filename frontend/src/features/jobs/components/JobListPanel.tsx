@@ -125,7 +125,7 @@ export function JobListPanel() {
           {hasFilters && (
             <button
               onClick={clearFilters}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium text-danger-500 hover:bg-danger-50 dark:hover:bg-red-900/20 transition-colors whitespace-nowrap border border-danger-200 dark:border-red-800"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium text-danger-500 hover:bg-danger-50 dark:hover:bg-danger-900/20 transition-colors whitespace-nowrap border border-danger-200 dark:border-danger-800"
             >
               <X className="w-3 h-3" />
               Limpiar

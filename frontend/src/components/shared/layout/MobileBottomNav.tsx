@@ -127,9 +127,9 @@ function MoreSheet({ onClose }: { onClose: () => void }) {
           {/* Logout */}
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-danger-50 dark:hover:bg-red-900/20 transition-colors text-left group"
+            className="w-full flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-danger-50 dark:hover:bg-danger-900/20 transition-colors text-left group"
           >
-            <div className="w-9 h-9 rounded-xl bg-danger-50 dark:bg-red-900/20 flex items-center justify-center shrink-0">
+            <div className="w-9 h-9 rounded-xl bg-danger-50 dark:bg-danger-900/20 flex items-center justify-center shrink-0">
               <LogOut className="w-4.5 h-4.5 text-danger-500" />
             </div>
             <p className="text-sm font-medium text-danger-500">

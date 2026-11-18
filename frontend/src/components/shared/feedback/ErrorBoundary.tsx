@@ -39,7 +39,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
       return (
         <div className="flex flex-col items-center justify-center py-16 text-center px-4">
-          <div className="w-16 h-16 rounded-2xl bg-danger-50 dark:bg-red-900/20 flex items-center justify-center mb-4">
+          <div className="w-16 h-16 rounded-2xl bg-danger-50 dark:bg-danger-900/20 flex items-center justify-center mb-4">
             <AlertTriangle className="w-8 h-8 text-danger-500" />
           </div>
           <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
@@ -69,7 +69,7 @@ interface InlineErrorProps {
 export function InlineError({ message, onRetry }: InlineErrorProps) {
   return (
     <div className="flex flex-col items-center justify-center py-12 text-center px-4">
-      <div className="w-12 h-12 rounded-xl bg-danger-50 dark:bg-red-900/20 flex items-center justify-center mb-3">
+      <div className="w-12 h-12 rounded-xl bg-danger-50 dark:bg-danger-900/20 flex items-center justify-center mb-3">
         <AlertTriangle className="w-6 h-6 text-danger-500" />
       </div>
       <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">

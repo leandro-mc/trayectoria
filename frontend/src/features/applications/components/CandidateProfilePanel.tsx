@@ -41,7 +41,7 @@ function AttachedCurriculum({ id }: { id: number }) {
         >
           <Sparkles className="w-3 h-3 text-white" />
         </div>
-        <h3 className="text-xs font-bold text-ai-600 dark:text-ai-400 uppercase tracking-wide">
+        <h3 className="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wide">
           Currículum personalizado adjunto
         </h3>
       </div>

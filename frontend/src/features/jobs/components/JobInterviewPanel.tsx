@@ -21,7 +21,7 @@ function StartingSkeleton() {
       >
         <Sparkles className="w-5 h-5 text-white" />
       </div>
-      <p className="text-sm text-ai-600 dark:text-ai-400 font-medium animate-pulse">
+      <p className="text-sm text-brand-600 dark:text-brand-400 font-medium animate-pulse">
         Preparando tu entrevista…
       </p>
       <div className="w-full max-w-xs space-y-2">

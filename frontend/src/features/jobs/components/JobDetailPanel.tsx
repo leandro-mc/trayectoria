@@ -176,14 +176,14 @@ export function JobDetailPanel() {
                 <>
                 <button
                   onClick={() => setMode('cv')}
-                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-ai-300 dark:border-ai-800 text-ai-600 dark:text-ai-400 hover:bg-ai-50 dark:hover:bg-ai-900/20 transition-colors"
+                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-brand-300 dark:border-brand-800 text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-colors"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   CV personalizado
                 </button>
                 <button
                   onClick={() => setMode('interview')}
-                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-ai-300 dark:border-ai-800 text-ai-600 dark:text-ai-400 hover:bg-ai-50 dark:hover:bg-ai-900/20 transition-colors"
+                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-brand-300 dark:border-brand-800 text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-colors"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
                   Entrevista IA

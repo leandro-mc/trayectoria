@@ -21,8 +21,8 @@ function MetricCard({
 }) {
   const iconBg =
     accent === 'brand'   ? 'bg-brand-50 dark:bg-brand-900/30' :
-    accent === 'warning' ? 'bg-warning-50 dark:bg-orange-900/20' :
-    accent === 'success' ? 'bg-success-50 dark:bg-green-900/20' :
+    accent === 'warning' ? 'bg-warning-50 dark:bg-warning-900/20' :
+    accent === 'success' ? 'bg-success-50 dark:bg-success-900/20' :
     'bg-neutral-100 dark:bg-neutral-800'
 
   const iconColor =

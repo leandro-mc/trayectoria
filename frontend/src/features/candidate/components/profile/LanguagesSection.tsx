@@ -122,7 +122,7 @@ export function LanguagesSection() {
             <button
               onClick={() => deleteLang(lang.language)}
               disabled={deleting}
-              className="p-1.5 rounded-lg opacity-0 group-hover:opacity-100 hover:bg-danger-50 dark:hover:bg-red-900/20 text-neutral-400 hover:text-danger-500 transition-all disabled:opacity-50"
+              className="p-1.5 rounded-lg opacity-0 group-hover:opacity-100 hover:bg-danger-50 dark:hover:bg-danger-900/20 text-neutral-400 hover:text-danger-500 transition-all disabled:opacity-50"
               aria-label={`Eliminar ${lang.language}`}
             >
               <Trash2 className="w-4 h-4" />

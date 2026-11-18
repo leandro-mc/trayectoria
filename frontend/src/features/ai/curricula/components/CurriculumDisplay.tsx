@@ -40,19 +40,19 @@ export function CurriculumDisplay({ content, compact = false }: CurriculumDispla
       {/* Highlights */}
       {content.highlights && content.highlights.length > 0 && (
         <div
-          className="p-4 rounded-xl border border-ai-200 dark:border-ai-800"
+          className="p-4 rounded-xl border border-brand-200 dark:border-brand-800"
           style={{ background: 'linear-gradient(135deg, rgba(168,85,247,.06), rgba(99,102,241,.06))' }}
         >
           <div className="flex items-center gap-2 mb-3">
-            <Star className="w-3.5 h-3.5 text-ai-500" />
-            <span className="text-xs font-bold text-ai-600 dark:text-ai-400 uppercase tracking-wide">
+            <Star className="w-3.5 h-3.5 text-brand-500" />
+            <span className="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wide">
               Por qué sos ideal para este puesto
             </span>
           </div>
           <ul className="space-y-1.5">
             {content.highlights.map((h, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-neutral-700 dark:text-neutral-300">
-                <span className="text-ai-500 font-bold mt-0.5 shrink-0">·</span>
+                <span className="text-brand-500 font-bold mt-0.5 shrink-0">·</span>
                 {h}
               </li>
             ))}

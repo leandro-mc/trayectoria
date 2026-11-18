@@ -138,7 +138,7 @@ export function ApplyButton({
                 {matchingCurricula.length > 0 ? (
                   <div className="mt-4 mb-5">
                     <label className="flex items-center gap-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
-                      <Sparkles className="w-3.5 h-3.5 text-ai-500" />
+                      <Sparkles className="w-3.5 h-3.5 text-brand-500" />
                       Adjuntar currículum con IA
                     </label>
                     <select
@@ -158,7 +158,7 @@ export function ApplyButton({
                   <div className="mt-4 mb-5 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
                     <p className="text-xs text-neutral-500 dark:text-neutral-400">
                       Se enviará tu perfil completo. Podés generar un{' '}
-                      <span className="text-ai-500 font-medium">CV personalizado ✨</span>{' '}
+                      <span className="text-brand-500 font-medium">CV personalizado ✨</span>{' '}
                       para esta oferta desde el panel de la oferta.
                     </p>
                   </div>

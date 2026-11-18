@@ -53,7 +53,7 @@ function CurriculumPanel({ id, onClear }: { id: number; onClear: () => void }) {
         <button
           onClick={handleDelete}
           disabled={deleting}
-          className="p-2 rounded-lg hover:bg-danger-50 dark:hover:bg-red-900/20 text-neutral-400 hover:text-danger-500 disabled:opacity-50 transition-colors"
+          className="p-2 rounded-lg hover:bg-danger-50 dark:hover:bg-danger-900/20 text-neutral-400 hover:text-danger-500 disabled:opacity-50 transition-colors"
           title="Eliminar"
         >
           {deleting

@@ -25,14 +25,14 @@ function QuickAction({
       className={[
         'rounded-xl p-5 border transition-shadow hover:shadow-card-hover',
         gradient
-          ? 'border-brand-200 dark:border-brand-800 bg-gradient-to-br from-brand-50 to-ai-50 dark:from-brand-900/20 dark:to-ai-900/20'
+          ? 'border-brand-200 dark:border-brand-800 bg-gradient-to-br from-brand-50 to-brand-50 dark:from-brand-900/20 dark:to-brand-900/20'
           : 'border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-card',
       ].join(' ')}
     >
       <div className={[
         'w-9 h-9 rounded-lg flex items-center justify-center mb-3',
         gradient
-          ? 'bg-gradient-to-r from-ai-500 to-brand-500'
+          ? 'bg-gradient-to-r from-brand-500 to-brand-500'
           : 'bg-neutral-100 dark:bg-neutral-800',
       ].join(' ')}>
         <Icon className={['w-5 h-5', gradient ? 'text-white' : 'text-neutral-500 dark:text-neutral-400'].join(' ')} />

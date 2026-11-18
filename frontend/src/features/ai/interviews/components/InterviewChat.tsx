@@ -84,12 +84,12 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
 
       {/* Score + recommendation */}
       <div
-        className="text-center py-5 rounded-2xl border border-ai-100 dark:border-ai-900"
+        className="text-center py-5 rounded-2xl border border-brand-100 dark:border-brand-900"
         style={{ background: 'linear-gradient(135deg,rgba(168,85,247,.06),rgba(99,102,241,.06))' }}
       >
         <div className="flex items-center justify-center gap-2 mb-2">
-          <Star className="w-4 h-4 text-ai-500" />
-          <span className="text-xs font-semibold text-ai-600 dark:text-ai-400 uppercase tracking-wide">
+          <Star className="w-4 h-4 text-brand-500" />
+          <span className="text-xs font-semibold text-brand-600 dark:text-brand-400 uppercase tracking-wide">
             Feedback de la IA
           </span>
         </div>
@@ -151,7 +151,7 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
 
       {/* Detailed */}
       <div className="p-4 bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700">
-        <p className="text-xs font-semibold text-ai-600 dark:text-ai-400 uppercase tracking-wide mb-2">
+        <p className="text-xs font-semibold text-brand-600 dark:text-brand-400 uppercase tracking-wide mb-2">
           Feedback detallado
         </p>
         <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">

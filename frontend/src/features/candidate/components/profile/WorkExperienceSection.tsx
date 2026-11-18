@@ -173,7 +173,7 @@ export function WorkExperienceSection() {
               <button onClick={() => openEdit(exp)} className="p-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors">
                 <Pencil className="w-4 h-4" />
               </button>
-              <button onClick={() => deleteExp(exp.id)} disabled={deleting} className="p-1.5 rounded-lg hover:bg-danger-50 dark:hover:bg-red-900/20 text-neutral-400 hover:text-danger-500 transition-colors disabled:opacity-50">
+              <button onClick={() => deleteExp(exp.id)} disabled={deleting} className="p-1.5 rounded-lg hover:bg-danger-50 dark:hover:bg-danger-900/20 text-neutral-400 hover:text-danger-500 transition-colors disabled:opacity-50">
                 <Trash2 className="w-4 h-4" />
               </button>
             </div>

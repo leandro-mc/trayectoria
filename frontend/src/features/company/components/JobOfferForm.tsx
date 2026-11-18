@@ -183,7 +183,7 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
 
       {/*  API error  */}
       {apiError && (
-        <div className="px-4 py-3 rounded-lg bg-danger-50 dark:bg-red-900/20 border border-danger-200 dark:border-red-800 text-sm text-danger-600 dark:text-red-400">
+        <div className="px-4 py-3 rounded-lg bg-danger-50 dark:bg-danger-900/20 border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
           {extractApiError(apiError)}
         </div>
       )}
@@ -306,10 +306,10 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
         </label>
 
         {requiresInterview && (
-          <div className="mt-4 p-4 rounded-xl bg-ai-50 dark:bg-ai-900/10 border border-ai-200 dark:border-ai-800">
+          <div className="mt-4 p-4 rounded-xl bg-brand-50 dark:bg-brand-900/10 border border-brand-200 dark:border-brand-800">
             <div className="flex items-center gap-2 mb-3">
-              <Sparkles className="w-4 h-4 text-ai-500" />
-              <span className="text-xs font-semibold text-ai-600 dark:text-ai-400">
+              <Sparkles className="w-4 h-4 text-brand-500" />
+              <span className="text-xs font-semibold text-brand-600 dark:text-brand-400">
                 Instrucciones para la IA
               </span>
             </div>

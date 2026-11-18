@@ -34,7 +34,7 @@ function UnsaveButton({ jobOfferId, onUnsave }: {
     <button
       onClick={(e) => { e.stopPropagation(); onUnsave(jobOfferId) }}
       title="Quitar de guardadas"
-      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-danger-300 dark:hover:border-red-700 hover:bg-danger-50 dark:hover:bg-red-900/20 text-neutral-400 hover:text-danger-500 text-xs font-medium transition-colors shrink-0"
+      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 hover:border-danger-300 dark:hover:border-danger-700 hover:bg-danger-50 dark:hover:bg-danger-900/20 text-neutral-400 hover:text-danger-500 text-xs font-medium transition-colors shrink-0"
     >
       <BookmarkX className="w-3.5 h-3.5" />
       Quitar

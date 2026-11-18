@@ -201,11 +201,11 @@ function InterviewsList({
           >
             <div className={cn(
               'w-8 h-8 rounded-lg flex items-center justify-center shrink-0',
-              isCompleted ? 'bg-success-50 dark:bg-green-900/20' : 'bg-ai-50 dark:bg-ai-900/20',
+              isCompleted ? 'bg-success-50 dark:bg-success-900/20' : 'bg-brand-50 dark:bg-brand-900/20',
             )}>
               {isCompleted
                 ? <CheckCircle2 className="w-4 h-4 text-success-500" />
-                : <Clock className="w-4 h-4 text-ai-500" />
+                : <Clock className="w-4 h-4 text-brand-500" />
               }
             </div>
             <div className="flex-1 min-w-0">
@@ -214,7 +214,7 @@ function InterviewsList({
               </p>
               <p className={cn(
                 'text-xs mt-0.5',
-                isCompleted ? 'text-success-500 dark:text-success-400' : 'text-ai-500 dark:text-ai-400',
+                isCompleted ? 'text-success-500 dark:text-success-400' : 'text-brand-500 dark:text-brand-400',
               )}>
                 {isCompleted ? 'Completada' : 'En progreso'}
                 {' · '}{formatDate(iv.createdAt)}

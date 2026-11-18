@@ -25,9 +25,9 @@ import type { JobOfferSummaryResponse } from '@/features/jobs/types/jobs.types'
 //  Status config 
 
 const STATUS_STYLES: Record<string, string> = {
-  ACTIVE: 'bg-success-50 text-success-600 dark:bg-green-900/20 dark:text-green-400',
+  ACTIVE: 'bg-success-50 text-success-600 dark:bg-success-900/20 dark:text-success-400',
   DRAFT:  'bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400',
-  CLOSED: 'bg-danger-50 text-danger-500 dark:bg-red-900/20 dark:text-red-400',
+  CLOSED: 'bg-danger-50 text-danger-500 dark:bg-danger-900/20 dark:text-danger-400',
 }
 const STATUS_LABELS: Record<string, string> = {
   ACTIVE: 'Activa',
@@ -177,7 +177,7 @@ function OfferRow({ offer }: { offer: JobOfferSummaryResponse }) {
               <button
                 onClick={handleDelete}
                 disabled={deleting}
-                className="w-full text-left px-3 py-2 text-sm hover:bg-danger-50 dark:hover:bg-red-900/20 text-danger-500 flex items-center gap-2 disabled:opacity-50"
+                className="w-full text-left px-3 py-2 text-sm hover:bg-danger-50 dark:hover:bg-danger-900/20 text-danger-500 flex items-center gap-2 disabled:opacity-50"
               >
                 {deleting
                   ? <Loader2 className="w-3.5 h-3.5 animate-spin" />
