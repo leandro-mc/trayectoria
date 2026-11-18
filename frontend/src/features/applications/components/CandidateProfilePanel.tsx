@@ -4,7 +4,7 @@
 
 'use client'
 
-import { Mail, Sparkles, FileText } from 'lucide-react'
+import { Mail, FileText } from 'lucide-react'
 import { useCurriculum, useBaseCurriculum,} from '@/features/ai/curricula/hooks/useCurricula'
 import { CurriculumDisplay } from '@/features/ai/curricula/components/CurriculumDisplay'
 import { formatDate } from '@/lib/utils/date'
@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils/cn'
 import { APPLICATION_STATUS_LABELS, APPLICATION_STATUS_COLORS,} from '@/config/constants'
 import type { JobApplicationResponse } from '../types/applications.types'
 import { Skeleton } from '@/components/ui/skeleton'
+import { IconTile } from '@/components/shared/brand/IconTile'
 
 //  Curriculum loaders 
 
@@ -34,12 +35,7 @@ function AttachedCurriculum({ id }: { id: number }) {
   return (
     <>
       <div className="flex items-center gap-2 mb-3">
-        <div
-          className="w-5 h-5 rounded flex items-center justify-center shrink-0"
-          style={{ background: 'linear-gradient(135deg,#A855F7,#6366F1)' }}
-        >
-          <Sparkles className="w-3 h-3 text-white" />
-        </div>
+        <IconTile icon={FileText} size="sm" />
         <h3 className="text-xs font-bold text-brand-text uppercase tracking-wide">
           Currículum personalizado adjunto
         </h3>

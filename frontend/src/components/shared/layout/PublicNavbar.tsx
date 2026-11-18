@@ -2,10 +2,11 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Sparkles, LayoutDashboard } from 'lucide-react'
+import { LayoutDashboard } from 'lucide-react'
 import { ThemeToggle } from './ThemeToggle'
 import { useAuthStore } from '@/stores/auth.store'
 import { ROUTES } from '@/config/routes'
+import { Logo } from '@/components/shared/brand/Logo'
 
 interface PublicNavbarProps {
   hideAuthButtons?: boolean
@@ -22,17 +23,7 @@ export function PublicNavbar({ hideAuthButtons = false }: PublicNavbarProps) {
     <header className="sticky top-0 z-20 h-14 sm:h-16 flex items-center justify-between px-3 sm:px-6 border-b border-border bg-white/80 dark:bg-neutral-900/80 backdrop-blur-sm">
 
       {/* Logo */}
-      <Link href={ROUTES.publicJobs} className="flex items-center gap-2.5 group">
-        <div
-          className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center transition-opacity group-hover:opacity-80"
-          style={{ background: 'linear-gradient(135deg, #A855F7, #6366F1)' }}
-        >
-          <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
-        </div>
-        <span className="text-sm sm:text-base font-bold text-foreground tracking-tight">
-          TrayectorIA
-        </span>
-      </Link>
+      <Logo href={ROUTES.publicJobs} />
 
       {/* Center nav */}
       {pathname === ROUTES.publicJobs && (

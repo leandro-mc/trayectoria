@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Sparkles, Briefcase, Bookmark, MessageSquare } from 'lucide-react'
+import { Briefcase, Bookmark, MessageSquare, FileText } from 'lucide-react'
 import { PageHeader } from '@/components/shared/layout/PageHeader'
 import { ROUTES } from '@/config/routes'
 
@@ -11,31 +11,31 @@ function QuickAction({
   title,
   description,
   href,
-  gradient,
+  highlight,
 }: {
   icon:        React.ComponentType<{ className?: string }>
   title:       string
   description: string
   href:       string
-  gradient?:   boolean
+  highlight?:   boolean
 }) {
   return (
     <Link
       href={href}
       className={[
         'rounded-xl p-5 border transition-shadow hover:shadow-card-hover',
-        gradient
-          ? 'border-brand-200 dark:border-brand-800 bg-gradient-to-br from-brand-50 to-brand-50 dark:from-brand-900/20 dark:to-brand-900/20'
+        highlight
+          ? 'border-brand-200 dark:border-brand-800 bg-brand-tint'
           : 'border-border bg-card shadow-card',
       ].join(' ')}
     >
       <div className={[
         'w-9 h-9 rounded-lg flex items-center justify-center mb-3',
-        gradient
-          ? 'bg-gradient-to-r from-brand-500 to-brand-500'
+        highlight
+          ? 'bg-primary'
           : 'bg-muted',
       ].join(' ')}>
-        <Icon className={['w-5 h-5', gradient ? 'text-white' : 'text-muted-foreground'].join(' ')} />
+        <Icon className={['w-5 h-5', highlight ? 'text-white' : 'text-muted-foreground'].join(' ')} />
       </div>
       <p className="text-sm font-semibold text-foreground mb-1">{title}</p>
       <p className="text-xs text-muted-foreground">{description}</p>
@@ -53,18 +53,18 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <QuickAction
-          icon={Sparkles}
+          icon={FileText}
           title="Generar CV con IA"
           description="Creá un currículum personalizado para cada oferta"
           href={ROUTES.curricula}
-          gradient
+          highlight
         />
         <QuickAction
           icon={MessageSquare}
           title="Practicar entrevista"
           description="Simulá entrevistas laborales con IA"
           href={ROUTES.interviews}
-          gradient
+          highlight
         />
         <QuickAction
           icon={Briefcase}

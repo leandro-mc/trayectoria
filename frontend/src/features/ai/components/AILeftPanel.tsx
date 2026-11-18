@@ -16,6 +16,7 @@ import { formatDate } from '@/lib/utils/date'
 import { cn } from '@/lib/utils/cn'
 import type { GeneratedCurriculumResponse } from '@/features/ai/curricula/types/curricula.types'
 import type { SimulatedInterviewResponse } from '@/features/ai/interviews/types/interviews.types'
+import { IconTile } from '@/components/shared/brand/IconTile'
 
 //  Shared hook for ?id= URL state 
 
@@ -125,12 +126,7 @@ function CurriculaList({
               : 'hover:bg-hover',
           )}
         >
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-            style={{ background: 'linear-gradient(135deg,#A855F7,#6366F1)' }}
-          >
-            <FileText className="w-4 h-4 text-white" />
-          </div>
+          <IconTile icon={FileText} />
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-neutral-800 dark:text-neutral-200 truncate">
               {cv.jobOfferTitle ?? 'Currículum general'}

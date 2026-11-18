@@ -2,10 +2,11 @@
 
 'use client'
 
-import { X, Sparkles } from 'lucide-react'
+import { X } from 'lucide-react'
 import { CurriculumDisplay } from './CurriculumDisplay'
 import { formatDate } from '@/lib/utils/date'
 import type { GeneratedCurriculumResponse } from '../types/curricula.types'
+import { Badge } from '@/components/ui/badge'
 
 interface CurriculumViewerProps {
   curriculum: GeneratedCurriculumResponse
@@ -23,13 +24,7 @@ export function CurriculumViewer({ curriculum, onClose }: CurriculumViewerProps)
         <div className="flex items-start justify-between px-6 pt-5 pb-4 border-b border-border-soft shrink-0">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span
-                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium text-white"
-                style={{ background: 'linear-gradient(135deg,#A855F7,#6366F1)' }}
-              >
-                <Sparkles className="w-3 h-3" />
-                Generado con IA
-              </span>
+              <Badge variant="brand">Generado con IA</Badge>
             </div>
             <h2 className="text-base font-bold text-foreground">
               {curriculum.jobOfferTitle ?? 'Currículum'}

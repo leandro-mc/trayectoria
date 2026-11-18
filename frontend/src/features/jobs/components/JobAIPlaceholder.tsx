@@ -3,10 +3,12 @@
 
 'use client'
 
-import { Sparkles, MessageSquare, ArrowRight } from 'lucide-react'
+import { FileText, MessageSquare, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { useJobsParams, type JobsMode } from '../hooks/useJobsParams'
 import { ROUTES } from '@/config/routes'
+import { IconTile } from '@/components/shared/brand/IconTile'
+import { buttonVariants } from '@/components/ui/button'
 
 const AI_CONFIG: Record<JobsMode, {
   icon:        React.ComponentType<{ className?: string }>
@@ -16,7 +18,7 @@ const AI_CONFIG: Record<JobsMode, {
   href:        string
 }> = {
   cv: {
-    icon:        Sparkles,
+    icon:        FileText,
     title:       'CV personalizado con IA',
     description: 'La IA analizará esta oferta y tu perfil para generar un currículum optimizado que resalte tus habilidades más relevantes.',
     cta:         'Ir a Mis Currículums',
@@ -41,21 +43,10 @@ export function JobAIPlaceholder() {
 
   return (
     <div className="flex flex-col items-center justify-center h-full bg-card p-8">
-
-      {/* AI badge */}
-      <div
-        className="w-16 h-16 rounded-2xl flex items-center justify-center mb-5"
-        style={{ background: 'linear-gradient(135deg, #A855F7, #6366F1)' }}
-      >
-        <Icon className="w-8 h-8 text-white" />
-      </div>
+      <IconTile icon={Icon} size="xl" />
 
       {/* Content */}
       <div className="max-w-sm text-center">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-tint border border-brand-200 dark:border-brand-800 text-brand-text text-xs font-medium mb-4">
-          <Sparkles className="w-3 h-3" />
-          Powered by AI
-        </div>
 
         <h3 className="text-lg font-bold text-foreground mb-3">
           {config.title}
@@ -65,11 +56,7 @@ export function JobAIPlaceholder() {
           {config.description}
         </p>
 
-        <Link
-          href={config.href}
-          className="inline-flex items-center gap-2 h-10 px-5 rounded-xl text-white text-sm font-semibold transition-opacity hover:opacity-90"
-          style={{ background: 'linear-gradient(135deg, #A855F7, #6366F1)' }}
-        >
+        <Link href={config.href} className={buttonVariants({ size: 'lg' })}>
           {config.cta}
           <ArrowRight className="w-4 h-4" />
         </Link>

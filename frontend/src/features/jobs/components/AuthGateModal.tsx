@@ -1,8 +1,9 @@
 'use client'
 
-import { X, Sparkles, LogIn, UserPlus } from 'lucide-react'
+import { X, LogIn, UserPlus } from 'lucide-react'
 import Link from 'next/link'
 import { ROUTES } from '@/config/routes'
+import { IconTile } from '@/components/shared/brand/IconTile'
 
 interface AuthGateModalProps {
   action:  string   // e.g. "postularte" | "guardar esta oferta"
@@ -28,12 +29,7 @@ export function AuthGateModal({ action, onClose }: AuthGateModalProps) {
         </button>
 
         {/* Icon */}
-        <div
-          className="w-12 h-12 rounded-2xl flex items-center justify-center mb-4"
-          style={{ background: 'linear-gradient(135deg, #A855F7, #6366F1)' }}
-        >
-          <Sparkles className="w-6 h-6 text-white" />
-        </div>
+        <IconTile icon={LogIn} size="lg" />
 
         <h3 className="text-base font-bold text-foreground mb-2">
           Necesitás una cuenta

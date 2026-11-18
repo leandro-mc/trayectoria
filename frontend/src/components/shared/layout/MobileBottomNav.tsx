@@ -3,11 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import {
-  LayoutDashboard, Search, Briefcase, Sparkles, User,
-  ListChecks, Building2, MoreHorizontal,
-  Sun, Moon, Monitor, LogOut, X,
-} from 'lucide-react'
+import { LayoutDashboard, Search, Briefcase, User, ListChecks, Building2, MoreHorizontal, Sun, Moon, Monitor, LogOut, X, FileText } from 'lucide-react'
 import { ROUTES } from '@/config/routes'
 import { useAuthStore } from '@/stores/auth.store'
 import { useUIStore } from '@/stores/ui.store'
@@ -21,7 +17,7 @@ const CANDIDATE_NAV = [
   { href: ROUTES.dashboard,    icon: LayoutDashboard, label: 'Inicio'        },
   { href: ROUTES.jobs,         icon: Search,          label: 'Empleos'       },
   { href: ROUTES.applications, icon: Briefcase,       label: 'Postulaciones' },
-  { href: ROUTES.curricula,    icon: Sparkles,        label: 'IA'            },
+  { href: ROUTES.curricula,    icon: FileText,        label: 'CV'            },
   { href: ROUTES.profile,      icon: User,            label: 'Perfil'        },
 ] as const
 

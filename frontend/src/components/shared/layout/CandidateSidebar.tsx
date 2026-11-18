@@ -1,18 +1,6 @@
 'use client'
 
-import Link from 'next/link'
-import {
-  LayoutDashboard,
-  User,
-  Search,
-  Briefcase,
-  Bookmark,
-  Sparkles,
-  MessageSquare,
-  ChevronLeft,
-  ChevronRight,
-  LogOut,
-} from 'lucide-react'
+import { LayoutDashboard, User, Search, Briefcase, Bookmark, MessageSquare, ChevronLeft, ChevronRight, LogOut, FileText } from 'lucide-react'
 import { useUIStore } from '@/stores/ui.store'
 import { useAuthStore } from '@/stores/auth.store'
 import { useLogout } from '@/features/auth/hooks/useAuth'
@@ -21,6 +9,7 @@ import { ThemeToggle } from './ThemeToggle'
 import { getInitials } from '@/lib/utils/format'
 import { ROUTES } from '@/config/routes'
 import { cn } from '@/lib/utils/cn'
+import { Logo } from '@/components/shared/brand/Logo'
 
 //  Nav items 
 
@@ -30,7 +19,7 @@ const NAV_ITEMS = [
   { href: ROUTES.jobs,        icon: Search,          label: 'Buscar empleos'      },
   { href: ROUTES.applications,icon: Briefcase,       label: 'Mis Postulaciones'   },
   { href: ROUTES.saved,       icon: Bookmark,        label: 'Guardadas'           },
-  { href: ROUTES.curricula,   icon: Sparkles,        label: 'Mis Currículums', matchPrefix: true },
+  { href: ROUTES.curricula,   icon: FileText,        label: 'Mis Currículums', matchPrefix: true },
   { href: ROUTES.interviews,  icon: MessageSquare,   label: 'Entrevistas IA',  matchPrefix: true },
 ] as const
 
@@ -57,19 +46,7 @@ export function CandidateSidebar() {
         'h-16 flex items-center border-b border-border shrink-0',
         collapsed ? 'justify-center px-2' : 'px-4 gap-2.5',
       )}>
-        <Link href={ROUTES.dashboard} className="flex items-center gap-2.5 group">
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-opacity group-hover:opacity-80"
-            style={{ background: 'linear-gradient(135deg, #A855F7, #6366F1)' }}
-          >
-            <Sparkles className="w-4 h-4 text-white" />
-          </div>
-          {!collapsed && (
-            <span className="text-sm font-bold text-foreground tracking-tight truncate">
-              TrayectorIA
-            </span>
-          )}
-        </Link>
+        <Logo href={ROUTES.dashboard} collapsed={collapsed} />
       </div>
 
       {/*  Nav  */}

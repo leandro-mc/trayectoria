@@ -1,7 +1,7 @@
 // Pure content renderer — no modal wrapper.
 // Used by CurriculumViewer (modal) and JobCVPanel (inline in split panel).
 
-import { Sparkles, Briefcase, GraduationCap, Code2, Globe, Star } from 'lucide-react'
+import { Briefcase, GraduationCap, Code2, Globe, FileText } from 'lucide-react'
 import type { CurriculumContent } from '../types/curricula.types'
 
 function Section({
@@ -40,11 +40,9 @@ export function CurriculumDisplay({ content, compact = false }: CurriculumDispla
       {/* Highlights */}
       {content.highlights && content.highlights.length > 0 && (
         <div
-          className="p-4 rounded-xl border border-brand-200 dark:border-brand-800"
-          style={{ background: 'linear-gradient(135deg, rgba(168,85,247,.06), rgba(99,102,241,.06))' }}
+          className="p-4 rounded-xl border border-brand-200 dark:border-brand-800 bg-brand-tint"
         >
           <div className="flex items-center gap-2 mb-3">
-            <Star className="w-3.5 h-3.5 text-brand-text" />
             <span className="text-xs font-bold text-brand-text uppercase tracking-wide">
               Por qué sos ideal para este puesto
             </span>
@@ -62,7 +60,7 @@ export function CurriculumDisplay({ content, compact = false }: CurriculumDispla
 
       {/* Summary */}
       {content.summary && (
-        <Section icon={Sparkles} title="Resumen profesional">
+        <Section icon={FileText} title="Resumen profesional">
           <p className="text-sm text-secondary-foreground leading-relaxed">
             {content.summary}
           </p>

@@ -3,10 +3,7 @@
 import { use } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import {
-  ArrowLeft, Pencil, Users, MapPin, Calendar,
-  Clock, Briefcase, Sparkles, CheckCircle2, Globe, Wifi,
-} from 'lucide-react'
+import { ArrowLeft, Pencil, Users, MapPin, Calendar, Clock, Briefcase, CheckCircle2, Globe, Wifi, MessageSquare } from 'lucide-react'
 import { PageHeader } from '@/components/shared/layout/PageHeader'
 import { PageSkeleton } from '@/components/shared/feedback/PageSkeleton'
 import { useJobOffer, useInterviewInstructions } from '@/features/jobs/hooks/useJobOffers'
@@ -183,7 +180,7 @@ export default function OfferDetailPage({ params }: PageProps) {
         {/*  Interview section  */}
         <div className="bg-card border border-border rounded-xl shadow-card p-6">
           <div className="flex items-center gap-2 mb-4">
-            <Sparkles className="w-4 h-4 text-brand-text" />
+            <MessageSquare className="w-4 h-4 text-brand-text" />
             <h3 className="text-sm font-semibold text-foreground">
               Entrevista con IA
             </h3>

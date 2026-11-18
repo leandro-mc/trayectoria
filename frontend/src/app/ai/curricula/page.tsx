@@ -1,13 +1,14 @@
 'use client'
 
 import { Suspense } from 'react'
-import { Search, Sparkles, Trash2 } from 'lucide-react'
+import { Search, Trash2 } from 'lucide-react'
 import { AILeftPanel, useAIParams } from '@/features/ai/components/AILeftPanel'
 import { CurriculumDisplay } from '@/features/ai/curricula/components/CurriculumDisplay'
 import { useCurriculum, useDeleteCurriculum } from '@/features/ai/curricula/hooks/useCurricula'
 import { cn } from '@/lib/utils/cn'
 import { Spinner } from '@/components/ui/spinner'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Badge } from '@/components/ui/badge'
 
 //  Right panel — selected curriculum 
 
@@ -38,13 +39,7 @@ function CurriculumPanel({ id, onClear }: { id: number; onClear: () => void }) {
       <div className="flex items-start justify-between px-5 py-4 border-b border-border shrink-0">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span
-              className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium text-white"
-              style={{ background: 'linear-gradient(135deg,#A855F7,#6366F1)' }}
-            >
-              <Sparkles className="w-2.5 h-2.5" />
-              Generado con IA
-            </span>
+            <Badge variant="brand">Generado con IA</Badge>
           </div>
           <h2 className="text-sm font-bold text-foreground">
             {cv.jobOfferTitle ?? 'Currículum'}

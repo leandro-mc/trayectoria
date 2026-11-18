@@ -4,7 +4,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Sparkles, RefreshCw } from 'lucide-react'
+import { RefreshCw, FileText } from 'lucide-react'
 import { useCandidateProfile } from '@/features/candidate/hooks/useCandidate'
 import {
   useLatestCurriculum,
@@ -15,6 +15,8 @@ import { useJobsParams } from '../hooks/useJobsParams'
 import { useQueryClient } from '@tanstack/react-query'
 import { QUERY_KEYS } from '@/config/query-keys'
 import { Skeleton } from '@/components/ui/skeleton'
+import { IconTile } from '@/components/shared/brand/IconTile'
+import { Button } from '@/components/ui/button'
 
 //  Module-level guard 
 // Tracks jobOfferIds for which a generate call is already in flight.
@@ -29,33 +31,20 @@ function GeneratingSkeleton({ label }: { label: string }) {
   return (
     <div className="p-5">
       <div className="flex items-center gap-2 mb-5">
-        <div
-          className="w-6 h-6 rounded-full flex items-center justify-center animate-pulse shrink-0"
-          style={{ background: 'linear-gradient(135deg,#A855F7,#6366F1)' }}
-        >
-          <Sparkles className="w-3 h-3 text-white" />
-        </div>
+        <IconTile icon={FileText} size="sm" className="animate-pulse rounded-full" />
         <span className="text-sm font-medium text-brand-text animate-pulse">
           {label}
         </span>
       </div>
       <div className="space-y-2.5">
         {[88, 75, 92, 68, 80, 60].map((w, i) => (
-          <div
-            key={i}
-            className="h-3 rounded-lg animate-pulse bg-gradient-to-r from-neutral-200 via-neutral-100 to-neutral-200 dark:from-neutral-800 dark:via-neutral-700 dark:to-neutral-800"
-            style={{ width: `${w}%` }}
-          />
+          <Skeleton key={i} className="h-3 rounded-lg" style={{ width: `${w}%` }} />
         ))}
       </div>
       <div className="mt-6 space-y-2.5">
         <Skeleton className="h-2 rounded w-1/4" />
         {[95, 82, 70].map((w, i) => (
-          <div
-            key={i}
-            className="h-3 rounded-lg animate-pulse bg-gradient-to-r from-neutral-200 via-neutral-100 to-neutral-200 dark:from-neutral-800 dark:via-neutral-700 dark:to-neutral-800"
-            style={{ width: `${w}%` }}
-          />
+          <Skeleton key={i} className="h-3 rounded-lg" style={{ width: `${w}%` }} />
         ))}
       </div>
     </div>
@@ -161,12 +150,7 @@ export function JobCVPanel() {
       {/* Header */}
       <div className="flex items-center justify-between px-5 py-3.5 border-b border-border shrink-0">
         <div className="flex items-center gap-2">
-          <div
-            className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
-            style={{ background: 'linear-gradient(135deg,#A855F7,#6366F1)' }}
-          >
-            <Sparkles className="w-3.5 h-3.5 text-white" />
-          </div>
+          <IconTile icon={FileText} size="sm" />
           <span className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
             CV personalizado con IA
           </span>
@@ -207,15 +191,12 @@ export function JobCVPanel() {
             <p className="text-sm text-muted-foreground">
               No se pudo generar el currículum. Verificá que tu perfil esté completo.
             </p>
-            <button
+            <Button
               onClick={handleRegenerate}
-              disabled={generating}
-              className="inline-flex items-center gap-2 h-9 px-4 rounded-xl text-white text-sm font-medium hover:opacity-90 disabled:opacity-50"
-              style={{ background: 'linear-gradient(135deg,#A855F7,#6366F1)' }}
-            >
+              disabled={generating}>
               <RefreshCw className="w-4 h-4" />
               Reintentar
-            </button>
+            </Button>
           </div>
         )}
       </div>

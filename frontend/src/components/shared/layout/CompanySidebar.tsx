@@ -1,17 +1,6 @@
 'use client'
 
-import Link from 'next/link'
-import {
-  LayoutDashboard,
-  Building2,
-  ListChecks,
-  PlusCircle,
-  ChevronLeft,
-  ChevronRight,
-  LogOut,
-  Sparkles,
-  Search,
-} from 'lucide-react'
+import { LayoutDashboard, Building2, ListChecks, PlusCircle, ChevronLeft, ChevronRight, LogOut, Search } from 'lucide-react'
 import { useUIStore } from '@/stores/ui.store'
 import { useAuthStore } from '@/stores/auth.store'
 import { useLogout } from '@/features/auth/hooks/useAuth'
@@ -20,6 +9,7 @@ import { ThemeToggle } from './ThemeToggle'
 import { getInitials } from '@/lib/utils/format'
 import { ROUTES } from '@/config/routes'
 import { cn } from '@/lib/utils/cn'
+import { Logo } from '@/components/shared/brand/Logo'
 
 const NAV_ITEMS = [
   { href: ROUTES.companyDashboard, icon: LayoutDashboard, label: 'Dashboard'       },
@@ -50,19 +40,7 @@ export function CompanySidebar() {
         'h-16 flex items-center border-b border-border shrink-0',
         collapsed ? 'justify-center px-2' : 'px-4 gap-2.5',
       )}>
-        <Link href={ROUTES.companyDashboard} className="flex items-center gap-2.5 group">
-          <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-opacity group-hover:opacity-80"
-            style={{ background: 'linear-gradient(135deg, #A855F7, #6366F1)' }}
-          >
-            <Sparkles className="w-4 h-4 text-white" />
-          </div>
-          {!collapsed && (
-            <span className="text-sm font-bold text-foreground tracking-tight truncate">
-              TrayectorIA
-            </span>
-          )}
-        </Link>
+        <Logo href={ROUTES.companyDashboard} collapsed={collapsed} />
       </div>
 
       {/*  Nav  */}

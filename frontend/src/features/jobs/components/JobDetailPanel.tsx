@@ -1,10 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import {
-  ArrowLeft, MapPin, Briefcase, Wifi, Calendar,
-  Sparkles, MessageSquare, FileText,
-} from 'lucide-react'
+import { ArrowLeft, MapPin, Briefcase, Wifi, Calendar, MessageSquare, FileText } from 'lucide-react'
 import { useJobOffer } from '../hooks/useJobOffers'
 import { useJobsParams } from '../hooks/useJobsParams'
 import { SaveButton } from './SaveButton'
@@ -179,7 +176,7 @@ export function JobDetailPanel() {
                   onClick={() => setMode('cv')}
                   className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-brand-300 dark:border-brand-800 text-brand-text hover:bg-brand-tint transition-colors"
                 >
-                  <Sparkles className="w-3.5 h-3.5" />
+                  <FileText className="w-3.5 h-3.5" />
                   CV personalizado
                 </button>
                 <button

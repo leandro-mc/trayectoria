@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Save, Sparkles } from 'lucide-react'
+import { Save, MessageSquare } from 'lucide-react'
 import { jobOfferSchema, type JobOfferFormValues } from '../schemas/job-offer.schemas'
 import { useCreateJobOffer, useUpdateJobOffer } from '@/features/jobs/hooks/useJobOffers'
 import { SkillPicker } from '@/features/skills/components/SkillPicker'
@@ -309,7 +309,7 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
         {requiresInterview && (
           <div className="mt-4 p-4 rounded-xl bg-brand-50 dark:bg-brand-900/10 border border-brand-200 dark:border-brand-800">
             <div className="flex items-center gap-2 mb-3">
-              <Sparkles className="w-4 h-4 text-brand-text" />
+              <MessageSquare className="w-4 h-4 text-brand-text" />
               <span className="text-xs font-semibold text-brand-text">
                 Instrucciones para la IA
               </span>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Send, CheckCircle2, X, Sparkles } from 'lucide-react'
+import { Send, CheckCircle2, X, FileText } from 'lucide-react'
 import { useAuthStore } from '@/stores/auth.store'
 import { useApply, useHasApplied } from '@/features/applications/hooks/useApplications'
 import { useCurricula } from '@/features/ai/curricula/hooks/useCurricula'
@@ -139,7 +139,7 @@ export function ApplyButton({
                 {matchingCurricula.length > 0 ? (
                   <div className="mt-4 mb-5">
                     <label className="flex items-center gap-1.5 text-xs font-semibold text-secondary-foreground mb-2">
-                      <Sparkles className="w-3.5 h-3.5 text-brand-text" />
+                      <FileText className="w-3.5 h-3.5 text-brand-text" />
                       Adjuntar currículum con IA
                     </label>
                     <select

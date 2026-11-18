@@ -7,6 +7,7 @@ import { InterviewChat } from '@/features/ai/interviews/components/InterviewChat
 import { useInterview } from '@/features/ai/interviews/hooks/useInterviews'
 import { loadFeedback } from '@/features/ai/interviews/utils/feedback-cache'
 import { cn } from '@/lib/utils/cn'
+import { Spinner } from '@/components/ui/spinner'
 
 //  Right panel — selected interview 
 
@@ -17,8 +18,7 @@ function InterviewPanel({ id }: { id: number }) {
     return (
       <div className="flex flex-col h-full bg-card">
         <div className="flex-1 flex items-center justify-center">
-          <div className="w-8 h-8 rounded-full animate-pulse"
-            style={{ background: 'linear-gradient(135deg,#A855F7,#6366F1)' }} />
+          <Spinner className="size-6 text-brand-text" />
         </div>
       </div>
     )

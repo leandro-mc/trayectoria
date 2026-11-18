@@ -4,7 +4,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { Send, Sparkles, CheckCircle2, Mic, Star, TrendingUp, AlertCircle, ThumbsUp } from 'lucide-react'
+import { Send, CheckCircle2, Mic, TrendingUp, AlertCircle, ThumbsUp } from 'lucide-react'
 import { useSendMessage, useCompleteInterview } from '../hooks/useInterviews'
 import { saveFeedback } from '../utils/feedback-cache'
 import {
@@ -15,8 +15,24 @@ import { formatDate } from '@/lib/utils/date'
 import { cn } from '@/lib/utils/cn'
 import type { SimulatedInterviewResponse, InterviewFeedback } from '../types/interviews.types'
 import { Spinner } from '@/components/ui/spinner'
+import { Button } from '@/components/ui/button'
 
 //  Sub-components 
+
+/** Chat avatar: the candidate's "Tú" or the interviewer's initial. No icons. */
+function Avatar({ role }: { role: 'USER' | 'ASSISTANT' }) {
+  const isUser = role === 'USER'
+  return (
+    <div
+      className={cn(
+        'mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-bold',
+        isUser ? 'bg-brand-tint-strong text-brand-text' : 'bg-primary text-primary-foreground',
+      )}
+    >
+      {isUser ? 'Tú' : 'E'}
+    </div>
+  )
+}
 
 function MessageBubble({
   role, content, sentAt,
@@ -28,17 +44,7 @@ function MessageBubble({
   const isUser = role === 'USER'
   return (
     <div className={cn('flex gap-2.5', isUser && 'flex-row-reverse')}>
-      <div
-        className={cn(
-          'w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5',
-          isUser
-            ? 'bg-brand-tint-strong text-brand-text text-xs font-bold'
-            : 'text-white',
-        )}
-        style={!isUser ? { background: 'linear-gradient(135deg,#A855F7,#6366F1)' } : undefined}
-      >
-        {isUser ? 'Tú' : <Sparkles className="w-3.5 h-3.5" />}
-      </div>
+      <Avatar role={role} />
       <div className={cn(
         'max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed',
         isUser
@@ -57,12 +63,7 @@ function MessageBubble({
 function TypingIndicator() {
   return (
     <div className="flex gap-2.5">
-      <div
-        className="w-7 h-7 rounded-full flex items-center justify-center text-white shrink-0"
-        style={{ background: 'linear-gradient(135deg,#A855F7,#6366F1)' }}
-      >
-        <Sparkles className="w-3.5 h-3.5" />
-      </div>
+      <Avatar role="ASSISTANT" />
       <div className="bg-raised border border-input rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
         {[0, 150, 300].map((delay) => (
           <span
@@ -82,11 +83,9 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
 
       {/* Score + recommendation */}
       <div
-        className="text-center py-5 rounded-2xl border border-brand-100 dark:border-brand-900"
-        style={{ background: 'linear-gradient(135deg,rgba(168,85,247,.06),rgba(99,102,241,.06))' }}
+        className="text-center py-5 rounded-2xl border border-brand-100 dark:border-brand-900 bg-brand-tint"
       >
         <div className="flex items-center justify-center gap-2 mb-2">
-          <Star className="w-4 h-4 text-brand-text" />
           <span className="text-xs font-semibold text-brand-text uppercase tracking-wide">
             Feedback de la IA
           </span>
@@ -288,17 +287,14 @@ export function InterviewChat({
                 el.style.height = `${Math.min(el.scrollHeight, 128)}px`
               }}
             />
-            <button
+            <Button
               onClick={handleSend}
-              disabled={sending || !input.trim()}
-              className="w-10 h-10 rounded-xl flex items-center justify-center text-white disabled:opacity-40 hover:opacity-90 transition-opacity shrink-0"
-              style={{ background: 'linear-gradient(135deg,#A855F7,#6366F1)' }}
-            >
+              disabled={sending || !input.trim()} size="icon-lg" className="shrink-0">
               {sending
                 ? <Spinner />
                 : <Send className="w-4 h-4" />
               }
-            </button>
+            </Button>
             {/* Voice — Phase 2 placeholder */}
             <button
               disabled

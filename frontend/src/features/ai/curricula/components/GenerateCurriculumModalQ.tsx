@@ -1,12 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import { X, Sparkles } from 'lucide-react'
+import { X, FileText } from 'lucide-react'
 import { useGenerateCurriculum } from '../hooks/useCurricula'
 import { useJobOffers } from '@/features/jobs/hooks/useJobOffers'
 import { extractApiError } from '@/lib/utils/format'
 import type { GeneratedCurriculumResponse } from '../types/curricula.types'
 import { Spinner } from '@/components/ui/spinner'
+import { IconTile } from '@/components/shared/brand/IconTile'
+import { Button } from '@/components/ui/button'
 
 interface GenerateCurriculumModalProps {
   onClose:   () => void
@@ -42,10 +44,7 @@ export function GenerateCurriculumModal({ onClose, onSuccess }: GenerateCurricul
         {/* Header */}
         <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-border-soft">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0"
-              style={{ background: 'linear-gradient(135deg, #A855F7, #6366F1)' }}>
-              <Sparkles className="w-4 h-4 text-white" />
-            </div>
+            <IconTile icon={FileText} />
             <div>
               <h2 className="text-sm font-bold text-foreground">
                 Generar currículum con IA
@@ -108,17 +107,14 @@ export function GenerateCurriculumModal({ onClose, onSuccess }: GenerateCurricul
           >
             Cancelar
           </button>
-          <button
+          <Button
             onClick={handleGenerate}
-            disabled={isPending || !selectedJobId}
-            className="flex-1 h-10 rounded-xl text-white text-sm font-semibold disabled:opacity-50 transition-opacity hover:opacity-90 flex items-center justify-center gap-2"
-            style={{ background: 'linear-gradient(135deg, #A855F7, #6366F1)' }}
-          >
+            disabled={isPending || !selectedJobId} size="lg" className="flex-1">
             {isPending
               ? <><Spinner />Generando...</>
-              : <><Sparkles className="w-4 h-4" />Generar</>
+              : "Generar"
             }
-          </button>
+          </Button>
         </div>
       </div>
     </div>
