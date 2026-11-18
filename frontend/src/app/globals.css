@@ -34,7 +34,8 @@
 
   /*  Semantic status colours, derived from the brand's colour-wheel neighbours:
       success = teal-green (near its complement), warning = amber (analogous),
-      danger = brighter red-orange, clearly more vivid than the brand burgundy.  */
+      danger = vermilion (hue ~16deg), turned away from the burgundy (359deg) so the two
+      never read as the same red: dE >= 25 from the brand in both themes.  */
   --color-success-50: #EDFBF3;
   --color-success-100: #D5F4E2;
   --color-success-200: #B0EBCA;
@@ -57,21 +58,20 @@
   --color-warning-800: #604008;
   --color-warning-900: #3F2903;
 
-  --color-danger-50: #FFF4F2;
-  --color-danger-100: #FFE4DF;
-  --color-danger-200: #FFCDC4;
-  --color-danger-300: #FFA192;
-  --color-danger-400: #F66E5C;
-  --color-danger-500: #DC4130;
-  --color-danger-600: #C1291B;
-  --color-danger-700: #A21C10;
-  --color-danger-800: #7C140A;
-  --color-danger-900: #4C110A;
+  --color-danger-50: #FFF6F2;
+  --color-danger-100: #FFE8DF;
+  --color-danger-200: #FFD4C4;
+  --color-danger-300: #FFB092;
+  --color-danger-400: #F97F4F;
+  --color-danger-500: #DC5F30;
+  --color-danger-600: #C4400F;
+  --color-danger-700: #A23810;
+  --color-danger-800: #7C290A;
+  --color-danger-900: #4C1C0A;
 
   /*  Typography  */
   --font-sans:    "Instrument Sans Variable", "Instrument Sans", system-ui, sans-serif;
   --font-display: "Fraunces Variable", "Fraunces", Georgia, serif;
-  --font-mono: "JetBrains Mono", "Fira Code", monospace;
 
   /*  Shadows  */
   --shadow-card:       0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04);
@@ -121,20 +121,32 @@
   --accent:               var(--color-brand-50);
   --accent-foreground:    var(--color-brand-700);
   --destructive:          var(--color-danger-600);
+  --destructive-foreground: var(--color-neutral-0);
 
+  /*  Text ladder, strongest to weakest. Each step keeps >= 4.5:1 (WCAG AA) on
+      card, page and muted surfaces; scripts/check-contrast.py enforces it.  */
   --muted:                var(--color-neutral-100);
-  --muted-foreground:     var(--color-neutral-500);
-  --body:                 var(--color-neutral-600);   /* running text */
-  --subtle:               var(--color-neutral-400);   /* placeholders, hints */
+  --body:                 var(--color-neutral-700);   /* running text */
+  --muted-foreground:     var(--color-neutral-600);   /* secondary / meta text */
+  --subtle:               var(--color-neutral-500);   /* placeholders, hints */
 
-  --border:               var(--color-neutral-200);
-  --input:                var(--color-neutral-200);
+  --border:               var(--color-neutral-200);   /* decorative dividers and card edges */
+  --input:                var(--color-neutral-500);   /* control boundary: needs 3:1 (WCAG 1.4.11) */
   --ring:                 var(--color-brand-500);
 
   --brand-text:           var(--color-brand-600);     /* brand-coloured text and icons */
   --brand-tint:           var(--color-brand-50);      /* soft brand surface */
   --brand-tint-strong:    var(--color-brand-100);
+  --brand-border:         var(--color-brand-200);     /* brand-tinted outline and hover edge */
   --danger-tint:          var(--color-danger-50);
+  --danger-border:        var(--color-danger-200);
+  --danger-text:          var(--color-danger-600);
+  --success-tint:         var(--color-success-50);
+  --success-text:         var(--color-success-700);
+  --success:              var(--color-success-600);   /* fills: status dots, bars */
+  --warning-tint:         var(--color-warning-50);
+  --warning-text:         var(--color-warning-700);
+  --warning:              var(--color-warning-500);
   --raised:               var(--color-neutral-0);     /* inputs, popovers on top of a card */
   --hover:                var(--color-neutral-50);    /* row / item hover */
   --border-soft:          var(--color-neutral-100);   /* dividers inside a card */
@@ -155,21 +167,31 @@
   --secondary-foreground: var(--color-neutral-300);
   --accent:               var(--color-brand-900);
   --accent-foreground:    var(--color-brand-200);
-  --destructive:          var(--color-danger-500);
+  --destructive:          var(--color-danger-600);
+  --destructive-foreground: var(--color-neutral-0);
 
   --muted:                var(--color-neutral-800);
+  --body:                 var(--color-neutral-300);
   --muted-foreground:     var(--color-neutral-400);
-  --body:                 var(--color-neutral-400);
-  --subtle:               var(--color-neutral-500);
+  --subtle:               var(--color-neutral-400);
 
   --border:               var(--color-neutral-800);
-  --input:                var(--color-neutral-700);
+  --input:                var(--color-neutral-500);
   --ring:                 var(--color-brand-400);
 
   --brand-text:           var(--color-brand-400);
   --brand-tint:           color-mix(in oklab, var(--color-brand-900) 20%, transparent);
   --brand-tint-strong:    color-mix(in oklab, var(--color-brand-900) 40%, transparent);
+  --brand-border:         var(--color-brand-800);
   --danger-tint:          color-mix(in oklab, var(--color-danger-900) 20%, transparent);
+  --danger-border:        var(--color-danger-800);
+  --danger-text:          var(--color-danger-400);
+  --success-tint:         color-mix(in oklab, var(--color-success-900) 20%, transparent);
+  --success-text:         var(--color-success-400);
+  --success:              var(--color-success-500);
+  --warning-tint:         color-mix(in oklab, var(--color-warning-900) 20%, transparent);
+  --warning-text:         var(--color-warning-400);
+  --warning:              var(--color-warning-400);
   --raised:               var(--color-neutral-800);
   --hover:                var(--color-neutral-800);
   --border-soft:          var(--color-neutral-800);
@@ -190,6 +212,7 @@
   --color-accent:               var(--accent);
   --color-accent-foreground:    var(--accent-foreground);
   --color-destructive:          var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-muted:                var(--muted);
   --color-muted-foreground:     var(--muted-foreground);
   --color-body:                 var(--body);
@@ -200,7 +223,16 @@
   --color-brand-text:           var(--brand-text);
   --color-brand-tint:           var(--brand-tint);
   --color-brand-tint-strong:    var(--brand-tint-strong);
+  --color-brand-border:         var(--brand-border);
   --color-danger-tint:          var(--danger-tint);
+  --color-danger-border:        var(--danger-border);
+  --color-danger-text:          var(--danger-text);
+  --color-success-tint:         var(--success-tint);
+  --color-success-text:         var(--success-text);
+  --color-success:              var(--success);
+  --color-warning-tint:         var(--warning-tint);
+  --color-warning-text:         var(--warning-text);
+  --color-warning:              var(--warning);
   --color-raised:               var(--raised);
   --color-hover:                var(--hover);
   --color-border-soft:          var(--border-soft);
@@ -240,12 +272,12 @@ body {
 
 ::-webkit-scrollbar       { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--color-neutral-300); border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: var(--color-neutral-400); }
+::-webkit-scrollbar-thumb { background: var(--faint); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: var(--subtle); }
 
 /*  Focus  */
 
-:focus-visible { outline: 2px solid var(--color-brand-500); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 
 /*  Selection  */
 
