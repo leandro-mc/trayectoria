@@ -118,7 +118,7 @@ export function CandidateProfilePanel({ application }: CandidateProfilePanelProp
             {email && (
               <a
                 href={`mailto:${email}`}
-                className="inline-flex items-center gap-1 text-xs text-brand-500 hover:text-brand-600 mt-0.5"
+                className="inline-flex items-center gap-1 text-xs text-brand-text hover:text-brand-text mt-0.5"
               >
                 <Mail className="w-3 h-3" />
                 {email}

@@ -67,7 +67,7 @@ export function SkillPicker({
                 <button
                   type="button"
                   onClick={() => onRemove(skill.id)}
-                  className="text-brand-400 hover:text-brand-600 dark:hover:text-brand-200 transition-colors"
+                  className="text-brand-400 hover:text-brand-text dark:hover:text-brand-200 transition-colors"
                   aria-label={`Quitar ${skill.name}`}
                 >
                   <X className="w-3 h-3" />

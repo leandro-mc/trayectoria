@@ -103,7 +103,7 @@ export function CompanyProfileForm() {
             type="button"
             onClick={() => logoInputRef.current?.click()}
             disabled={uploading}
-            className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white flex items-center justify-center shadow-md transition-colors"
+            className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-primary hover:bg-primary/90 disabled:opacity-60 text-white flex items-center justify-center shadow-md transition-colors"
             aria-label="Cambiar logo"
           >
             {uploading
@@ -188,7 +188,7 @@ export function CompanyProfileForm() {
         <button
           type="submit"
           disabled={isPending || !isDirty}
-          className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
+          className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
         >
           {isPending && <Spinner />}
           <Save className="w-4 h-4" />

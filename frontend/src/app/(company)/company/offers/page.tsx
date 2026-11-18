@@ -206,7 +206,7 @@ export default function CompanyOffersPage() {
         actions={
           <Link
             href={ROUTES.newOffer}
-            className="inline-flex items-center gap-2 h-9 px-4 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium transition-colors"
+            className="inline-flex items-center gap-2 h-9 px-4 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-medium transition-colors"
           >
             <Plus className="w-4 h-4" />
             Nueva oferta

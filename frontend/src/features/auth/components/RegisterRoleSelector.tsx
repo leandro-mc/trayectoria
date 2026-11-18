@@ -58,14 +58,14 @@ export function RegisterRoleSelector() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <RoleCard
           href={ROUTES.registerCandidate}
-          icon={<UserRound className="w-6 h-6 text-brand-500" />}
+          icon={<UserRound className="w-6 h-6 text-brand-text" />}
           title="Soy candidato"
           description="Buscás trabajo, querés mejorar tu CV con IA o practicar entrevistas."
           cta="Crear cuenta"
         />
         <RoleCard
           href={ROUTES.registerCompany}
-          icon={<Building2 className="w-6 h-6 text-brand-500" />}
+          icon={<Building2 className="w-6 h-6 text-brand-text" />}
           title="Soy empresa"
           description="Publicás ofertas laborales y buscás talento para tu equipo."
           cta="Crear cuenta"

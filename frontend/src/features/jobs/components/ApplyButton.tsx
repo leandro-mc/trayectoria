@@ -84,7 +84,7 @@ export function ApplyButton({
           'inline-flex items-center gap-1.5 h-9 px-4 rounded-lg text-xs font-semibold transition-colors',
           isDisabled
             ? 'bg-muted text-subtle cursor-not-allowed'
-            : 'bg-brand-500 hover:bg-brand-600 text-white',
+            : 'bg-primary hover:bg-primary/90 text-white',
         ].join(' ')}
       >
         {!isDisabled && <Send className="w-3.5 h-3.5" />}
@@ -139,7 +139,7 @@ export function ApplyButton({
                 {matchingCurricula.length > 0 ? (
                   <div className="mt-4 mb-5">
                     <label className="flex items-center gap-1.5 text-xs font-semibold text-secondary-foreground mb-2">
-                      <Sparkles className="w-3.5 h-3.5 text-brand-500" />
+                      <Sparkles className="w-3.5 h-3.5 text-brand-text" />
                       Adjuntar currículum con IA
                     </label>
                     <select
@@ -159,7 +159,7 @@ export function ApplyButton({
                   <div className="mt-4 mb-5 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-input">
                     <p className="text-xs text-muted-foreground">
                       Se enviará tu perfil completo. Podés generar un{' '}
-                      <span className="text-brand-500 font-medium">CV personalizado ✨</span>{' '}
+                      <span className="text-brand-text font-medium">CV personalizado ✨</span>{' '}
                       para esta oferta desde el panel de la oferta.
                     </p>
                   </div>
@@ -176,7 +176,7 @@ export function ApplyButton({
                   <button
                     onClick={handleConfirm}
                     disabled={isPending}
-                    className="flex-1 h-10 rounded-xl bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white text-sm font-semibold transition-colors flex items-center justify-center gap-2"
+                    className="flex-1 h-10 rounded-xl bg-primary hover:bg-primary/90 disabled:opacity-60 text-white text-sm font-semibold transition-colors flex items-center justify-center gap-2"
                   >
                     {isPending && <Spinner />}
                     {isPending ? 'Enviando...' : 'Confirmar'}

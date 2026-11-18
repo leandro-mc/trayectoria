@@ -88,7 +88,7 @@ function EducationForm({ initial, onClose }: { initial?: EducationResponse; onCl
             <button type="button" onClick={onClose} disabled={isPending} className="flex-1 h-10 rounded-lg border border-input text-body text-sm font-medium hover:bg-hover disabled:opacity-50 transition-colors">
               Cancelar
             </button>
-            <button type="submit" disabled={isPending} className="flex-1 h-10 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2">
+            <button type="submit" disabled={isPending} className="flex-1 h-10 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2">
               {isPending && <Spinner />}
               {initial ? 'Guardar cambios' : 'Agregar'}
             </button>

@@ -45,7 +45,7 @@ export function AuthGateModal({ action, onClose }: AuthGateModalProps) {
         <div className="flex flex-col gap-2">
           <Link
             href={ROUTES.register}
-            className="flex items-center justify-center gap-2 h-10 rounded-xl bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold transition-colors"
+            className="flex items-center justify-center gap-2 h-10 rounded-xl bg-primary hover:bg-primary/90 text-white text-sm font-semibold transition-colors"
             onClick={onClose}
           >
             <UserPlus className="w-4 h-4" />

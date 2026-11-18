@@ -106,7 +106,7 @@ function CurriculaList({
           Sin currículums
         </p>
         <p className="text-xs text-neutral-400 leading-relaxed">
-          Desde <a href={ROUTES.jobs} className="underline text-brand-500 hover:text-brand-600">Empleos</a>, elegí una oferta y presioná “CV personalizado”.
+          Desde <a href={ROUTES.jobs} className="underline text-brand-text hover:text-brand-text">Empleos</a>, elegí una oferta y presioná “CV personalizado”.
         </p>
       </div>
     )
@@ -139,7 +139,7 @@ function CurriculaList({
           </div>
           <ChevronRight className={cn(
             'w-3.5 h-3.5 shrink-0 transition-colors',
-            selectedId === cv.id ? 'text-brand-500' : 'text-faint',
+            selectedId === cv.id ? 'text-brand-text' : 'text-faint',
           )} />
         </button>
       ))}
@@ -178,7 +178,7 @@ function InterviewsList({
           Sin entrevistas
         </p>
         <p className="text-xs text-neutral-400 leading-relaxed">
-          Desde <a href={ROUTES.jobs} className="underline text-brand-500 hover:text-brand-600">Empleos</a>, elegí una oferta y presioná “Entrevista IA”.
+          Desde <a href={ROUTES.jobs} className="underline text-brand-text hover:text-brand-text">Empleos</a>, elegí una oferta y presioná “Entrevista IA”.
         </p>
       </div>
     )
@@ -205,7 +205,7 @@ function InterviewsList({
             )}>
               {isCompleted
                 ? <CheckCircle2 className="w-4 h-4 text-success-500" />
-                : <Clock className="w-4 h-4 text-brand-500" />
+                : <Clock className="w-4 h-4 text-brand-text" />
               }
             </div>
             <div className="flex-1 min-w-0">
@@ -214,7 +214,7 @@ function InterviewsList({
               </p>
               <p className={cn(
                 'text-xs mt-0.5',
-                isCompleted ? 'text-success-500 dark:text-success-400' : 'text-brand-500 dark:text-brand-400',
+                isCompleted ? 'text-success-500 dark:text-success-400' : 'text-brand-text',
               )}>
                 {isCompleted ? 'Completada' : 'En progreso'}
                 {' · '}{formatDate(iv.createdAt)}
@@ -222,7 +222,7 @@ function InterviewsList({
             </div>
             <ChevronRight className={cn(
               'w-3.5 h-3.5 shrink-0 transition-colors',
-              selectedId === iv.id ? 'text-brand-500' : 'text-faint',
+              selectedId === iv.id ? 'text-brand-text' : 'text-faint',
             )} />
           </button>
         )

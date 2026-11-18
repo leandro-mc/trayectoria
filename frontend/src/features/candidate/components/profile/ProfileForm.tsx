@@ -154,7 +154,7 @@ export function ProfileForm() {
         <button
           type="submit"
           disabled={isPending || !isDirty}
-          className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
+          className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
         >
           {isPending && <Spinner />}
           <Save className="w-4 h-4" />

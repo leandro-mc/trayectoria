@@ -56,7 +56,7 @@ export function JobDescriptionSide() {
             </span>
           )}
           {offer.workMode && (
-            <span className="inline-flex items-center gap-1 text-xs text-brand-500 dark:text-brand-400">
+            <span className="inline-flex items-center gap-1 text-xs text-brand-text">
               <Wifi className="w-3 h-3" />
               {WORK_MODE_LABELS[offer.workMode]}
             </span>

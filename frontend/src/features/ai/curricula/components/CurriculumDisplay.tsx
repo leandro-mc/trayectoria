@@ -16,7 +16,7 @@ function Section({
   return (
     <div>
       <div className="flex items-center gap-2 mb-3">
-        <Icon className="w-4 h-4 text-brand-500" />
+        <Icon className="w-4 h-4 text-brand-text" />
         <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wide">
           {title}
         </h3>
@@ -44,7 +44,7 @@ export function CurriculumDisplay({ content, compact = false }: CurriculumDispla
           style={{ background: 'linear-gradient(135deg, rgba(168,85,247,.06), rgba(99,102,241,.06))' }}
         >
           <div className="flex items-center gap-2 mb-3">
-            <Star className="w-3.5 h-3.5 text-brand-500" />
+            <Star className="w-3.5 h-3.5 text-brand-text" />
             <span className="text-xs font-bold text-brand-text uppercase tracking-wide">
               Por qué sos ideal para este puesto
             </span>
@@ -52,7 +52,7 @@ export function CurriculumDisplay({ content, compact = false }: CurriculumDispla
           <ul className="space-y-1.5">
             {content.highlights.map((h, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-secondary-foreground">
-                <span className="text-brand-500 font-bold mt-0.5 shrink-0">·</span>
+                <span className="text-brand-text font-bold mt-0.5 shrink-0">·</span>
                 {h}
               </li>
             ))}

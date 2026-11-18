@@ -51,7 +51,7 @@ export function PublicNavbar({ hideAuthButtons = false }: PublicNavbarProps) {
           isAuthenticated ? (
             <Link
               href={dashboardHref}
-              className="inline-flex items-center gap-1.5 sm:gap-2 h-8 sm:h-9 px-3 sm:px-4 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-xs sm:text-sm font-medium transition-colors"
+              className="inline-flex items-center gap-1.5 sm:gap-2 h-8 sm:h-9 px-3 sm:px-4 rounded-lg bg-primary hover:bg-primary/90 text-white text-xs sm:text-sm font-medium transition-colors"
             >
               <LayoutDashboard className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Mi panel
@@ -66,7 +66,7 @@ export function PublicNavbar({ hideAuthButtons = false }: PublicNavbarProps) {
               </Link>
               <Link
                 href={ROUTES.register}
-                className="inline-flex h-8 sm:h-9 px-2.5 sm:px-4 items-center rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-xs sm:text-sm font-medium transition-colors"
+                className="inline-flex h-8 sm:h-9 px-2.5 sm:px-4 items-center rounded-lg bg-primary hover:bg-primary/90 text-white text-xs sm:text-sm font-medium transition-colors"
               >
                 Registrarse
               </Link>

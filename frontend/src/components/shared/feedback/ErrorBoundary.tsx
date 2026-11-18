@@ -48,7 +48,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
           <p className="text-sm text-muted-foreground max-w-sm mb-6">
             Ocurrió un error inesperado. Podés intentar recargar la sección.
           </p>
-          <Button onClick={this.handleReset} className="bg-brand-500 hover:bg-brand-600 text-white">
+          <Button onClick={this.handleReset} className="bg-primary hover:bg-primary/90 text-white">
             Reintentar
           </Button>
         </div>

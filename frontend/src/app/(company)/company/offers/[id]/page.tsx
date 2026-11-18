@@ -84,7 +84,7 @@ export default function OfferDetailPage({ params }: PageProps) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
         <p className="text-muted-foreground mb-4">Oferta no encontrada.</p>
-        <button onClick={() => router.push(ROUTES.offers)} className="text-brand-500 text-sm font-medium hover:underline">
+        <button onClick={() => router.push(ROUTES.offers)} className="text-brand-text text-sm font-medium hover:underline">
           Volver a mis ofertas
         </button>
       </div>
@@ -112,7 +112,7 @@ export default function OfferDetailPage({ params }: PageProps) {
             </Link>
             <Link
               href={ROUTES.editOffer(offerId)}
-              className="inline-flex items-center gap-2 h-9 px-4 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium transition-colors"
+              className="inline-flex items-center gap-2 h-9 px-4 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-medium transition-colors"
             >
               <Pencil className="w-4 h-4" />
               Editar
@@ -183,7 +183,7 @@ export default function OfferDetailPage({ params }: PageProps) {
         {/*  Interview section  */}
         <div className="bg-card border border-border rounded-xl shadow-card p-6">
           <div className="flex items-center gap-2 mb-4">
-            <Sparkles className="w-4 h-4 text-brand-500" />
+            <Sparkles className="w-4 h-4 text-brand-text" />
             <h3 className="text-sm font-semibold text-foreground">
               Entrevista con IA
             </h3>

@@ -73,7 +73,7 @@ export function Pagination({
               onClick={() => onPageChange(p as number)}
               className={cn(
                 'h-8 w-8 text-sm',
-                p === page && 'bg-brand-500 hover:bg-brand-600 text-white border-brand-500',
+                p === page && 'bg-primary hover:bg-primary/90 text-white border-brand-500',
               )}
               aria-label={`Página ${(p as number) + 1}`}
               aria-current={p === page ? 'page' : undefined}

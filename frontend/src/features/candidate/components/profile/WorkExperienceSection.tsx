@@ -104,7 +104,7 @@ function ExperienceForm({ initial, onClose }: ExperienceFormProps) {
             </div>
           </div>
           <label className="flex items-center gap-2.5 cursor-pointer">
-            <input type="checkbox" {...register('isCurrent')} disabled={isPending} className="w-4 h-4 rounded border-neutral-300 text-brand-500 focus:ring-brand-500" />
+            <input type="checkbox" {...register('isCurrent')} disabled={isPending} className="w-4 h-4 rounded border-neutral-300 text-brand-text focus:ring-brand-500" />
             <span className="text-sm text-secondary-foreground">Trabajo aquí actualmente</span>
           </label>
 
@@ -112,7 +112,7 @@ function ExperienceForm({ initial, onClose }: ExperienceFormProps) {
             <button type="button" onClick={onClose} disabled={isPending} className="flex-1 h-10 rounded-lg border border-input bg-card text-body text-sm font-medium transition-colors hover:bg-hover disabled:opacity-50">
               Cancelar
             </button>
-            <button type="submit" disabled={isPending} className="flex-1 h-10 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2">
+            <button type="submit" disabled={isPending} className="flex-1 h-10 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2">
               {isPending && <Spinner />}
               {initial ? 'Guardar cambios' : 'Agregar'}
             </button>

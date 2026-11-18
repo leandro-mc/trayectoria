@@ -126,7 +126,7 @@ export function LoginForm() {
           <button
             type="submit"
             disabled={isPending}
-            className="w-full h-10 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
+            className="w-full h-10 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
           >
             {isPending && <Spinner />}
             {isPending ? 'Ingresando...' : 'Iniciar sesión'}

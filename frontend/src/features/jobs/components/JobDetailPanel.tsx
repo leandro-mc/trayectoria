@@ -71,7 +71,7 @@ export function JobDetailPanel() {
         </p>
         <button
           onClick={goBackToList}
-          className="mt-3 text-xs text-brand-500 hover:text-brand-600 transition-colors"
+          className="mt-3 text-xs text-brand-text hover:text-brand-text transition-colors"
         >
           Volver a la lista
         </button>

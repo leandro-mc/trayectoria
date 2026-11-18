@@ -47,14 +47,14 @@ export function EmptyState({
           ? (
             <NextLink 
               href={action.href}
-              className="px-4 py-2 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium transition-colors"
+              className="px-4 py-2 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-medium transition-colors"
             >
               {action.label}
             </NextLink>
           ) : (
             <button
               onClick={action.onClick}
-              className="px-4 py-2 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium transition-colors"
+              className="px-4 py-2 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-medium transition-colors"
             >
               {action.label}
             </button>

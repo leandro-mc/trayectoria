@@ -85,7 +85,7 @@ function ApplicationRow({
         <p className="text-xs text-neutral-400 mt-0.5">
           {formatDate(application.appliedAt)}
           {application.curriculumId && (
-            <span className="ml-1.5 text-brand-500 font-medium">· CV ✨</span>
+            <span className="ml-1.5 text-brand-text font-medium">· CV ✨</span>
           )}
         </p>
       </div>

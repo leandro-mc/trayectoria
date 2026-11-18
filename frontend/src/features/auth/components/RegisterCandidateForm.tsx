@@ -28,7 +28,7 @@ function StepIndicator({ current }: StepIndicatorProps) {
       {/* Progress bar */}
       <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden mb-4">
         <div
-          className="h-full bg-brand-500 rounded-full transition-all duration-500 ease-out"
+          className="h-full bg-primary rounded-full transition-all duration-500 ease-out"
           style={{ width: current === 1 ? '50%' : '100%' }}
         />
       </div>
@@ -43,8 +43,8 @@ function StepIndicator({ current }: StepIndicatorProps) {
               <div
                 className={[
                   'w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold transition-colors',
-                  isDone   ? 'bg-brand-500 text-white' : '',
-                  isActive ? 'bg-brand-500 text-white' : '',
+                  isDone   ? 'bg-primary text-white' : '',
+                  isActive ? 'bg-primary text-white' : '',
                   !isDone && !isActive ? 'bg-neutral-200 dark:bg-neutral-800 text-neutral-400' : '',
                 ].join(' ')}
               >
@@ -164,7 +164,7 @@ function Step1({ onNext }: Step1Props) {
 
       <button
         type="submit"
-        className="w-full h-10 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium transition-colors"
+        className="w-full h-10 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-medium transition-colors"
       >
         Continuar
       </button>
@@ -254,7 +254,7 @@ function Step2({ onSubmit, onBack, isPending, apiError }: Step2Props) {
         <button
           type="submit"
           disabled={isPending}
-          className="flex-1 h-10 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
+          className="flex-1 h-10 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
         >
           {isPending && <Spinner />}
           {isPending ? 'Creando cuenta...' : 'Crear cuenta'}

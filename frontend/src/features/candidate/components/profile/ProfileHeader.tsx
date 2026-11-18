@@ -44,7 +44,7 @@ export function ProfileHeader() {
           type="button"
           onClick={() => inputRef.current?.click()}
           disabled={isPending}
-          className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white flex items-center justify-center shadow-md transition-colors"
+          className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-primary hover:bg-primary/90 disabled:opacity-60 text-white flex items-center justify-center shadow-md transition-colors"
           aria-label="Cambiar foto"
         >
           {isPending

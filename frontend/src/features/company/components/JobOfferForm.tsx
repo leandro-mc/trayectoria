@@ -294,7 +294,7 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
             type="checkbox"
             {...register('requiresInterview')}
             disabled={isPending}
-            className="mt-0.5 w-4 h-4 rounded border-neutral-300 text-brand-500 focus:ring-brand-500"
+            className="mt-0.5 w-4 h-4 rounded border-neutral-300 text-brand-text focus:ring-brand-500"
           />
           <div>
             <p className="text-sm font-medium text-secondary-foreground">
@@ -309,7 +309,7 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
         {requiresInterview && (
           <div className="mt-4 p-4 rounded-xl bg-brand-50 dark:bg-brand-900/10 border border-brand-200 dark:border-brand-800">
             <div className="flex items-center gap-2 mb-3">
-              <Sparkles className="w-4 h-4 text-brand-500" />
+              <Sparkles className="w-4 h-4 text-brand-text" />
               <span className="text-xs font-semibold text-brand-text">
                 Instrucciones para la IA
               </span>
@@ -339,7 +339,7 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
         <button
           type="submit"
           disabled={isPending}
-          className="inline-flex items-center gap-2 h-10 px-6 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-semibold transition-colors"
+          className="inline-flex items-center gap-2 h-10 px-6 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-semibold transition-colors"
         >
           {isPending && <Spinner />}
           <Save className="w-4 h-4" />

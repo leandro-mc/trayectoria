@@ -53,7 +53,7 @@ export function SidebarLink({
       {/* Badge */}
       {badge !== undefined && badge > 0 && (
         <span className={cn(
-          'inline-flex items-center justify-center rounded-full text-xs font-bold bg-brand-500 text-white min-w-[18px] h-[18px] px-1',
+          'inline-flex items-center justify-center rounded-full text-xs font-bold bg-primary text-white min-w-[18px] h-[18px] px-1',
           collapsed ? 'absolute -top-1 -right-1' : 'ml-auto',
         )}>
           {badge > 99 ? '99+' : badge}

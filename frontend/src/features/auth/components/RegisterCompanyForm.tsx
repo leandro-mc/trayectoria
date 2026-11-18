@@ -47,7 +47,7 @@ export function RegisterCompanyForm() {
         {/* Header */}
         <div className="mb-8">
           <div className="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-900/30 flex items-center justify-center mb-4">
-            <Building2 className="w-6 h-6 text-brand-500" />
+            <Building2 className="w-6 h-6 text-brand-text" />
           </div>
           <h1 className="text-2xl font-bold text-foreground mb-1">
             Registrá tu empresa
@@ -166,7 +166,7 @@ export function RegisterCompanyForm() {
           <button
             type="submit"
             disabled={isPending}
-            className="w-full h-10 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
+            className="w-full h-10 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
           >
             {isPending && <Spinner />}
             {isPending ? 'Creando cuenta...' : 'Crear cuenta de empresa'}

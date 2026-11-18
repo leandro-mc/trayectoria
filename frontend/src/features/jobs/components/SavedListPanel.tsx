@@ -56,7 +56,7 @@ export function SavedListPanel() {
       {/*  Header  */}
       <div className="px-3 pt-3 pb-2.5 border-b border-border-soft shrink-0 bg-card">
         <div className="flex items-center gap-2 mb-1">
-          <Bookmark className="w-4 h-4 text-brand-500 shrink-0" />
+          <Bookmark className="w-4 h-4 text-brand-text shrink-0" />
           <h2 className="text-sm font-semibold text-foreground">
             Ofertas guardadas
           </h2>
@@ -86,7 +86,7 @@ export function SavedListPanel() {
             </p>
             <a
               href={ROUTES.jobs}
-              className="text-xs text-brand-500 hover:text-brand-600 font-medium transition-colors"
+              className="text-xs text-brand-text hover:text-brand-text font-medium transition-colors"
             >
               Explorar ofertas →
             </a>

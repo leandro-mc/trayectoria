@@ -37,7 +37,7 @@ function CheckboxGroup<T extends string>({
               type="checkbox"
               checked={selected === value}
               onChange={() => onChange(selected === value ? undefined : value)}
-              className="w-4 h-4 rounded border-neutral-300 dark:border-neutral-600 text-brand-500 focus:ring-brand-500 focus:ring-offset-0"
+              className="w-4 h-4 rounded border-neutral-300 dark:border-neutral-600 text-brand-text focus:ring-brand-500 focus:ring-offset-0"
             />
             <span className="text-sm text-body group-hover:text-neutral-900 dark:group-hover:text-neutral-200 transition-colors">
               {optLabel}

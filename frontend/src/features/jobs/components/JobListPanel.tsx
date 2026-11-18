@@ -22,7 +22,7 @@ function FilterPill({
       className={cn(
         'px-2.5 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-colors border',
         active
-          ? 'bg-brand-500 border-brand-500 text-white'
+          ? 'bg-primary border-brand-500 text-white'
           : 'bg-card border-input text-body hover:border-brand-300 dark:hover:border-brand-700',
       )}
     >
@@ -143,7 +143,7 @@ export function JobListPanel() {
             }
           </p>
           {isFetching && !isLoading && (
-            <span className="text-xs text-brand-500">Actualizando...</span>
+            <span className="text-xs text-brand-text">Actualizando...</span>
           )}
         </div>
       </div>

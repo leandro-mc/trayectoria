@@ -82,7 +82,7 @@ export function LanguagesSection() {
               <button
                 type="submit"
                 disabled={adding}
-                className="h-10 px-4 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center gap-2"
+                className="h-10 px-4 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center gap-2"
               >
                 {adding && <Spinner />}
                 Agregar

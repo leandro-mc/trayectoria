@@ -42,7 +42,7 @@ function MessageBubble({
       <div className={cn(
         'max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed',
         isUser
-          ? 'bg-brand-500 text-white rounded-tr-sm'
+          ? 'bg-primary text-white rounded-tr-sm'
           : 'bg-raised border border-input text-neutral-800 dark:text-neutral-200 rounded-tl-sm',
       )}>
         <p className="whitespace-pre-wrap">{content}</p>
@@ -86,7 +86,7 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
         style={{ background: 'linear-gradient(135deg,rgba(168,85,247,.06),rgba(99,102,241,.06))' }}
       >
         <div className="flex items-center justify-center gap-2 mb-2">
-          <Star className="w-4 h-4 text-brand-500" />
+          <Star className="w-4 h-4 text-brand-text" />
           <span className="text-xs font-semibold text-brand-text uppercase tracking-wide">
             Feedback de la IA
           </span>
