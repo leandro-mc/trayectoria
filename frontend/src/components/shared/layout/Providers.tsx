@@ -8,7 +8,7 @@ import '@/lib/api/interceptors'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { useEffect, useRef, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { useUIStore } from '@/stores/ui.store'
 import { useBootstrapAuth } from '@/features/auth/hooks/useBootstrapAuth'
 
@@ -85,11 +85,11 @@ interface ProvidersProps {
 }
 
 export function Providers({ children }: ProvidersProps) {
-  const clientRef = useRef<QueryClient | null>(null)
-  if (!clientRef.current) clientRef.current = makeQueryClient()
+  // useState's lazy initialiser creates exactly one client per mounted tree
+  const [queryClient] = useState(makeQueryClient)
 
   return (
-    <QueryClientProvider client={clientRef.current}>
+    <QueryClientProvider client={queryClient}>
       <ThemeSync />
       <AuthBootstrapGate>
         {children}

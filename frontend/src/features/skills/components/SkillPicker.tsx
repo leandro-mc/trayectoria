@@ -135,7 +135,7 @@ export function SkillPicker({
           {open && search.length >= 2 && !isLoading && suggestions.length === 0 && (
             <div className="absolute z-10 top-full left-0 right-0 mt-1 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-card p-4 text-center">
               <p className="text-sm text-neutral-400">
-                No se encontraron skills para "{search}"
+                No se encontraron skills para “{search}”
               </p>
             </div>
           )}

@@ -106,7 +106,7 @@ function CurriculaList({
           Sin currículums
         </p>
         <p className="text-xs text-neutral-400 leading-relaxed">
-          Desde <a href={ROUTES.jobs} className="underline text-brand-500 hover:text-brand-600">Empleos</a>, elegí una oferta y presioná "CV personalizado".
+          Desde <a href={ROUTES.jobs} className="underline text-brand-500 hover:text-brand-600">Empleos</a>, elegí una oferta y presioná “CV personalizado”.
         </p>
       </div>
     )
@@ -178,7 +178,7 @@ function InterviewsList({
           Sin entrevistas
         </p>
         <p className="text-xs text-neutral-400 leading-relaxed">
-          Desde <a href={ROUTES.jobs} className="underline text-brand-500 hover:text-brand-600">Empleos</a>, elegí una oferta y presioná "Entrevista IA".
+          Desde <a href={ROUTES.jobs} className="underline text-brand-500 hover:text-brand-600">Empleos</a>, elegí una oferta y presioná “Entrevista IA”.
         </p>
       </div>
     )
