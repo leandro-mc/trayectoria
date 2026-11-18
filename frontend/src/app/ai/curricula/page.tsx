@@ -1,11 +1,13 @@
 'use client'
 
 import { Suspense } from 'react'
-import { Search, Sparkles, Trash2, Loader2 } from 'lucide-react'
+import { Search, Sparkles, Trash2 } from 'lucide-react'
 import { AILeftPanel, useAIParams } from '@/features/ai/components/AILeftPanel'
 import { CurriculumDisplay } from '@/features/ai/curricula/components/CurriculumDisplay'
 import { useCurriculum, useDeleteCurriculum } from '@/features/ai/curricula/hooks/useCurricula'
 import { cn } from '@/lib/utils/cn'
+import { Spinner } from '@/components/ui/spinner'
+import { Skeleton } from '@/components/ui/skeleton'
 
 //  Right panel — selected curriculum 
 
@@ -15,13 +17,11 @@ function CurriculumPanel({ id, onClear }: { id: number; onClear: () => void }) {
 
   if (isLoading || !cv) {
     return (
-      <div className="p-6 space-y-3 animate-pulse">
+      <div className="p-6 space-y-3">
         {[88, 72, 91, 65, 80].map((w, i) => (
-          <div
-            key={i}
-            className="h-3 rounded-lg bg-neutral-200 dark:bg-neutral-800"
-            style={{ width: `${w}%` }}
-          />
+          <Skeleton
+            key={i} className="h-3 rounded-lg"
+            style={{ width: `${w}%` }} />
         ))}
       </div>
     )
@@ -57,7 +57,7 @@ function CurriculumPanel({ id, onClear }: { id: number; onClear: () => void }) {
           title="Eliminar"
         >
           {deleting
-            ? <Loader2 className="w-4 h-4 animate-spin" />
+            ? <Spinner />
             : <Trash2 className="w-4 h-4" />
           }
         </button>

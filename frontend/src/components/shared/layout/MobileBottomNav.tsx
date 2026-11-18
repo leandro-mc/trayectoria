@@ -13,6 +13,7 @@ import { useAuthStore } from '@/stores/auth.store'
 import { useUIStore } from '@/stores/ui.store'
 import type { Theme } from '@/stores/ui.store'
 import { cn } from '@/lib/utils/cn'
+import { Skeleton } from '@/components/ui/skeleton'
 
 //  Nav configs per role 
 
@@ -83,7 +84,7 @@ function MoreSheet({ onClose }: { onClose: () => void }) {
 
         {/* Handle */}
         <div className="flex justify-center pt-3 pb-1">
-          <div className="w-10 h-1 rounded-full bg-neutral-200 dark:bg-neutral-700" />
+          <Skeleton className="w-10 h-1 rounded-full" />
         </div>
 
         {/* Close */}

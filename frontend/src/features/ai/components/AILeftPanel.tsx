@@ -88,7 +88,7 @@ function CurriculaList({
 
   if (isLoading) {
     return (
-      <div className="p-4 space-y-3 animate-pulse">
+      <div className="p-4 space-y-3">
         {[1, 2, 3].map((i) => (
           <div key={i} className="h-16 rounded-xl bg-muted" />
         ))}
@@ -160,7 +160,7 @@ function InterviewsList({
 
   if (isLoading) {
     return (
-      <div className="p-4 space-y-3 animate-pulse">
+      <div className="p-4 space-y-3">
         {[1, 2].map((i) => (
           <div key={i} className="h-16 rounded-xl bg-muted" />
         ))}

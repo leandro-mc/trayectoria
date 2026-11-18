@@ -3,12 +3,13 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Eye, EyeOff, Loader2, Building2 } from 'lucide-react'
+import { Eye, EyeOff, Building2 } from 'lucide-react'
 import Link from 'next/link'
 import { registerCompanySchema, type RegisterCompanyFormValues } from '../schemas/auth.schemas'
 import { useRegisterCompany } from '../hooks/useAuth'
 import { extractApiError } from '@/lib/utils/format'
 import { ROUTES } from '@/config/routes'
+import { Spinner } from '@/components/ui/spinner'
 
 export function RegisterCompanyForm() {
   const [showPassword, setShowPassword]       = useState(false)
@@ -167,7 +168,7 @@ export function RegisterCompanyForm() {
             disabled={isPending}
             className="w-full h-10 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
           >
-            {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
+            {isPending && <Spinner />}
             {isPending ? 'Creando cuenta...' : 'Crear cuenta de empresa'}
           </button>
 

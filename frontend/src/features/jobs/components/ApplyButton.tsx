@@ -1,11 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { Send, Loader2, CheckCircle2, X, Sparkles } from 'lucide-react'
+import { Send, CheckCircle2, X, Sparkles } from 'lucide-react'
 import { useAuthStore } from '@/stores/auth.store'
 import { useApply, useHasApplied } from '@/features/applications/hooks/useApplications'
 import { useCurricula } from '@/features/ai/curricula/hooks/useCurricula'
 import { AuthGateModal } from './AuthGateModal'
+import { Spinner } from '@/components/ui/spinner'
 
 interface ApplyButtonProps {
   jobOfferId:  number
@@ -177,7 +178,7 @@ export function ApplyButton({
                     disabled={isPending}
                     className="flex-1 h-10 rounded-xl bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white text-sm font-semibold transition-colors flex items-center justify-center gap-2"
                   >
-                    {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
+                    {isPending && <Spinner />}
                     {isPending ? 'Enviando...' : 'Confirmar'}
                   </button>
                 </div>

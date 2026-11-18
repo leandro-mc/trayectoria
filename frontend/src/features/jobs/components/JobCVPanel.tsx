@@ -14,6 +14,7 @@ import { CurriculumDisplay } from '@/features/ai/curricula/components/Curriculum
 import { useJobsParams } from '../hooks/useJobsParams'
 import { useQueryClient } from '@tanstack/react-query'
 import { QUERY_KEYS } from '@/config/query-keys'
+import { Skeleton } from '@/components/ui/skeleton'
 
 //  Module-level guard 
 // Tracks jobOfferIds for which a generate call is already in flight.
@@ -48,7 +49,7 @@ function GeneratingSkeleton({ label }: { label: string }) {
         ))}
       </div>
       <div className="mt-6 space-y-2.5">
-        <div className="h-2 rounded bg-neutral-200 dark:bg-neutral-800 animate-pulse w-1/4" />
+        <Skeleton className="h-2 rounded w-1/4" />
         {[95, 82, 70].map((w, i) => (
           <div
             key={i}

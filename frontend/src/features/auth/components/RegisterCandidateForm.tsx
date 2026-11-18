@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Eye, EyeOff, Loader2, ArrowLeft } from 'lucide-react'
+import { Eye, EyeOff, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import {
   registerCandidateStep1Schema,
@@ -14,6 +14,7 @@ import {
 import { useRegisterCandidate } from '../hooks/useAuth'
 import { extractApiError } from '@/lib/utils/format'
 import { ROUTES } from '@/config/routes'
+import { Spinner } from '@/components/ui/spinner'
 
 //  Step indicator 
 
@@ -255,7 +256,7 @@ function Step2({ onSubmit, onBack, isPending, apiError }: Step2Props) {
           disabled={isPending}
           className="flex-1 h-10 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
         >
-          {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
+          {isPending && <Spinner />}
           {isPending ? 'Creando cuenta...' : 'Crear cuenta'}
         </button>
       </div>

@@ -3,11 +3,13 @@
 import { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2, Save, Camera } from 'lucide-react'
+import { Save, Camera } from 'lucide-react'
 import { useCompanyProfile, useUpdateCompanyProfile, useUploadLogo } from '../hooks/useCompany'
 import { companyProfileSchema, type CompanyProfileFormValues } from '../schemas/company.schemas'
 import { extractApiError } from '@/lib/utils/format'
 import { getInitials } from '@/lib/utils/format'
+import { Spinner } from '@/components/ui/spinner'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const inputClass    = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
 const textareaClass = 'w-full px-3 py-2.5 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50 resize-none'
@@ -69,9 +71,9 @@ export function CompanyProfileForm() {
 
   if (isLoading) {
     return (
-      <div className="space-y-4 animate-pulse">
+      <div className="space-y-4">
         {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="h-10 rounded-lg bg-neutral-200 dark:bg-neutral-800" />
+          <Skeleton key={i} className="h-10 rounded-lg" />
         ))}
       </div>
     )
@@ -105,7 +107,7 @@ export function CompanyProfileForm() {
             aria-label="Cambiar logo"
           >
             {uploading
-              ? <Loader2 className="w-3.5 h-3.5 animate-spin" />
+              ? <Spinner className="size-3.5" />
               : <Camera className="w-3.5 h-3.5" />
             }
           </button>
@@ -188,7 +190,7 @@ export function CompanyProfileForm() {
           disabled={isPending || !isDirty}
           className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
         >
-          {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
+          {isPending && <Spinner />}
           <Save className="w-4 h-4" />
           {isPending ? 'Guardando...' : 'Guardar cambios'}
         </button>

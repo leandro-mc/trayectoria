@@ -11,18 +11,17 @@ import { formatDate } from '@/lib/utils/date'
 import { cn } from '@/lib/utils/cn'
 import { APPLICATION_STATUS_LABELS, APPLICATION_STATUS_COLORS,} from '@/config/constants'
 import type { JobApplicationResponse } from '../types/applications.types'
+import { Skeleton } from '@/components/ui/skeleton'
 
 //  Curriculum loaders 
 
 function CurriculumSkeleton() {
   return (
-    <div className="space-y-2 animate-pulse">
+    <div className="space-y-2">
       {[88, 72, 91, 65, 80].map((w, i) => (
-        <div
-          key={i}
-          className="h-3 rounded-lg bg-neutral-200 dark:bg-neutral-800"
-          style={{ width: `${w}%` }}
-        />
+        <Skeleton
+          key={i} className="h-3 rounded-lg"
+          style={{ width: `${w}%` }} />
       ))}
     </div>
   )

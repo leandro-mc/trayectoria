@@ -8,17 +8,18 @@ import { useSavedOffers, useUnsaveOffer } from '@/features/saved-offers/hooks/us
 import { useJobsParams } from '../hooks/useJobsParams'
 import { JobOfferCard } from './JobOfferCard'
 import { ROUTES } from '@/config/routes'
+import { Skeleton } from '@/components/ui/skeleton'
 
 //  Skeleton 
 
 function CardSkeleton() {
   return (
-    <div className="animate-pulse p-4 rounded-xl border border-border bg-card space-y-3">
-      <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-3/4" />
-      <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded w-1/2" />
+    <div className="p-4 rounded-xl border border-border bg-card space-y-3">
+      <Skeleton className="h-4 rounded w-3/4" />
+      <Skeleton className="h-3 rounded w-1/2" />
       <div className="flex gap-2">
-        <div className="h-5 bg-neutral-200 dark:bg-neutral-800 rounded-full w-16" />
-        <div className="h-5 bg-neutral-200 dark:bg-neutral-800 rounded-full w-20" />
+        <Skeleton className="h-5 rounded-full w-16" />
+        <Skeleton className="h-5 rounded-full w-20" />
       </div>
     </div>
   )

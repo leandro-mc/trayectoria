@@ -5,6 +5,7 @@ import { ListChecks, Users, Clock, PlusCircle } from 'lucide-react'
 import { PageHeader } from '@/components/shared/layout/PageHeader'
 import { useCompanyStats } from '@/features/company/hooks/useCompany'
 import { ROUTES } from '@/config/routes'
+import { Skeleton } from '@/components/ui/skeleton'
 
 function MetricCard({
   icon: Icon,
@@ -44,7 +45,7 @@ function MetricCard({
 
       {value === undefined ? (
         // Skeleton while loading
-        <div className="h-8 w-16 bg-neutral-200 dark:bg-neutral-800 rounded-lg animate-pulse" />
+        <Skeleton className="h-8 w-16 rounded-lg" />
       ) : (
         <p className="text-3xl font-bold text-foreground tabular-nums">
           {value.toLocaleString()}

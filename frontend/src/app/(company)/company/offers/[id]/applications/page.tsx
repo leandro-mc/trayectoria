@@ -3,7 +3,7 @@
 
 import { use, useState, useCallback } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, Users, ChevronDown, Loader2, Search } from 'lucide-react'
+import { ArrowLeft, Users, ChevronDown, Search } from 'lucide-react'
 import { PageHeader } from '@/components/shared/layout/PageHeader'
 import { EmptyState } from '@/components/shared/feedback/EmptyState'
 import { Pagination } from '@/components/shared/data/Pagination'
@@ -22,6 +22,8 @@ import { ROUTES } from '@/config/routes'
 import { cn } from '@/lib/utils/cn'
 import type { JobApplicationResponse } from '@/features/applications/types/applications.types'
 import type { ApplicationStatus } from '@/types/global.types'
+import { Spinner } from '@/components/ui/spinner'
+import { Skeleton } from '@/components/ui/skeleton'
 
 //  Status filter tabs 
 
@@ -119,7 +121,7 @@ function ApplicationRow({
                   className="w-full text-left px-3 py-2 text-sm hover:bg-hover text-secondary-foreground flex items-center gap-2.5 disabled:opacity-50"
                 >
                   {isPending
-                    ? <Loader2 className="w-3 h-3 animate-spin shrink-0" />
+                    ? <Spinner className="size-3 shrink-0" />
                     : <span className={cn(
                         'w-2 h-2 rounded-full shrink-0',
                         s === 'ACCEPTED'  ? 'bg-success-500'  :
@@ -215,15 +217,15 @@ export default function OfferApplicationsPage({ params }: PageProps) {
           <div className="flex-1 min-h-0 overflow-y-auto bg-card border border-border rounded-xl">
 
             {isLoading && (
-              <div className="divide-y divide-border-soft animate-pulse">
+              <div className="divide-y divide-border-soft">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <div key={i} className="flex items-center gap-3 px-4 py-3.5">
-                    <div className="w-8 h-8 rounded-full bg-neutral-200 dark:bg-neutral-800 shrink-0" />
+                    <Skeleton className="w-8 h-8 rounded-full shrink-0" />
                     <div className="flex-1 space-y-1.5">
-                      <div className="h-3.5 bg-neutral-200 dark:bg-neutral-800 rounded w-1/2" />
-                      <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded w-1/3" />
+                      <Skeleton className="h-3.5 rounded w-1/2" />
+                      <Skeleton className="h-3 rounded w-1/3" />
                     </div>
-                    <div className="h-5 w-20 bg-neutral-200 dark:bg-neutral-800 rounded-full shrink-0" />
+                    <Skeleton className="h-5 w-20 rounded-full shrink-0" />
                   </div>
                 ))}
               </div>

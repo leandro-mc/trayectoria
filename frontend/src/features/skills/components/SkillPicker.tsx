@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Search, X, Loader2 } from 'lucide-react'
+import { Search, X } from 'lucide-react'
 import { useSkillsCatalog } from '../hooks/useSkillsCatalog'
 import type { SkillResponse } from '@/types/api.types'
 import { cn } from '@/lib/utils/cn'
+import { Spinner } from '@/components/ui/spinner'
 
 interface SkillPickerProps {
   // Skills the candidate already has
@@ -83,7 +84,7 @@ export function SkillPicker({
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 pointer-events-none" />
             {isLoading && search.length >= 2 && (
-              <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 animate-spin" />
+              <Spinner className="size-4 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" />
             )}
             <input
               ref={inputRef}

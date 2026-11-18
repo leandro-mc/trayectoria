@@ -3,10 +3,11 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Plus, Trash2, Loader2, Languages } from 'lucide-react'
+import { Plus, Trash2, Languages } from 'lucide-react'
 import { useLanguages, useAddLanguage, useDeleteLanguage } from '../../hooks/useCandidate'
 import { languageSchema, type LanguageFormValues } from '../../schemas/candidate.schemas'
 import { LANGUAGE_LEVELS } from '@/config/constants'
+import { Spinner } from '@/components/ui/spinner'
 
 const inputClass = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
 const selectClass = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
@@ -83,7 +84,7 @@ export function LanguagesSection() {
                 disabled={adding}
                 className="h-10 px-4 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center gap-2"
               >
-                {adding && <Loader2 className="w-4 h-4 animate-spin" />}
+                {adding && <Spinner />}
                 Agregar
               </button>
             </div>
@@ -92,7 +93,7 @@ export function LanguagesSection() {
 
         {/* List */}
         {isLoading && (
-          <div className="space-y-2 animate-pulse">
+          <div className="space-y-2">
             {[1, 2].map((i) => <div key={i} className="h-10 rounded-lg bg-muted" />)}
           </div>
         )}

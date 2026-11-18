@@ -3,10 +3,12 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2, Save } from 'lucide-react'
+import { Save } from 'lucide-react'
 import { useCandidateProfile, useUpdateCandidateProfile } from '../../hooks/useCandidate'
 import { profileSchema, type ProfileFormValues } from '../../schemas/candidate.schemas'
 import { extractApiError } from '@/lib/utils/format'
+import { Spinner } from '@/components/ui/spinner'
+import { Skeleton } from '@/components/ui/skeleton'
 
 //  Reusable field wrapper 
 
@@ -77,9 +79,9 @@ export function ProfileForm() {
 
   if (isLoading) {
     return (
-      <div className="space-y-4 animate-pulse">
+      <div className="space-y-4">
         {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="h-10 rounded-lg bg-neutral-200 dark:bg-neutral-800" />
+          <Skeleton key={i} className="h-10 rounded-lg" />
         ))}
       </div>
     )
@@ -154,7 +156,7 @@ export function ProfileForm() {
           disabled={isPending || !isDirty}
           className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
         >
-          {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
+          {isPending && <Spinner />}
           <Save className="w-4 h-4" />
           {isPending ? 'Guardando...' : 'Guardar cambios'}
         </button>

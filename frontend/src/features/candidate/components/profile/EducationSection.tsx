@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Plus, Pencil, Trash2, Loader2, GraduationCap, X } from 'lucide-react'
+import { Plus, Pencil, Trash2, GraduationCap, X } from 'lucide-react'
 import {
   useEducation,
   useAddEducation,
@@ -13,6 +13,7 @@ import {
 import { educationSchema, type EducationFormValues } from '../../schemas/candidate.schemas'
 import { formatPeriod } from '@/lib/utils/date'
 import type { EducationResponse } from '../../types/candidate.types'
+import { Spinner } from '@/components/ui/spinner'
 
 const inputClass = 'w-full h-10 px-3 rounded-lg border border-input bg-raised text-foreground placeholder-neutral-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent disabled:opacity-50'
 
@@ -88,7 +89,7 @@ function EducationForm({ initial, onClose }: { initial?: EducationResponse; onCl
               Cancelar
             </button>
             <button type="submit" disabled={isPending} className="flex-1 h-10 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2">
-              {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
+              {isPending && <Spinner />}
               {initial ? 'Guardar cambios' : 'Agregar'}
             </button>
           </div>
@@ -118,7 +119,7 @@ export function EducationSection() {
       </div>
       <div className="divide-y divide-border-soft">
         {isLoading && (
-          <div className="p-6 space-y-3 animate-pulse">
+          <div className="p-6 space-y-3">
             {[1, 2].map((i) => <div key={i} className="h-14 rounded-lg bg-muted" />)}
           </div>
         )}

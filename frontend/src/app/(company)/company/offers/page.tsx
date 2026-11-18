@@ -4,10 +4,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import {
-  Plus, Users, Pencil, Trash2, MoreHorizontal,
-  Loader2, ChevronDown, ListChecks, Eye,
-} from 'lucide-react'
+import { Plus, Users, Pencil, Trash2, MoreHorizontal, ChevronDown, ListChecks, Eye } from 'lucide-react'
 import { PageHeader } from '@/components/shared/layout/PageHeader'
 import { EmptyState } from '@/components/shared/feedback/EmptyState'
 import { Pagination } from '@/components/shared/data/Pagination'
@@ -21,6 +18,8 @@ import { ROUTES } from '@/config/routes'
 import { formatDate } from '@/lib/utils/date'
 import { cn } from '@/lib/utils/cn'
 import type { JobOfferSummaryResponse } from '@/features/jobs/types/jobs.types'
+import { Spinner } from '@/components/ui/spinner'
+import { Skeleton } from '@/components/ui/skeleton'
 
 //  Status config 
 
@@ -42,7 +41,7 @@ function ApplicantCount({ offerId }: { offerId: number }) {
 
   if (isLoading) {
     return (
-      <span className="inline-block w-6 h-4 rounded bg-neutral-200 dark:bg-neutral-700 animate-pulse" />
+      <Skeleton className="inline-block h-4 w-6 rounded" />
     )
   }
 
@@ -126,7 +125,7 @@ function OfferRow({ offer }: { offer: JobOfferSummaryResponse }) {
                   className="w-full text-left px-3 py-2 text-sm hover:bg-hover text-secondary-foreground flex items-center gap-2 disabled:opacity-50"
                 >
                   {updatingStatus
-                    ? <Loader2 className="w-3 h-3 animate-spin" />
+                    ? <Spinner className="size-3" />
                     : <span className={cn('w-2 h-2 rounded-full shrink-0',
                         s === 'ACTIVE' ? 'bg-success-500' :
                         s === 'CLOSED' ? 'bg-danger-500'  : 'bg-neutral-400',
@@ -180,7 +179,7 @@ function OfferRow({ offer }: { offer: JobOfferSummaryResponse }) {
                 className="w-full text-left px-3 py-2 text-sm hover:bg-danger-tint text-danger-500 flex items-center gap-2 disabled:opacity-50"
               >
                 {deleting
-                  ? <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  ? <Spinner className="size-3.5" />
                   : <Trash2 className="w-3.5 h-3.5" />
                 }
                 Eliminar
@@ -222,16 +221,16 @@ export default function CompanyOffersPage() {
       <div className="bg-card border border-border rounded-xl shadow-card">
 
         {isLoading && (
-          <div className="divide-y divide-border-soft animate-pulse">
+          <div className="divide-y divide-border-soft">
             {Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="flex items-center gap-4 px-5 py-4">
                 <div className="flex-1 space-y-2">
-                  <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-1/2" />
-                  <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded w-1/4" />
+                  <Skeleton className="h-4 rounded w-1/2" />
+                  <Skeleton className="h-3 rounded w-1/4" />
                 </div>
-                <div className="h-6 w-8 bg-neutral-200 dark:bg-neutral-800 rounded-lg" />
-                <div className="h-6 w-16 bg-neutral-200 dark:bg-neutral-800 rounded-full" />
-                <div className="h-7 w-6  bg-neutral-200 dark:bg-neutral-800 rounded-lg" />
+                <Skeleton className="h-6 w-8 rounded-lg" />
+                <Skeleton className="h-6 w-16 rounded-full" />
+                <Skeleton className="h-7 w-6 rounded-lg" />
               </div>
             ))}
           </div>

@@ -3,12 +3,13 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Eye, EyeOff, Loader2 } from 'lucide-react'
+import { Eye, EyeOff } from 'lucide-react'
 import Link from 'next/link'
 import { loginSchema, type LoginFormValues } from '../schemas/auth.schemas'
 import { useLogin } from '../hooks/useAuth'
 import { extractApiError } from '@/lib/utils/format'
 import { ROUTES } from '@/config/routes'
+import { Spinner } from '@/components/ui/spinner'
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
@@ -127,7 +128,7 @@ export function LoginForm() {
             disabled={isPending}
             className="w-full h-10 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
           >
-            {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
+            {isPending && <Spinner />}
             {isPending ? 'Ingresando...' : 'Iniciar sesión'}
           </button>
 

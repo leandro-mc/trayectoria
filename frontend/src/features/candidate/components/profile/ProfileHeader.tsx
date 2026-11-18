@@ -1,9 +1,10 @@
 'use client'
 
 import { useRef } from 'react'
-import { Camera, Loader2 } from 'lucide-react'
+import { Camera } from 'lucide-react'
 import { useCandidateProfile, useUploadAvatar } from '../../hooks/useCandidate'
 import { getInitials } from '@/lib/utils/format'
+import { Spinner } from '@/components/ui/spinner'
 
 export function ProfileHeader() {
   const { data: profile } = useCandidateProfile()
@@ -47,7 +48,7 @@ export function ProfileHeader() {
           aria-label="Cambiar foto"
         >
           {isPending
-            ? <Loader2 className="w-3.5 h-3.5 animate-spin" />
+            ? <Spinner className="size-3.5" />
             : <Camera className="w-3.5 h-3.5" />
           }
         </button>

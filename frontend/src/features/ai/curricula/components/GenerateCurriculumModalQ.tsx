@@ -1,11 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { X, Sparkles, Loader2 } from 'lucide-react'
+import { X, Sparkles } from 'lucide-react'
 import { useGenerateCurriculum } from '../hooks/useCurricula'
 import { useJobOffers } from '@/features/jobs/hooks/useJobOffers'
 import { extractApiError } from '@/lib/utils/format'
 import type { GeneratedCurriculumResponse } from '../types/curricula.types'
+import { Spinner } from '@/components/ui/spinner'
 
 interface GenerateCurriculumModalProps {
   onClose:   () => void
@@ -114,7 +115,7 @@ export function GenerateCurriculumModal({ onClose, onSuccess }: GenerateCurricul
             style={{ background: 'linear-gradient(135deg, #A855F7, #6366F1)' }}
           >
             {isPending
-              ? <><Loader2 className="w-4 h-4 animate-spin" />Generando...</>
+              ? <><Spinner />Generando...</>
               : <><Sparkles className="w-4 h-4" />Generar</>
             }
           </button>

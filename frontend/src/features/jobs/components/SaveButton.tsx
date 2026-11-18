@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Bookmark, BookmarkCheck, Loader2 } from 'lucide-react'
+import { Bookmark, BookmarkCheck } from 'lucide-react'
+import { Spinner } from '@/components/ui/spinner'
 import { useAuthStore } from '@/stores/auth.store'
 import { useIsSaved, useSaveOffer, useUnsaveOffer } from '@/features/saved-offers/hooks/useSavedOffers'
 import { AuthGateModal } from './AuthGateModal'
@@ -48,7 +49,7 @@ export function SaveButton({ jobOfferId, size = 'md', showLabel = false }: SaveB
         )}
       >
         {isPending ? (
-          <Loader2 className={cn('animate-spin', isSmall ? 'w-3 h-3' : 'w-3.5 h-3.5')} />
+          <Spinner className={isSmall ? 'size-3' : 'size-3.5'} />
         ) : isSaved ? (
           <BookmarkCheck className={cn(isSmall ? 'w-3 h-3' : 'w-3.5 h-3.5')} />
         ) : (

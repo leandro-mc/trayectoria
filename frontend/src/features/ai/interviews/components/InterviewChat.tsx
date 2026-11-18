@@ -4,10 +4,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
-import {
-  Send, Loader2, Sparkles, CheckCircle2, Mic,
-  Star, TrendingUp, AlertCircle, ThumbsUp,
-} from 'lucide-react'
+import { Send, Sparkles, CheckCircle2, Mic, Star, TrendingUp, AlertCircle, ThumbsUp } from 'lucide-react'
 import { useSendMessage, useCompleteInterview } from '../hooks/useInterviews'
 import { saveFeedback } from '../utils/feedback-cache'
 import {
@@ -17,6 +14,7 @@ import {
 import { formatDate } from '@/lib/utils/date'
 import { cn } from '@/lib/utils/cn'
 import type { SimulatedInterviewResponse, InterviewFeedback } from '../types/interviews.types'
+import { Spinner } from '@/components/ui/spinner'
 
 //  Sub-components 
 
@@ -234,7 +232,7 @@ export function InterviewChat({
             disabled={completing || interview.messages.length < 2}
             className="inline-flex items-center gap-1.5 h-7 px-3 rounded-lg text-xs font-medium border border-input text-muted-foreground hover:bg-hover disabled:opacity-40 transition-colors"
           >
-            {completing && <Loader2 className="w-3 h-3 animate-spin" />}
+            {completing && <Spinner className="size-3" />}
             Finalizar entrevista
           </button>
         </div>
@@ -297,7 +295,7 @@ export function InterviewChat({
               style={{ background: 'linear-gradient(135deg,#A855F7,#6366F1)' }}
             >
               {sending
-                ? <Loader2 className="w-4 h-4 animate-spin" />
+                ? <Spinner />
                 : <Send className="w-4 h-4" />
               }
             </button>

@@ -27,7 +27,7 @@ export function SkillsSection() {
       </div>
       <div className="p-6">
         {isLoading ? (
-          <div className="flex flex-wrap gap-2 animate-pulse">
+          <div className="flex flex-wrap gap-2">
             {[80, 60, 100, 70, 90].map((w) => (
               <div
                 key={w}

@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2, Save, Sparkles } from 'lucide-react'
+import { Save, Sparkles } from 'lucide-react'
 import { jobOfferSchema, type JobOfferFormValues } from '../schemas/job-offer.schemas'
 import { useCreateJobOffer, useUpdateJobOffer } from '@/features/jobs/hooks/useJobOffers'
 import { SkillPicker } from '@/features/skills/components/SkillPicker'
@@ -13,6 +13,7 @@ import { extractApiError } from '@/lib/utils/format'
 import { ROUTES } from '@/config/routes'
 import type { JobOfferResponse } from '@/features/jobs/types/jobs.types'
 import type { SkillResponse } from '@/types/api.types'
+import { Spinner } from '@/components/ui/spinner'
 
 //  Reusable field wrapper 
 
@@ -340,7 +341,7 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
           disabled={isPending}
           className="inline-flex items-center gap-2 h-10 px-6 rounded-lg bg-brand-500 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-semibold transition-colors"
         >
-          {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
+          {isPending && <Spinner />}
           <Save className="w-4 h-4" />
           {isPending
             ? (isEdit ? 'Guardando...' : 'Publicando...')

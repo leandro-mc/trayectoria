@@ -13,6 +13,7 @@ import { useAuthStore } from '@/stores/auth.store'
 import { WORK_MODE_LABELS, JOB_TYPE_LABELS } from '@/config/constants'
 import { formatDate } from '@/lib/utils/date'
 import { cn } from '@/lib/utils/cn'
+import { Skeleton } from '@/components/ui/skeleton'
 
 //  Content section tabs 
 
@@ -29,17 +30,17 @@ const TABS: { key: TabKey; label: string }[] = [
 
 function DetailSkeleton() {
   return (
-    <div className="p-6 animate-pulse space-y-4">
-      <div className="h-6 bg-neutral-200 dark:bg-neutral-800 rounded w-2/3" />
-      <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-1/3" />
+    <div className="p-6 space-y-4">
+      <Skeleton className="h-6 rounded w-2/3" />
+      <Skeleton className="h-4 rounded w-1/3" />
       <div className="flex gap-2 mt-4">
         {[60, 80, 70].map((w) => (
-          <div key={w} className="h-6 bg-neutral-200 dark:bg-neutral-800 rounded-full" style={{ width: `${w}px` }} />
+          <Skeleton key={w} className="h-6 rounded-full" style={{ width: `${w}px` }} />
         ))}
       </div>
       <div className="space-y-2 mt-6">
         {[100, 90, 95, 85, 100].map((w, i) => (
-          <div key={i} className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded" style={{ width: `${w}%` }} />
+          <Skeleton key={i} className="h-3 rounded" style={{ width: `${w}%` }} />
         ))}
       </div>
     </div>
