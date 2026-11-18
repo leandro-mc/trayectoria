@@ -9,9 +9,11 @@ import { loginSchema, type LoginFormValues } from '../schemas/auth.schemas'
 import { useLogin } from '../hooks/useAuth'
 import { extractApiError } from '@/lib/utils/format'
 import { ROUTES } from '@/config/routes'
-import { Spinner } from '@/components/ui/spinner'
 import { Input } from '@/components/ui/input'
 import { FormLabel, FieldError } from '@/components/shared/forms/FormField'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { ErrorAlert } from '@/components/ui/error-alert'
 
 export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
@@ -39,7 +41,7 @@ export function LoginForm() {
     <div className="w-full max-w-[480px]">
 
       {/*  Card  */}
-      <div className="bg-card border border-border rounded-2xl p-8 shadow-card">
+      <Card padding="xl">
 
         {/* Header */}
         <div className="mb-8">
@@ -53,9 +55,9 @@ export function LoginForm() {
 
         {/* API error banner */}
         {apiError && (
-          <div className="mb-5 px-4 py-3 rounded-lg bg-danger-tint border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
+          <ErrorAlert className="mb-5">
             {apiError}
-          </div>
+          </ErrorAlert>
         )}
 
         {/* Form */}
@@ -84,7 +86,7 @@ export function LoginForm() {
                 Contraseña
               </FormLabel>
               {/* Phase 2: forgot password */}
-              <span className="text-xs text-neutral-400 cursor-not-allowed" title="Próximamente">
+              <span className="text-xs text-muted-foreground cursor-not-allowed" title="Próximamente">
                 ¿Olvidaste tu contraseña?
               </span>
             </div>
@@ -100,7 +102,7 @@ export function LoginForm() {
               <button
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
               >
                 {showPassword
@@ -113,14 +115,14 @@ export function LoginForm() {
           </div>
 
           {/* Submit */}
-          <button
+          <Button
+            size="lg"
+            loading={isPending}
             type="submit"
-            disabled={isPending}
-            className="w-full h-10 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
+            className="w-full"
           >
-            {isPending && <Spinner />}
             {isPending ? 'Ingresando...' : 'Iniciar sesión'}
-          </button>
+          </Button>
 
         </form>
 
@@ -130,7 +132,7 @@ export function LoginForm() {
             <div className="w-full border-t border-border" />
           </div>
           <div className="relative flex justify-center">
-            <span className="bg-card px-3 text-xs text-neutral-400">
+            <span className="bg-card px-3 text-xs text-muted-foreground">
               o continuá con
             </span>
           </div>
@@ -140,7 +142,7 @@ export function LoginForm() {
         <button
           type="button"
           disabled
-          className="w-full h-10 rounded-lg border border-input bg-raised text-neutral-400 text-sm font-medium flex items-center justify-center gap-2 cursor-not-allowed opacity-50"
+          className="w-full h-10 rounded-lg border border-input bg-raised text-muted-foreground text-sm font-medium flex items-center justify-center gap-2 cursor-not-allowed opacity-50"
           title="Próximamente"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -152,7 +154,7 @@ export function LoginForm() {
           Continuar con Google (próximamente)
         </button>
 
-      </div>
+      </Card>
 
       {/* Footer link */}
       <p className="text-center text-sm text-muted-foreground mt-6">

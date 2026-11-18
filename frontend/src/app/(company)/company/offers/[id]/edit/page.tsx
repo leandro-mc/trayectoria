@@ -8,6 +8,7 @@ import { JobOfferForm } from '@/features/company/components/JobOfferForm'
 import { useJobOffer, useInterviewInstructions } from '@/features/jobs/hooks/useJobOffers'
 import { PageSkeleton } from '@/components/shared/feedback/PageSkeleton'
 import { ROUTES } from '@/config/routes'
+import { Button } from '@/components/ui/button'
 
 interface EditOfferPageProps {
   params: Promise<{ id: string }>
@@ -30,13 +31,11 @@ export default function EditOfferPage({ params }: EditOfferPageProps) {
         title="Editar oferta"
         description={offer?.title ?? ''}
         actions={
-          <Link
-            href={ROUTES.offerDetail(offerId)}
-            className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg border border-input bg-card hover:bg-hover text-body text-sm font-medium transition-colors"
-          >
+          <Button asChild variant="outline"><Link
+      href={ROUTES.offerDetail(offerId)}>
             <Eye className="w-4 h-4" />
             Ver oferta
-          </Link>
+          </Link></Button>
         }
       />
       {offer && (

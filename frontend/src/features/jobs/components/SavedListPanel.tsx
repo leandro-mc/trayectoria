@@ -35,7 +35,7 @@ function UnsaveButton({ jobOfferId, onUnsave }: {
     <button
       onClick={(e) => { e.stopPropagation(); onUnsave(jobOfferId) }}
       title="Quitar de guardadas"
-      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-input hover:border-danger-300 dark:hover:border-danger-700 hover:bg-danger-tint text-neutral-400 hover:text-danger-500 text-xs font-medium transition-colors shrink-0"
+      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-input hover:border-danger-border hover:bg-danger-tint text-muted-foreground hover:text-danger-text text-xs font-medium transition-colors shrink-0"
     >
       <BookmarkX className="w-3.5 h-3.5" />
       Quitar
@@ -61,7 +61,7 @@ export function SavedListPanel() {
             Ofertas guardadas
           </h2>
         </div>
-        <p className="text-xs text-neutral-400">
+        <p className="text-xs text-muted-foreground">
           {data
             ? `${data.totalElements} oferta${data.totalElements !== 1 ? 's' : ''} guardada${data.totalElements !== 1 ? 's' : ''}`
             : ' '
@@ -122,17 +122,17 @@ export function SavedListPanel() {
           <button
             disabled={page === 0}
             onClick={() => setPage(page - 1)}
-            className="text-xs font-medium text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="text-xs font-medium text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           >
             ← Anterior
           </button>
-          <span className="text-xs text-neutral-400">
+          <span className="text-xs text-muted-foreground">
             {page + 1} / {data.totalPages}
           </span>
           <button
             disabled={data.last}
             onClick={() => setPage(page + 1)}
-            className="text-xs font-medium text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="text-xs font-medium text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           >
             Siguiente →
           </button>

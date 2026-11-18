@@ -15,13 +15,15 @@ import {
   JOB_TYPE_LABELS,
 } from '@/config/constants'
 import type { WorkMode, JobType, JobStatus } from '@/types/global.types'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
 //  Status badge 
 
 const STATUS_STYLES: Record<JobStatus, string> = {
-  ACTIVE: 'bg-success-50 text-success-600 dark:bg-success-900/20 dark:text-success-400',
+  ACTIVE: 'bg-success-tint text-success-text',
   DRAFT:  'bg-muted text-muted-foreground',
-  CLOSED: 'bg-danger-tint text-danger-500 dark:text-danger-400',
+  CLOSED: 'bg-danger-tint text-danger-text',
 }
 const STATUS_LABELS: Record<JobStatus, string> = {
   ACTIVE: 'Activa',
@@ -100,20 +102,16 @@ export default function OfferDetailPage({ params }: PageProps) {
         description={`Publicada ${formatDate(offer.createdAt)}`}
         actions={
           <div className="flex items-center gap-2">
-            <Link
-              href={ROUTES.offerApplications(offerId)}
-              className="inline-flex items-center gap-1.5 h-9 px-4 rounded-lg border border-input bg-card hover:bg-hover text-body text-sm font-medium transition-colors"
-            >
+            <Button asChild variant="outline"><Link
+       href={ROUTES.offerApplications(offerId)}>
               <Users className="w-4 h-4" />
               Postulantes
-            </Link>
-            <Link
-              href={ROUTES.editOffer(offerId)}
-              className="inline-flex items-center gap-2 h-9 px-4 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-medium transition-colors"
-            >
+            </Link></Button>
+            <Button asChild><Link
+       href={ROUTES.editOffer(offerId)}>
               <Pencil className="w-4 h-4" />
               Editar
-            </Link>
+            </Link></Button>
           </div>
         }
       />
@@ -121,7 +119,7 @@ export default function OfferDetailPage({ params }: PageProps) {
       <div className="space-y-5">
 
         {/*  Hero card  */}
-        <div className="bg-card border border-border rounded-xl shadow-card p-6">
+        <Card padding="lg">
 
           {/* Status + meta row */}
           <div className="flex flex-wrap items-center gap-2 mb-5">
@@ -165,20 +163,20 @@ export default function OfferDetailPage({ params }: PageProps) {
               ))}
             </div>
           )}
-        </div>
+        </Card>
 
         {/*  Content  */}
         {(offer.description || offer.responsibilities || offer.requirements || offer.benefits) && (
-          <div className="bg-card border border-border rounded-xl shadow-card p-6 space-y-6">
+          <Card padding="lg" className="space-y-6">
             <ContentSection title="Descripción"        content={offer.description}     />
             <ContentSection title="Responsabilidades"  content={offer.responsibilities} />
             <ContentSection title="Requisitos"         content={offer.requirements}    />
             <ContentSection title="Beneficios"         content={offer.benefits}        />
-          </div>
+          </Card>
         )}
 
         {/*  Interview section  */}
-        <div className="bg-card border border-border rounded-xl shadow-card p-6">
+        <Card padding="lg">
           <div className="flex items-center gap-2 mb-4">
             <MessageSquare className="w-4 h-4 text-brand-text" />
             <h3 className="text-sm font-semibold text-foreground">
@@ -188,13 +186,13 @@ export default function OfferDetailPage({ params }: PageProps) {
 
           {offer.requiresInterview ? (
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-sm text-success-600 dark:text-success-400">
+              <div className="flex items-center gap-2 text-sm text-success-text">
                 <CheckCircle2 className="w-4 h-4 shrink-0" />
                 Los candidatos deben completar una entrevista simulada para postularse
               </div>
 
               {instructions?.interviewInstructions ? (
-                <div className="p-4 rounded-xl bg-brand-50 dark:bg-brand-900/10 border border-brand-200 dark:border-brand-800">
+                <div className="p-4 rounded-xl bg-brand-tint border border-brand-border">
                   <p className="text-xs font-semibold text-brand-text mb-2">
                     Instrucciones para la IA
                   </p>
@@ -203,23 +201,23 @@ export default function OfferDetailPage({ params }: PageProps) {
                   </p>
                 </div>
               ) : (
-                <p className="text-sm text-neutral-400 italic">
+                <p className="text-sm text-muted-foreground italic">
                   Sin instrucciones específicas — la IA usará el contexto de la oferta.
                 </p>
               )}
             </div>
           ) : (
-            <p className="text-sm text-neutral-400">
+            <p className="text-sm text-muted-foreground">
               Esta oferta no requiere entrevista simulada con IA.
             </p>
           )}
-        </div>
+        </Card>
 
         {/*  Footer nav  */}
         <div className="flex justify-start pt-1 pb-6">
           <Link
             href={ROUTES.offers}
-            className="inline-flex items-center gap-1.5 text-sm text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Volver a mis ofertas

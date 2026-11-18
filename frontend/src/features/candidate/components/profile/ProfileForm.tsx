@@ -7,10 +7,11 @@ import { Save } from 'lucide-react'
 import { useCandidateProfile, useUpdateCandidateProfile } from '../../hooks/useCandidate'
 import { profileSchema, type ProfileFormValues } from '../../schemas/candidate.schemas'
 import { extractApiError } from '@/lib/utils/format'
-import { Spinner } from '@/components/ui/spinner'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { ErrorAlert } from '@/components/ui/error-alert'
 
 //  Reusable field wrapper 
 
@@ -27,7 +28,7 @@ function Field({
         {label}
       </label>
       {children}
-      {error && <p className="mt-1.5 text-xs text-danger-500">{error}</p>}
+      {error && <p className="mt-1.5 text-xs text-danger-text">{error}</p>}
     </div>
   )
 }
@@ -92,9 +93,9 @@ export function ProfileForm() {
 
       {/* API error */}
       {error && (
-        <div className="px-4 py-3 rounded-lg bg-danger-tint border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
+        <ErrorAlert>
           {extractApiError(error)}
-        </div>
+        </ErrorAlert>
       )}
 
       {/* Name row */}
@@ -134,7 +135,7 @@ export function ProfileForm() {
 
       {/* Links */}
       <div className="pt-2 border-t border-border-soft">
-        <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400 mb-4">Links</p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">Links</p>
         <div className="space-y-4">
           <Field label="LinkedIn" error={errors.linkedinUrl?.message}>
             <Input {...register('linkedinUrl')} placeholder="https://linkedin.com/in/tu-perfil" disabled={isPending} />
@@ -150,15 +151,14 @@ export function ProfileForm() {
 
       {/* Submit */}
       <div className="flex justify-end pt-2">
-        <button
-          type="submit"
-          disabled={isPending || !isDirty}
-          className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
-        >
-          {isPending && <Spinner />}
+        <Button
+     size="lg"
+     loading={isPending}
+     type="submit"
+     disabled={isPending || !isDirty}>
           <Save className="w-4 h-4" />
           {isPending ? 'Guardando...' : 'Guardar cambios'}
-        </button>
+        </Button>
       </div>
 
     </form>

@@ -16,10 +16,11 @@ import {
 } from '../../schemas/candidate.schemas'
 import { formatPeriod } from '@/lib/utils/date'
 import type { WorkExperienceResponse } from '../../types/candidate.types'
-import { Spinner } from '@/components/ui/spinner'
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { Modal, ModalClose, ModalTitle } from '@/components/shared/overlays/Modal'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
 //  Form Sheet 
 
@@ -76,12 +77,12 @@ function ExperienceForm({ initial, onClose }: ExperienceFormProps) {
           <div>
             <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Empresa *</label>
             <Input {...register('company')} placeholder="Nombre de la empresa" disabled={isPending} />
-            {errors.company && <p className="mt-1 text-xs text-danger-500">{errors.company.message}</p>}
+            {errors.company && <p className="mt-1 text-xs text-danger-text">{errors.company.message}</p>}
           </div>
           <div>
             <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Cargo *</label>
             <Input {...register('position')} placeholder="Tu cargo o rol" disabled={isPending} />
-            {errors.position && <p className="mt-1 text-xs text-danger-500">{errors.position.message}</p>}
+            {errors.position && <p className="mt-1 text-xs text-danger-text">{errors.position.message}</p>}
           </div>
           <div>
             <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Descripción</label>
@@ -98,18 +99,17 @@ function ExperienceForm({ initial, onClose }: ExperienceFormProps) {
             </div>
           </div>
           <label className="flex items-center gap-2.5 cursor-pointer">
-            <input type="checkbox" {...register('isCurrent')} disabled={isPending} className="w-4 h-4 rounded border-neutral-300 text-brand-text focus:ring-brand-500" />
+            <input type="checkbox" {...register('isCurrent')} disabled={isPending} className="w-4 h-4 rounded border-neutral-300 text-brand-text focus:ring-ring" />
             <span className="text-sm text-secondary-foreground">Trabajo aquí actualmente</span>
           </label>
 
           <div className="flex gap-3 pt-2">
-            <button type="button" onClick={onClose} disabled={isPending} className="flex-1 h-10 rounded-lg border border-input bg-card text-body text-sm font-medium transition-colors hover:bg-hover disabled:opacity-50">
+            <Button variant="outline" size="lg" type="button" onClick={onClose} disabled={isPending} className="flex-1">
               Cancelar
-            </button>
-            <button type="submit" disabled={isPending} className="flex-1 h-10 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2">
-              {isPending && <Spinner />}
+            </Button>
+            <Button size="lg" loading={isPending} type="submit" className="flex-1">
               {initial ? 'Guardar cambios' : 'Agregar'}
-            </button>
+            </Button>
           </div>
         </form>
     </Modal>
@@ -129,7 +129,7 @@ export function WorkExperienceSection() {
   function closeForm()                            { setFormOpen(false);    setEditing(undefined) }
 
   return (
-    <div className="bg-card border border-border rounded-xl shadow-card">
+    <Card>
       <div className="flex items-center justify-between px-6 py-4 border-b border-border-soft">
         <h3 className="text-sm font-semibold text-foreground">Experiencia laboral</h3>
         <button onClick={openAdd} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-text hover:text-brand-700 transition-colors">
@@ -156,7 +156,7 @@ export function WorkExperienceSection() {
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-foreground">{exp.position}</p>
               <p className="text-sm text-body">{exp.company}</p>
-              <p className="text-xs text-neutral-400 mt-0.5">
+              <p className="text-xs text-muted-foreground mt-0.5">
                 {formatPeriod(exp.startDate, exp.isCurrent ? null : exp.endDate, exp.isCurrent)}
               </p>
               {exp.description && (
@@ -164,10 +164,10 @@ export function WorkExperienceSection() {
               )}
             </div>
             <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-              <button onClick={() => openEdit(exp)} className="p-1.5 rounded-lg hover:bg-muted text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors">
+              <button onClick={() => openEdit(exp)} className="p-1.5 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground transition-colors">
                 <Pencil className="w-4 h-4" />
               </button>
-              <button onClick={() => deleteExp(exp.id)} disabled={deleting} className="p-1.5 rounded-lg hover:bg-danger-tint text-neutral-400 hover:text-danger-500 transition-colors disabled:opacity-50">
+              <button onClick={() => deleteExp(exp.id)} disabled={deleting} className="p-1.5 rounded-lg hover:bg-danger-tint text-muted-foreground hover:text-danger-text transition-colors disabled:opacity-50">
                 <Trash2 className="w-4 h-4" />
               </button>
             </div>
@@ -176,6 +176,6 @@ export function WorkExperienceSection() {
       </div>
 
       {formOpen && <ExperienceForm initial={editing} onClose={closeForm} />}
-    </div>
+    </Card>
   )
 }

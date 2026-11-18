@@ -151,20 +151,22 @@ export function JobCVPanel() {
       <div className="flex items-center justify-between px-5 py-3.5 border-b border-border shrink-0">
         <div className="flex items-center gap-2">
           <IconTile icon={FileText} size="sm" />
-          <span className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+          <span className="text-sm font-semibold text-foreground">
             CV personalizado con IA
           </span>
         </div>
 
         {showContent && (
-          <button
+          <Button
+            variant="outline"
+            size="sm"
             onClick={handleRegenerate}
             disabled={generating}
-            className="inline-flex items-center gap-1.5 h-7 px-2.5 rounded-lg text-xs font-medium text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 border border-input hover:bg-hover disabled:opacity-50 transition-colors"
+            className="text-muted-foreground hover:text-foreground"
           >
             <RefreshCw className={`w-3 h-3 ${generating ? 'animate-spin' : ''}`} />
             Regenerar
-          </button>
+          </Button>
         )}
       </div>
 

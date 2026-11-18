@@ -48,7 +48,7 @@ function CurriculumPanel({ id, onClear }: { id: number; onClear: () => void }) {
         <button
           onClick={handleDelete}
           disabled={deleting}
-          className="p-2 rounded-lg hover:bg-danger-tint text-neutral-400 hover:text-danger-500 disabled:opacity-50 transition-colors"
+          className="p-2 rounded-lg hover:bg-danger-tint text-muted-foreground hover:text-danger-text disabled:opacity-50 transition-colors"
           title="Eliminar"
         >
           {deleting
@@ -110,7 +110,7 @@ function CurriculaPageContent() {
           {/* Mobile back button */}
           <button
             onClick={clearSelection}
-            className="lg:hidden flex items-center gap-2 px-4 py-3 text-xs font-medium text-neutral-500 border-b border-border bg-card shrink-0 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors"
+            className="lg:hidden flex items-center gap-2 px-4 py-3 text-xs font-medium text-muted-foreground border-b border-border bg-card shrink-0 hover:text-foreground transition-colors"
           >
             ← Volver al listado
           </button>

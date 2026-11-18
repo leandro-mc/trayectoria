@@ -8,6 +8,7 @@ import { useAuthStore } from '@/stores/auth.store'
 import { HOME_ROUTE } from '@/config/navigation'
 import { ROUTES } from '@/config/routes'
 import { Logo } from '@/components/shared/brand/Logo'
+import { Button } from '@/components/ui/button'
 
 interface PublicNavbarProps {
   hideAuthButtons?: boolean
@@ -41,27 +42,21 @@ export function PublicNavbar({ hideAuthButtons = false }: PublicNavbarProps) {
 
         {!hideAuthButtons && (
           isAuthenticated ? (
-            <Link
-              href={dashboardHref}
-              className="inline-flex items-center gap-1.5 sm:gap-2 h-8 sm:h-9 px-3 sm:px-4 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground text-xs sm:text-sm font-medium transition-colors"
-            >
+            <Button asChild size="sm" className="sm:gap-2 sm:h-9 sm:px-4 sm:text-sm"><Link
+       href={dashboardHref}>
               <LayoutDashboard className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Mi panel
-            </Link>
+            </Link></Button>
           ) : (
             <>
-              <Link
-                href={ROUTES.login}
-                className="inline-flex h-8 sm:h-9 px-2.5 sm:px-4 items-center rounded-lg border border-input bg-card hover:bg-hover text-secondary-foreground text-xs sm:text-sm font-medium transition-colors"
-              >
+              <Button asChild variant="outline" size="sm" className="sm:h-9 sm:px-4 sm:text-sm"><Link
+        href={ROUTES.login}>
                 Iniciar sesión
-              </Link>
-              <Link
-                href={ROUTES.register}
-                className="inline-flex h-8 sm:h-9 px-2.5 sm:px-4 items-center rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground text-xs sm:text-sm font-medium transition-colors"
-              >
+              </Link></Button>
+              <Button asChild size="sm" className="sm:h-9 sm:px-4 sm:text-sm"><Link
+        href={ROUTES.register}>
                 Registrarse
-              </Link>
+              </Link></Button>
             </>
           )
         )}

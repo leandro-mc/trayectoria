@@ -7,9 +7,10 @@ import { Plus, Trash2, Languages } from 'lucide-react'
 import { useLanguages, useAddLanguage, useDeleteLanguage } from '../../hooks/useCandidate'
 import { languageSchema, type LanguageFormValues } from '../../schemas/candidate.schemas'
 import { LANGUAGE_LEVELS } from '@/config/constants'
-import { Spinner } from '@/components/ui/spinner'
 import { NativeSelect } from '@/components/ui/native-select'
 import { Input } from '@/components/ui/input'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
 
 export function LanguagesSection() {
@@ -36,7 +37,7 @@ export function LanguagesSection() {
   }
 
   return (
-    <div className="bg-card border border-border rounded-xl shadow-card">
+    <Card>
       <div className="flex items-center justify-between px-6 py-4 border-b border-border-soft">
         <h3 className="text-sm font-semibold text-foreground">Idiomas</h3>
         {!showForm && (
@@ -52,14 +53,14 @@ export function LanguagesSection() {
       <div className="p-6 space-y-4">
         {/* Add form */}
         {showForm && (
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col sm:flex-row gap-3 p-4 rounded-xl bg-neutral-50 dark:bg-neutral-800/50 border border-input">
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col sm:flex-row gap-3 p-4 rounded-xl bg-muted border border-border">
             <div className="flex-1">
               <Input
                 {...register('language')}
                 placeholder="Ej: Inglés, Portugués"
                 disabled={adding}
               />
-              {errors.language && <p className="mt-1 text-xs text-danger-500">{errors.language.message}</p>}
+              {errors.language && <p className="mt-1 text-xs text-danger-text">{errors.language.message}</p>}
             </div>
             <div className="w-full sm:w-40">
               <NativeSelect {...register('level')} disabled={adding}>
@@ -78,14 +79,12 @@ export function LanguagesSection() {
               >
                 Cancelar
               </button>
-              <button
-                type="submit"
-                disabled={adding}
-                className="h-10 px-4 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center gap-2"
-              >
-                {adding && <Spinner />}
+              <Button
+        size="lg"
+        loading={adding}
+        type="submit">
                 Agregar
-              </button>
+              </Button>
             </div>
           </form>
         )}
@@ -122,7 +121,7 @@ export function LanguagesSection() {
             <button
               onClick={() => deleteLang(lang.language)}
               disabled={deleting}
-              className="p-1.5 rounded-lg opacity-0 group-hover:opacity-100 hover:bg-danger-tint text-neutral-400 hover:text-danger-500 transition-all disabled:opacity-50"
+              className="p-1.5 rounded-lg opacity-0 group-hover:opacity-100 hover:bg-danger-tint text-muted-foreground hover:text-danger-text transition-all disabled:opacity-50"
               aria-label={`Eliminar ${lang.language}`}
             >
               <Trash2 className="w-4 h-4" />
@@ -130,6 +129,6 @@ export function LanguagesSection() {
           </div>
         ))}
       </div>
-    </div>
+    </Card>
   )
 }

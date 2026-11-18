@@ -16,10 +16,10 @@ function RoleCard({ href, icon, title, description, cta }: RoleCardProps) {
   return (
     <Link
       href={href}
-      className="group flex flex-col p-6 bg-card border border-border rounded-2xl shadow-card hover:shadow-card-hover hover:border-brand-300 dark:hover:border-brand-700 transition-all duration-200"
+      className="group flex flex-col p-6 bg-card border border-border rounded-2xl shadow-card hover:shadow-card-hover hover:border-brand-border transition-all duration-200"
     >
       {/* Icon */}
-      <div className="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-900/30 flex items-center justify-center mb-4 group-hover:bg-brand-100 dark:group-hover:bg-brand-900/50 transition-colors">
+      <div className="w-12 h-12 rounded-xl bg-brand-tint flex items-center justify-center mb-4 group-hover:bg-brand-tint-strong transition-colors">
         {icon}
       </div>
 

@@ -1,92 +1,44 @@
 import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { Slot } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
-function Card({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card"
-      className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm",
-        className
-      )}
-      {...props}
-    />
-  )
+/**
+ * The one card surface of the app: page-level blocks, list rows, form panels.
+ * Padding is a prop so a card can also wrap a list that supplies its own
+ * (padding="none" + divided rows).
+ *
+ *   <Card padding="lg">…</Card>
+ *   <Card asChild padding="lg" interactive><Link href="…">…</Link></Card>
+ */
+const cardVariants = cva("border border-border bg-card shadow-card", {
+  variants: {
+    padding: {
+      none: "rounded-xl",
+      sm:   "rounded-xl p-4",
+      md:   "rounded-xl p-5",
+      lg:   "rounded-xl p-6",
+      xl:   "rounded-2xl p-8",   // auth forms: more room, softer corners
+    },
+    /** Lifts on hover; only for cards that are themselves a link or button. */
+    interactive: {
+      true:  "transition-shadow hover:shadow-card-hover",
+      false: "",
+    },
+  },
+  defaultVariants: { padding: "none", interactive: false },
+})
+
+function Card({
+  className,
+  padding,
+  interactive,
+  asChild = false,
+  ...props
+}: React.ComponentProps<"div"> & VariantProps<typeof cardVariants> & { asChild?: boolean }) {
+  const Comp = asChild ? Slot.Root : "div"
+  return <Comp data-slot="card" className={cn(cardVariants({ padding, interactive }), className)} {...props} />
 }
 
-function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-header"
-      className={cn(
-        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
-function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-title"
-      className={cn("leading-none font-semibold", className)}
-      {...props}
-    />
-  )
-}
-
-function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-description"
-      className={cn("text-muted-foreground text-sm", className)}
-      {...props}
-    />
-  )
-}
-
-function CardAction({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-action"
-      className={cn(
-        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
-        className
-      )}
-      {...props}
-    />
-  )
-}
-
-function CardContent({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-content"
-      className={cn("px-6", className)}
-      {...props}
-    />
-  )
-}
-
-function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="card-footer"
-      className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
-      {...props}
-    />
-  )
-}
-
-export {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardAction,
-  CardDescription,
-  CardContent,
-}
+export { Card }

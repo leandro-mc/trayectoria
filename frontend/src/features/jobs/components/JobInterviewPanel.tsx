@@ -93,7 +93,7 @@ export function JobInterviewPanel() {
       {/* Header */}
       <div className="flex items-center gap-2 px-5 py-3.5 border-b border-border shrink-0">
         <IconTile icon={MessageSquare} size="sm" />
-        <span className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+        <span className="text-sm font-semibold text-foreground">
           Entrevista simulada con IA
         </span>
       </div>

@@ -25,7 +25,7 @@ function QuickAction({
       className={[
         'rounded-xl p-5 border transition-shadow hover:shadow-card-hover',
         highlight
-          ? 'border-brand-200 dark:border-brand-800 bg-brand-tint'
+          ? 'border-brand-border bg-brand-tint'
           : 'border-border bg-card shadow-card',
       ].join(' ')}
     >

@@ -100,7 +100,7 @@ export function JobDetailPanel() {
         {/* Mobile back button */}
         <button
           onClick={goBackToList}
-          className="lg:hidden inline-flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 mb-3 transition-colors"
+          className="lg:hidden inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground mb-3 transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           Volver a la lista
@@ -137,7 +137,7 @@ export function JobDetailPanel() {
             </span>
           )}
           {offer.expiresAt && (
-            <span className="inline-flex items-center gap-1 text-xs text-neutral-400">
+            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
               <Calendar className="w-3 h-3" />
               Cierra {formatDate(offer.expiresAt)}
             </span>
@@ -174,14 +174,14 @@ export function JobDetailPanel() {
                 <>
                 <button
                   onClick={() => setMode('cv')}
-                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-brand-300 dark:border-brand-800 text-brand-text hover:bg-brand-tint transition-colors"
+                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-brand-border text-brand-text hover:bg-brand-tint transition-colors"
                 >
                   <FileText className="w-3.5 h-3.5" />
                   CV personalizado
                 </button>
                 <button
                   onClick={() => setMode('interview')}
-                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-brand-300 dark:border-brand-800 text-brand-text hover:bg-brand-tint transition-colors"
+                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-brand-border text-brand-text hover:bg-brand-tint transition-colors"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
                   Entrevista IA
@@ -201,7 +201,7 @@ export function JobDetailPanel() {
                 className={cn(
                   'px-4 py-2 text-xs font-medium border-b-2 transition-colors whitespace-nowrap',
                   resolvedTab === tab.key
-                    ? 'border-brand-500 text-brand-text'
+                    ? 'border-primary text-brand-text'
                     : 'border-transparent text-muted-foreground hover:text-secondary-foreground',
                 )}
               >
@@ -217,7 +217,7 @@ export function JobDetailPanel() {
         {availableTabs.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-center">
             <FileText className="w-8 h-8 text-faint mb-2" />
-            <p className="text-sm text-neutral-400">
+            <p className="text-sm text-muted-foreground">
               Esta oferta no tiene descripción detallada
             </p>
           </div>
@@ -227,7 +227,7 @@ export function JobDetailPanel() {
               {tabContent[resolvedTab]}
             </div>
           ) : (
-            <p className="text-sm text-neutral-400 italic">
+            <p className="text-sm text-muted-foreground italic">
               Sin información en esta sección
             </p>
           )

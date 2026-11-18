@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ROUTES } from '@/config/routes'
 import { IconTile } from '@/components/shared/brand/IconTile'
 import { Modal, ModalClose, ModalTitle } from '@/components/shared/overlays/Modal'
+import { Button } from '@/components/ui/button'
 
 interface AuthGateModalProps {
   action:  string   // e.g. "postularte" | "guardar esta oferta"
@@ -27,22 +28,18 @@ export function AuthGateModal({ action, onClose }: AuthGateModalProps) {
         </p>
 
         <div className="flex flex-col gap-2">
-          <Link
-            href={ROUTES.register}
-            className="flex items-center justify-center gap-2 h-10 rounded-xl bg-primary hover:bg-primary/90 text-white text-sm font-semibold transition-colors"
-            onClick={onClose}
-          >
+          <Button asChild size="lg"><Link
+      href={ROUTES.register} onClick={onClose}
+     >
             <UserPlus className="w-4 h-4" />
             Crear cuenta gratis
-          </Link>
-          <Link
-            href={ROUTES.login}
-            className="flex items-center justify-center gap-2 h-10 rounded-xl border border-input bg-card hover:bg-hover text-secondary-foreground text-sm font-medium transition-colors"
-            onClick={onClose}
-          >
+          </Link></Button>
+          <Button asChild variant="outline" size="lg"><Link
+      href={ROUTES.login} onClick={onClose}
+     >
             <LogIn className="w-4 h-4" />
             Iniciar sesión
-          </Link>
+          </Link></Button>
         </div>
     </Modal>
   )

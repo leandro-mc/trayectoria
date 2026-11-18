@@ -1,5 +1,5 @@
 // Pure content renderer — no modal wrapper.
-// Used by CurriculumViewer (modal) and JobCVPanel (inline in split panel).
+// Rendered inline by the curricula page and by JobCVPanel.
 
 import { Briefcase, GraduationCap, Code2, Globe, FileText } from 'lucide-react'
 import type { CurriculumContent } from '../types/curricula.types'
@@ -40,7 +40,7 @@ export function CurriculumDisplay({ content, compact = false }: CurriculumDispla
       {/* Highlights */}
       {content.highlights && content.highlights.length > 0 && (
         <div
-          className="p-4 rounded-xl border border-brand-200 dark:border-brand-800 bg-brand-tint"
+          className="p-4 rounded-xl border border-brand-border bg-brand-tint"
         >
           <div className="flex items-center gap-2 mb-3">
             <span className="text-xs font-bold text-brand-text uppercase tracking-wide">
@@ -73,13 +73,13 @@ export function CurriculumDisplay({ content, compact = false }: CurriculumDispla
           <div className="space-y-4">
             {content.experience.map((exp, i) => (
               <div key={i} className="pl-4 border-l-2 border-input">
-                <p className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                <p className="text-sm font-semibold text-foreground">
                   {exp.position}
                 </p>
                 <p className="text-xs font-medium text-brand-text mb-0.5">
                   {exp.company}
                 </p>
-                <p className="text-xs text-neutral-400 mb-2">{exp.period}</p>
+                <p className="text-xs text-muted-foreground mb-2">{exp.period}</p>
                 <p className="text-sm text-body leading-relaxed whitespace-pre-line">
                   {exp.description}
                 </p>
@@ -95,11 +95,11 @@ export function CurriculumDisplay({ content, compact = false }: CurriculumDispla
           <div className="space-y-3">
             {content.education.map((edu, i) => (
               <div key={i} className="pl-4 border-l-2 border-input">
-                <p className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                <p className="text-sm font-semibold text-foreground">
                   {edu.degree}
                 </p>
                 <p className="text-xs text-brand-text">{edu.institution}</p>
-                <p className="text-xs text-neutral-400">{edu.period}</p>
+                <p className="text-xs text-muted-foreground">{edu.period}</p>
               </div>
             ))}
           </div>

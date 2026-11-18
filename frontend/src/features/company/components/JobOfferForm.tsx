@@ -13,10 +13,12 @@ import { extractApiError } from '@/lib/utils/format'
 import { ROUTES } from '@/config/routes'
 import type { JobOfferResponse } from '@/features/jobs/types/jobs.types'
 import type { SkillResponse } from '@/types/api.types'
-import { Spinner } from '@/components/ui/spinner'
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
 import { NativeSelect } from '@/components/ui/native-select'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { ErrorAlert } from '@/components/ui/error-alert'
 
 //  Reusable field wrapper 
 
@@ -33,11 +35,11 @@ function Field({
     <div>
       <label className="block text-sm font-medium text-secondary-foreground mb-1.5">
         {label}
-        {required && <span className="text-danger-500 ml-0.5">*</span>}
+        {required && <span className="text-danger-text ml-0.5">*</span>}
       </label>
       {children}
-      {hint  && !error && <p className="mt-1.5 text-xs text-neutral-400">{hint}</p>}
-      {error && <p className="mt-1.5 text-xs text-danger-500">{error}</p>}
+      {hint  && !error && <p className="mt-1.5 text-xs text-muted-foreground">{hint}</p>}
+      {error && <p className="mt-1.5 text-xs text-danger-text">{error}</p>}
     </div>
   )
 }
@@ -47,12 +49,12 @@ function Field({
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-card border border-border rounded-xl shadow-card p-6 space-y-5">
+    <Card padding="lg" className="space-y-5">
       <h3 className="text-sm font-semibold text-foreground pb-3 border-b border-border-soft">
         {title}
       </h3>
       {children}
-    </div>
+    </Card>
   )
 }
 
@@ -184,9 +186,9 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
 
       {/*  API error  */}
       {apiError && (
-        <div className="px-4 py-3 rounded-lg bg-danger-tint border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
+        <ErrorAlert>
           {extractApiError(apiError)}
-        </div>
+        </ErrorAlert>
       )}
 
       {/*  Basic info  */}
@@ -287,20 +289,20 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
             type="checkbox"
             {...register('requiresInterview')}
             disabled={isPending}
-            className="mt-0.5 w-4 h-4 rounded border-neutral-300 text-brand-text focus:ring-brand-500"
+            className="mt-0.5 w-4 h-4 rounded border-neutral-300 text-brand-text focus:ring-ring"
           />
           <div>
             <p className="text-sm font-medium text-secondary-foreground">
               Requerir entrevista simulada con IA
             </p>
-            <p className="text-xs text-neutral-400 mt-0.5">
+            <p className="text-xs text-muted-foreground mt-0.5">
               Los candidatos deberán completar una entrevista antes de postularse
             </p>
           </div>
         </label>
 
         {requiresInterview && (
-          <div className="mt-4 p-4 rounded-xl bg-brand-50 dark:bg-brand-900/10 border border-brand-200 dark:border-brand-800">
+          <div className="mt-4 p-4 rounded-xl bg-brand-tint border border-brand-border">
             <div className="flex items-center gap-2 mb-3">
               <MessageSquare className="w-4 h-4 text-brand-text" />
               <span className="text-xs font-semibold text-brand-text">
@@ -319,27 +321,25 @@ export function JobOfferForm({ initial, initialInstructions }: JobOfferFormProps
 
       {/*  Submit  */}
       <div className="flex items-center justify-between pt-2">
-        <button
-          type="button"
-          onClick={() => router.push(ROUTES.offers)}
-          disabled={isPending}
-          className="h-10 px-5 rounded-lg border border-input text-body text-sm font-medium hover:bg-hover disabled:opacity-50 transition-colors"
-        >
+        <Button
+     variant="outline"
+     size="lg"
+     type="button"
+     onClick={() => router.push(ROUTES.offers)}
+     disabled={isPending}>
           Cancelar
-        </button>
+        </Button>
 
-        <button
-          type="submit"
-          disabled={isPending}
-          className="inline-flex items-center gap-2 h-10 px-6 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-semibold transition-colors"
-        >
-          {isPending && <Spinner />}
+        <Button
+     size="lg"
+     loading={isPending}
+     type="submit">
           <Save className="w-4 h-4" />
           {isPending
             ? (isEdit ? 'Guardando...' : 'Publicando...')
             : (isEdit ? 'Guardar cambios' : 'Publicar oferta')
           }
-        </button>
+        </Button>
       </div>
 
     </form>

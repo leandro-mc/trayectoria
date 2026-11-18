@@ -5,6 +5,8 @@ import { Camera } from 'lucide-react'
 import { useCandidateProfile, useUploadAvatar } from '../../hooks/useCandidate'
 import { getInitials } from '@/lib/utils/format'
 import { Spinner } from '@/components/ui/spinner'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
 export function ProfileHeader() {
   const { data: profile } = useCandidateProfile()
@@ -23,7 +25,7 @@ export function ProfileHeader() {
   }
 
   return (
-    <div className="flex items-center gap-5 p-6 bg-card border border-border rounded-xl shadow-card mb-6">
+    <Card padding="lg" className="flex items-center gap-5 mb-6">
 
       {/* Avatar */}
       <div className="relative shrink-0">
@@ -40,18 +42,19 @@ export function ProfileHeader() {
         )}
 
         {/* Upload button */}
-        <button
+        <Button
+          size="sm"
           type="button"
           onClick={() => inputRef.current?.click()}
           disabled={isPending}
-          className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-primary hover:bg-primary/90 disabled:opacity-60 text-white flex items-center justify-center shadow-md transition-colors"
+          className="absolute -bottom-1 -right-1 w-7 shadow-md"
           aria-label="Cambiar foto"
         >
           {isPending
             ? <Spinner className="size-3.5" />
             : <Camera className="w-3.5 h-3.5" />
           }
-        </button>
+        </Button>
 
         <input
           ref={inputRef}
@@ -77,6 +80,6 @@ export function ProfileHeader() {
         )}
       </div>
 
-    </div>
+    </Card>
   )
 }

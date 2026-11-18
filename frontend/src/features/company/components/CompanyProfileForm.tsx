@@ -12,6 +12,8 @@ import { Spinner } from '@/components/ui/spinner'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Textarea } from '@/components/ui/textarea'
 import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { ErrorAlert } from '@/components/ui/error-alert'
 
 
 function Field({
@@ -23,7 +25,7 @@ function Field({
         {label}
       </label>
       {children}
-      {error && <p className="mt-1.5 text-xs text-danger-500">{error}</p>}
+      {error && <p className="mt-1.5 text-xs text-danger-text">{error}</p>}
     </div>
   )
 }
@@ -85,7 +87,7 @@ export function CompanyProfileForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
       {/*  Logo + company name header  */}
-      <div className="flex items-center gap-5 p-5 rounded-xl bg-neutral-50 dark:bg-neutral-800/50 border border-input">
+      <div className="flex items-center gap-5 p-5 rounded-xl bg-muted border border-border">
         {/* Logo */}
         <div className="relative shrink-0">
           {profile?.logoUrl ? (
@@ -99,18 +101,19 @@ export function CompanyProfileForm() {
               {getInitials(displayName)}
             </div>
           )}
-          <button
+          <Button
+            size="sm"
             type="button"
             onClick={() => logoInputRef.current?.click()}
             disabled={uploading}
-            className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-primary hover:bg-primary/90 disabled:opacity-60 text-white flex items-center justify-center shadow-md transition-colors"
+            className="absolute -bottom-1 -right-1 w-7 shadow-md"
             aria-label="Cambiar logo"
           >
             {uploading
               ? <Spinner className="size-3.5" />
               : <Camera className="w-3.5 h-3.5" />
             }
-          </button>
+          </Button>
           <input
             ref={logoInputRef}
             type="file"
@@ -130,9 +133,9 @@ export function CompanyProfileForm() {
 
       {/*  API error  */}
       {error && (
-        <div className="px-4 py-3 rounded-lg bg-danger-tint border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
+        <ErrorAlert>
           {extractApiError(error)}
-        </div>
+        </ErrorAlert>
       )}
 
       {/*  Fields  */}
@@ -180,15 +183,14 @@ export function CompanyProfileForm() {
       </Field>
 
       <div className="flex justify-end">
-        <button
-          type="submit"
-          disabled={isPending || !isDirty}
-          className="inline-flex items-center gap-2 h-10 px-5 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors"
-        >
-          {isPending && <Spinner />}
+        <Button
+     size="lg"
+     loading={isPending}
+     type="submit"
+     disabled={isPending || !isDirty}>
           <Save className="w-4 h-4" />
           {isPending ? 'Guardando...' : 'Guardar cambios'}
-        </button>
+        </Button>
       </div>
 
     </form>

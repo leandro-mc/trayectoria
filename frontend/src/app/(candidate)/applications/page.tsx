@@ -12,6 +12,7 @@ import { ROUTES } from '@/config/routes'
 import type { ApplicationStatus } from '@/types/global.types'
 import Link from 'next/link'
 import { ApplicationStatusBadge } from '@/components/shared/data/StatusBadge'
+import { Card } from '@/components/ui/card'
 
 const STATUS_TABS: { label: string; value: ApplicationStatus | 'ALL' }[] = [
   { label: 'Todas',       value: 'ALL'       },
@@ -75,9 +76,9 @@ export default function ApplicationsPage() {
       {!isLoading && filtered.length > 0 && (
         <div className="space-y-3">
           {filtered.map((app) => (
-            <div
+            <Card padding="md"
               key={app.id}
-              className="bg-card border border-border rounded-xl p-5 shadow-card flex items-start gap-4"
+              className="flex items-start gap-4"
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-3 mb-1">
@@ -93,7 +94,7 @@ export default function ApplicationsPage() {
                   </div>
                   <ApplicationStatusBadge status={app.status} className="shrink-0" />
                 </div>
-                <p className="text-xs text-neutral-400 mt-2">
+                <p className="text-xs text-muted-foreground mt-2">
                   Postulado el {formatDate(app.appliedAt)}
                 </p>
               </div>
@@ -101,7 +102,7 @@ export default function ApplicationsPage() {
               <div className="flex items-center gap-1 shrink-0">
                 <Link
                   href={ROUTES.publicJob(app.jobOfferId)}
-                  className="p-1.5 rounded-lg hover:bg-muted text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                  className="p-1.5 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
                   title="Ver oferta"
                 >
                   <ExternalLink className="w-4 h-4" />
@@ -110,14 +111,14 @@ export default function ApplicationsPage() {
                   <button
                     onClick={() => withdraw(app.id)}
                     disabled={withdrawing}
-                    className="p-1.5 rounded-lg hover:bg-danger-tint text-neutral-400 hover:text-danger-500 transition-colors disabled:opacity-50"
+                    className="p-1.5 rounded-lg hover:bg-danger-tint text-muted-foreground hover:text-danger-text transition-colors disabled:opacity-50"
                     title="Retirar postulación"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                 )}
               </div>
-            </div>
+            </Card>
           ))}
 
           {data && (

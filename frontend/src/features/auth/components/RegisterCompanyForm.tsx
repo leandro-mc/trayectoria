@@ -9,9 +9,11 @@ import { registerCompanySchema, type RegisterCompanyFormValues } from '../schema
 import { useRegisterCompany } from '../hooks/useAuth'
 import { extractApiError } from '@/lib/utils/format'
 import { ROUTES } from '@/config/routes'
-import { Spinner } from '@/components/ui/spinner'
 import { Input } from '@/components/ui/input'
 import { FormLabel, FieldError } from '@/components/shared/forms/FormField'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { ErrorAlert } from '@/components/ui/error-alert'
 
 export function RegisterCompanyForm() {
   const [showPassword, setShowPassword]       = useState(false)
@@ -44,11 +46,11 @@ export function RegisterCompanyForm() {
 
   return (
     <div className="w-full max-w-[480px]">
-      <div className="bg-card border border-border rounded-2xl p-8 shadow-card">
+      <Card padding="xl">
 
         {/* Header */}
         <div className="mb-8">
-          <div className="w-12 h-12 rounded-xl bg-brand-50 dark:bg-brand-900/30 flex items-center justify-center mb-4">
+          <div className="w-12 h-12 rounded-xl bg-brand-tint flex items-center justify-center mb-4">
             <Building2 className="w-6 h-6 text-brand-text" />
           </div>
           <h1 className="text-2xl font-bold text-foreground mb-1">
@@ -61,9 +63,9 @@ export function RegisterCompanyForm() {
 
         {/* API error */}
         {apiError && (
-          <div className="mb-5 px-4 py-3 rounded-lg bg-danger-tint border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
+          <ErrorAlert className="mb-5">
             {apiError}
-          </div>
+          </ErrorAlert>
         )}
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
@@ -117,7 +119,7 @@ export function RegisterCompanyForm() {
               <button
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label={showPassword ? 'Ocultar' : 'Mostrar'}
               >
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -143,7 +145,7 @@ export function RegisterCompanyForm() {
               <button
                 type="button"
                 onClick={() => setShowConfirm((v) => !v)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
                 aria-label={showConfirmPassword ? 'Ocultar' : 'Mostrar'}
               >
                 {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -153,14 +155,14 @@ export function RegisterCompanyForm() {
           </div>
 
           {/* Submit */}
-          <button
+          <Button
+            size="lg"
+            loading={isPending}
             type="submit"
-            disabled={isPending}
-            className="w-full h-10 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
+            className="w-full"
           >
-            {isPending && <Spinner />}
             {isPending ? 'Creando cuenta...' : 'Crear cuenta de empresa'}
-          </button>
+          </Button>
 
         </form>
 
@@ -177,7 +179,7 @@ export function RegisterCompanyForm() {
           </p>
         </div>
 
-      </div>
+      </Card>
 
       <p className="text-center text-sm text-muted-foreground mt-6">
         ¿Ya tenés cuenta?{' '}

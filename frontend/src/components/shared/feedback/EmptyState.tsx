@@ -3,6 +3,7 @@
 import NextLink from 'next/link'
 import { type LucideIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 
 interface EmptyStateProps {
   icon:        LucideIcon
@@ -45,19 +46,15 @@ export function EmptyState({
       {action && (
         action.href
           ? (
-            <NextLink 
-              href={action.href}
-              className="px-4 py-2 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-medium transition-colors"
-            >
+            <Button asChild><NextLink 
+       href={action.href}>
               {action.label}
-            </NextLink>
+            </NextLink></Button>
           ) : (
-            <button
-              onClick={action.onClick}
-              className="px-4 py-2 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-medium transition-colors"
-            >
+            <Button
+       onClick={action.onClick}>
               {action.label}
-            </button>
+            </Button>
           )
       )}
     </div>

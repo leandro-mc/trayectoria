@@ -78,7 +78,7 @@ function InterviewsPageContent() {
           {/* Mobile back */}
           <button
             onClick={clearSelection}
-            className="lg:hidden flex items-center gap-2 px-4 py-3 text-xs font-medium text-neutral-500 border-b border-border bg-card shrink-0 hover:text-neutral-800 transition-colors"
+            className="lg:hidden flex items-center gap-2 px-4 py-3 text-xs font-medium text-muted-foreground border-b border-border bg-card shrink-0 hover:text-foreground transition-colors"
           >
             ← Volver al listado
           </button>

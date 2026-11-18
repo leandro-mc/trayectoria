@@ -13,9 +13,10 @@ import {
 import { educationSchema, type EducationFormValues } from '../../schemas/candidate.schemas'
 import { formatPeriod } from '@/lib/utils/date'
 import type { EducationResponse } from '../../types/candidate.types'
-import { Spinner } from '@/components/ui/spinner'
 import { Input } from '@/components/ui/input'
 import { Modal, ModalClose, ModalTitle } from '@/components/shared/overlays/Modal'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
 
 function EducationForm({ initial, onClose }: { initial?: EducationResponse; onClose: () => void }) {
@@ -61,7 +62,7 @@ function EducationForm({ initial, onClose }: { initial?: EducationResponse; onCl
           <div>
             <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Institución *</label>
             <Input {...register('institution')} placeholder="Universidad o institución" disabled={isPending} />
-            {errors.institution && <p className="mt-1 text-xs text-danger-500">{errors.institution.message}</p>}
+            {errors.institution && <p className="mt-1 text-xs text-danger-text">{errors.institution.message}</p>}
           </div>
           <div>
             <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Título / Grado</label>
@@ -82,13 +83,12 @@ function EducationForm({ initial, onClose }: { initial?: EducationResponse; onCl
             </div>
           </div>
           <div className="flex gap-3 pt-2">
-            <button type="button" onClick={onClose} disabled={isPending} className="flex-1 h-10 rounded-lg border border-input text-body text-sm font-medium hover:bg-hover disabled:opacity-50 transition-colors">
+            <Button variant="outline" size="lg" type="button" onClick={onClose} disabled={isPending} className="flex-1">
               Cancelar
-            </button>
-            <button type="submit" disabled={isPending} className="flex-1 h-10 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2">
-              {isPending && <Spinner />}
+            </Button>
+            <Button size="lg" loading={isPending} type="submit" className="flex-1">
               {initial ? 'Guardar cambios' : 'Agregar'}
-            </button>
+            </Button>
           </div>
         </form>
     </Modal>
@@ -106,7 +106,7 @@ export function EducationSection() {
   function closeForm()                           { setFormOpen(false);    setEditing(undefined) }
 
   return (
-    <div className="bg-card border border-border rounded-xl shadow-card">
+    <Card>
       <div className="flex items-center justify-between px-6 py-4 border-b border-border-soft">
         <h3 className="text-sm font-semibold text-foreground">Educación</h3>
         <button onClick={openAdd} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-text hover:text-brand-700 transition-colors">
@@ -134,13 +134,13 @@ export function EducationSection() {
                   {edu.degree}{edu.fieldOfStudy ? ` · ${edu.fieldOfStudy}` : ''}
                 </p>
               )}
-              <p className="text-xs text-neutral-400 mt-0.5">{formatPeriod(edu.startDate, edu.endDate, false)}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">{formatPeriod(edu.startDate, edu.endDate, false)}</p>
             </div>
             <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-              <button onClick={() => openEdit(edu)} className="p-1.5 rounded-lg hover:bg-muted text-neutral-400 hover:text-neutral-600 transition-colors">
+              <button onClick={() => openEdit(edu)} className="p-1.5 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground transition-colors">
                 <Pencil className="w-4 h-4" />
               </button>
-              <button onClick={() => deleteEdu(edu.id)} disabled={deleting} className="p-1.5 rounded-lg hover:bg-danger-tint text-neutral-400 hover:text-danger-500 transition-colors disabled:opacity-50">
+              <button onClick={() => deleteEdu(edu.id)} disabled={deleting} className="p-1.5 rounded-lg hover:bg-danger-tint text-muted-foreground hover:text-danger-text transition-colors disabled:opacity-50">
                 <Trash2 className="w-4 h-4" />
               </button>
             </div>
@@ -148,6 +148,6 @@ export function EducationSection() {
         ))}
       </div>
       {formOpen && <EducationForm initial={editing} onClose={closeForm} />}
-    </div>
+    </Card>
   )
 }

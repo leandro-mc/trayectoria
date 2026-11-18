@@ -23,8 +23,8 @@ function FilterPill({
       className={cn(
         'px-2.5 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-colors border',
         active
-          ? 'bg-primary border-brand-500 text-white'
-          : 'bg-card border-input text-body hover:border-brand-300 dark:hover:border-brand-700',
+          ? 'bg-primary border-primary text-primary-foreground'
+          : 'bg-card border-input text-body hover:border-brand-border',
       )}
     >
       {label}
@@ -84,17 +84,17 @@ export function JobListPanel() {
 
         {/* Search */}
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 pointer-events-none" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
           <Input
             type="text"
             value={keyword}
             onChange={(e) => setFilter('q', e.target.value)}
-            placeholder="Buscar por título..." className="h-9 pl-9 pr-8 bg-neutral-50 dark:bg-neutral-800"
+            placeholder="Buscar por título..." className="h-9 pl-9 pr-8 bg-muted"
           />
           {keyword && (
             <button
               onClick={() => setFilter('q', '')}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -112,7 +112,7 @@ export function JobListPanel() {
             />
           ))}
 
-          <span className="w-px bg-neutral-200 dark:bg-neutral-700 shrink-0" />
+          <span className="w-px bg-border shrink-0" />
 
           {(Object.keys(JOB_TYPE_LABELS) as JobType[]).map((value) => (
             <FilterPill
@@ -126,7 +126,7 @@ export function JobListPanel() {
           {hasFilters && (
             <button
               onClick={clearFilters}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium text-danger-500 hover:bg-danger-tint transition-colors whitespace-nowrap border border-danger-200 dark:border-danger-800"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium text-danger-text hover:bg-danger-tint transition-colors whitespace-nowrap border border-danger-border"
             >
               <X className="w-3 h-3" />
               Limpiar
@@ -136,7 +136,7 @@ export function JobListPanel() {
 
         {/* Results count */}
         <div className="flex items-center justify-between h-5">
-          <p className="text-xs text-neutral-400">
+          <p className="text-xs text-muted-foreground">
             {data
               ? `${data.totalElements} oferta${data.totalElements !== 1 ? 's' : ''}`
               : ' '
@@ -160,7 +160,7 @@ export function JobListPanel() {
             <p className="text-sm font-medium text-muted-foreground">
               Sin resultados
             </p>
-            <p className="text-xs text-neutral-400 mt-1">
+            <p className="text-xs text-muted-foreground mt-1">
               Probá ajustando los filtros
             </p>
           </div>
@@ -183,17 +183,17 @@ export function JobListPanel() {
           <button
             disabled={page === 0}
             onClick={() => setPage(page - 1)}
-            className="text-xs font-medium text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="text-xs font-medium text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           >
             ← Anterior
           </button>
-          <span className="text-xs text-neutral-400">
+          <span className="text-xs text-muted-foreground">
             {page + 1} / {data.totalPages}
           </span>
           <button
             disabled={data.last}
             onClick={() => setPage(page + 1)}
-            className="text-xs font-medium text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="text-xs font-medium text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           >
             Siguiente →
           </button>

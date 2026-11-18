@@ -3,6 +3,7 @@
 import { useCandidateSkills, useAddSkills, useDeleteSkill } from '../../hooks/useCandidate'
 import { SkillPicker } from '@/features/skills/components/SkillPicker'
 import type { SkillResponse } from '../../types/candidate.types'
+import { Card } from '@/components/ui/card'
 
 export function SkillsSection() {
   const { data: skills = [], isLoading } = useCandidateSkills()
@@ -18,7 +19,7 @@ export function SkillsSection() {
   }
 
   return (
-    <div className="bg-card border border-border rounded-xl shadow-card">
+    <Card>
       <div className="px-6 py-4 border-b border-border-soft">
         <h3 className="text-sm font-semibold text-foreground">Skills</h3>
         <p className="text-xs text-muted-foreground mt-0.5">
@@ -44,6 +45,6 @@ export function SkillsSection() {
           />
         )}
       </div>
-    </div>
+    </Card>
   )
 }

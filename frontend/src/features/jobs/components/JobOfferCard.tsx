@@ -43,8 +43,8 @@ export function JobOfferCard({
         'group relative flex flex-col gap-3 p-4 rounded-xl border transition-all duration-150',
         onClick ? 'cursor-pointer' : '',
         selected
-          ? 'border-brand-400 dark:border-brand-500 bg-brand-50/60 dark:bg-brand-900/10 shadow-md'
-          : 'border-border bg-card shadow-card hover:shadow-card-hover hover:border-neutral-300 dark:hover:border-neutral-700',
+          ? 'border-primary bg-brand-tint shadow-md'
+          : 'border-border bg-card shadow-card hover:shadow-card-hover hover:border-faint',
       )}
     >
       {/* Header */}
@@ -53,7 +53,7 @@ export function JobOfferCard({
           <p className={cn(
             'text-sm font-semibold truncate',
             selected
-              ? 'text-brand-700 dark:text-brand-300'
+              ? 'text-brand-text'
               : 'text-foreground',
           )}>
             {offer.title}
@@ -108,7 +108,7 @@ export function JobOfferCard({
             </span>
           ))}
           {offer.skills.length > 4 && (
-            <span className="px-2 py-0.5 rounded-md bg-muted text-xs text-neutral-400">
+            <span className="px-2 py-0.5 rounded-md bg-muted text-xs text-muted-foreground">
               +{offer.skills.length - 4}
             </span>
           )}

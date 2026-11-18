@@ -7,6 +7,7 @@ import type { SkillResponse } from '@/types/api.types'
 import { cn } from '@/lib/utils'
 import { Spinner } from '@/components/ui/spinner'
 import { Input } from '@/components/ui/input'
+import { Card } from '@/components/ui/card'
 
 interface SkillPickerProps {
   // Skills the candidate already has
@@ -61,14 +62,14 @@ export function SkillPicker({
           {selected.map((skill) => (
             <span
               key={skill.id}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-brand-tint border border-brand-200 dark:border-brand-800 text-xs font-medium text-brand-700 dark:text-brand-300"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-brand-tint border border-brand-border text-xs font-medium text-brand-text"
             >
               {skill.name}
               {!disabled && (
                 <button
                   type="button"
                   onClick={() => onRemove(skill.id)}
-                  className="text-brand-400 hover:text-brand-text dark:hover:text-brand-200 transition-colors"
+                  className="text-brand-text opacity-70 hover:opacity-100 transition-colors"
                   aria-label={`Quitar ${skill.name}`}
                 >
                   <X className="w-3 h-3" />
@@ -83,9 +84,9 @@ export function SkillPicker({
       {!disabled && (
         <div ref={containerRef} className="relative">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400 pointer-events-none" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
             {isLoading && search.length >= 2 && (
-              <Spinner className="size-4 absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400" />
+              <Spinner className="size-4 absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             )}
             <Input
               ref={inputRef}
@@ -116,12 +117,12 @@ export function SkillPicker({
                       className={cn(
                         'w-full text-left px-4 py-2.5 text-sm flex items-center justify-between gap-3',
                         'hover:bg-brand-tint transition-colors',
-                        'text-neutral-800 dark:text-neutral-200',
+                        'text-foreground',
                       )}
                     >
                       <span>{skill.name}</span>
                       {skill.type && (
-                        <span className="text-xs text-neutral-400 shrink-0">
+                        <span className="text-xs text-muted-foreground shrink-0">
                           {skill.type.toLowerCase()}
                         </span>
                       )}
@@ -134,11 +135,11 @@ export function SkillPicker({
 
           {/* No results */}
           {open && search.length >= 2 && !isLoading && suggestions.length === 0 && (
-            <div className="absolute z-10 top-full left-0 right-0 mt-1 bg-card border border-border rounded-xl shadow-card p-4 text-center">
-              <p className="text-sm text-neutral-400">
+            <Card padding="sm" className="absolute z-10 top-full left-0 right-0 mt-1 text-center">
+              <p className="text-sm text-muted-foreground">
                 No se encontraron skills para “{search}”
               </p>
-            </div>
+            </Card>
           )}
         </div>
       )}

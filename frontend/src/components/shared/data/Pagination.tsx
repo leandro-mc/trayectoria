@@ -64,7 +64,7 @@ export function Pagination({
 
         {getPages().map((p, i) =>
           p === 'ellipsis' ? (
-            <span key={`ellipsis-${i}`} className="px-2 text-neutral-400 text-sm">…</span>
+            <span key={`ellipsis-${i}`} className="px-2 text-muted-foreground text-sm">…</span>
           ) : (
             <Button
               key={p}
@@ -73,7 +73,7 @@ export function Pagination({
               onClick={() => onPageChange(p as number)}
               className={cn(
                 'h-8 w-8 text-sm',
-                p === page && 'bg-primary hover:bg-primary/90 text-white border-brand-500',
+                p === page && 'bg-primary hover:bg-primary/90 text-primary-foreground border-primary',
               )}
               aria-label={`Página ${(p as number) + 1}`}
               aria-current={p === page ? 'page' : undefined}

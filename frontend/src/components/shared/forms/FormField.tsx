@@ -14,7 +14,7 @@ export function FormLabel({ className, ...props }: ComponentProps<'label'>) {
 export function FieldError({ error, className }: { error?: { message?: string }; className?: string }) {
   if (!error?.message) return null
   return (
-    <p role="alert" className={cn('mt-1.5 text-xs text-danger-500', className)}>
+    <p role="alert" className={cn('mt-1.5 text-xs text-danger-text', className)}>
       {error.message}
     </p>
   )

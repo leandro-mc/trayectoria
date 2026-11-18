@@ -6,9 +6,9 @@ import { useAuthStore } from '@/stores/auth.store'
 import { useApply, useHasApplied } from '@/features/applications/hooks/useApplications'
 import { useCurricula } from '@/features/ai/curricula/hooks/useCurricula'
 import { AuthGateModal } from './AuthGateModal'
-import { Spinner } from '@/components/ui/spinner'
 import { NativeSelect } from '@/components/ui/native-select'
 import { Modal, ModalClose } from '@/components/shared/overlays/Modal'
+import { Button } from '@/components/ui/button'
 
 interface ApplyButtonProps {
   jobOfferId:  number
@@ -125,7 +125,7 @@ export function ApplyButton({
                 </h3>
                 <p className="text-sm text-body">{jobTitle}</p>
                 {companyName && (
-                  <p className="text-xs text-neutral-400 mt-0.5 mb-4">{companyName}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5 mb-4">{companyName}</p>
                 )}
 
                 {matchingCurricula.length > 0 ? (
@@ -147,7 +147,7 @@ export function ApplyButton({
                     </NativeSelect>
                   </div>
                 ) : (
-                  <div className="mt-4 mb-5 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-input">
+                  <div className="mt-4 mb-5 p-3 rounded-xl bg-muted border border-border">
                     <p className="text-xs text-muted-foreground">
                       Se enviará tu perfil completo. Podés generar un{' '}
                       <span className="text-brand-text font-medium">CV personalizado ✨</span>{' '}
@@ -157,21 +157,23 @@ export function ApplyButton({
                 )}
 
                 <div className="flex gap-2">
-                  <button
+                  <Button
+                    variant="outline"
+                    size="lg"
                     onClick={handleClose}
                     disabled={isPending}
-                    className="flex-1 h-10 rounded-xl border border-input text-body text-sm font-medium hover:bg-hover disabled:opacity-50 transition-colors"
+                    className="flex-1"
                   >
                     Cancelar
-                  </button>
-                  <button
+                  </Button>
+                  <Button
+                    size="lg"
+                    loading={isPending}
                     onClick={handleConfirm}
-                    disabled={isPending}
-                    className="flex-1 h-10 rounded-xl bg-primary hover:bg-primary/90 disabled:opacity-60 text-white text-sm font-semibold transition-colors flex items-center justify-center gap-2"
+                    className="flex-1"
                   >
-                    {isPending && <Spinner />}
                     {isPending ? 'Enviando...' : 'Confirmar'}
-                  </button>
+                  </Button>
                 </div>
               </>
             )}

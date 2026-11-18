@@ -6,6 +6,8 @@ import { PageHeader } from '@/components/shared/layout/PageHeader'
 import { useCompanyStats } from '@/features/company/hooks/useCompany'
 import { ROUTES } from '@/config/routes'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
 function MetricCard({
   icon: Icon,
@@ -21,19 +23,19 @@ function MetricCard({
   accent?: 'brand' | 'warning' | 'success'
 }) {
   const iconBg =
-    accent === 'brand'   ? 'bg-brand-50 dark:bg-brand-900/30' :
-    accent === 'warning' ? 'bg-warning-50 dark:bg-warning-900/20' :
-    accent === 'success' ? 'bg-success-50 dark:bg-success-900/20' :
+    accent === 'brand'   ? 'bg-brand-tint' :
+    accent === 'warning' ? 'bg-warning-tint' :
+    accent === 'success' ? 'bg-success-tint' :
     'bg-muted'
 
   const iconColor =
     accent === 'brand'   ? 'text-brand-text' :
-    accent === 'warning' ? 'text-warning-500' :
-    accent === 'success' ? 'text-success-600' :
+    accent === 'warning' ? 'text-warning-text' :
+    accent === 'success' ? 'text-success-text' :
     'text-muted-foreground'
 
   const card = (
-    <div className="bg-card border border-border rounded-xl p-5 shadow-card hover:shadow-card-hover transition-shadow">
+    <Card padding="md">
       <div className="flex items-center justify-between mb-4">
         <p className="text-sm text-muted-foreground font-medium">
           {label}
@@ -51,7 +53,7 @@ function MetricCard({
           {value.toLocaleString()}
         </p>
       )}
-    </div>
+    </Card>
   )
 
   if (href) {
@@ -71,13 +73,11 @@ export default function CompanyDashboardPage() {
         title="Dashboard"
         description="Resumen de tu actividad"
         actions={
-          <Link
-            href={ROUTES.newOffer}
-            className="inline-flex items-center gap-2 h-9 px-4 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-medium transition-colors"
-          >
+          <Button asChild><Link
+      href={ROUTES.newOffer}>
             <PlusCircle className="w-4 h-4" />
             Nueva oferta
-          </Link>
+          </Link></Button>
         }
       />
 

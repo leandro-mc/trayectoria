@@ -35,13 +35,13 @@ export function JobDescriptionSide() {
       <div className="px-5 pt-4 pb-4 border-b border-border bg-card shrink-0">
         <button
           onClick={goBackToDetail}
-          className="inline-flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 mb-3 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground mb-3 transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           Volver al detalle
         </button>
 
-        <p className="text-xs font-medium text-neutral-400 mb-0.5">
+        <p className="text-xs font-medium text-muted-foreground mb-0.5">
           {offer.companyName ?? 'Empresa'}
         </p>
         <h2 className="text-sm font-bold text-foreground leading-snug">
@@ -50,7 +50,7 @@ export function JobDescriptionSide() {
 
         <div className="flex flex-wrap gap-2 mt-2">
           {offer.location && (
-            <span className="inline-flex items-center gap-1 text-xs text-neutral-400">
+            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
               <MapPin className="w-3 h-3" />
               {offer.location}
             </span>
@@ -62,7 +62,7 @@ export function JobDescriptionSide() {
             </span>
           )}
           {offer.jobType && (
-            <span className="inline-flex items-center gap-1 text-xs text-neutral-400">
+            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
               <Briefcase className="w-3 h-3" />
               {JOB_TYPE_LABELS[offer.jobType]}
             </span>
@@ -73,7 +73,7 @@ export function JobDescriptionSide() {
         {offer.skills.length > 0 && (
           <div className="flex flex-wrap gap-1 mt-2">
             {offer.skills.slice(0, 6).map((skill) => (
-              <span key={skill.id} className="px-2 py-0.5 rounded bg-muted text-xs text-neutral-500">
+              <span key={skill.id} className="px-2 py-0.5 rounded bg-muted text-xs text-muted-foreground">
                 {skill.name}
               </span>
             ))}
@@ -88,7 +88,7 @@ export function JobDescriptionSide() {
             {offer.description}
           </p>
         ) : (
-          <p className="text-xs text-neutral-400 italic">Sin descripción disponible</p>
+          <p className="text-xs text-muted-foreground italic">Sin descripción disponible</p>
         )}
 
         {offer.requirements && (

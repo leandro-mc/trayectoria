@@ -14,9 +14,11 @@ import {
 import { useRegisterCandidate } from '../hooks/useAuth'
 import { extractApiError } from '@/lib/utils/format'
 import { ROUTES } from '@/config/routes'
-import { Spinner } from '@/components/ui/spinner'
 import { Input } from '@/components/ui/input'
 import { FormLabel, FieldError } from '@/components/shared/forms/FormField'
+import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { ErrorAlert } from '@/components/ui/error-alert'
 
 //  Step indicator 
 
@@ -28,7 +30,7 @@ function StepIndicator({ current }: StepIndicatorProps) {
   return (
     <div className="mb-8">
       {/* Progress bar */}
-      <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-800 rounded-full overflow-hidden mb-4">
+      <div className="w-full h-1 bg-border rounded-full overflow-hidden mb-4">
         <div
           className="h-full bg-primary rounded-full transition-all duration-500 ease-out"
           style={{ width: current === 1 ? '50%' : '100%' }}
@@ -47,7 +49,7 @@ function StepIndicator({ current }: StepIndicatorProps) {
                   'w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold transition-colors',
                   isDone   ? 'bg-primary text-white' : '',
                   isActive ? 'bg-primary text-white' : '',
-                  !isDone && !isActive ? 'bg-neutral-200 dark:bg-neutral-800 text-neutral-400' : '',
+                  !isDone && !isActive ? 'bg-border text-muted-foreground' : '',
                 ].join(' ')}
               >
                 {isDone ? '✓' : step}
@@ -56,7 +58,7 @@ function StepIndicator({ current }: StepIndicatorProps) {
                 className={`text-xs font-medium transition-colors ${
                   isActive || isDone
                     ? 'text-secondary-foreground'
-                    : 'text-neutral-400 dark:text-neutral-600'
+                    : 'text-muted-foreground'
                 }`}
               >
                 {label}
@@ -121,7 +123,7 @@ function Step1({ onNext }: Step1Props) {
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
             aria-label={showPassword ? 'Ocultar' : 'Mostrar'}
           >
             {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -146,7 +148,7 @@ function Step1({ onNext }: Step1Props) {
           <button
             type="button"
             onClick={() => setShowConfirm((v) => !v)}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
             aria-label={showConfirmPassword ? 'Ocultar' : 'Mostrar'}
           >
             {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -155,12 +157,13 @@ function Step1({ onNext }: Step1Props) {
         <FieldError error={errors.confirmPassword} />
       </div>
 
-      <button
+      <Button
+        size="lg"
         type="submit"
-        className="w-full h-10 rounded-lg bg-primary hover:bg-primary/90 text-white text-sm font-medium transition-colors"
+        className="w-full"
       >
         Continuar
-      </button>
+      </Button>
 
     </form>
   )
@@ -188,9 +191,9 @@ function Step2({ onSubmit, onBack, isPending, apiError }: Step2Props) {
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
 
       {apiError && (
-        <div className="px-4 py-3 rounded-lg bg-danger-tint border border-danger-200 dark:border-danger-800 text-sm text-danger-600 dark:text-danger-400">
+        <ErrorAlert>
           {apiError}
-        </div>
+        </ErrorAlert>
       )}
 
       {/* First name */}
@@ -228,24 +231,24 @@ function Step2({ onSubmit, onBack, isPending, apiError }: Step2Props) {
 
       {/* Actions */}
       <div className="flex gap-3">
-        <button
-          type="button"
-          onClick={onBack}
-          disabled={isPending}
-          className="h-10 px-4 rounded-lg border border-input bg-card hover:bg-hover text-body text-sm font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
-        >
+        <Button
+     variant="outline"
+     size="lg"
+     type="button"
+     onClick={onBack}
+     disabled={isPending}>
           <ArrowLeft className="w-4 h-4" />
           Atrás
-        </button>
+        </Button>
 
-        <button
+        <Button
+          size="lg"
+          loading={isPending}
           type="submit"
-          disabled={isPending}
-          className="flex-1 h-10 rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-60 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2"
+          className="flex-1"
         >
-          {isPending && <Spinner />}
           {isPending ? 'Creando cuenta...' : 'Crear cuenta'}
-        </button>
+        </Button>
       </div>
 
     </form>
@@ -294,7 +297,7 @@ export function RegisterCandidateForm() {
 
   return (
     <div className="w-full max-w-[480px]">
-      <div className="bg-card border border-border rounded-2xl p-8 shadow-card">
+      <Card padding="xl">
 
         <StepIndicator current={step} />
 
@@ -320,7 +323,7 @@ export function RegisterCandidateForm() {
           />
         )}
 
-      </div>
+      </Card>
 
       <p className="text-center text-sm text-muted-foreground mt-6">
         ¿Ya tenés cuenta?{' '}

@@ -54,7 +54,7 @@ function AITabs() {
         className={cn(
           'flex-1 flex items-center justify-center gap-1.5 py-3 text-xs font-semibold border-b-2 transition-colors',
           isCurricula
-            ? 'border-brand-500 text-brand-text'
+            ? 'border-primary text-brand-text'
             : 'border-transparent text-subtle hover:text-secondary-foreground',
         )}
       >
@@ -66,7 +66,7 @@ function AITabs() {
         className={cn(
           'flex-1 flex items-center justify-center gap-1.5 py-3 text-xs font-semibold border-b-2 transition-colors',
           isInterviews
-            ? 'border-brand-500 text-brand-text'
+            ? 'border-primary text-brand-text'
             : 'border-transparent text-subtle hover:text-secondary-foreground',
         )}
       >
@@ -102,12 +102,12 @@ function CurriculaList({
     return (
       <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
         <div className="w-12 h-12 rounded-2xl bg-muted flex items-center justify-center mb-3">
-          <FileText className="w-6 h-6 text-neutral-400" />
+          <FileText className="w-6 h-6 text-muted-foreground" />
         </div>
         <p className="text-sm font-medium text-secondary-foreground mb-1">
           Sin currículums
         </p>
-        <p className="text-xs text-neutral-400 leading-relaxed">
+        <p className="text-xs text-muted-foreground leading-relaxed">
           Desde <Link href={ROUTES.jobs} className="underline text-brand-text hover:text-brand-text">Empleos</Link>, elegí una oferta y presioná “CV personalizado”.
         </p>
       </div>
@@ -129,10 +129,10 @@ function CurriculaList({
         >
           <IconTile icon={FileText} />
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-neutral-800 dark:text-neutral-200 truncate">
+            <p className="text-sm font-medium text-foreground truncate">
               {cv.jobOfferTitle ?? 'Currículum general'}
             </p>
-            <p className="text-xs text-neutral-400 mt-0.5">{formatDate(cv.createdAt)}</p>
+            <p className="text-xs text-muted-foreground mt-0.5">{formatDate(cv.createdAt)}</p>
           </div>
           <ChevronRight className={cn(
             'w-3.5 h-3.5 shrink-0 transition-colors',
@@ -169,12 +169,12 @@ function InterviewsList({
     return (
       <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
         <div className="w-12 h-12 rounded-2xl bg-muted flex items-center justify-center mb-3">
-          <MessageSquare className="w-6 h-6 text-neutral-400" />
+          <MessageSquare className="w-6 h-6 text-muted-foreground" />
         </div>
         <p className="text-sm font-medium text-secondary-foreground mb-1">
           Sin entrevistas
         </p>
-        <p className="text-xs text-neutral-400 leading-relaxed">
+        <p className="text-xs text-muted-foreground leading-relaxed">
           Desde <Link href={ROUTES.jobs} className="underline text-brand-text hover:text-brand-text">Empleos</Link>, elegí una oferta y presioná “Entrevista IA”.
         </p>
       </div>
@@ -198,7 +198,7 @@ function InterviewsList({
           >
             <div className={cn(
               'w-8 h-8 rounded-lg flex items-center justify-center shrink-0',
-              isCompleted ? 'bg-success-50 dark:bg-success-900/20' : 'bg-brand-tint',
+              isCompleted ? 'bg-success-tint' : 'bg-brand-tint',
             )}>
               {isCompleted
                 ? <CheckCircle2 className="w-4 h-4 text-success-500" />
@@ -206,12 +206,12 @@ function InterviewsList({
               }
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-neutral-800 dark:text-neutral-200 truncate">
+              <p className="text-sm font-medium text-foreground truncate">
                 {iv.jobOfferTitle ?? 'Entrevista'}
               </p>
               <p className={cn(
                 'text-xs mt-0.5',
-                isCompleted ? 'text-success-500 dark:text-success-400' : 'text-brand-text',
+                isCompleted ? 'text-success-text' : 'text-brand-text',
               )}>
                 {isCompleted ? 'Completada' : 'En progreso'}
                 {' · '}{formatDate(iv.createdAt)}
