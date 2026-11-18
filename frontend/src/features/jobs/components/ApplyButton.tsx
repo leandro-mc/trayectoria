@@ -1,13 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import { Send, CheckCircle2, X, FileText } from 'lucide-react'
+import { Send, CheckCircle2, FileText } from 'lucide-react'
 import { useAuthStore } from '@/stores/auth.store'
 import { useApply, useHasApplied } from '@/features/applications/hooks/useApplications'
 import { useCurricula } from '@/features/ai/curricula/hooks/useCurricula'
 import { AuthGateModal } from './AuthGateModal'
 import { Spinner } from '@/components/ui/spinner'
 import { NativeSelect } from '@/components/ui/native-select'
+import { Modal, ModalClose } from '@/components/shared/overlays/Modal'
 
 interface ApplyButtonProps {
   jobOfferId:  number
@@ -101,18 +102,8 @@ export function ApplyButton({
       )}
 
       {/* Confirm modal */}
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/40 dark:bg-black/60" onClick={handleClose} />
-          <div className="relative z-10 w-full max-w-sm bg-card rounded-2xl shadow-modal p-6">
-
-            <button
-              onClick={handleClose}
-              disabled={isPending}
-              className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-muted text-neutral-400 transition-colors disabled:opacity-50"
-            >
-              <X className="w-4 h-4" />
-            </button>
+      <Modal open={showModal} onClose={handleClose} dismissible={!isPending} size="sm" label="Postularme a esta oferta" className="p-6">
+            <ModalClose disabled={isPending} className="absolute right-4 top-4" />
 
             {applied ? (
               <div className="text-center py-4">
@@ -184,9 +175,7 @@ export function ApplyButton({
                 </div>
               </>
             )}
-          </div>
-        </div>
-      )}
+          </Modal>
     </>
   )
 }

@@ -1,9 +1,10 @@
 'use client'
 
-import { X, LogIn, UserPlus } from 'lucide-react'
+import { LogIn, UserPlus } from 'lucide-react'
 import Link from 'next/link'
 import { ROUTES } from '@/config/routes'
 import { IconTile } from '@/components/shared/brand/IconTile'
+import { Modal, ModalClose, ModalTitle } from '@/components/shared/overlays/Modal'
 
 interface AuthGateModalProps {
   action:  string   // e.g. "postularte" | "guardar esta oferta"
@@ -12,28 +13,15 @@ interface AuthGateModalProps {
 
 export function AuthGateModal({ action, onClose }: AuthGateModalProps) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/40 dark:bg-black/60"
-        onClick={onClose}
-      />
-
-      {/* Modal */}
-      <div className="relative z-10 w-full max-w-sm bg-card rounded-2xl shadow-modal p-6">
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-muted text-neutral-400 transition-colors"
-        >
-          <X className="w-4 h-4" />
-        </button>
+    <Modal open onClose={onClose} size="sm" className="p-6">
+        <ModalClose className="absolute right-4 top-4" />
 
         {/* Icon */}
         <IconTile icon={LogIn} size="lg" />
 
-        <h3 className="text-base font-bold text-foreground mb-2">
+        <ModalTitle className="mb-2 text-base font-bold text-foreground">
           Necesitás una cuenta
-        </h3>
+        </ModalTitle>
         <p className="text-sm text-muted-foreground mb-6">
           Para {action} en TrayectorIA, creá tu cuenta gratis o iniciá sesión.
         </p>
@@ -56,7 +44,6 @@ export function AuthGateModal({ action, onClose }: AuthGateModalProps) {
             Iniciar sesión
           </Link>
         </div>
-      </div>
-    </div>
+    </Modal>
   )
 }

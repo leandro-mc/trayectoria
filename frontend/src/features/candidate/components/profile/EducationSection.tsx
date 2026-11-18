@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Plus, Pencil, Trash2, GraduationCap, X } from 'lucide-react'
+import { Plus, Pencil, Trash2, GraduationCap } from 'lucide-react'
 import {
   useEducation,
   useAddEducation,
@@ -15,6 +15,7 @@ import { formatPeriod } from '@/lib/utils/date'
 import type { EducationResponse } from '../../types/candidate.types'
 import { Spinner } from '@/components/ui/spinner'
 import { Input } from '@/components/ui/input'
+import { Modal, ModalClose, ModalTitle } from '@/components/shared/overlays/Modal'
 
 
 function EducationForm({ initial, onClose }: { initial?: EducationResponse; onClose: () => void }) {
@@ -49,16 +50,12 @@ function EducationForm({ initial, onClose }: { initial?: EducationResponse; onCl
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex">
-      <div className="flex-1 bg-black/40 dark:bg-black/60" onClick={onClose} />
-      <div className="w-full max-w-md bg-card h-full overflow-y-auto shadow-modal flex flex-col">
+    <Modal open onClose={onClose} variant="sheet">
         <div className="flex items-center justify-between p-5 border-b border-border">
-          <h3 className="text-base font-semibold text-foreground">
+          <ModalTitle className="text-base font-semibold text-foreground">
             {initial ? 'Editar educación' : 'Agregar educación'}
-          </h3>
-          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-muted text-neutral-400 transition-colors">
-            <X className="w-5 h-5" />
-          </button>
+          </ModalTitle>
+          <ModalClose />
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="p-5 space-y-4 flex-1">
           <div>
@@ -94,8 +91,7 @@ function EducationForm({ initial, onClose }: { initial?: EducationResponse; onCl
             </button>
           </div>
         </form>
-      </div>
-    </div>
+    </Modal>
   )
 }
 
