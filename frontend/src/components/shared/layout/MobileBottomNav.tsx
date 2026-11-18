@@ -8,7 +8,7 @@ import { ROUTES } from '@/config/routes'
 import { useAuthStore } from '@/stores/auth.store'
 import { useUIStore } from '@/stores/ui.store'
 import type { Theme } from '@/stores/ui.store'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 import { Skeleton } from '@/components/ui/skeleton'
 
 //  Nav configs per role 

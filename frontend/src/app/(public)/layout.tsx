@@ -3,7 +3,7 @@
 import type { ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
 import { PublicNavbar } from '@/components/shared/layout/PublicNavbar'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 
 interface PublicLayoutProps {
   children: ReactNode

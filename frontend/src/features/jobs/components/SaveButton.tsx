@@ -6,7 +6,7 @@ import { Spinner } from '@/components/ui/spinner'
 import { useAuthStore } from '@/stores/auth.store'
 import { useIsSaved, useSaveOffer, useUnsaveOffer } from '@/features/saved-offers/hooks/useSavedOffers'
 import { AuthGateModal } from './AuthGateModal'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 
 interface SaveButtonProps {
   jobOfferId: number

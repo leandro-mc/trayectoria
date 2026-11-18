@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Search, X } from 'lucide-react'
 import { useSkillsCatalog } from '../hooks/useSkillsCatalog'
 import type { SkillResponse } from '@/types/api.types'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 import { Spinner } from '@/components/ui/spinner'
 import { Input } from '@/components/ui/input'
 

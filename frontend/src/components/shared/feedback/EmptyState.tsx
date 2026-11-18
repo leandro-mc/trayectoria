@@ -2,7 +2,7 @@
 
 import NextLink from 'next/link'
 import { type LucideIcon } from 'lucide-react'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 
 interface EmptyStateProps {
   icon:        LucideIcon

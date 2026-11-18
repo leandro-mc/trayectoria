@@ -8,7 +8,7 @@ import { Send, CheckCircle2, Mic, TrendingUp, AlertCircle, ThumbsUp } from 'luci
 import { useSendMessage, useCompleteInterview } from '../hooks/useInterviews'
 import { saveFeedback } from '../utils/feedback-cache'
 import { formatDate } from '@/lib/utils/date'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 import type { SimulatedInterviewResponse, InterviewFeedback } from '../types/interviews.types'
 import { Spinner } from '@/components/ui/spinner'
 import { Button } from '@/components/ui/button'

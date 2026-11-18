@@ -9,7 +9,7 @@ import { PageSkeleton } from '@/components/shared/feedback/PageSkeleton'
 import { useJobOffer, useInterviewInstructions } from '@/features/jobs/hooks/useJobOffers'
 import { ROUTES } from '@/config/routes'
 import { formatDate } from '@/lib/utils/date'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 import {
   WORK_MODE_LABELS,
   JOB_TYPE_LABELS,

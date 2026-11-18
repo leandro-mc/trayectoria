@@ -7,16 +7,16 @@ import { PublicNavbar } from '@/components/shared/layout/PublicNavbar'
 import { useAuthStore } from '@/stores/auth.store'
 import { CompanySidebar } from '@/components/shared/layout/CompanySidebar'
 
-// Jobs is accessible to everyone.
+// Shell for the split-panel pages. Jobs is accessible to everyone.
 // - CANDIDATE   -> full candidate shell with sidebar (panel fijo, acciones activas)
 // - COMPANY     -> public navbar (pueden ver ofertas, no postularse)
 // - No auth     -> public navbar (pueden ver, se les pide login al actuar)
 
-interface JobsShellProps {
+interface SplitPanelShellProps {
   children: ReactNode
 }
 
-export function JobsShell({ children }: JobsShellProps) {
+export function SplitPanelShell({ children }: SplitPanelShellProps) {
   const role = useAuthStore((s) => s.user?.role)
   const isCandidate = role === 'CANDIDATE'
   const isCompany   = role === 'COMPANY'

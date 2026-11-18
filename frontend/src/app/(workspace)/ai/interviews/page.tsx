@@ -6,7 +6,7 @@ import { AILeftPanel, useAIParams } from '@/features/ai/components/AILeftPanel'
 import { InterviewChat } from '@/features/ai/interviews/components/InterviewChat'
 import { useInterview } from '@/features/ai/interviews/hooks/useInterviews'
 import { loadFeedback } from '@/features/ai/interviews/utils/feedback-cache'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 import { Spinner } from '@/components/ui/spinner'
 
 //  Right panel — selected interview 

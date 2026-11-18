@@ -8,7 +8,7 @@ import { SidebarLink } from './SidebarLink'
 import { ThemeToggle } from './ThemeToggle'
 import { getInitials } from '@/lib/utils/format'
 import { ROUTES } from '@/config/routes'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 import { Logo } from '@/components/shared/brand/Logo'
 
 const NAV_ITEMS = [

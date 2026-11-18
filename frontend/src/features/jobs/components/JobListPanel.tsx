@@ -8,7 +8,7 @@ import { SaveButton } from './SaveButton'
 import { useAuthStore } from '@/stores/auth.store'
 import { WORK_MODE_LABELS, JOB_TYPE_LABELS } from '@/config/constants'
 import type { WorkMode, JobType } from '@/types/global.types'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Input } from '@/components/ui/input'
 

@@ -19,7 +19,7 @@ import {
 } from '@/config/constants'
 import { formatDate } from '@/lib/utils/date'
 import { ROUTES } from '@/config/routes'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 import type { JobApplicationResponse } from '@/features/applications/types/applications.types'
 import type { ApplicationStatus } from '@/types/global.types'
 import { Spinner } from '@/components/ui/spinner'

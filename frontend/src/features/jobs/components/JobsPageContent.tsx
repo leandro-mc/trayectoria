@@ -7,7 +7,7 @@ import { JobDescriptionSide } from './JobDescriptionSide'
 import { JobCVPanel } from './JobCVPanel'
 import { JobInterviewPanel } from './JobInterviewPanel'
 import { useJobsParams } from '../hooks/useJobsParams'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 
 //  States 
 //

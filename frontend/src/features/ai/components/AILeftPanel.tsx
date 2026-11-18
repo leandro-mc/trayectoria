@@ -13,10 +13,11 @@ import { useCurricula } from '@/features/ai/curricula/hooks/useCurricula'
 import { useInterviews } from '@/features/ai/interviews/hooks/useInterviews'
 import { ROUTES } from '@/config/routes'
 import { formatDate } from '@/lib/utils/date'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 import type { GeneratedCurriculumResponse } from '@/features/ai/curricula/types/curricula.types'
 import type { SimulatedInterviewResponse } from '@/features/ai/interviews/types/interviews.types'
 import { IconTile } from '@/components/shared/brand/IconTile'
+import Link from 'next/link'
 
 //  Shared hook for ?id= URL state 
 
@@ -107,7 +108,7 @@ function CurriculaList({
           Sin currículums
         </p>
         <p className="text-xs text-neutral-400 leading-relaxed">
-          Desde <a href={ROUTES.jobs} className="underline text-brand-text hover:text-brand-text">Empleos</a>, elegí una oferta y presioná “CV personalizado”.
+          Desde <Link href={ROUTES.jobs} className="underline text-brand-text hover:text-brand-text">Empleos</Link>, elegí una oferta y presioná “CV personalizado”.
         </p>
       </div>
     )
@@ -174,7 +175,7 @@ function InterviewsList({
           Sin entrevistas
         </p>
         <p className="text-xs text-neutral-400 leading-relaxed">
-          Desde <a href={ROUTES.jobs} className="underline text-brand-text hover:text-brand-text">Empleos</a>, elegí una oferta y presioná “Entrevista IA”.
+          Desde <Link href={ROUTES.jobs} className="underline text-brand-text hover:text-brand-text">Empleos</Link>, elegí una oferta y presioná “Entrevista IA”.
         </p>
       </div>
     )

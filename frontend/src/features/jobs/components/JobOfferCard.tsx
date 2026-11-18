@@ -5,7 +5,7 @@ import { MapPin, Clock, Wifi, Building } from 'lucide-react'
 import { WORK_MODE_LABELS, JOB_TYPE_LABELS } from '@/config/constants'
 import { formatRelativeDate } from '@/lib/utils/date'
 import type { JobOfferSummaryResponse } from '../types/jobs.types'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 
 const WORK_MODE_ICONS = {
   REMOTE:  <Wifi      className="w-3 h-3" />,

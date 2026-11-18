@@ -16,7 +16,7 @@ import {
 import { useOfferApplicationCount } from '@/features/applications/hooks/useJobApplications'
 import { ROUTES } from '@/config/routes'
 import { formatDate } from '@/lib/utils/date'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 import type { JobOfferSummaryResponse } from '@/features/jobs/types/jobs.types'
 import { Spinner } from '@/components/ui/spinner'
 import { Skeleton } from '@/components/ui/skeleton'
