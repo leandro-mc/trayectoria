@@ -9,7 +9,7 @@ import { useCurriculum, useBaseCurriculum,} from '@/features/ai/curricula/hooks/
 import { CurriculumDisplay } from '@/features/ai/curricula/components/CurriculumDisplay'
 import { formatDate } from '@/lib/utils/date'
 import type { JobApplicationResponse } from '../types/applications.types'
-import { Skeleton } from '@/components/ui/skeleton'
+import { SkeletonLines } from '@/components/ui/skeleton'
 import { IconTile } from '@/components/shared/brand/IconTile'
 import { ApplicationStatusBadge } from '@/components/shared/data/StatusBadge'
 
@@ -17,13 +17,7 @@ import { ApplicationStatusBadge } from '@/components/shared/data/StatusBadge'
 
 function CurriculumSkeleton() {
   return (
-    <div className="space-y-2">
-      {[88, 72, 91, 65, 80].map((w, i) => (
-        <Skeleton
-          key={i} className="h-3 rounded-lg"
-          style={{ width: `${w}%` }} />
-      ))}
-    </div>
+    <SkeletonLines count={5} className="space-y-2" />
   )
 }
 

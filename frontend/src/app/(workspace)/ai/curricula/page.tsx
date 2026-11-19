@@ -4,14 +4,12 @@ import { Suspense } from 'react'
 import { FileText, Trash2 } from 'lucide-react'
 import { DetailPlaceholder, MasterDetail } from '@/components/shared/layout/MasterDetail'
 import { Button } from '@/components/ui/button'
-import { Skeleton } from '@/components/ui/skeleton'
+import { SkeletonLines } from '@/components/ui/skeleton'
 import { Spinner } from '@/components/ui/spinner'
 import { AILeftPanel } from '@/features/ai/components/AILeftPanel'
 import { CurriculumDisplay } from '@/features/ai/curricula/components/CurriculumDisplay'
 import { useCurriculum, useDeleteCurriculum } from '@/features/ai/curricula/hooks/useCurricula'
 import { useAIParams } from '@/features/ai/hooks/useAIParams'
-
-const LINE_WIDTHS = ['w-11/12', 'w-3/4', 'w-5/6', 'w-2/3', 'w-4/5'] as const
 
 function CurriculumPanel({ id, onClear }: { id: number; onClear: () => void }) {
   const { data: cv, isLoading } = useCurriculum(id)
@@ -19,9 +17,7 @@ function CurriculumPanel({ id, onClear }: { id: number; onClear: () => void }) {
 
   if (isLoading || !cv) {
     return (
-      <div className="space-y-3 p-6">
-        {LINE_WIDTHS.map((w) => <Skeleton key={w} className={`h-3 rounded-lg ${w}`} />)}
-      </div>
+      <SkeletonLines count={5} className="p-6" />
     )
   }
 

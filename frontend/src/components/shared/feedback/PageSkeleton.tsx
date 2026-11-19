@@ -1,8 +1,5 @@
 import { Card } from '@/components/ui/card'
-import { Skeleton } from '@/components/ui/skeleton'
-
-// Tailwind classes instead of computed widths: a skeleton paragraph gets a ragged right edge.
-const LINE_WIDTHS = ['w-11/12', 'w-5/6', 'w-3/4', 'w-2/3'] as const
+import { Skeleton, SkeletonLines } from '@/components/ui/skeleton'
 
 /** Generic card-shaped skeleton */
 export function CardSkeleton({ lines = 3 }: { lines?: number }) {
@@ -10,9 +7,7 @@ export function CardSkeleton({ lines = 3 }: { lines?: number }) {
     <Card padding="md">
       <Skeleton className="mb-3 h-5 w-3/4 rounded" />
       <Skeleton className="mb-4 h-4 w-1/2 rounded" />
-      {Array.from({ length: Math.max(lines - 2, 0) }).map((_, i) => (
-        <Skeleton key={i} className={`mb-2 h-3.5 rounded ${LINE_WIDTHS[i % LINE_WIDTHS.length]}`} />
-      ))}
+      <SkeletonLines count={Math.max(lines - 2, 0)} lineClassName="h-3.5" className="space-y-2" />
     </Card>
   )
 }

@@ -1,11 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { Send, CheckCircle2, FileText } from 'lucide-react'
+import { Check, CheckCircle2, FileText, Send } from 'lucide-react'
 import { useAuthStore } from '@/stores/auth.store'
 import { useApply, useHasApplied } from '@/features/applications/hooks/useApplications'
 import { useCurricula } from '@/features/ai/curricula/hooks/useCurricula'
 import { AuthGateModal } from './AuthGateModal'
+import { Field } from '@/components/shared/forms/Field'
 import { NativeSelect } from '@/components/ui/native-select'
 import { Modal, ModalClose } from '@/components/shared/overlays/Modal'
 import { Button } from '@/components/ui/button'
@@ -69,29 +70,20 @@ export function ApplyButton({
     setShowModal(false)
   }
 
-  // ── Button label ───────────────────────────────────────────────────────────
-  const buttonLabel = isClosed
-    ? 'Cerrada'
-    : hasApplied
-      ? '✓ Ya postulado'
-      : 'Postularme'
+  const buttonLabel = isClosed ? 'Cerrada' : hasApplied ? 'Ya postulado' : 'Postularme'
 
   return (
     <>
-      <button
+      <Button
+        variant={isDisabled ? 'secondary' : 'default'}
         onClick={handleClick}
         disabled={isDisabled}
         title={hasApplied ? 'Ya te postulaste a esta oferta' : undefined}
-        className={[
-          'inline-flex items-center gap-1.5 h-9 px-4 rounded-lg text-xs font-semibold transition-colors',
-          isDisabled
-            ? 'bg-muted text-subtle cursor-not-allowed'
-            : 'bg-primary hover:bg-primary/90 text-primary-foreground',
-        ].join(' ')}
+        className="text-xs font-semibold"
       >
-        {!isDisabled && <Send className="w-3.5 h-3.5" />}
+        {hasApplied ? <Check /> : !isDisabled && <Send />}
         {buttonLabel}
-      </button>
+      </Button>
 
       {/* Auth gate */}
       {showGate && (
@@ -113,7 +105,7 @@ export function ApplyButton({
                 </p>
                 <p className="text-sm text-muted-foreground mt-1">
                   {selectedCvId
-                    ? 'Se adjuntó tu currículum personalizado ✨'
+                    ? 'Se adjuntó tu currículum personalizado'
                     : 'La empresa recibirá tu perfil completo'
                   }
                 </p>
@@ -129,28 +121,31 @@ export function ApplyButton({
                 )}
 
                 {matchingCurricula.length > 0 ? (
-                  <div className="mt-4 mb-5">
-                    <label className="flex items-center gap-1.5 text-xs font-semibold text-secondary-foreground mb-2">
-                      <FileText className="w-3.5 h-3.5 text-brand-text" />
-                      Adjuntar currículum con IA
-                    </label>
-                    <NativeSelect
-                      value={selectedCvId}
-                      onChange={(e) => setSelectedCvId(e.target.value ? Number(e.target.value) : '')} className="h-9 text-xs"
-                    >
-                      <option value="">Solo mi perfil (sin CV adjunto)</option>
-                      {matchingCurricula.map((cv) => (
-                        <option key={cv.id} value={cv.id}>
-                          ✨ CV para esta oferta — {new Date(cv.createdAt).toLocaleDateString('es', { day: 'numeric', month: 'short' })}
-                        </option>
-                      ))}
-                    </NativeSelect>
-                  </div>
+                  <Field
+                    className="mt-4 mb-5"
+                    label={<span className="flex items-center gap-1.5 text-xs font-semibold"><FileText className="size-3.5 text-brand-text" aria-hidden="true" />Adjuntar currículum con IA</span>}
+                  >
+                    {(a11y) => (
+                      <NativeSelect
+                        value={selectedCvId}
+                        onChange={(e) => setSelectedCvId(e.target.value ? Number(e.target.value) : '')}
+                        className="h-9 text-xs"
+                        {...a11y}
+                      >
+                        <option value="">Solo mi perfil (sin CV adjunto)</option>
+                        {matchingCurricula.map((cv) => (
+                          <option key={cv.id} value={cv.id}>
+                            CV para esta oferta — {new Date(cv.createdAt).toLocaleDateString('es', { day: 'numeric', month: 'short' })}
+                          </option>
+                        ))}
+                      </NativeSelect>
+                    )}
+                  </Field>
                 ) : (
                   <div className="mt-4 mb-5 p-3 rounded-xl bg-muted border border-border">
                     <p className="text-xs text-muted-foreground">
                       Se enviará tu perfil completo. Podés generar un{' '}
-                      <span className="text-brand-text font-medium">CV personalizado ✨</span>{' '}
+                      <span className="text-brand-text font-medium">CV personalizado</span>{' '}
                       para esta oferta desde el panel de la oferta.
                     </p>
                   </div>

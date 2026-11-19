@@ -14,7 +14,7 @@ import { CurriculumDisplay } from '@/features/ai/curricula/components/Curriculum
 import { useJobsParams } from '../hooks/useJobsParams'
 import { useQueryClient } from '@tanstack/react-query'
 import { QUERY_KEYS } from '@/config/query-keys'
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton, SkeletonLines } from '@/components/ui/skeleton'
 import { IconTile } from '@/components/shared/brand/IconTile'
 import { Button } from '@/components/ui/button'
 
@@ -36,16 +36,10 @@ function GeneratingSkeleton({ label }: { label: string }) {
           {label}
         </span>
       </div>
-      <div className="space-y-2.5">
-        {[88, 75, 92, 68, 80, 60].map((w, i) => (
-          <Skeleton key={i} className="h-3 rounded-lg" style={{ width: `${w}%` }} />
-        ))}
-      </div>
+      <SkeletonLines count={6} />
       <div className="mt-6 space-y-2.5">
         <Skeleton className="h-2 rounded w-1/4" />
-        {[95, 82, 70].map((w, i) => (
-          <Skeleton key={i} className="h-3 rounded-lg" style={{ width: `${w}%` }} />
-        ))}
+        <SkeletonLines count={3} className="space-y-2.5" />
       </div>
     </div>
   )

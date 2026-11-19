@@ -10,7 +10,7 @@ import { loadFeedback } from '@/features/ai/interviews/utils/feedback-cache'
 import { InterviewChat } from '@/features/ai/interviews/components/InterviewChat'
 import { useJobsParams } from '../hooks/useJobsParams'
 import { IconTile } from '@/components/shared/brand/IconTile'
-import { Skeleton } from '@/components/ui/skeleton'
+import { SkeletonLines } from '@/components/ui/skeleton'
 
 //  Starting skeleton 
 
@@ -21,11 +21,7 @@ function StartingSkeleton() {
       <p className="text-sm text-brand-text font-medium animate-pulse">
         Preparando tu entrevista…
       </p>
-      <div className="w-full max-w-xs space-y-2">
-        {[80, 65, 75].map((w, i) => (
-          <Skeleton key={i} className="h-3 rounded-lg" style={{ width: `${w}%`, marginLeft: 'auto', marginRight: 'auto' }} />
-        ))}
-      </div>
+      <SkeletonLines count={3} className="w-full max-w-xs" />
     </div>
   )
 }

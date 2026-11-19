@@ -6,7 +6,7 @@ import { ArrowLeft, MapPin, Briefcase, Wifi } from 'lucide-react'
 import { useJobOffer } from '../hooks/useJobOffers'
 import { useJobsParams } from '../hooks/useJobsParams'
 import { WORK_MODE_LABELS, JOB_TYPE_LABELS } from '@/config/constants'
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton, SkeletonLines } from '@/components/ui/skeleton'
 
 export function JobDescriptionSide() {
   const { selectedId, goBackToDetail } = useJobsParams()
@@ -17,11 +17,7 @@ export function JobDescriptionSide() {
       <div className="p-5 space-y-3">
         <Skeleton className="h-4 rounded w-2/3" />
         <Skeleton className="h-3 rounded w-1/3" />
-        <div className="space-y-2 mt-4">
-          {[100, 95, 90, 85].map((w, i) => (
-            <Skeleton key={i} className="h-3 rounded" style={{ width: `${w}%` }} />
-          ))}
-        </div>
+        <SkeletonLines count={4} className="mt-4" />
       </div>
     )
   }

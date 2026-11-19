@@ -10,7 +10,7 @@ import { useAuthStore } from '@/stores/auth.store'
 import { WORK_MODE_LABELS, JOB_TYPE_LABELS } from '@/config/constants'
 import { formatDate } from '@/lib/utils/date'
 import { cn } from '@/lib/utils'
-import { Skeleton } from '@/components/ui/skeleton'
+import { Skeleton, SkeletonLines } from '@/components/ui/skeleton'
 
 //  Content section tabs 
 
@@ -30,16 +30,12 @@ function DetailSkeleton() {
     <div className="p-6 space-y-4">
       <Skeleton className="h-6 rounded w-2/3" />
       <Skeleton className="h-4 rounded w-1/3" />
-      <div className="flex gap-2 mt-4">
-        {[60, 80, 70].map((w) => (
-          <Skeleton key={w} className="h-6 rounded-full" style={{ width: `${w}px` }} />
-        ))}
+      <div className="mt-4 flex gap-2">
+        <Skeleton className="h-6 w-16 rounded-full" />
+        <Skeleton className="h-6 w-20 rounded-full" />
+        <Skeleton className="h-6 w-[70px] rounded-full" />
       </div>
-      <div className="space-y-2 mt-6">
-        {[100, 90, 95, 85, 100].map((w, i) => (
-          <Skeleton key={i} className="h-3 rounded" style={{ width: `${w}%` }} />
-        ))}
-      </div>
+      <SkeletonLines count={5} className="mt-6" />
     </div>
   )
 }
