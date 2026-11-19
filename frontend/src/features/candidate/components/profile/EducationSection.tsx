@@ -1,30 +1,24 @@
 'use client'
 
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Plus, Pencil, Trash2, GraduationCap } from 'lucide-react'
-import {
-  useEducation,
-  useAddEducation,
-  useUpdateEducation,
-  useDeleteEducation,
-} from '../../hooks/useCandidate'
+import { GraduationCap } from 'lucide-react'
+import { useAddEducation, useDeleteEducation, useEducation, useUpdateEducation } from '../../hooks/useCandidate'
 import { educationSchema, type EducationFormValues } from '../../schemas/candidate.schemas'
-import { formatPeriod } from '@/lib/utils/date'
 import type { EducationResponse } from '../../types/candidate.types'
-import { Input } from '@/components/ui/input'
-import { Modal, ModalClose, ModalTitle } from '@/components/shared/overlays/Modal'
-import { Card } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-
+import { AddButton, ProfileSection, RowActions, SectionEmpty } from './ProfileSection'
+import { EntryModal } from './EntryModal'
+import { TextField } from '@/components/shared/forms/TextField'
+import { Skeleton } from '@/components/ui/skeleton'
+import { formatPeriod } from '@/lib/utils/date'
 
 function EducationForm({ initial, onClose }: { initial?: EducationResponse; onClose: () => void }) {
   const { mutate: add,    isPending: adding   } = useAddEducation()
   const { mutate: update, isPending: updating } = useUpdateEducation()
   const isPending = adding || updating
 
-  const { register, handleSubmit, formState: { errors } } = useForm<EducationFormValues>({
+  const form = useForm<EducationFormValues>({
     resolver: zodResolver(educationSchema),
     defaultValues: {
       institution:  initial?.institution  ?? '',
@@ -43,111 +37,62 @@ function EducationForm({ initial, onClose }: { initial?: EducationResponse; onCl
       startDate:    data.startDate    || undefined,
       endDate:      data.endDate      || undefined,
     }
-    if (initial) {
-      update({ id: initial.id, data: payload }, { onSuccess: onClose })
-    } else {
-      add(payload, { onSuccess: onClose })
-    }
+    if (initial) update({ id: initial.id, data: payload }, { onSuccess: onClose })
+    else         add(payload, { onSuccess: onClose })
   }
 
   return (
-    <Modal open onClose={onClose} variant="sheet">
-        <div className="flex items-center justify-between p-5 border-b border-border">
-          <ModalTitle className="text-base font-semibold text-foreground">
-            {initial ? 'Editar educación' : 'Agregar educación'}
-          </ModalTitle>
-          <ModalClose />
+    <FormProvider {...form}>
+      <EntryModal
+        title={initial ? 'Editar educación' : 'Agregar educación'}
+        submitLabel={initial ? 'Guardar cambios' : 'Agregar'}
+        isPending={isPending}
+        onClose={onClose}
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <TextField<EducationFormValues> name="institution" label="Institución" required placeholder="Universidad o institución" disabled={isPending} />
+        <TextField<EducationFormValues> name="degree" label="Título / Grado" placeholder="Ej: Licenciatura, Bachillerato" disabled={isPending} />
+        <TextField<EducationFormValues> name="fieldOfStudy" label="Campo de estudio" placeholder="Ej: Ingeniería en Sistemas" disabled={isPending} />
+        <div className="grid grid-cols-2 gap-3">
+          <TextField<EducationFormValues> name="startDate" type="date" label="Inicio" disabled={isPending} />
+          <TextField<EducationFormValues> name="endDate" type="date" label="Fin" disabled={isPending} />
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} className="p-5 space-y-4 flex-1">
-          <div>
-            <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Institución *</label>
-            <Input {...register('institution')} placeholder="Universidad o institución" disabled={isPending} />
-            {errors.institution && <p className="mt-1 text-xs text-danger-text">{errors.institution.message}</p>}
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Título / Grado</label>
-            <Input {...register('degree')} placeholder="Ej: Licenciatura, Bachillerato" disabled={isPending} />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Campo de estudio</label>
-            <Input {...register('fieldOfStudy')} placeholder="Ej: Ingeniería en Sistemas" disabled={isPending} />
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Inicio</label>
-              <Input type="date" {...register('startDate')} disabled={isPending} />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-secondary-foreground mb-1.5">Fin</label>
-              <Input type="date" {...register('endDate')} disabled={isPending} />
-            </div>
-          </div>
-          <div className="flex gap-3 pt-2">
-            <Button variant="outline" size="lg" type="button" onClick={onClose} disabled={isPending} className="flex-1">
-              Cancelar
-            </Button>
-            <Button size="lg" loading={isPending} type="submit" className="flex-1">
-              {initial ? 'Guardar cambios' : 'Agregar'}
-            </Button>
-          </div>
-        </form>
-    </Modal>
+      </EntryModal>
+    </FormProvider>
   )
 }
 
 export function EducationSection() {
   const { data: educations = [], isLoading } = useEducation()
   const { mutate: deleteEdu, isPending: deleting } = useDeleteEducation()
+  // `editing` undefined + `formOpen` = adding a new entry.
   const [formOpen, setFormOpen] = useState(false)
   const [editing, setEditing]   = useState<EducationResponse | undefined>()
 
-  function openAdd()                             { setEditing(undefined); setFormOpen(true) }
-  function openEdit(edu: EducationResponse)      { setEditing(edu);       setFormOpen(true) }
-  function closeForm()                           { setFormOpen(false);    setEditing(undefined) }
+  const open  = (edu?: EducationResponse) => { setEditing(edu); setFormOpen(true) }
+  const close = () => { setFormOpen(false); setEditing(undefined) }
 
   return (
-    <Card>
-      <div className="flex items-center justify-between px-6 py-4 border-b border-border-soft">
-        <h3 className="text-sm font-semibold text-foreground">Educación</h3>
-        <button onClick={openAdd} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-text hover:underline transition-colors">
-          <Plus className="w-4 h-4" /> Agregar
-        </button>
-      </div>
+    <ProfileSection title="Educación" action={<AddButton onClick={() => open()} />}>
       <div className="divide-y divide-border-soft">
-        {isLoading && (
-          <div className="p-6 space-y-3">
-            {[1, 2].map((i) => <div key={i} className="h-14 rounded-lg bg-muted" />)}
-          </div>
-        )}
-        {!isLoading && educations.length === 0 && (
-          <div className="flex flex-col items-center py-10 text-center px-6">
-            <GraduationCap className="w-8 h-8 text-faint mb-2" />
-            <p className="text-sm text-muted-foreground">Aún no agregaste educación</p>
-          </div>
-        )}
+        {isLoading && <div className="space-y-3 p-6"><Skeleton className="h-14 rounded-lg" /><Skeleton className="h-14 rounded-lg" /></div>}
+        {!isLoading && educations.length === 0 && <SectionEmpty icon={GraduationCap}>Aún no agregaste educación</SectionEmpty>}
+
         {educations.map((edu) => (
-          <div key={edu.id} className="flex items-start gap-4 px-6 py-4 group">
-            <div className="flex-1 min-w-0">
+          <div key={edu.id} className="group flex items-start gap-4 px-6 py-4">
+            <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold text-foreground">{edu.institution}</p>
               {edu.degree && (
-                <p className="text-sm text-body">
-                  {edu.degree}{edu.fieldOfStudy ? ` · ${edu.fieldOfStudy}` : ''}
-                </p>
+                <p className="text-sm text-body">{edu.degree}{edu.fieldOfStudy ? ` · ${edu.fieldOfStudy}` : ''}</p>
               )}
-              <p className="text-xs text-muted-foreground mt-0.5">{formatPeriod(edu.startDate, edu.endDate, false)}</p>
+              <p className="mt-0.5 text-xs text-muted-foreground">{formatPeriod(edu.startDate, edu.endDate, false)}</p>
             </div>
-            <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-              <button onClick={() => openEdit(edu)} className="p-1.5 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground transition-colors">
-                <Pencil className="w-4 h-4" />
-              </button>
-              <button onClick={() => deleteEdu(edu.id)} disabled={deleting} className="p-1.5 rounded-lg hover:bg-danger-tint text-muted-foreground hover:text-danger-text transition-colors disabled:opacity-50">
-                <Trash2 className="w-4 h-4" />
-              </button>
-            </div>
+            <RowActions label={edu.institution ?? 'esta educación'} onEdit={() => open(edu)} onDelete={() => deleteEdu(edu.id)} deleting={deleting} />
           </div>
         ))}
       </div>
-      {formOpen && <EducationForm initial={editing} onClose={closeForm} />}
-    </Card>
+
+      {formOpen && <EducationForm initial={editing} onClose={close} />}
+    </ProfileSection>
   )
 }

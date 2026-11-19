@@ -1,198 +1,87 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import { useForm } from 'react-hook-form'
+import { useEffect } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Save, Camera } from 'lucide-react'
+import { Save } from 'lucide-react'
 import { useCompanyProfile, useUpdateCompanyProfile, useUploadLogo } from '../hooks/useCompany'
 import { companyProfileSchema, type CompanyProfileFormValues } from '../schemas/company.schemas'
-import { extractApiError } from '@/lib/utils/format'
-import { getInitials } from '@/lib/utils/format'
-import { Spinner } from '@/components/ui/spinner'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Textarea } from '@/components/ui/textarea'
-import { Input } from '@/components/ui/input'
+import { AvatarUpload } from '@/components/shared/data/AvatarUpload'
+import { FormSkeleton } from '@/components/shared/feedback/PageSkeleton'
+import { TextareaField, TextField } from '@/components/shared/forms/TextField'
 import { Button } from '@/components/ui/button'
 import { ErrorAlert } from '@/components/ui/error-alert'
+import { extractApiError } from '@/lib/utils/format'
 
-
-function Field({
-  label, error, children,
-}: { label: string; error?: string; children: React.ReactNode }) {
-  return (
-    <div>
-      <label className="block text-sm font-medium text-secondary-foreground mb-1.5">
-        {label}
-      </label>
-      {children}
-      {error && <p className="mt-1.5 text-xs text-danger-text">{error}</p>}
-    </div>
-  )
-}
+// The API stores "no value" as null, the form as ''.
+const toForm = (v: string | null | undefined) => v ?? ''
+const toApi  = (v: string | undefined) => v || null
 
 export function CompanyProfileForm() {
-  const { data: profile, isLoading }             = useCompanyProfile()
-  const { mutate: update, isPending, error }      = useUpdateCompanyProfile()
+  const { data: profile, isLoading } = useCompanyProfile()
+  const { mutate: update, isPending, error } = useUpdateCompanyProfile()
   const { mutate: uploadLogo, isPending: uploading } = useUploadLogo()
-  const logoInputRef = useRef<HTMLInputElement>(null)
 
-  const {
-    register, handleSubmit, reset,
-    formState: { errors, isDirty },
-  } = useForm<CompanyProfileFormValues>({
-    resolver: zodResolver(companyProfileSchema),
-  })
+  const form = useForm<CompanyProfileFormValues>({ resolver: zodResolver(companyProfileSchema) })
+  const { reset, handleSubmit, formState: { isDirty } } = form
 
   useEffect(() => {
-    if (profile) {
-      reset({
-        companyName: profile.companyName ?? '',
-        industry:    profile.industry    ?? '',
-        about:       profile.about       ?? '',
-        website:     profile.website     ?? '',
-        location:    profile.location    ?? '',
-      })
-    }
+    if (!profile) return
+    reset({
+      companyName: toForm(profile.companyName),
+      industry:    toForm(profile.industry),
+      about:       toForm(profile.about),
+      website:     toForm(profile.website),
+      location:    toForm(profile.location),
+    })
   }, [profile, reset])
 
-  function onSubmit(data: CompanyProfileFormValues) {
+  function onSubmit(d: CompanyProfileFormValues) {
     update({
-      companyName: data.companyName || null,
-      industry:    data.industry    || null,
-      about:       data.about       || null,
-      website:     data.website     || null,
-      location:    data.location    || null,
+      companyName: toApi(d.companyName), industry: toApi(d.industry), about: toApi(d.about),
+      website: toApi(d.website), location: toApi(d.location),
     })
   }
 
-  function handleLogoChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0]
-    if (file) uploadLogo(file)
-    e.target.value = ''
-  }
-
-  if (isLoading) {
-    return (
-      <div className="space-y-4">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <Skeleton key={i} className="h-10 rounded-lg" />
-        ))}
-      </div>
-    )
-  }
+  if (isLoading) return <FormSkeleton />
 
   const displayName = profile?.companyName ?? profile?.email ?? ''
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
-      {/*  Logo + company name header  */}
-      <div className="flex items-center gap-5 p-5 rounded-xl bg-muted border border-border">
-        {/* Logo */}
-        <div className="relative shrink-0">
-          {profile?.logoUrl ? (
-            <img
-              src={profile.logoUrl}
-              alt={displayName}
-              className="w-20 h-20 rounded-xl object-cover border-2 border-border"
-            />
-          ) : (
-            <div className="w-20 h-20 rounded-xl bg-brand-tint-strong flex items-center justify-center text-2xl font-bold text-brand-text border-2 border-input">
-              {getInitials(displayName)}
-            </div>
-          )}
-          <Button
-            size="sm"
-            type="button"
-            onClick={() => logoInputRef.current?.click()}
-            disabled={uploading}
-            className="absolute -bottom-1 -right-1 w-7 shadow-md"
-            aria-label="Cambiar logo"
-          >
-            {uploading
-              ? <Spinner className="size-3.5" />
-              : <Camera className="w-3.5 h-3.5" />
-            }
-          </Button>
-          <input
-            ref={logoInputRef}
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={handleLogoChange}
-          />
+    <FormProvider {...form}>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-6">
+        <div className="flex items-center gap-5 rounded-xl border border-border bg-muted p-5">
+          <AvatarUpload name={displayName} imageUrl={profile?.logoUrl} shape="rounded" uploading={uploading} label="Cambiar logo" onSelect={uploadLogo} />
+          <div>
+            <p className="text-base font-bold text-foreground">{displayName || 'Tu empresa'}</p>
+            <p className="text-sm text-muted-foreground">{profile?.email}</p>
+          </div>
         </div>
 
-        <div>
-          <p className="text-base font-bold text-foreground">
-            {displayName || 'Tu empresa'}
-          </p>
-          <p className="text-sm text-muted-foreground">{profile?.email}</p>
+        {error && <ErrorAlert>{extractApiError(error)}</ErrorAlert>}
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+          <TextField<CompanyProfileFormValues> name="companyName" label="Nombre de la empresa" placeholder="Nombre de tu empresa" disabled={isPending} />
+          <TextField<CompanyProfileFormValues> name="industry" label="Industria" placeholder="Ej: Tecnología, Finanzas, Salud" disabled={isPending} />
+          <TextField<CompanyProfileFormValues> name="website" label="Sitio web" placeholder="https://tuempresa.com" disabled={isPending} />
+          <TextField<CompanyProfileFormValues> name="location" label="Ubicación" placeholder="San José, Costa Rica" disabled={isPending} />
         </div>
-      </div>
 
-      {/*  API error  */}
-      {error && (
-        <ErrorAlert>
-          {extractApiError(error)}
-        </ErrorAlert>
-      )}
-
-      {/*  Fields  */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <Field label="Nombre de la empresa" error={errors.companyName?.message}>
-          <Input
-            {...register('companyName')}
-            placeholder="Nombre de tu empresa"
-            disabled={isPending}
-          />
-        </Field>
-        <Field label="Industria" error={errors.industry?.message}>
-          <Input
-            {...register('industry')}
-            placeholder="Ej: Tecnología, Finanzas, Salud"
-            disabled={isPending}
-          />
-        </Field>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <Field label="Sitio web" error={errors.website?.message}>
-          <Input
-            {...register('website')}
-            placeholder="https://tuempresa.com"
-            disabled={isPending}
-          />
-        </Field>
-        <Field label="Ubicación" error={errors.location?.message}>
-          <Input
-            {...register('location')}
-            placeholder="San José, Costa Rica"
-            disabled={isPending}
-          />
-        </Field>
-      </div>
-
-      <Field label="Sobre la empresa" error={errors.about?.message}>
-        <Textarea
-          {...register('about')}
+        <TextareaField<CompanyProfileFormValues>
+          name="about"
+          label="Sobre la empresa"
           rows={4}
           placeholder="Describí brevemente tu empresa, cultura, misión..."
           disabled={isPending}
         />
-      </Field>
 
-      <div className="flex justify-end">
-        <Button
-     size="lg"
-     loading={isPending}
-     type="submit"
-     disabled={isPending || !isDirty}>
-          <Save className="w-4 h-4" />
-          {isPending ? 'Guardando...' : 'Guardar cambios'}
-        </Button>
-      </div>
-
-    </form>
+        <div className="flex justify-end">
+          <Button type="submit" size="lg" loading={isPending} disabled={!isDirty}>
+            <Save />
+            {isPending ? 'Guardando...' : 'Guardar cambios'}
+          </Button>
+        </div>
+      </form>
+    </FormProvider>
   )
 }

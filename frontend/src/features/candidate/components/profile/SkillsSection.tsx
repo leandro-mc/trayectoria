@@ -1,50 +1,29 @@
 'use client'
 
-import { useCandidateSkills, useAddSkills, useDeleteSkill } from '../../hooks/useCandidate'
+import { useAddSkills, useCandidateSkills, useDeleteSkill } from '../../hooks/useCandidate'
+import { ProfileSection } from './ProfileSection'
+import { Skeleton } from '@/components/ui/skeleton'
 import { SkillPicker } from '@/features/skills/components/SkillPicker'
-import type { SkillResponse } from '../../types/candidate.types'
-import { Card } from '@/components/ui/card'
+
+// Distinct widths make the placeholder read as a row of chips rather than a block.
+const CHIP_WIDTHS = ['w-20', 'w-16', 'w-24', 'w-[70px]', 'w-[90px]']
 
 export function SkillsSection() {
   const { data: skills = [], isLoading } = useCandidateSkills()
-  const { mutate: addSkills   } = useAddSkills()
+  const { mutate: addSkills }   = useAddSkills()
   const { mutate: deleteSkill } = useDeleteSkill()
 
-  function handleAdd(skill: SkillResponse) {
-    addSkills({ skillIds: [skill.id] })
-  }
-
-  function handleRemove(skillId: number) {
-    deleteSkill(skillId)
-  }
-
   return (
-    <Card>
-      <div className="px-6 py-4 border-b border-border-soft">
-        <h3 className="text-sm font-semibold text-foreground">Skills</h3>
-        <p className="text-xs text-muted-foreground mt-0.5">
-          Buscá y agregá tus habilidades técnicas y blandas
-        </p>
-      </div>
+    <ProfileSection title="Skills" description="Buscá y agregá tus habilidades técnicas y blandas">
       <div className="p-6">
         {isLoading ? (
           <div className="flex flex-wrap gap-2">
-            {[80, 60, 100, 70, 90].map((w) => (
-              <div
-                key={w}
-                className="h-7 rounded-lg bg-muted"
-                style={{ width: `${w}px` }}
-              />
-            ))}
+            {CHIP_WIDTHS.map((w) => <Skeleton key={w} className={`h-7 rounded-lg ${w}`} />)}
           </div>
         ) : (
-          <SkillPicker
-            selected={skills}
-            onAdd={handleAdd}
-            onRemove={handleRemove}
-          />
+          <SkillPicker selected={skills} onAdd={(skill) => addSkills({ skillIds: [skill.id] })} onRemove={deleteSkill} />
         )}
       </div>
-    </Card>
+    </ProfileSection>
   )
 }
