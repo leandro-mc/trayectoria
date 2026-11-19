@@ -73,11 +73,12 @@ export default function CompanyDashboardPage() {
         title="Dashboard"
         description="Resumen de tu actividad"
         actions={
-          <Button asChild><Link
-      href={ROUTES.newOffer}>
-            <PlusCircle className="w-4 h-4" />
-            Nueva oferta
-          </Link></Button>
+          <Button asChild>
+            <Link href={ROUTES.newOffer}>
+              <PlusCircle className="w-4 h-4" />
+              Nueva oferta
+            </Link>
+          </Button>
         }
       />
 

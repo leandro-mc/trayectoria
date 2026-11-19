@@ -135,7 +135,7 @@ export function ProfileForm() {
 
       {/* Links */}
       <div className="pt-2 border-t border-border-soft">
-        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">Links</p>
+        <p className="text-xs font-semibold text-muted-foreground mb-4">Links</p>
         <div className="space-y-4">
           <Field label="LinkedIn" error={errors.linkedinUrl?.message}>
             <Input {...register('linkedinUrl')} placeholder="https://linkedin.com/in/tu-perfil" disabled={isPending} />

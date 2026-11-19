@@ -17,7 +17,7 @@ function Section({
     <div>
       <div className="flex items-center gap-2 mb-3">
         <Icon className="w-4 h-4 text-brand-text" />
-        <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wide">
+        <h3 className="text-xs font-bold text-muted-foreground">
           {title}
         </h3>
       </div>
@@ -43,7 +43,7 @@ export function CurriculumDisplay({ content, compact = false }: CurriculumDispla
           className="p-4 rounded-xl border border-brand-border bg-brand-tint"
         >
           <div className="flex items-center gap-2 mb-3">
-            <span className="text-xs font-bold text-brand-text uppercase tracking-wide">
+            <span className="text-xs font-bold text-brand-text">
               Por qué sos ideal para este puesto
             </span>
           </div>
@@ -72,7 +72,7 @@ export function CurriculumDisplay({ content, compact = false }: CurriculumDispla
         <Section icon={Briefcase} title="Experiencia">
           <div className="space-y-4">
             {content.experience.map((exp, i) => (
-              <div key={i} className="pl-4 border-l-2 border-input">
+              <div key={i} className="pl-4 border-l-2 border-border">
                 <p className="text-sm font-semibold text-foreground">
                   {exp.position}
                 </p>
@@ -94,7 +94,7 @@ export function CurriculumDisplay({ content, compact = false }: CurriculumDispla
         <Section icon={GraduationCap} title="Educación">
           <div className="space-y-3">
             {content.education.map((edu, i) => (
-              <div key={i} className="pl-4 border-l-2 border-input">
+              <div key={i} className="pl-4 border-l-2 border-border">
                 <p className="text-sm font-semibold text-foreground">
                   {edu.degree}
                 </p>

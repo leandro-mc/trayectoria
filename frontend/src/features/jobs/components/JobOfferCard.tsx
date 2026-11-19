@@ -15,7 +15,7 @@ const WORK_MODE_ICONS = {
 
 const WORK_MODE_COLORS: Record<string, string> = {
   REMOTE:  'bg-brand-tint text-brand-text',
-  HYBRID:  'bg-warning-50 text-warning-600',
+  HYBRID:  'bg-warning-tint text-warning-text',
   ON_SITE: 'bg-muted text-body',
 }
 

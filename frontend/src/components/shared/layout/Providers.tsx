@@ -67,7 +67,7 @@ function AuthBootstrapGate({ children }: { children: ReactNode }) {
   if (!ready) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-background">
-        <div className="w-8 h-8 rounded-full animate-spin border-2 border-brand-500 border-t-transparent" />
+        <div className="w-8 h-8 rounded-full animate-spin border-2 border-primary border-t-transparent" />
       </div>
     )
   }

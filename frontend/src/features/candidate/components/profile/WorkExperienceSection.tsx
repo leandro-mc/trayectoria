@@ -132,7 +132,7 @@ export function WorkExperienceSection() {
     <Card>
       <div className="flex items-center justify-between px-6 py-4 border-b border-border-soft">
         <h3 className="text-sm font-semibold text-foreground">Experiencia laboral</h3>
-        <button onClick={openAdd} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-text hover:text-brand-700 transition-colors">
+        <button onClick={openAdd} className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-text hover:underline transition-colors">
           <Plus className="w-4 h-4" /> Agregar
         </button>
       </div>

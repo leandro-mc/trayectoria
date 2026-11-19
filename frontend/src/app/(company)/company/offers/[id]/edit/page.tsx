@@ -31,11 +31,12 @@ export default function EditOfferPage({ params }: EditOfferPageProps) {
         title="Editar oferta"
         description={offer?.title ?? ''}
         actions={
-          <Button asChild variant="outline"><Link
-      href={ROUTES.offerDetail(offerId)}>
-            <Eye className="w-4 h-4" />
-            Ver oferta
-          </Link></Button>
+          <Button asChild variant="outline">
+            <Link href={ROUTES.offerDetail(offerId)}>
+              <Eye className="w-4 h-4" />
+              Ver oferta
+            </Link>
+          </Button>
         }
       />
       {offer && (

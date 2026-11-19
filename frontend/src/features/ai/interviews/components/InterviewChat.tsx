@@ -45,11 +45,11 @@ function MessageBubble({
       <div className={cn(
         'max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed',
         isUser
-          ? 'bg-primary text-white rounded-tr-sm'
-          : 'bg-raised border border-input text-foreground rounded-tl-sm',
+          ? 'bg-primary text-primary-foreground rounded-tr-sm'
+          : 'bg-raised border border-border text-foreground rounded-tl-sm',
       )}>
         <p className="whitespace-pre-wrap">{content}</p>
-        <p className={cn('text-[10px] mt-1.5', isUser ? 'text-brand-200' : 'text-muted-foreground')}>
+        <p className={cn('text-[10px] mt-1.5', isUser ? 'text-primary-foreground/80' : 'text-muted-foreground')}>
           {formatDate(sentAt)}
         </p>
       </div>
@@ -61,7 +61,7 @@ function TypingIndicator() {
   return (
     <div className="flex gap-2.5">
       <Avatar role="ASSISTANT" />
-      <div className="bg-raised border border-input rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
+      <div className="bg-raised border border-border rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
         {[0, 150, 300].map((delay) => (
           <span
             key={delay}
@@ -83,7 +83,7 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
         className="text-center py-5 rounded-2xl border border-brand-border bg-brand-tint"
       >
         <div className="flex items-center justify-center gap-2 mb-2">
-          <span className="text-xs font-semibold text-brand-text uppercase tracking-wide">
+          <span className="text-xs font-semibold text-brand-text">
             Feedback de la IA
           </span>
         </div>
@@ -95,8 +95,8 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
       </div>
 
       {/* Summary */}
-      <div className="p-4 bg-raised rounded-xl border border-input">
-        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Resumen</p>
+      <div className="p-4 bg-raised rounded-xl border border-border">
+        <p className="text-xs font-semibold text-muted-foreground mb-2">Resumen</p>
         <p className="text-sm text-secondary-foreground leading-relaxed">
           {feedback.summary}
         </p>
@@ -106,13 +106,13 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
       {feedback.strengths.length > 0 && (
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <ThumbsUp className="w-3.5 h-3.5 text-success-500" />
-            <p className="text-xs font-semibold text-success-text uppercase tracking-wide">Fortalezas</p>
+            <ThumbsUp className="w-3.5 h-3.5 text-success-text" />
+            <p className="text-xs font-semibold text-success-text">Fortalezas</p>
           </div>
           <ul className="space-y-2">
             {feedback.strengths.map((s, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-secondary-foreground">
-                <CheckCircle2 className="w-3.5 h-3.5 text-success-500 mt-0.5 shrink-0" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-success-text mt-0.5 shrink-0" />
                 {s}
               </li>
             ))}
@@ -125,7 +125,7 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
         <div>
           <div className="flex items-center gap-2 mb-2">
             <TrendingUp className="w-3.5 h-3.5 text-warning-text" />
-            <p className="text-xs font-semibold text-warning-600 uppercase tracking-wide">Áreas a mejorar</p>
+            <p className="text-xs font-semibold text-warning-text">Áreas a mejorar</p>
           </div>
           <ul className="space-y-2">
             {feedback.areasForImprovement.map((a, i) => (
@@ -139,8 +139,8 @@ function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
       )}
 
       {/* Detailed */}
-      <div className="p-4 bg-raised rounded-xl border border-input">
-        <p className="text-xs font-semibold text-brand-text uppercase tracking-wide mb-2">
+      <div className="p-4 bg-raised rounded-xl border border-border">
+        <p className="text-xs font-semibold text-brand-text mb-2">
           Feedback detallado
         </p>
         <p className="text-sm text-secondary-foreground leading-relaxed">
@@ -250,7 +250,7 @@ export function InterviewChat({
         {/* Completed without feedback from current session — just the checkmark */}
         {isCompleted && !sending && !feedback && (
           <div className="flex flex-col items-center py-4 text-center">
-            <CheckCircle2 className="w-7 h-7 text-success-500 mb-2" />
+            <CheckCircle2 className="w-7 h-7 text-success-text mb-2" />
             <p className="text-sm font-medium text-body">
               Entrevista completada
             </p>

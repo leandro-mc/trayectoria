@@ -44,7 +44,7 @@ export function SaveButton({ jobOfferId, size = 'md', showLabel = false }: SaveB
           'inline-flex items-center gap-1.5 rounded-lg border font-medium transition-colors disabled:opacity-50',
           isSmall ? 'h-7 px-2 text-xs' : 'h-9 px-3 text-xs',
           isSaved
-            ? 'border-brand-border bg-brand-tint text-brand-text hover:border-danger-300 hover:bg-danger-tint hover:text-danger-text'
+            ? 'border-brand-border bg-brand-tint text-brand-text hover:border-danger-border hover:bg-danger-tint hover:text-danger-text'
             : 'border-input bg-card text-muted-foreground hover:border-brand-border hover:text-brand-text',
         )}
       >

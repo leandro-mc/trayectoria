@@ -201,7 +201,7 @@ function InterviewsList({
               isCompleted ? 'bg-success-tint' : 'bg-brand-tint',
             )}>
               {isCompleted
-                ? <CheckCircle2 className="w-4 h-4 text-success-500" />
+                ? <CheckCircle2 className="w-4 h-4 text-success-text" />
                 : <Clock className="w-4 h-4 text-brand-text" />
               }
             </div>

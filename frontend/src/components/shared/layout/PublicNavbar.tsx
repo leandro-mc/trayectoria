@@ -42,21 +42,24 @@ export function PublicNavbar({ hideAuthButtons = false }: PublicNavbarProps) {
 
         {!hideAuthButtons && (
           isAuthenticated ? (
-            <Button asChild size="sm" className="sm:gap-2 sm:h-9 sm:px-4 sm:text-sm"><Link
-       href={dashboardHref}>
-              <LayoutDashboard className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              Mi panel
-            </Link></Button>
+            <Button asChild size="sm" className="sm:gap-2 sm:h-9 sm:px-4 sm:text-sm">
+              <Link href={dashboardHref}>
+                <LayoutDashboard className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                Mi panel
+              </Link>
+            </Button>
           ) : (
             <>
-              <Button asChild variant="outline" size="sm" className="sm:h-9 sm:px-4 sm:text-sm"><Link
-        href={ROUTES.login}>
-                Iniciar sesión
-              </Link></Button>
-              <Button asChild size="sm" className="sm:h-9 sm:px-4 sm:text-sm"><Link
-        href={ROUTES.register}>
-                Registrarse
-              </Link></Button>
+              <Button asChild variant="outline" size="sm" className="sm:h-9 sm:px-4 sm:text-sm">
+                <Link href={ROUTES.login}>
+                  Iniciar sesión
+                </Link>
+              </Button>
+              <Button asChild size="sm" className="sm:h-9 sm:px-4 sm:text-sm">
+                <Link href={ROUTES.register}>
+                  Registrarse
+                </Link>
+              </Button>
             </>
           )
         )}

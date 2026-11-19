@@ -28,18 +28,18 @@ export function AuthGateModal({ action, onClose }: AuthGateModalProps) {
         </p>
 
         <div className="flex flex-col gap-2">
-          <Button asChild size="lg"><Link
-      href={ROUTES.register} onClick={onClose}
-     >
-            <UserPlus className="w-4 h-4" />
-            Crear cuenta gratis
-          </Link></Button>
-          <Button asChild variant="outline" size="lg"><Link
-      href={ROUTES.login} onClick={onClose}
-     >
-            <LogIn className="w-4 h-4" />
-            Iniciar sesión
-          </Link></Button>
+          <Button asChild size="lg">
+            <Link href={ROUTES.register} onClick={onClose}>
+              <UserPlus className="w-4 h-4" />
+              Crear cuenta gratis
+            </Link>
+          </Button>
+          <Button asChild variant="outline" size="lg">
+            <Link href={ROUTES.login} onClick={onClose}>
+              <LogIn className="w-4 h-4" />
+              Iniciar sesión
+            </Link>
+          </Button>
         </div>
     </Modal>
   )

@@ -86,7 +86,7 @@ export function ApplyButton({
           'inline-flex items-center gap-1.5 h-9 px-4 rounded-lg text-xs font-semibold transition-colors',
           isDisabled
             ? 'bg-muted text-subtle cursor-not-allowed'
-            : 'bg-primary hover:bg-primary/90 text-white',
+            : 'bg-primary hover:bg-primary/90 text-primary-foreground',
         ].join(' ')}
       >
         {!isDisabled && <Send className="w-3.5 h-3.5" />}
@@ -107,7 +107,7 @@ export function ApplyButton({
 
             {applied ? (
               <div className="text-center py-4">
-                <CheckCircle2 className="w-12 h-12 text-success-500 mx-auto mb-3" />
+                <CheckCircle2 className="w-12 h-12 text-success-text mx-auto mb-3" />
                 <p className="text-base font-bold text-foreground">
                   ¡Postulación enviada!
                 </p>

@@ -102,16 +102,18 @@ export default function OfferDetailPage({ params }: PageProps) {
         description={`Publicada ${formatDate(offer.createdAt)}`}
         actions={
           <div className="flex items-center gap-2">
-            <Button asChild variant="outline"><Link
-       href={ROUTES.offerApplications(offerId)}>
-              <Users className="w-4 h-4" />
-              Postulantes
-            </Link></Button>
-            <Button asChild><Link
-       href={ROUTES.editOffer(offerId)}>
-              <Pencil className="w-4 h-4" />
-              Editar
-            </Link></Button>
+            <Button asChild variant="outline">
+              <Link href={ROUTES.offerApplications(offerId)}>
+                <Users className="w-4 h-4" />
+                Postulantes
+              </Link>
+            </Button>
+            <Button asChild>
+              <Link href={ROUTES.editOffer(offerId)}>
+                <Pencil className="w-4 h-4" />
+                Editar
+              </Link>
+            </Button>
           </div>
         }
       />

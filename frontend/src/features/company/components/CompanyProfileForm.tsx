@@ -94,7 +94,7 @@ export function CompanyProfileForm() {
             <img
               src={profile.logoUrl}
               alt={displayName}
-              className="w-20 h-20 rounded-xl object-cover border-2 border-input"
+              className="w-20 h-20 rounded-xl object-cover border-2 border-border"
             />
           ) : (
             <div className="w-20 h-20 rounded-xl bg-brand-tint-strong flex items-center justify-center text-2xl font-bold text-brand-text border-2 border-input">

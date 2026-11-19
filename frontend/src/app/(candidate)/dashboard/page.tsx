@@ -35,7 +35,7 @@ function QuickAction({
           ? 'bg-primary'
           : 'bg-muted',
       ].join(' ')}>
-        <Icon className={['w-5 h-5', highlight ? 'text-white' : 'text-muted-foreground'].join(' ')} />
+        <Icon className={['w-5 h-5', highlight ? 'text-primary-foreground' : 'text-muted-foreground'].join(' ')} />
       </div>
       <p className="text-sm font-semibold text-foreground mb-1">{title}</p>
       <p className="text-xs text-muted-foreground">{description}</p>

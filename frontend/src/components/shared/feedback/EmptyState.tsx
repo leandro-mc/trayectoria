@@ -46,10 +46,11 @@ export function EmptyState({
       {action && (
         action.href
           ? (
-            <Button asChild><NextLink 
-       href={action.href}>
-              {action.label}
-            </NextLink></Button>
+            <Button asChild>
+              <NextLink href={action.href}>
+                {action.label}
+              </NextLink>
+            </Button>
           ) : (
             <Button
        onClick={action.onClick}>
