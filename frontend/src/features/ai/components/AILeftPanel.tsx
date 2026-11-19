@@ -1,250 +1,118 @@
-// Shared left panel for /ai/* split panel pages.
-// Contains tabs (Currículums | Entrevistas) + list for the active section.
-
+// Shared left panel for the /ai/* split-panel pages: tabs (Currículums | Entrevistas) plus the list of the active one.
 'use client'
 
-import { useRouter, usePathname, useSearchParams } from 'next/navigation'
-import { useCallback } from 'react'
-import {
-  FileText, MessageSquare, CheckCircle2, Clock,
-  ChevronRight,
-} from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { CheckCircle2, Clock, FileText, MessageSquare } from 'lucide-react'
+import { ListEmpty, ListSkeleton, SelectableRow } from './AIListParts'
+import { IconTile } from '@/components/shared/brand/IconTile'
+import { ROUTES } from '@/config/routes'
 import { useCurricula } from '@/features/ai/curricula/hooks/useCurricula'
 import { useInterviews } from '@/features/ai/interviews/hooks/useInterviews'
-import { ROUTES } from '@/config/routes'
 import { formatDate } from '@/lib/utils/date'
 import { cn } from '@/lib/utils'
-import type { GeneratedCurriculumResponse } from '@/features/ai/curricula/types/curricula.types'
-import type { SimulatedInterviewResponse } from '@/features/ai/interviews/types/interviews.types'
-import { IconTile } from '@/components/shared/brand/IconTile'
-import Link from 'next/link'
 
-//  Shared hook for ?id= URL state 
-
-export function useAIParams() {
-  const searchParams = useSearchParams()
-  const router       = useRouter()
-
-  const selectedId = searchParams.get('id') ? Number(searchParams.get('id')) : null
-
-  const selectItem = useCallback((id: number) => {
-    const params = new URLSearchParams(searchParams.toString())
-    params.set('id', String(id))
-    router.replace(`?${params.toString()}`, { scroll: false })
-  }, [router, searchParams])
-
-  const clearSelection = useCallback(() => {
-    router.replace('?', { scroll: false })
-  }, [router])
-
-  return { selectedId, selectItem, clearSelection }
-}
-
-//  Tabs 
+const TABS = [
+  { href: ROUTES.curricula,  label: 'Currículums', icon: FileText      },
+  { href: ROUTES.interviews, label: 'Entrevistas', icon: MessageSquare },
+] as const
 
 function AITabs() {
   const pathname = usePathname()
-  const isCurricula  = pathname === ROUTES.curricula
-  const isInterviews = pathname === ROUTES.interviews
 
   return (
-    <div className="flex border-b border-border shrink-0">
-      <a
-        href={ROUTES.curricula}
-        className={cn(
-          'flex-1 flex items-center justify-center gap-1.5 py-3 text-xs font-semibold border-b-2 transition-colors',
-          isCurricula
-            ? 'border-primary text-brand-text'
-            : 'border-transparent text-subtle hover:text-secondary-foreground',
-        )}
-      >
-        <FileText className="w-3.5 h-3.5" />
-        Currículums
-      </a>
-      <a
-        href={ROUTES.interviews}
-        className={cn(
-          'flex-1 flex items-center justify-center gap-1.5 py-3 text-xs font-semibold border-b-2 transition-colors',
-          isInterviews
-            ? 'border-primary text-brand-text'
-            : 'border-transparent text-subtle hover:text-secondary-foreground',
-        )}
-      >
-        <MessageSquare className="w-3.5 h-3.5" />
-        Entrevistas
-      </a>
-    </div>
+    <nav aria-label="Secciones de IA" className="flex shrink-0 border-b border-border">
+      {TABS.map(({ href, label, icon: Icon }) => {
+        const active = pathname === href
+        return (
+          <Link
+            key={href}
+            href={href}
+            aria-current={active ? 'page' : undefined}
+            className={cn(
+              'flex flex-1 items-center justify-center gap-1.5 border-b-2 py-3 text-xs font-semibold transition-colors',
+              active ? 'border-primary text-brand-text' : 'border-transparent text-muted-foreground hover:text-secondary-foreground',
+            )}
+          >
+            <Icon className="size-3.5" aria-hidden="true" />
+            {label}
+          </Link>
+        )
+      })}
+    </nav>
   )
 }
 
-//  Curricula list 
-
-function CurriculaList({
-  selectedId,
-  onSelect,
-}: {
+interface ListProps {
   selectedId: number | null
   onSelect:   (id: number) => void
-}) {
+}
+
+function CurriculaList({ selectedId, onSelect }: ListProps) {
   const { data: curricula = [], isLoading } = useCurricula()
 
-  if (isLoading) {
-    return (
-      <div className="p-4 space-y-3">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="h-16 rounded-xl bg-muted" />
-        ))}
-      </div>
-    )
-  }
-
-  if (curricula.length === 0) {
-    return (
-      <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
-        <div className="w-12 h-12 rounded-2xl bg-muted flex items-center justify-center mb-3">
-          <FileText className="w-6 h-6 text-muted-foreground" />
-        </div>
-        <p className="text-sm font-medium text-secondary-foreground mb-1">
-          Sin currículums
-        </p>
-        <p className="text-xs text-muted-foreground leading-relaxed">
-          Desde <Link href={ROUTES.jobs} className="underline text-brand-text hover:text-brand-text">Empleos</Link>, elegí una oferta y presioná “CV personalizado”.
-        </p>
-      </div>
-    )
-  }
+  if (isLoading) return <ListSkeleton rows={3} />
+  if (curricula.length === 0) return <ListEmpty icon={FileText} title="Sin currículums" action="CV personalizado" />
 
   return (
     <div className="divide-y divide-border-soft">
-      {curricula.map((cv: GeneratedCurriculumResponse) => (
-        <button
+      {curricula.map((cv) => (
+        <SelectableRow
           key={cv.id}
-          onClick={() => onSelect(cv.id)}
-          className={cn(
-            'w-full flex items-center gap-3 px-4 py-3.5 text-left transition-colors',
-            selectedId === cv.id
-              ? 'bg-brand-tint'
-              : 'hover:bg-hover',
-          )}
-        >
-          <IconTile icon={FileText} />
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-foreground truncate">
-              {cv.jobOfferTitle ?? 'Currículum general'}
-            </p>
-            <p className="text-xs text-muted-foreground mt-0.5">{formatDate(cv.createdAt)}</p>
-          </div>
-          <ChevronRight className={cn(
-            'w-3.5 h-3.5 shrink-0 transition-colors',
-            selectedId === cv.id ? 'text-brand-text' : 'text-faint',
-          )} />
-        </button>
+          selected={selectedId === cv.id}
+          onSelect={() => onSelect(cv.id)}
+          leading={<IconTile icon={FileText} />}
+          title={cv.jobOfferTitle ?? 'Currículum general'}
+          subtitle={formatDate(cv.createdAt)}
+        />
       ))}
     </div>
   )
 }
 
-//  Interviews list 
-
-function InterviewsList({
-  selectedId,
-  onSelect,
-}: {
-  selectedId: number | null
-  onSelect:   (id: number) => void
-}) {
+function InterviewsList({ selectedId, onSelect }: ListProps) {
   const { data: interviews = [], isLoading } = useInterviews()
 
-  if (isLoading) {
-    return (
-      <div className="p-4 space-y-3">
-        {[1, 2].map((i) => (
-          <div key={i} className="h-16 rounded-xl bg-muted" />
-        ))}
-      </div>
-    )
-  }
-
-  if (interviews.length === 0) {
-    return (
-      <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
-        <div className="w-12 h-12 rounded-2xl bg-muted flex items-center justify-center mb-3">
-          <MessageSquare className="w-6 h-6 text-muted-foreground" />
-        </div>
-        <p className="text-sm font-medium text-secondary-foreground mb-1">
-          Sin entrevistas
-        </p>
-        <p className="text-xs text-muted-foreground leading-relaxed">
-          Desde <Link href={ROUTES.jobs} className="underline text-brand-text hover:text-brand-text">Empleos</Link>, elegí una oferta y presioná “Entrevista IA”.
-        </p>
-      </div>
-    )
-  }
+  if (isLoading) return <ListSkeleton rows={2} />
+  if (interviews.length === 0) return <ListEmpty icon={MessageSquare} title="Sin entrevistas" action="Entrevista IA" />
 
   return (
     <div className="divide-y divide-border-soft">
-      {interviews.map((iv: SimulatedInterviewResponse) => {
-        const isCompleted = iv.status === 'COMPLETED'
+      {interviews.map((iv) => {
+        const done = iv.status === 'COMPLETED'
+        const StatusIcon = done ? CheckCircle2 : Clock
         return (
-          <button
+          <SelectableRow
             key={iv.id}
-            onClick={() => onSelect(iv.id)}
-            className={cn(
-              'w-full flex items-center gap-3 px-4 py-3.5 text-left transition-colors',
-              selectedId === iv.id
-                ? 'bg-brand-tint'
-                : 'hover:bg-hover',
-            )}
-          >
-            <div className={cn(
-              'w-8 h-8 rounded-lg flex items-center justify-center shrink-0',
-              isCompleted ? 'bg-success-tint' : 'bg-brand-tint',
-            )}>
-              {isCompleted
-                ? <CheckCircle2 className="w-4 h-4 text-success-text" />
-                : <Clock className="w-4 h-4 text-brand-text" />
-              }
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-foreground truncate">
-                {iv.jobOfferTitle ?? 'Entrevista'}
-              </p>
-              <p className={cn(
-                'text-xs mt-0.5',
-                isCompleted ? 'text-success-text' : 'text-brand-text',
-              )}>
-                {isCompleted ? 'Completada' : 'En progreso'}
-                {' · '}{formatDate(iv.createdAt)}
-              </p>
-            </div>
-            <ChevronRight className={cn(
-              'w-3.5 h-3.5 shrink-0 transition-colors',
-              selectedId === iv.id ? 'text-brand-text' : 'text-faint',
-            )} />
-          </button>
+            selected={selectedId === iv.id}
+            onSelect={() => onSelect(iv.id)}
+            leading={
+              <span aria-hidden="true" className={cn('flex size-8 shrink-0 items-center justify-center rounded-lg', done ? 'bg-success-tint' : 'bg-brand-tint')}>
+                <StatusIcon className={cn('size-4', done ? 'text-success-text' : 'text-brand-text')} />
+              </span>
+            }
+            title={iv.jobOfferTitle ?? 'Entrevista'}
+            subtitle={`${done ? 'Completada' : 'En progreso'} · ${formatDate(iv.createdAt)}`}
+            subtitleClassName={done ? 'text-success-text' : 'text-brand-text'}
+          />
         )
       })}
     </div>
   )
 }
 
-//  AILeftPanel 
-
-interface AILeftPanelProps {
-  section:   'curricula' | 'interviews'
-  selectedId: number | null
-  onSelect:   (id: number) => void
+interface AILeftPanelProps extends ListProps {
+  section: 'curricula' | 'interviews'
 }
 
 export function AILeftPanel({ section, selectedId, onSelect }: AILeftPanelProps) {
   return (
-    <div className="flex flex-col h-full bg-card">
+    <div className="flex h-full flex-col bg-card">
       <AITabs />
-      <div className="flex-1 min-h-0 overflow-y-auto">
+      <div className="min-h-0 flex-1 overflow-y-auto">
         {section === 'curricula'
           ? <CurriculaList selectedId={selectedId} onSelect={onSelect} />
-          : <InterviewsList selectedId={selectedId} onSelect={onSelect} />
-        }
+          : <InterviewsList selectedId={selectedId} onSelect={onSelect} />}
       </div>
     </div>
   )

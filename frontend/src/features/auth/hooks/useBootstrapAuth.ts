@@ -96,7 +96,6 @@ export function useBootstrapAuth(): boolean {
     void init()
 
     return () => { cancelled = true }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Intentionally empty — runs exactly once on mount
 
   return ready

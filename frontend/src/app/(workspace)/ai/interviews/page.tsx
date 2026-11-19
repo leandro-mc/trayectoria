@@ -1,95 +1,40 @@
 'use client'
 
 import { Suspense } from 'react'
-import { Search } from 'lucide-react'
-import { AILeftPanel, useAIParams } from '@/features/ai/components/AILeftPanel'
+import { MessageSquare } from 'lucide-react'
+import { DetailPlaceholder, MasterDetail } from '@/components/shared/layout/MasterDetail'
+import { Spinner } from '@/components/ui/spinner'
+import { AILeftPanel } from '@/features/ai/components/AILeftPanel'
+import { useAIParams } from '@/features/ai/hooks/useAIParams'
 import { InterviewChat } from '@/features/ai/interviews/components/InterviewChat'
 import { useInterview } from '@/features/ai/interviews/hooks/useInterviews'
 import { loadFeedback } from '@/features/ai/interviews/utils/feedback-cache'
-import { cn } from '@/lib/utils'
-import { Spinner } from '@/components/ui/spinner'
-
-//  Right panel — selected interview 
 
 function InterviewPanel({ id }: { id: number }) {
   const { data: interview, isLoading } = useInterview(id)
 
   if (isLoading || !interview) {
     return (
-      <div className="flex flex-col h-full bg-card">
-        <div className="flex-1 flex items-center justify-center">
-          <Spinner className="size-6 text-brand-text" />
-        </div>
+      <div className="flex h-full items-center justify-center bg-card">
+        <Spinner className="size-6 text-brand-text" />
       </div>
     )
   }
 
-  return (
-    <InterviewChat
-      interview={interview}
-      initialFeedback={loadFeedback(id)}
-      messagesClassName="flex-1 min-h-0"
-    />
-  )
+  return <InterviewChat interview={interview} initialFeedback={loadFeedback(id)} />
 }
-
-//  Empty right panel 
-
-function EmptyRight() {
-  return (
-    <div className="hidden lg:flex flex-1 items-center justify-center bg-background">
-      <div className="text-center">
-        <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-3">
-          <Search className="w-7 h-7 text-faint" />
-        </div>
-        <p className="text-sm font-medium text-subtle">
-          Seleccioná una entrevista para verla
-        </p>
-      </div>
-    </div>
-  )
-}
-
-//  Page 
 
 function InterviewsPageContent() {
   const { selectedId, selectItem, clearSelection } = useAIParams()
 
   return (
-    <div className="flex h-full overflow-hidden">
-
-      {/* Left panel */}
-      <div className={cn(
-        'flex-col overflow-hidden border-r border-border',
-        selectedId !== null
-          ? 'hidden lg:flex lg:w-[38%]'
-          : 'flex w-full lg:w-[38%]',
-      )}>
-        <AILeftPanel
-          section="interviews"
-          selectedId={selectedId}
-          onSelect={selectItem}
-        />
-      </div>
-
-      {/* Right panel */}
-      {selectedId !== null ? (
-        <div className="flex flex-col flex-1 overflow-hidden bg-card">
-          {/* Mobile back */}
-          <button
-            onClick={clearSelection}
-            className="lg:hidden flex items-center gap-2 px-4 py-3 text-xs font-medium text-muted-foreground border-b border-border bg-card shrink-0 hover:text-foreground transition-colors"
-          >
-            ← Volver al listado
-          </button>
-          <div className="flex-1 min-h-0 overflow-hidden">
-            <InterviewPanel id={selectedId} />
-          </div>
-        </div>
-      ) : (
-        <EmptyRight />
-      )}
-    </div>
+    <MasterDetail
+      hasSelection={selectedId !== null}
+      onBack={clearSelection}
+      list={<AILeftPanel section="interviews" selectedId={selectedId} onSelect={selectItem} />}
+      detail={selectedId !== null && <InterviewPanel id={selectedId} />}
+      placeholder={<DetailPlaceholder icon={MessageSquare}>Seleccioná una entrevista para verla</DetailPlaceholder>}
+    />
   )
 }
 
