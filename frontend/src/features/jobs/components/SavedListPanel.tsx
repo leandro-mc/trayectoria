@@ -3,27 +3,16 @@
 // "Quitar" unsaves without leaving the panel.
 'use client'
 
+import Link from 'next/link'
 import { Bookmark, BookmarkX } from 'lucide-react'
 import { useSavedOffers, useUnsaveOffer } from '@/features/saved-offers/hooks/useSavedOffers'
 import { useJobsParams } from '../hooks/useJobsParams'
 import { JobOfferCard } from './JobOfferCard'
 import { ROUTES } from '@/config/routes'
-import { Skeleton } from '@/components/ui/skeleton'
+import { JobCardSkeleton } from '@/components/shared/feedback/PageSkeleton'
 
 //  Skeleton 
 
-function CardSkeleton() {
-  return (
-    <div className="p-4 rounded-xl border border-border bg-card space-y-3">
-      <Skeleton className="h-4 rounded w-3/4" />
-      <Skeleton className="h-3 rounded w-1/2" />
-      <div className="flex gap-2">
-        <Skeleton className="h-5 rounded-full w-16" />
-        <Skeleton className="h-5 rounded-full w-20" />
-      </div>
-    </div>
-  )
-}
 
 //  Unsave button 
 
@@ -73,7 +62,7 @@ export function SavedListPanel() {
       <div className="flex-1 overflow-y-auto px-3 py-2 space-y-2">
 
         {isLoading && (
-          Array.from({ length: 5 }).map((_, i) => <CardSkeleton key={i} />)
+          Array.from({ length: 5 }).map((_, i) => <JobCardSkeleton key={i} />)
         )}
 
         {!isLoading && data?.content.length === 0 && (
@@ -84,12 +73,9 @@ export function SavedListPanel() {
             <p className="text-sm font-medium text-muted-foreground mb-1">
               No tenés ofertas guardadas
             </p>
-            <a
-              href={ROUTES.jobs}
-              className="text-xs text-brand-text hover:text-brand-text font-medium transition-colors"
-            >
+            <Link href={ROUTES.jobs} className="text-xs font-medium text-brand-text hover:underline">
               Explorar ofertas →
-            </a>
+            </Link>
           </div>
         )}
 

@@ -3,6 +3,7 @@
 
 import type { InternalAxiosRequestConfig, AxiosError } from 'axios'
 import { apiClient } from './client'
+import { ROUTES } from '@/config/routes'
 import { tokenStorage } from '@/lib/auth/token.storage'
 import type { AuthResponse } from '@/types/api.types'
 
@@ -100,7 +101,8 @@ function forceLogout(): void {
     useAuthStore.getState().logout()
   })
 
+  // A full navigation (not router.push) on purpose: it drops every in-memory cache and store of the expired session.
   if (typeof window !== 'undefined') {
-    window.location.href = '/login'
+    window.location.href = ROUTES.login
   }
 }

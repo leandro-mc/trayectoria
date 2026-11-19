@@ -54,7 +54,7 @@ export function Modal({
   return (
     <DialogPrimitive.Root open={open} onOpenChange={(next) => { if (!next && dismissible) onClose() }}>
       <DialogPrimitive.Portal>
-        <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/50" />
+        <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-scrim" />
         <DialogPrimitive.Content
           aria-describedby={undefined}
           className={cn(

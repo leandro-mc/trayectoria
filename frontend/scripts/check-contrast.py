@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-WCAG contrast audit for the design tokens in src/app/globals.css.
+WCAG contrast audit for the design tokens in src/styles/tokens.css.
 
 Reads the palette and the semantic tokens of both themes straight from the CSS,
 so the check can never drift from what ships. Exits 1 if any pair fails.
@@ -9,7 +9,7 @@ so the check can never drift from what ships. Exits 1 if any pair fails.
 """
 import re, sys, pathlib
 
-css = (pathlib.Path(__file__).parent.parent / "src/app/globals.css").read_text()
+css = (pathlib.Path(__file__).parent.parent / "src/styles/tokens.css").read_text()
 
 def block(selector):
     m = re.search(re.escape(selector) + r"\s*\{(.*?)\n\}", css, re.S)

@@ -12,6 +12,20 @@ export function CardSkeleton({ lines = 3 }: { lines?: number }) {
   )
 }
 
+/** Placeholder for one job card in the jobs / saved lists (same shape as JobOfferCard). */
+export function JobCardSkeleton() {
+  return (
+    <div className="space-y-3 rounded-xl border border-border bg-card p-4">
+      <Skeleton className="h-4 w-3/4 rounded" />
+      <Skeleton className="h-3 w-1/2 rounded" />
+      <div className="flex gap-2">
+        <Skeleton className="h-5 w-16 rounded-full" />
+        <Skeleton className="h-5 w-20 rounded-full" />
+      </div>
+    </div>
+  )
+}
+
 /** Placeholder for a form while its data loads. */
 export function FormSkeleton({ rows = 4 }: { rows?: number }) {
   return (

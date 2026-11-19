@@ -9,7 +9,7 @@ import { useAuthStore } from '@/stores/auth.store'
 import { WORK_MODE_LABELS, JOB_TYPE_LABELS } from '@/config/constants'
 import type { WorkMode, JobType } from '@/types/global.types'
 import { cn } from '@/lib/utils'
-import { Skeleton } from '@/components/ui/skeleton'
+import { JobCardSkeleton } from '@/components/shared/feedback/PageSkeleton'
 import { Input } from '@/components/ui/input'
 
 //  Filter pill 
@@ -34,18 +34,6 @@ function FilterPill({
 
 //  Skeleton 
 
-function CardSkeleton() {
-  return (
-    <div className="p-4 rounded-xl border border-border bg-card space-y-3">
-      <Skeleton className="h-4 rounded w-3/4" />
-      <Skeleton className="h-3 rounded w-1/2" />
-      <div className="flex gap-2">
-        <Skeleton className="h-5 rounded-full w-16" />
-        <Skeleton className="h-5 rounded-full w-20" />
-      </div>
-    </div>
-  )
-}
 
 //  Component 
 
@@ -151,7 +139,7 @@ export function JobListPanel() {
       {/*  List  */}
       <div className="flex-1 overflow-y-auto px-3 py-2 space-y-2">
         {isLoading && (
-          Array.from({ length: 6 }).map((_, i) => <CardSkeleton key={i} />)
+          Array.from({ length: 6 }).map((_, i) => <JobCardSkeleton key={i} />)
         )}
 
         {!isLoading && data?.content.length === 0 && (
