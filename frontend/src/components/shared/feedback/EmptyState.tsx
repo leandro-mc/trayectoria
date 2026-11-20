@@ -2,7 +2,8 @@
 
 import NextLink from 'next/link'
 import { type LucideIcon } from 'lucide-react'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 
 interface EmptyStateProps {
   icon:        LucideIcon
@@ -30,34 +31,31 @@ export function EmptyState({
         className,
       )}
     >
-      <div className="w-16 h-16 rounded-2xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mb-4">
-        <Icon className="w-8 h-8 text-neutral-400 dark:text-neutral-500" />
+      <div className="w-16 h-16 rounded-2xl bg-muted flex items-center justify-center mb-4">
+        <Icon className="w-8 h-8 text-subtle" />
       </div>
 
-      <h3 className="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-2">
+      <h3 className="text-lg font-semibold text-foreground mb-2">
         {title}
       </h3>
 
-      <p className="text-sm text-neutral-500 dark:text-neutral-400 max-w-sm mb-6">
+      <p className="text-sm text-muted-foreground max-w-sm mb-6">
         {description}
       </p>
 
       {action && (
         action.href
           ? (
-            <NextLink 
-              href={action.href}
-              className="px-4 py-2 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium transition-colors"
-            >
-              {action.label}
-            </NextLink>
+            <Button asChild>
+              <NextLink href={action.href}>
+                {action.label}
+              </NextLink>
+            </Button>
           ) : (
-            <button
-              onClick={action.onClick}
-              className="px-4 py-2 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-medium transition-colors"
-            >
+            <Button
+       onClick={action.onClick}>
               {action.label}
-            </button>
+            </Button>
           )
       )}
     </div>

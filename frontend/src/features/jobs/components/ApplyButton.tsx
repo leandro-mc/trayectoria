@@ -1,11 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { Send, Loader2, CheckCircle2, X, Sparkles } from 'lucide-react'
+import { Check, CheckCircle2, FileText, Send } from 'lucide-react'
 import { useAuthStore } from '@/stores/auth.store'
 import { useApply, useHasApplied } from '@/features/applications/hooks/useApplications'
 import { useCurricula } from '@/features/ai/curricula/hooks/useCurricula'
 import { AuthGateModal } from './AuthGateModal'
+import { Field } from '@/components/shared/forms/Field'
+import { NativeSelect } from '@/components/ui/native-select'
+import { Modal, ModalClose } from '@/components/shared/overlays/Modal'
+import { Button } from '@/components/ui/button'
 
 interface ApplyButtonProps {
   jobOfferId:  number
@@ -66,29 +70,20 @@ export function ApplyButton({
     setShowModal(false)
   }
 
-  // ── Button label ───────────────────────────────────────────────────────────
-  const buttonLabel = isClosed
-    ? 'Cerrada'
-    : hasApplied
-      ? '✓ Ya postulado'
-      : 'Postularme'
+  const buttonLabel = isClosed ? 'Cerrada' : hasApplied ? 'Ya postulado' : 'Postularme'
 
   return (
     <>
-      <button
+      <Button
+        variant={isDisabled ? 'secondary' : 'default'}
         onClick={handleClick}
         disabled={isDisabled}
         title={hasApplied ? 'Ya te postulaste a esta oferta' : undefined}
-        className={[
-          'inline-flex items-center gap-1.5 h-9 px-4 rounded-lg text-xs font-semibold transition-colors',
-          isDisabled
-            ? 'bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-500 cursor-not-allowed'
-            : 'bg-brand-500 hover:bg-brand-600 text-white',
-        ].join(' ')}
+        className="text-xs font-semibold"
       >
-        {!isDisabled && <Send className="w-3.5 h-3.5" />}
+        {hasApplied ? <Check /> : !isDisabled && <Send />}
         {buttonLabel}
-      </button>
+      </Button>
 
       {/* Auth gate */}
       {showGate && (
@@ -99,93 +94,85 @@ export function ApplyButton({
       )}
 
       {/* Confirm modal */}
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/40 dark:bg-black/60" onClick={handleClose} />
-          <div className="relative z-10 w-full max-w-sm bg-white dark:bg-neutral-900 rounded-2xl shadow-modal p-6">
-
-            <button
-              onClick={handleClose}
-              disabled={isPending}
-              className="absolute top-4 right-4 p-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-400 transition-colors disabled:opacity-50"
-            >
-              <X className="w-4 h-4" />
-            </button>
+      <Modal open={showModal} onClose={handleClose} dismissible={!isPending} size="sm" label="Postularme a esta oferta" className="p-6">
+            <ModalClose disabled={isPending} className="absolute right-4 top-4" />
 
             {applied ? (
               <div className="text-center py-4">
-                <CheckCircle2 className="w-12 h-12 text-success-500 mx-auto mb-3" />
-                <p className="text-base font-bold text-neutral-900 dark:text-neutral-100">
+                <CheckCircle2 className="w-12 h-12 text-success-text mx-auto mb-3" />
+                <p className="text-base font-bold text-foreground">
                   ¡Postulación enviada!
                 </p>
-                <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
+                <p className="text-sm text-muted-foreground mt-1">
                   {selectedCvId
-                    ? 'Se adjuntó tu currículum personalizado ✨'
+                    ? 'Se adjuntó tu currículum personalizado'
                     : 'La empresa recibirá tu perfil completo'
                   }
                 </p>
               </div>
             ) : (
               <>
-                <h3 className="text-base font-bold text-neutral-900 dark:text-neutral-100 mb-1">
+                <h3 className="text-base font-bold text-foreground mb-1">
                   Confirmar postulación
                 </h3>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">{jobTitle}</p>
+                <p className="text-sm text-body">{jobTitle}</p>
                 {companyName && (
-                  <p className="text-xs text-neutral-400 mt-0.5 mb-4">{companyName}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5 mb-4">{companyName}</p>
                 )}
 
                 {matchingCurricula.length > 0 ? (
-                  <div className="mt-4 mb-5">
-                    <label className="flex items-center gap-1.5 text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-2">
-                      <Sparkles className="w-3.5 h-3.5 text-ai-500" />
-                      Adjuntar currículum con IA
-                    </label>
-                    <select
-                      value={selectedCvId}
-                      onChange={(e) => setSelectedCvId(e.target.value ? Number(e.target.value) : '')}
-                      className="w-full h-9 px-3 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 text-xs focus:outline-none focus:ring-2 focus:ring-brand-500"
-                    >
-                      <option value="">Solo mi perfil (sin CV adjunto)</option>
-                      {matchingCurricula.map((cv) => (
-                        <option key={cv.id} value={cv.id}>
-                          ✨ CV para esta oferta — {new Date(cv.createdAt).toLocaleDateString('es', { day: 'numeric', month: 'short' })}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                  <Field
+                    className="mt-4 mb-5"
+                    label={<span className="flex items-center gap-1.5 text-xs font-semibold"><FileText className="size-3.5 text-brand-text" aria-hidden="true" />Adjuntar currículum con IA</span>}
+                  >
+                    {(a11y) => (
+                      <NativeSelect
+                        value={selectedCvId}
+                        onChange={(e) => setSelectedCvId(e.target.value ? Number(e.target.value) : '')}
+                        className="h-9 text-xs"
+                        {...a11y}
+                      >
+                        <option value="">Solo mi perfil (sin CV adjunto)</option>
+                        {matchingCurricula.map((cv) => (
+                          <option key={cv.id} value={cv.id}>
+                            CV para esta oferta — {new Date(cv.createdAt).toLocaleDateString('es', { day: 'numeric', month: 'short' })}
+                          </option>
+                        ))}
+                      </NativeSelect>
+                    )}
+                  </Field>
                 ) : (
-                  <div className="mt-4 mb-5 p-3 rounded-xl bg-neutral-50 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700">
-                    <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                  <div className="mt-4 mb-5 p-3 rounded-xl bg-muted border border-border">
+                    <p className="text-xs text-muted-foreground">
                       Se enviará tu perfil completo. Podés generar un{' '}
-                      <span className="text-ai-500 font-medium">CV personalizado ✨</span>{' '}
+                      <span className="text-brand-text font-medium">CV personalizado</span>{' '}
                       para esta oferta desde el panel de la oferta.
                     </p>
                   </div>
                 )}
 
                 <div className="flex gap-2">
-                  <button
+                  <Button
+                    variant="outline"
+                    size="lg"
                     onClick={handleClose}
                     disabled={isPending}
-                    className="flex-1 h-10 rounded-xl border border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-400 text-sm font-medium hover:bg-neutral-50 dark:hover:bg-neutral-800 disabled:opacity-50 transition-colors"
+                    className="flex-1"
                   >
                     Cancelar
-                  </button>
-                  <button
+                  </Button>
+                  <Button
+                    size="lg"
+                    loading={isPending}
                     onClick={handleConfirm}
-                    disabled={isPending}
-                    className="flex-1 h-10 rounded-xl bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white text-sm font-semibold transition-colors flex items-center justify-center gap-2"
+                    className="flex-1"
                   >
-                    {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
                     {isPending ? 'Enviando...' : 'Confirmar'}
-                  </button>
+                  </Button>
                 </div>
               </>
             )}
-          </div>
-        </div>
-      )}
+          </Modal>
     </>
   )
 }

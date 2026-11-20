@@ -3,7 +3,7 @@
 import type { ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
 import { PublicNavbar } from '@/components/shared/layout/PublicNavbar'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 
 interface PublicLayoutProps {
   children: ReactNode
@@ -18,7 +18,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
   const isAuthPage = AUTH_PATHS.some((p) => pathname.startsWith(p))
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       <PublicNavbar hideAuthButtons={isAuthPage} />
 
       {/*  Content  */}
@@ -27,8 +27,8 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
       </main>
 
       {/*  Footer  */}
-      <footer className="py-4 text-center border-t border-neutral-200 dark:border-neutral-800">
-        <p className="text-xs text-neutral-400 dark:text-neutral-600">
+      <footer className="py-4 text-center border-t border-border">
+        <p className="text-xs text-muted-foreground">
           © {new Date().getFullYear()} TrayectorIA. Todos los derechos reservados.
         </p>
       </footer>

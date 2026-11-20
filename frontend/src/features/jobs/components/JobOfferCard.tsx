@@ -5,7 +5,7 @@ import { MapPin, Clock, Wifi, Building } from 'lucide-react'
 import { WORK_MODE_LABELS, JOB_TYPE_LABELS } from '@/config/constants'
 import { formatRelativeDate } from '@/lib/utils/date'
 import type { JobOfferSummaryResponse } from '../types/jobs.types'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 
 const WORK_MODE_ICONS = {
   REMOTE:  <Wifi      className="w-3 h-3" />,
@@ -14,9 +14,9 @@ const WORK_MODE_ICONS = {
 } as const
 
 const WORK_MODE_COLORS: Record<string, string> = {
-  REMOTE:  'bg-brand-50 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400',
-  HYBRID:  'bg-warning-50 text-warning-600',
-  ON_SITE: 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400',
+  REMOTE:  'bg-brand-tint text-brand-text',
+  HYBRID:  'bg-warning-tint text-warning-text',
+  ON_SITE: 'bg-muted text-body',
 }
 
 interface JobOfferCardProps {
@@ -43,8 +43,8 @@ export function JobOfferCard({
         'group relative flex flex-col gap-3 p-4 rounded-xl border transition-all duration-150',
         onClick ? 'cursor-pointer' : '',
         selected
-          ? 'border-brand-400 dark:border-brand-500 bg-brand-50/60 dark:bg-brand-900/10 shadow-md'
-          : 'border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-card hover:shadow-card-hover hover:border-neutral-300 dark:hover:border-neutral-700',
+          ? 'border-primary bg-brand-tint shadow-md'
+          : 'border-border bg-card shadow-card hover:shadow-card-hover hover:border-faint',
       )}
     >
       {/* Header */}
@@ -53,26 +53,26 @@ export function JobOfferCard({
           <p className={cn(
             'text-sm font-semibold truncate',
             selected
-              ? 'text-brand-700 dark:text-brand-300'
-              : 'text-neutral-900 dark:text-neutral-100',
+              ? 'text-brand-text'
+              : 'text-foreground',
           )}>
             {offer.title}
           </p>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 truncate mt-0.5">
+          <p className="text-xs text-muted-foreground truncate mt-0.5">
             {offer.companyName ?? 'Empresa'}
           </p>
         </div>
 
         {/* Selected indicator */}
         {selected && (
-          <span className="w-2 h-2 rounded-full bg-brand-500 shrink-0 mt-1.5" />
+          <span className="w-2 h-2 rounded-full bg-primary shrink-0 mt-1.5" />
         )}
       </div>
 
       {/* Meta row */}
       <div className="flex flex-wrap items-center gap-2">
         {offer.location && (
-          <span className="inline-flex items-center gap-1 text-xs text-neutral-400 dark:text-neutral-500">
+          <span className="inline-flex items-center gap-1 text-xs text-subtle">
             <MapPin className="w-3 h-3" />
             {offer.location}
           </span>
@@ -89,7 +89,7 @@ export function JobOfferCard({
         )}
 
         {offer.jobType && (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-muted text-muted-foreground">
             <Clock className="w-3 h-3" />
             {JOB_TYPE_LABELS[offer.jobType]}
           </span>
@@ -102,13 +102,13 @@ export function JobOfferCard({
           {offer.skills.slice(0, 4).map((skill) => (
             <span
               key={skill.id}
-              className="px-2 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-xs text-neutral-600 dark:text-neutral-400"
+              className="px-2 py-0.5 rounded-md bg-muted text-xs text-body"
             >
               {skill.name}
             </span>
           ))}
           {offer.skills.length > 4 && (
-            <span className="px-2 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-xs text-neutral-400">
+            <span className="px-2 py-0.5 rounded-md bg-muted text-xs text-muted-foreground">
               +{offer.skills.length - 4}
             </span>
           )}
@@ -117,7 +117,7 @@ export function JobOfferCard({
 
       {/* Footer */}
       <div className="flex items-center justify-between gap-2 mt-auto pt-1">
-        <span className="text-xs text-neutral-400 dark:text-neutral-500">
+        <span className="text-xs text-subtle">
           {formatRelativeDate(offer.createdAt)}
         </span>
 

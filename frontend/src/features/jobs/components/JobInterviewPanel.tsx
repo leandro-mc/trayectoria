@@ -4,35 +4,24 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Sparkles } from 'lucide-react'
+import { MessageSquare } from 'lucide-react'
 import { useInterviews, useStartInterview, useInterview } from '@/features/ai/interviews/hooks/useInterviews'
 import { loadFeedback } from '@/features/ai/interviews/utils/feedback-cache'
 import { InterviewChat } from '@/features/ai/interviews/components/InterviewChat'
 import { useJobsParams } from '../hooks/useJobsParams'
+import { IconTile } from '@/components/shared/brand/IconTile'
+import { SkeletonLines } from '@/components/ui/skeleton'
 
 //  Starting skeleton 
 
 function StartingSkeleton() {
   return (
     <div className="flex flex-col items-center justify-center h-full gap-4 p-6">
-      <div
-        className="w-10 h-10 rounded-full flex items-center justify-center animate-pulse"
-        style={{ background: 'linear-gradient(135deg,#A855F7,#6366F1)' }}
-      >
-        <Sparkles className="w-5 h-5 text-white" />
-      </div>
-      <p className="text-sm text-ai-600 dark:text-ai-400 font-medium animate-pulse">
+      <IconTile icon={MessageSquare} className="size-10 animate-pulse rounded-full" />
+      <p className="text-sm text-brand-text font-medium animate-pulse">
         Preparando tu entrevista…
       </p>
-      <div className="w-full max-w-xs space-y-2">
-        {[80, 65, 75].map((w, i) => (
-          <div
-            key={i}
-            className="h-3 rounded-lg animate-pulse bg-gradient-to-r from-neutral-200 via-neutral-100 to-neutral-200 dark:from-neutral-800 dark:via-neutral-700 dark:to-neutral-800"
-            style={{ width: `${w}%`, marginLeft: 'auto', marginRight: 'auto' }}
-          />
-        ))}
-      </div>
+      <SkeletonLines count={3} className="w-full max-w-xs" />
     </div>
   )
 }
@@ -95,17 +84,12 @@ export function JobInterviewPanel() {
   const isLoading = loadingList || (starting && !activeInterviewId)
 
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-neutral-900">
+    <div className="flex flex-col h-full bg-card">
 
       {/* Header */}
-      <div className="flex items-center gap-2 px-5 py-3.5 border-b border-neutral-200 dark:border-neutral-800 shrink-0">
-        <div
-          className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0"
-          style={{ background: 'linear-gradient(135deg,#A855F7,#6366F1)' }}
-        >
-          <Sparkles className="w-3.5 h-3.5 text-white" />
-        </div>
-        <span className="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+      <div className="flex items-center gap-2 px-5 py-3.5 border-b border-border shrink-0">
+        <IconTile icon={MessageSquare} size="sm" />
+        <span className="text-sm font-semibold text-foreground">
           Entrevista simulada con IA
         </span>
       </div>

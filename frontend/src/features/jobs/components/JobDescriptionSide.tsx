@@ -2,10 +2,12 @@
 
 'use client'
 
-import { ArrowLeft, MapPin, Briefcase, Wifi } from 'lucide-react'
+import { MapPin, Briefcase, Wifi } from 'lucide-react'
 import { useJobOffer } from '../hooks/useJobOffers'
 import { useJobsParams } from '../hooks/useJobsParams'
 import { WORK_MODE_LABELS, JOB_TYPE_LABELS } from '@/config/constants'
+import { BackButton } from '@/components/shared/layout/BackButton'
+import { Skeleton, SkeletonLines } from '@/components/ui/skeleton'
 
 export function JobDescriptionSide() {
   const { selectedId, goBackToDetail } = useJobsParams()
@@ -13,14 +15,10 @@ export function JobDescriptionSide() {
 
   if (isLoading) {
     return (
-      <div className="p-5 animate-pulse space-y-3">
-        <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-2/3" />
-        <div className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded w-1/3" />
-        <div className="space-y-2 mt-4">
-          {[100, 95, 90, 85].map((w, i) => (
-            <div key={i} className="h-3 bg-neutral-200 dark:bg-neutral-800 rounded" style={{ width: `${w}%` }} />
-          ))}
-        </div>
+      <div className="p-5 space-y-3">
+        <Skeleton className="h-4 rounded w-2/3" />
+        <Skeleton className="h-3 rounded w-1/3" />
+        <SkeletonLines count={4} className="mt-4" />
       </div>
     )
   }
@@ -28,40 +26,34 @@ export function JobDescriptionSide() {
   if (!offer) return null
 
   return (
-    <div className="flex flex-col h-full overflow-hidden bg-neutral-50 dark:bg-neutral-950">
+    <div className="flex flex-col h-full overflow-hidden bg-background">
 
       {/* Header */}
-      <div className="px-5 pt-4 pb-4 border-b border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shrink-0">
-        <button
-          onClick={goBackToDetail}
-          className="inline-flex items-center gap-1.5 text-xs text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 mb-3 transition-colors"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          Volver al detalle
-        </button>
+      <div className="px-5 pt-4 pb-4 border-b border-border bg-card shrink-0">
+        <BackButton onClick={goBackToDetail}>Volver al detalle</BackButton>
 
-        <p className="text-xs font-medium text-neutral-400 mb-0.5">
+        <p className="text-xs font-medium text-muted-foreground mb-0.5">
           {offer.companyName ?? 'Empresa'}
         </p>
-        <h2 className="text-sm font-bold text-neutral-900 dark:text-neutral-100 leading-snug">
+        <h2 className="text-sm font-bold text-foreground leading-snug">
           {offer.title}
         </h2>
 
         <div className="flex flex-wrap gap-2 mt-2">
           {offer.location && (
-            <span className="inline-flex items-center gap-1 text-xs text-neutral-400">
+            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
               <MapPin className="w-3 h-3" />
               {offer.location}
             </span>
           )}
           {offer.workMode && (
-            <span className="inline-flex items-center gap-1 text-xs text-brand-500 dark:text-brand-400">
+            <span className="inline-flex items-center gap-1 text-xs text-brand-text">
               <Wifi className="w-3 h-3" />
               {WORK_MODE_LABELS[offer.workMode]}
             </span>
           )}
           {offer.jobType && (
-            <span className="inline-flex items-center gap-1 text-xs text-neutral-400">
+            <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
               <Briefcase className="w-3 h-3" />
               {JOB_TYPE_LABELS[offer.jobType]}
             </span>
@@ -72,7 +64,7 @@ export function JobDescriptionSide() {
         {offer.skills.length > 0 && (
           <div className="flex flex-wrap gap-1 mt-2">
             {offer.skills.slice(0, 6).map((skill) => (
-              <span key={skill.id} className="px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-xs text-neutral-500">
+              <span key={skill.id} className="px-2 py-0.5 rounded bg-muted text-xs text-muted-foreground">
                 {skill.name}
               </span>
             ))}
@@ -83,19 +75,19 @@ export function JobDescriptionSide() {
       {/* Description scrollable */}
       <div className="flex-1 overflow-y-auto px-5 py-4">
         {offer.description ? (
-          <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed whitespace-pre-wrap">
+          <p className="text-xs text-body leading-relaxed whitespace-pre-wrap">
             {offer.description}
           </p>
         ) : (
-          <p className="text-xs text-neutral-400 italic">Sin descripción disponible</p>
+          <p className="text-xs text-muted-foreground italic">Sin descripción disponible</p>
         )}
 
         {offer.requirements && (
           <>
-            <p className="text-xs font-semibold text-neutral-700 dark:text-neutral-300 mt-5 mb-2">
+            <p className="text-xs font-semibold text-secondary-foreground mt-5 mb-2">
               Requisitos
             </p>
-            <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed whitespace-pre-wrap">
+            <p className="text-xs text-body leading-relaxed whitespace-pre-wrap">
               {offer.requirements}
             </p>
           </>

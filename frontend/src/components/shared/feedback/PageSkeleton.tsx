@@ -1,14 +1,36 @@
-'use client'
+import { Card } from '@/components/ui/card'
+import { Skeleton, SkeletonLines } from '@/components/ui/skeleton'
 
 /** Generic card-shaped skeleton */
 export function CardSkeleton({ lines = 3 }: { lines?: number }) {
   return (
-    <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl p-5 shadow-card animate-pulse">
-      <div className="h-5 bg-neutral-200 dark:bg-neutral-800 rounded w-3/4 mb-3" />
-      <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-1/2 mb-4" />
-      {Array.from({ length: lines - 2 }).map((_, i) => (
-        <div key={i} className="h-3.5 bg-neutral-200 dark:bg-neutral-800 rounded mb-2" style={{ width: `${90 - i * 10}%` }} />
-      ))}
+    <Card padding="md">
+      <Skeleton className="mb-3 h-5 w-3/4 rounded" />
+      <Skeleton className="mb-4 h-4 w-1/2 rounded" />
+      <SkeletonLines count={Math.max(lines - 2, 0)} lineClassName="h-3.5" className="space-y-2" />
+    </Card>
+  )
+}
+
+/** Placeholder for one job card in the jobs / saved lists (same shape as JobOfferCard). */
+export function JobCardSkeleton() {
+  return (
+    <div className="space-y-3 rounded-xl border border-border bg-card p-4">
+      <Skeleton className="h-4 w-3/4 rounded" />
+      <Skeleton className="h-3 w-1/2 rounded" />
+      <div className="flex gap-2">
+        <Skeleton className="h-5 w-16 rounded-full" />
+        <Skeleton className="h-5 w-20 rounded-full" />
+      </div>
+    </div>
+  )
+}
+
+/** Placeholder for a form while its data loads. */
+export function FormSkeleton({ rows = 4 }: { rows?: number }) {
+  return (
+    <div className="space-y-4">
+      {Array.from({ length: rows }).map((_, i) => <Skeleton key={i} className="h-10 rounded-lg" />)}
     </div>
   )
 }
@@ -16,15 +38,13 @@ export function CardSkeleton({ lines = 3 }: { lines?: number }) {
 /** Full page loading skeleton with header + cards */
 export function PageSkeleton() {
   return (
-    <div className="animate-pulse">
+    <div>
       <div className="mb-8">
-        <div className="h-7 bg-neutral-200 dark:bg-neutral-800 rounded w-48 mb-2" />
-        <div className="h-4 bg-neutral-200 dark:bg-neutral-800 rounded w-72" />
+        <Skeleton className="mb-2 h-7 w-48 rounded" />
+        <Skeleton className="h-4 w-72 rounded" />
       </div>
       <div className="space-y-4">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <CardSkeleton key={i} />
-        ))}
+        {Array.from({ length: 4 }).map((_, i) => <CardSkeleton key={i} />)}
       </div>
     </div>
   )

@@ -8,7 +8,7 @@ import '@/lib/api/interceptors'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import { useEffect, useRef, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { useUIStore } from '@/stores/ui.store'
 import { useBootstrapAuth } from '@/features/auth/hooks/useBootstrapAuth'
 
@@ -66,11 +66,8 @@ function AuthBootstrapGate({ children }: { children: ReactNode }) {
 
   if (!ready) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-neutral-50 dark:bg-neutral-950">
-        <div
-          className="w-8 h-8 rounded-full animate-spin border-2"
-          style={{ borderColor: '#6366F1', borderTopColor: 'transparent' }}
-        />
+      <div className="fixed inset-0 flex items-center justify-center bg-background">
+        <div className="w-8 h-8 rounded-full animate-spin border-2 border-primary border-t-transparent" />
       </div>
     )
   }
@@ -85,11 +82,11 @@ interface ProvidersProps {
 }
 
 export function Providers({ children }: ProvidersProps) {
-  const clientRef = useRef<QueryClient | null>(null)
-  if (!clientRef.current) clientRef.current = makeQueryClient()
+  // useState's lazy initialiser creates exactly one client per mounted tree
+  const [queryClient] = useState(makeQueryClient)
 
   return (
-    <QueryClientProvider client={clientRef.current}>
+    <QueryClientProvider client={queryClient}>
       <ThemeSync />
       <AuthBootstrapGate>
         {children}

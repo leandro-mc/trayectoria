@@ -30,19 +30,19 @@ export function ThemeToggle() {
         <Button
           variant="ghost"
           size="icon"
-          className="h-9 w-9 text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100"
+          className="text-muted-foreground hover:text-foreground"
           aria-label="Cambiar tema"
         >
           <CurrentIcon className="w-4 h-4" />
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end" className="w-36 bg-white dark:bg-neutral-900">
+      <DropdownMenuContent align="end" className="w-36 bg-card">
         {THEME_OPTIONS.map(({ value, label, icon: Icon }) => (
           <DropdownMenuItem
             key={value}
             onClick={() => setTheme(value)}
-            className={theme === value ? 'text-brand-600 dark:text-brand-400' : ''}
+            className={theme === value ? 'text-brand-text' : ''}
           >
             <Icon className="w-4 h-4 mr-2" />
             {label}

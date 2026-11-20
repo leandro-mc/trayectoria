@@ -2,19 +2,19 @@
 
 import { useState } from 'react'
 import { Briefcase, ExternalLink, Trash2 } from 'lucide-react'
+import { FilterChip } from '@/components/shared/data/FilterChip'
 import { PageHeader } from '@/components/shared/layout/PageHeader'
 import { EmptyState } from '@/components/shared/feedback/EmptyState'
 import { CardSkeleton } from '@/components/shared/feedback/PageSkeleton'
 import { Pagination } from '@/components/shared/data/Pagination'
 import { useMyApplications, useWithdrawApplication } from '@/features/applications/hooks/useApplications'
-import {
-  APPLICATION_STATUS_LABELS,
-  APPLICATION_STATUS_COLORS,
-} from '@/config/constants'
 import { formatDate } from '@/lib/utils/date'
 import { ROUTES } from '@/config/routes'
 import type { ApplicationStatus } from '@/types/global.types'
 import Link from 'next/link'
+import { ApplicationStatusBadge } from '@/components/shared/data/StatusBadge'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
 
 const STATUS_TABS: { label: string; value: ApplicationStatus | 'ALL' }[] = [
   { label: 'Todas',       value: 'ALL'       },
@@ -40,20 +40,11 @@ export default function ApplicationsPage() {
       <PageHeader title="Mis Postulaciones" description="Seguí el estado de tus aplicaciones" />
 
       {/* Status tabs */}
-      <div className="flex gap-1 mb-6 overflow-x-auto pb-1">
+      <div role="group" aria-label="Filtrar por estado" className="mb-6 flex gap-1.5 overflow-x-auto pb-1">
         {STATUS_TABS.map((tab) => (
-          <button
-            key={tab.value}
-            onClick={() => { setActiveTab(tab.value); setPage(0) }}
-            className={[
-              'px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors',
-              activeTab === tab.value
-                ? 'bg-brand-50 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400'
-                : 'text-neutral-500 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800',
-            ].join(' ')}
-          >
+          <FilterChip key={tab.value} active={activeTab === tab.value} onClick={() => { setActiveTab(tab.value); setPage(0) }}>
             {tab.label}
-          </button>
+          </FilterChip>
         ))}
       </div>
 
@@ -78,51 +69,49 @@ export default function ApplicationsPage() {
       {!isLoading && filtered.length > 0 && (
         <div className="space-y-3">
           {filtered.map((app) => (
-            <div
+            <Card padding="md"
               key={app.id}
-              className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl p-5 shadow-card flex items-start gap-4"
+              className="flex items-start gap-4"
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-3 mb-1">
                   <div>
-                    <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                    <p className="text-sm font-semibold text-foreground">
                       {app.jobOfferTitle}
                     </p>
                     {app.companyName && (
-                      <p className="text-xs text-neutral-500 dark:text-neutral-400">
+                      <p className="text-xs text-muted-foreground">
                         {app.companyName}
                       </p>
                     )}
                   </div>
-                  <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium shrink-0 ${APPLICATION_STATUS_COLORS[app.status]}`}>
-                    {APPLICATION_STATUS_LABELS[app.status]}
-                  </span>
+                  <ApplicationStatusBadge status={app.status} className="shrink-0" />
                 </div>
-                <p className="text-xs text-neutral-400 mt-2">
+                <p className="text-xs text-muted-foreground mt-2">
                   Postulado el {formatDate(app.appliedAt)}
                 </p>
               </div>
 
               <div className="flex items-center gap-1 shrink-0">
-                <Link
-                  href={ROUTES.publicJob(app.jobOfferId)}
-                  className="p-1.5 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
-                  title="Ver oferta"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                </Link>
+                <Button asChild variant="ghost" size="icon-sm" className="text-muted-foreground hover:text-foreground">
+                  <Link href={ROUTES.publicJob(app.jobOfferId)} aria-label={`Ver oferta ${app.jobOfferTitle ?? ''}`.trim()}>
+                    <ExternalLink />
+                  </Link>
+                </Button>
                 {app.status === 'PENDING' && (
-                  <button
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
                     onClick={() => withdraw(app.id)}
                     disabled={withdrawing}
-                    className="p-1.5 rounded-lg hover:bg-danger-50 dark:hover:bg-red-900/20 text-neutral-400 hover:text-danger-500 transition-colors disabled:opacity-50"
-                    title="Retirar postulación"
+                    aria-label="Retirar postulación"
+                    className="text-muted-foreground hover:bg-danger-tint hover:text-danger-text"
                   >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                    <Trash2 />
+                  </Button>
                 )}
               </div>
-            </div>
+            </Card>
           ))}
 
           {data && (

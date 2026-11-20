@@ -38,12 +38,16 @@ Otros scripts: `npm run build`, `npm run lint`, `npm run type-check`.
 
 ```
 src/
-├── app/         # Rutas por rol: (public), (candidate), (company), ai, jobs
+├── app/         # Rutas por rol: (public), (candidate), (company), (workspace)
 ├── features/    # Módulos de dominio: auth, candidate, company, jobs, applications, ai...
 │                #   cada uno con api/, components/, hooks/, schemas/, types/
-├── components/  # shadcn/ui y componentes compartidos
+├── components/  # ui/ (primitivas basadas en shadcn) y shared/ (Logo, Modal, StatusBadge, formularios…)
 ├── lib/         # Cliente Axios, almacenamiento de tokens, utilidades
 └── stores/      # Zustand (auth, ui)
 ```
 
 Flujo de datos: componente → hook personalizado (TanStack Query) → función de API → cliente Axios → backend.
+
+## Sistema de diseño
+
+Los tokens de color (marca burdeos `#932A2B`, superficies neutras y sobrias en claro y oscuro), la tipografía, los componentes compartidos y las convenciones de UI están documentados en [`docs/design-system.md`](docs/design-system.md).

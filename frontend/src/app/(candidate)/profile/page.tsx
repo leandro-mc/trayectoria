@@ -6,6 +6,7 @@ import { WorkExperienceSection } from '@/features/candidate/components/profile/W
 import { EducationSection } from '@/features/candidate/components/profile/EducationSection'
 import { SkillsSection } from '@/features/candidate/components/profile/SkillsSection'
 import { LanguagesSection } from '@/features/candidate/components/profile/LanguagesSection'
+import { Card } from '@/components/ui/card'
 
 export const metadata: Metadata = { title: 'Mi Perfil' }
 
@@ -21,12 +22,12 @@ export default function ProfilePage() {
       <ProfileHeader />
 
       {/* Basic info form */}
-      <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-card p-6 mb-6">
-        <h3 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 mb-5">
+      <Card padding="lg" className="mb-6">
+        <h3 className="text-sm font-semibold text-foreground mb-5">
           Información personal
         </h3>
         <ProfileForm />
-      </div>
+      </Card>
 
       {/* Sections */}
       <div className="space-y-6">

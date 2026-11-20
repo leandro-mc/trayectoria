@@ -1,17 +1,14 @@
 import type { WorkMode, JobType, ApplicationStatus, LanguageLevel, SkillType, JobStatus, InterviewRecommendation  } from '@/types/global.types'
 
+/** Colour intent of a status. Maps 1:1 to the Badge variants of the same name. */
+export type StatusTone = 'neutral' | 'brand' | 'success' | 'warning' | 'danger'
+
 //  Work Mode 
 
 export const WORK_MODE_LABELS: Record<WorkMode, string> = {
   REMOTE:  'Remoto',
   HYBRID:  'Híbrido',
   ON_SITE: 'Presencial',
-}
-
-export const WORK_MODE_BADGE_STYLES: Record<WorkMode, string> = {
-  REMOTE:  'bg-brand-50 text-brand-600 dark:bg-brand-900/20 dark:text-brand-400',
-  HYBRID:  'bg-warning-50 text-warning-600 dark:bg-yellow-900/20 dark:text-yellow-400',
-  ON_SITE: 'bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400',
 }
 
 //  Job Type 
@@ -30,10 +27,10 @@ export const JOB_STATUS_LABELS: Record<JobStatus, string> = {
   DRAFT:  'Borrador',
 }
 
-export const JOB_STATUS_BADGE_STYLES: Record<JobStatus, string> = {
-  ACTIVE: 'bg-success-50 text-success-600 dark:bg-green-900/20 dark:text-green-400',
-  CLOSED: 'bg-danger-50 text-danger-600 dark:bg-red-900/20 dark:text-red-400',
-  DRAFT:  'bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-400',
+export const JOB_STATUS_TONE: Record<JobStatus, StatusTone> = {
+  ACTIVE: 'success',
+  CLOSED: 'danger',
+  DRAFT:  'neutral',
 }
 
 //  Application Status 
@@ -46,12 +43,12 @@ export const APPLICATION_STATUS_LABELS: Record<ApplicationStatus, string> = {
   REJECTED:  'Rechazado',
 }
 
-export const APPLICATION_STATUS_COLORS: Record<ApplicationStatus, string> = {
-  PENDING:   'bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400',
-  VIEWED:    'bg-brand-50 text-brand-600 dark:bg-brand-900/20 dark:text-brand-400',
-  IN_REVIEW: 'bg-warning-50 text-warning-600 dark:bg-yellow-900/20 dark:text-yellow-400',
-  ACCEPTED:  'bg-success-50 text-success-600 dark:bg-green-900/20 dark:text-green-400',
-  REJECTED:  'bg-danger-50 text-danger-600 dark:bg-red-900/20 dark:text-red-400',
+export const APPLICATION_STATUS_TONE: Record<ApplicationStatus, StatusTone> = {
+  PENDING:   'neutral',
+  VIEWED:    'brand',
+  IN_REVIEW: 'warning',
+  ACCEPTED:  'success',
+  REJECTED:  'danger',
 }
 
 //  Language Levels 
@@ -97,9 +94,9 @@ export const INTERVIEW_RECOMMENDATION_LABELS: Record<InterviewRecommendation, st
   NO:         'No recomendado',
 }
 
-export const INTERVIEW_RECOMMENDATION_COLORS: Record<InterviewRecommendation, string> = {
-  STRONG_YES: 'bg-success-50 text-success-600 dark:bg-green-900/20 dark:text-green-400',
-  YES:        'bg-brand-50 text-brand-600 dark:bg-brand-900/20 dark:text-brand-400',
-  MAYBE:      'bg-warning-50 text-warning-600 dark:bg-yellow-900/20 dark:text-yellow-400',
-  NO:         'bg-danger-50 text-danger-600 dark:bg-red-900/20 dark:text-red-400',
+export const INTERVIEW_RECOMMENDATION_TONE: Record<InterviewRecommendation, StatusTone> = {
+  STRONG_YES: 'success',
+  YES:        'brand',
+  MAYBE:      'warning',
+  NO:         'danger',
 }

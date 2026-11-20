@@ -1,11 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { Bookmark, BookmarkCheck, Loader2 } from 'lucide-react'
+import { Bookmark, BookmarkCheck } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Spinner } from '@/components/ui/spinner'
 import { useAuthStore } from '@/stores/auth.store'
 import { useIsSaved, useSaveOffer, useUnsaveOffer } from '@/features/saved-offers/hooks/useSavedOffers'
 import { AuthGateModal } from './AuthGateModal'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 
 interface SaveButtonProps {
   jobOfferId: number
@@ -31,33 +33,27 @@ export function SaveButton({ jobOfferId, size = 'md', showLabel = false }: SaveB
     else         save(jobOfferId)
   }
 
-  const isSmall = size === 'sm'
 
   return (
     <>
-      <button
+      <Button
+        variant={isSaved ? 'brand' : 'outline'}
+        size={size === 'sm' ? 'xs' : 'sm'}
         onClick={handleClick}
         disabled={isPending || isLoading}
-        title={isSaved ? 'Quitar de guardados' : 'Guardar oferta'}
+        aria-pressed={isSaved}
+        aria-label={isSaved ? 'Quitar de guardadas' : 'Guardar oferta'}
+        title={isSaved ? 'Quitar de guardadas' : 'Guardar oferta'}
         className={cn(
-          'inline-flex items-center gap-1.5 rounded-lg border font-medium transition-colors disabled:opacity-50',
-          isSmall ? 'h-7 px-2 text-xs' : 'h-9 px-3 text-xs',
+          'text-xs',
           isSaved
-            ? 'border-brand-300 dark:border-brand-700 bg-brand-50 dark:bg-brand-900/20 text-brand-600 dark:text-brand-400 hover:border-danger-300 hover:bg-danger-50 hover:text-danger-500 dark:hover:text-red-400'
-            : 'border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 text-neutral-500 dark:text-neutral-400 hover:border-brand-300 dark:hover:border-brand-700 hover:text-brand-600 dark:hover:text-brand-400',
+            ? 'hover:border-danger-border hover:bg-danger-tint hover:text-danger-text'
+            : 'text-muted-foreground hover:border-brand-border hover:text-brand-text',
         )}
       >
-        {isPending ? (
-          <Loader2 className={cn('animate-spin', isSmall ? 'w-3 h-3' : 'w-3.5 h-3.5')} />
-        ) : isSaved ? (
-          <BookmarkCheck className={cn(isSmall ? 'w-3 h-3' : 'w-3.5 h-3.5')} />
-        ) : (
-          <Bookmark className={cn(isSmall ? 'w-3 h-3' : 'w-3.5 h-3.5')} />
-        )}
-        {showLabel && (
-          <span>{isSaved ? 'Guardada' : 'Guardar'}</span>
-        )}
-      </button>
+        {isPending ? <Spinner className="size-3" /> : isSaved ? <BookmarkCheck /> : <Bookmark />}
+        {showLabel && <span>{isSaved ? 'Guardada' : 'Guardar'}</span>}
+      </Button>
 
       {showGate && (
         <AuthGateModal

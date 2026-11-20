@@ -7,7 +7,7 @@ import { JobDescriptionSide } from './JobDescriptionSide'
 import { JobCVPanel } from './JobCVPanel'
 import { JobInterviewPanel } from './JobInterviewPanel'
 import { useJobsParams } from '../hooks/useJobsParams'
-import { cn } from '@/lib/utils/cn'
+import { cn } from '@/lib/utils'
 
 //  States 
 //
@@ -41,7 +41,7 @@ export function JobsPageContent() {
 
       {/*  Left panel  */}
       <div className={cn(
-        'flex-col overflow-hidden border-r border-neutral-200 dark:border-neutral-800',
+        'flex-col overflow-hidden border-r border-border',
         // Mobile: hide list when viewing a job; show description stacked on AI mode
         isAIMode
           ? 'hidden lg:flex lg:w-[42%] lg:border-r'           // AI: description side (desktop only, mobile stacks)
@@ -59,12 +59,12 @@ export function JobsPageContent() {
 
       {/* No selection — desktop empty hint */}
       {selectedId === null && (
-        <div className="hidden lg:flex flex-1 items-center justify-center bg-neutral-50 dark:bg-neutral-950">
+        <div className="hidden lg:flex flex-1 items-center justify-center bg-background">
           <div className="text-center">
-            <div className="w-14 h-14 rounded-2xl bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center mx-auto mb-3">
-              <Search className="w-7 h-7 text-neutral-300 dark:text-neutral-600" />
+            <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-3">
+              <Search className="w-7 h-7 text-faint" />
             </div>
-            <p className="text-sm font-medium text-neutral-400 dark:text-neutral-500">
+            <p className="text-sm font-medium text-subtle">
               Seleccioná una oferta para ver los detalles
             </p>
           </div>
@@ -78,7 +78,7 @@ export function JobsPageContent() {
           {isAIMode && (
             <div className="lg:hidden flex flex-col flex-1 overflow-hidden">
               {/* Compact description at top — collapsible feel */}
-              <div className="shrink-0 max-h-[35vh] overflow-y-auto border-b border-neutral-200 dark:border-neutral-800">
+              <div className="shrink-0 max-h-[35vh] overflow-y-auto border-b border-border">
                 <JobDescriptionSide />
               </div>
               {/* AI panel fills the rest */}
