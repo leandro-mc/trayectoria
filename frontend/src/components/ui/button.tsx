@@ -15,6 +15,9 @@ const buttonVariants = cva(
           "bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-destructive/30",
         outline:
           "border border-input bg-card text-body hover:bg-hover hover:text-foreground",
+        // Tinted outline for secondary brand actions (e.g. "CV personalizado", a saved job).
+        brand:
+          "border border-brand-border bg-card text-brand-text hover:bg-brand-tint",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost:

@@ -4,16 +4,17 @@ import { use, useState } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, UserSearch, Users } from 'lucide-react'
 import { Pagination } from '@/components/shared/data/Pagination'
+import { FilterChip } from '@/components/shared/data/FilterChip'
 import { EmptyState } from '@/components/shared/feedback/EmptyState'
 import { PageHeader } from '@/components/shared/layout/PageHeader'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { ROUTES } from '@/config/routes'
+import { cn } from '@/lib/utils'
 import { ApplicationRow, ApplicationRowSkeleton } from '@/features/applications/components/ApplicationRow'
 import { CandidateProfilePanel } from '@/features/applications/components/CandidateProfilePanel'
 import { useJobApplications } from '@/features/applications/hooks/useJobApplications'
 import { useJobOffer } from '@/features/jobs/hooks/useJobOffers'
-import { cn } from '@/lib/utils'
 import type { ApplicationStatus } from '@/types/global.types'
 
 type Filter = ApplicationStatus | 'ALL'
@@ -63,20 +64,11 @@ export default function OfferApplicationsPage({ params }: { params: Promise<{ id
           }
         />
 
-        <div role="group" aria-label="Filtrar por estado" className="mb-5 flex gap-1 overflow-x-auto pb-1">
+        <div role="group" aria-label="Filtrar por estado" className="mb-5 flex gap-1.5 overflow-x-auto pb-1">
           {FILTERS.map(({ label, value }) => (
-            <button
-              key={value}
-              type="button"
-              onClick={() => changeFilter(value)}
-              aria-pressed={filter === value}
-              className={cn(
-                'whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-colors',
-                filter === value ? 'bg-brand-tint text-brand-text' : 'text-muted-foreground hover:bg-muted',
-              )}
-            >
+            <FilterChip key={value} active={filter === value} onClick={() => changeFilter(value)}>
               {label}
-            </button>
+            </FilterChip>
           ))}
         </div>
       </div>

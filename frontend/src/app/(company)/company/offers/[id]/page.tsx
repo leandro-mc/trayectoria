@@ -2,7 +2,6 @@
 
 import { use } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { ArrowLeft, Pencil, Users, MapPin, Calendar, Clock, Briefcase, CheckCircle2, Globe, Wifi, MessageSquare } from 'lucide-react'
 import { PageHeader } from '@/components/shared/layout/PageHeader'
 import { PageSkeleton } from '@/components/shared/feedback/PageSkeleton'
@@ -73,7 +72,6 @@ interface PageProps {
 export default function OfferDetailPage({ params }: PageProps) {
   const { id }  = use(params)
   const offerId = Number(id)
-  const router  = useRouter()
 
   const { data: offer,        isLoading: offerLoading }        = useJobOffer(offerId)
   const { data: instructions, isLoading: instructionsLoading } = useInterviewInstructions(offerId)
@@ -83,9 +81,9 @@ export default function OfferDetailPage({ params }: PageProps) {
     return (
       <div className="flex flex-col items-center justify-center py-24 text-center">
         <p className="text-muted-foreground mb-4">Oferta no encontrada.</p>
-        <button onClick={() => router.push(ROUTES.offers)} className="text-brand-text text-sm font-medium hover:underline">
-          Volver a mis ofertas
-        </button>
+        <Button asChild variant="link">
+          <Link href={ROUTES.offers}>Volver a mis ofertas</Link>
+        </Button>
       </div>
     )
   }

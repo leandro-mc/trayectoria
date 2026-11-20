@@ -8,29 +8,11 @@ import { SaveButton } from './SaveButton'
 import { useAuthStore } from '@/stores/auth.store'
 import { WORK_MODE_LABELS, JOB_TYPE_LABELS } from '@/config/constants'
 import type { WorkMode, JobType } from '@/types/global.types'
-import { cn } from '@/lib/utils'
 import { JobCardSkeleton } from '@/components/shared/feedback/PageSkeleton'
+import { FilterChip } from '@/components/shared/data/FilterChip'
+import { CompactPagination } from '@/components/shared/data/Pagination'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-
-//  Filter pill 
-
-function FilterPill({
-  label, active, onClick,
-}: { label: string; active: boolean; onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      className={cn(
-        'px-2.5 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-colors border',
-        active
-          ? 'bg-primary border-primary text-primary-foreground'
-          : 'bg-card border-input text-body hover:border-brand-border',
-      )}
-    >
-      {label}
-    </button>
-  )
-}
 
 //  Skeleton 
 
@@ -81,10 +63,12 @@ export function JobListPanel() {
           />
           {keyword && (
             <button
+              type="button"
               onClick={() => setFilter('q', '')}
+              aria-label="Borrar búsqueda"
               className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
             >
-              <X className="w-3.5 h-3.5" />
+              <X className="size-3.5" aria-hidden="true" />
             </button>
           )}
         </div>
@@ -92,33 +76,29 @@ export function JobListPanel() {
         {/* Filter pills — iterate over typed constants */}
         <div className="flex gap-1.5 overflow-x-auto pb-0.5 scrollbar-none">
           {(Object.keys(WORK_MODE_LABELS) as WorkMode[]).map((value) => (
-            <FilterPill
-              key={value}
-              label={WORK_MODE_LABELS[value]}
-              active={workMode === value}
-              onClick={() => setFilter('workMode', workMode === value ? '' : value)}
-            />
+            <FilterChip key={value} active={workMode === value} onClick={() => setFilter('workMode', workMode === value ? '' : value)}>
+              {WORK_MODE_LABELS[value]}
+              </FilterChip>
           ))}
 
           <span className="w-px bg-border shrink-0" />
 
           {(Object.keys(JOB_TYPE_LABELS) as JobType[]).map((value) => (
-            <FilterPill
-              key={value}
-              label={JOB_TYPE_LABELS[value]}
-              active={jobType === value}
-              onClick={() => setFilter('jobType', jobType === value ? '' : value)}
-            />
+            <FilterChip key={value} active={jobType === value} onClick={() => setFilter('jobType', jobType === value ? '' : value)}>
+              {JOB_TYPE_LABELS[value]}
+              </FilterChip>
           ))}
 
           {hasFilters && (
-            <button
+            <Button
+              variant="ghost"
+              size="xs"
               onClick={clearFilters}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium text-danger-text hover:bg-danger-tint transition-colors whitespace-nowrap border border-danger-border"
+              className="rounded-full border border-danger-border text-danger-text hover:bg-danger-tint hover:text-danger-text"
             >
-              <X className="w-3 h-3" />
+              <X />
               Limpiar
-            </button>
+            </Button>
           )}
         </div>
 
@@ -165,28 +145,7 @@ export function JobListPanel() {
         ))}
       </div>
 
-      {/*  Pagination  */}
-      {data && data.totalPages > 1 && (
-        <div className="flex items-center justify-between px-4 py-3 border-t border-border-soft shrink-0 bg-card">
-          <button
-            disabled={page === 0}
-            onClick={() => setPage(page - 1)}
-            className="text-xs font-medium text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-          >
-            ← Anterior
-          </button>
-          <span className="text-xs text-muted-foreground">
-            {page + 1} / {data.totalPages}
-          </span>
-          <button
-            disabled={data.last}
-            onClick={() => setPage(page + 1)}
-            className="text-xs font-medium text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-          >
-            Siguiente →
-          </button>
-        </div>
-      )}
+      {data && <CompactPagination page={page} totalPages={data.totalPages} isLast={data.last} onPageChange={setPage} />}
     </div>
   )
 }

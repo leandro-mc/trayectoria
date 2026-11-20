@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ArrowLeft, MapPin, Briefcase, Wifi, Calendar, MessageSquare, FileText } from 'lucide-react'
+import { MapPin, Briefcase, Wifi, Calendar, MessageSquare, FileText } from 'lucide-react'
 import { useJobOffer } from '../hooks/useJobOffers'
 import { useJobsParams } from '../hooks/useJobsParams'
 import { SaveButton } from './SaveButton'
@@ -9,6 +9,8 @@ import { ApplyButton } from './ApplyButton'
 import { useAuthStore } from '@/stores/auth.store'
 import { WORK_MODE_LABELS, JOB_TYPE_LABELS } from '@/config/constants'
 import { formatDate } from '@/lib/utils/date'
+import { BackButton } from '@/components/shared/layout/BackButton'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { Skeleton, SkeletonLines } from '@/components/ui/skeleton'
 
@@ -62,12 +64,9 @@ export function JobDetailPanel() {
         <p className="text-sm font-medium text-muted-foreground">
           No se pudo cargar la oferta
         </p>
-        <button
-          onClick={goBackToList}
-          className="mt-3 text-xs text-brand-text hover:text-brand-text transition-colors"
-        >
+        <Button variant="link" size="sm" onClick={goBackToList} className="mt-3 text-xs">
           Volver a la lista
-        </button>
+        </Button>
       </div>
     )
   }
@@ -93,14 +92,7 @@ export function JobDetailPanel() {
       {/*  Sticky header  */}
       <div className="shrink-0 border-b border-border bg-card px-5 pt-4 pb-0">
 
-        {/* Mobile back button */}
-        <button
-          onClick={goBackToList}
-          className="lg:hidden inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground mb-3 transition-colors"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          Volver a la lista
-        </button>
+        <BackButton onClick={goBackToList} className="lg:hidden">Volver a la lista</BackButton>
 
         {/* Company + title */}
         <div className="mb-3">
@@ -168,31 +160,27 @@ export function JobDetailPanel() {
               <SaveButton jobOfferId={offer.id} size="md" showLabel />      
               {isCandidate && (
                 <>
-                <button
-                  onClick={() => setMode('cv')}
-                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-brand-border text-brand-text hover:bg-brand-tint transition-colors"
-                >
-                  <FileText className="w-3.5 h-3.5" />
+                <Button variant="brand" onClick={() => setMode('cv')} className="text-xs">
+                  <FileText />
                   CV personalizado
-                </button>
-                <button
-                  onClick={() => setMode('interview')}
-                  className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-xs font-medium border border-brand-border text-brand-text hover:bg-brand-tint transition-colors"
-                >
-                  <MessageSquare className="w-3.5 h-3.5" />
+                </Button>
+                <Button variant="brand" onClick={() => setMode('interview')} className="text-xs">
+                  <MessageSquare />
                   Entrevista IA
-                </button>  
-              </>
+                </Button>
+                </>
               )}       
           </div>
           </>
         )}
         {/* Content tabs */}
         {availableTabs.length > 1 && (
-          <div className="flex -mb-px">
+          <div role="group" aria-label="Contenido de la oferta" className="-mb-px flex">
             {availableTabs.map((tab) => (
               <button
                 key={tab.key}
+                type="button"
+                aria-pressed={resolvedTab === tab.key}
                 onClick={() => setActiveTab(tab.key)}
                 className={cn(
                   'px-4 py-2 text-xs font-medium border-b-2 transition-colors whitespace-nowrap',

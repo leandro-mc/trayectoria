@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Briefcase, ExternalLink, Trash2 } from 'lucide-react'
+import { FilterChip } from '@/components/shared/data/FilterChip'
 import { PageHeader } from '@/components/shared/layout/PageHeader'
 import { EmptyState } from '@/components/shared/feedback/EmptyState'
 import { CardSkeleton } from '@/components/shared/feedback/PageSkeleton'
@@ -12,6 +13,7 @@ import { ROUTES } from '@/config/routes'
 import type { ApplicationStatus } from '@/types/global.types'
 import Link from 'next/link'
 import { ApplicationStatusBadge } from '@/components/shared/data/StatusBadge'
+import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 
 const STATUS_TABS: { label: string; value: ApplicationStatus | 'ALL' }[] = [
@@ -38,20 +40,11 @@ export default function ApplicationsPage() {
       <PageHeader title="Mis Postulaciones" description="Seguí el estado de tus aplicaciones" />
 
       {/* Status tabs */}
-      <div className="flex gap-1 mb-6 overflow-x-auto pb-1">
+      <div role="group" aria-label="Filtrar por estado" className="mb-6 flex gap-1.5 overflow-x-auto pb-1">
         {STATUS_TABS.map((tab) => (
-          <button
-            key={tab.value}
-            onClick={() => { setActiveTab(tab.value); setPage(0) }}
-            className={[
-              'px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors',
-              activeTab === tab.value
-                ? 'bg-brand-tint text-brand-text'
-                : 'text-muted-foreground hover:bg-muted',
-            ].join(' ')}
-          >
+          <FilterChip key={tab.value} active={activeTab === tab.value} onClick={() => { setActiveTab(tab.value); setPage(0) }}>
             {tab.label}
-          </button>
+          </FilterChip>
         ))}
       </div>
 
@@ -100,22 +93,22 @@ export default function ApplicationsPage() {
               </div>
 
               <div className="flex items-center gap-1 shrink-0">
-                <Link
-                  href={ROUTES.publicJob(app.jobOfferId)}
-                  className="p-1.5 rounded-lg hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-                  title="Ver oferta"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                </Link>
+                <Button asChild variant="ghost" size="icon-sm" className="text-muted-foreground hover:text-foreground">
+                  <Link href={ROUTES.publicJob(app.jobOfferId)} aria-label={`Ver oferta ${app.jobOfferTitle ?? ''}`.trim()}>
+                    <ExternalLink />
+                  </Link>
+                </Button>
                 {app.status === 'PENDING' && (
-                  <button
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
                     onClick={() => withdraw(app.id)}
                     disabled={withdrawing}
-                    className="p-1.5 rounded-lg hover:bg-danger-tint text-muted-foreground hover:text-danger-text transition-colors disabled:opacity-50"
-                    title="Retirar postulación"
+                    aria-label="Retirar postulación"
+                    className="text-muted-foreground hover:bg-danger-tint hover:text-danger-text"
                   >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
+                    <Trash2 />
+                  </Button>
                 )}
               </div>
             </Card>

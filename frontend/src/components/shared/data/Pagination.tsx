@@ -50,16 +50,15 @@ export function Pagination({
         {totalElements} resultado{totalElements !== 1 ? 's' : ''}
       </p>
 
-      <div className="flex items-center gap-1">
+      <nav aria-label="Paginación" className="flex items-center gap-1">
         <Button
           variant="outline"
-          size="icon"
+          size="icon-sm"
           onClick={() => onPageChange(page - 1)}
           disabled={isFirst}
           aria-label="Página anterior"
-          className="h-8 w-8"
         >
-          <ChevronLeft className="w-4 h-4" />
+          <ChevronLeft />
         </Button>
 
         {getPages().map((p, i) =>
@@ -69,31 +68,52 @@ export function Pagination({
             <Button
               key={p}
               variant={p === page ? 'default' : 'outline'}
-              size="icon"
-              onClick={() => onPageChange(p as number)}
-              className={cn(
-                'h-8 w-8 text-sm',
-                p === page && 'bg-primary hover:bg-primary/90 text-primary-foreground border-primary',
-              )}
-              aria-label={`Página ${(p as number) + 1}`}
+              size="icon-sm"
+              onClick={() => onPageChange(p)}
+              aria-label={`Página ${p + 1}`}
               aria-current={p === page ? 'page' : undefined}
             >
-              {(p as number) + 1}
+              {p + 1}
             </Button>
           ),
         )}
 
         <Button
           variant="outline"
-          size="icon"
+          size="icon-sm"
           onClick={() => onPageChange(page + 1)}
           disabled={isLast}
           aria-label="Página siguiente"
-          className="h-8 w-8"
         >
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight />
         </Button>
-      </div>
+      </nav>
     </div>
+  )
+}
+
+interface CompactPaginationProps {
+  page:         number   // 0-based
+  totalPages:   number
+  isLast:       boolean
+  onPageChange: (page: number) => void
+}
+
+/** Previous / next with a page counter, for the narrow list panels where numbered pages do not fit. */
+export function CompactPagination({ page, totalPages, isLast, onPageChange }: CompactPaginationProps) {
+  if (totalPages <= 1) return null
+
+  return (
+    <nav aria-label="Paginación" className="flex shrink-0 items-center justify-between border-t border-border-soft bg-card px-4 py-3">
+      <Button variant="ghost" size="xs" disabled={page === 0} onClick={() => onPageChange(page - 1)} className="text-muted-foreground">
+        <ChevronLeft />
+        Anterior
+      </Button>
+      <span className="text-xs text-muted-foreground">{page + 1} / {totalPages}</span>
+      <Button variant="ghost" size="xs" disabled={isLast} onClick={() => onPageChange(page + 1)} className="text-muted-foreground">
+        Siguiente
+        <ChevronRight />
+      </Button>
+    </nav>
   )
 }

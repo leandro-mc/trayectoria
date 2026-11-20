@@ -2,10 +2,11 @@
 
 'use client'
 
-import { ArrowLeft, MapPin, Briefcase, Wifi } from 'lucide-react'
+import { MapPin, Briefcase, Wifi } from 'lucide-react'
 import { useJobOffer } from '../hooks/useJobOffers'
 import { useJobsParams } from '../hooks/useJobsParams'
 import { WORK_MODE_LABELS, JOB_TYPE_LABELS } from '@/config/constants'
+import { BackButton } from '@/components/shared/layout/BackButton'
 import { Skeleton, SkeletonLines } from '@/components/ui/skeleton'
 
 export function JobDescriptionSide() {
@@ -29,13 +30,7 @@ export function JobDescriptionSide() {
 
       {/* Header */}
       <div className="px-5 pt-4 pb-4 border-b border-border bg-card shrink-0">
-        <button
-          onClick={goBackToDetail}
-          className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground mb-3 transition-colors"
-        >
-          <ArrowLeft className="w-3.5 h-3.5" />
-          Volver al detalle
-        </button>
+        <BackButton onClick={goBackToDetail}>Volver al detalle</BackButton>
 
         <p className="text-xs font-medium text-muted-foreground mb-0.5">
           {offer.companyName ?? 'Empresa'}

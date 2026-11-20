@@ -4,15 +4,14 @@
 'use client'
 
 import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { CompactPagination } from '@/components/shared/data/Pagination'
 import { Bookmark, BookmarkX } from 'lucide-react'
 import { useSavedOffers, useUnsaveOffer } from '@/features/saved-offers/hooks/useSavedOffers'
 import { useJobsParams } from '../hooks/useJobsParams'
 import { JobOfferCard } from './JobOfferCard'
 import { ROUTES } from '@/config/routes'
 import { JobCardSkeleton } from '@/components/shared/feedback/PageSkeleton'
-
-//  Skeleton 
-
 
 //  Unsave button 
 
@@ -21,14 +20,15 @@ function UnsaveButton({ jobOfferId, onUnsave }: {
   onUnsave:   (id: number) => void
 }) {
   return (
-    <button
+    <Button
+      variant="outline"
+      size="sm"
       onClick={(e) => { e.stopPropagation(); onUnsave(jobOfferId) }}
-      title="Quitar de guardadas"
-      className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-input hover:border-danger-border hover:bg-danger-tint text-muted-foreground hover:text-danger-text text-xs font-medium transition-colors shrink-0"
+      className="text-xs text-muted-foreground hover:border-danger-border hover:bg-danger-tint hover:text-danger-text"
     >
-      <BookmarkX className="w-3.5 h-3.5" />
+      <BookmarkX />
       Quitar
-    </button>
+    </Button>
   )
 }
 
@@ -102,28 +102,7 @@ export function SavedListPanel() {
         ))}
       </div>
 
-      {/*  Pagination  */}
-      {data && data.totalPages > 1 && (
-        <div className="flex items-center justify-between px-4 py-3 border-t border-border-soft shrink-0 bg-card">
-          <button
-            disabled={page === 0}
-            onClick={() => setPage(page - 1)}
-            className="text-xs font-medium text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-          >
-            ← Anterior
-          </button>
-          <span className="text-xs text-muted-foreground">
-            {page + 1} / {data.totalPages}
-          </span>
-          <button
-            disabled={data.last}
-            onClick={() => setPage(page + 1)}
-            className="text-xs font-medium text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-          >
-            Siguiente →
-          </button>
-        </div>
-      )}
+      {data && <CompactPagination page={page} totalPages={data.totalPages} isLast={data.last} onPageChange={setPage} />}
     </div>
   )
 }

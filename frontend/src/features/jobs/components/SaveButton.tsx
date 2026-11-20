@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Bookmark, BookmarkCheck } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
 import { useAuthStore } from '@/stores/auth.store'
 import { useIsSaved, useSaveOffer, useUnsaveOffer } from '@/features/saved-offers/hooks/useSavedOffers'
@@ -32,33 +33,27 @@ export function SaveButton({ jobOfferId, size = 'md', showLabel = false }: SaveB
     else         save(jobOfferId)
   }
 
-  const isSmall = size === 'sm'
 
   return (
     <>
-      <button
+      <Button
+        variant={isSaved ? 'brand' : 'outline'}
+        size={size === 'sm' ? 'xs' : 'sm'}
         onClick={handleClick}
         disabled={isPending || isLoading}
-        title={isSaved ? 'Quitar de guardados' : 'Guardar oferta'}
+        aria-pressed={isSaved}
+        aria-label={isSaved ? 'Quitar de guardadas' : 'Guardar oferta'}
+        title={isSaved ? 'Quitar de guardadas' : 'Guardar oferta'}
         className={cn(
-          'inline-flex items-center gap-1.5 rounded-lg border font-medium transition-colors disabled:opacity-50',
-          isSmall ? 'h-7 px-2 text-xs' : 'h-9 px-3 text-xs',
+          'text-xs',
           isSaved
-            ? 'border-brand-border bg-brand-tint text-brand-text hover:border-danger-border hover:bg-danger-tint hover:text-danger-text'
-            : 'border-input bg-card text-muted-foreground hover:border-brand-border hover:text-brand-text',
+            ? 'hover:border-danger-border hover:bg-danger-tint hover:text-danger-text'
+            : 'text-muted-foreground hover:border-brand-border hover:text-brand-text',
         )}
       >
-        {isPending ? (
-          <Spinner className={isSmall ? 'size-3' : 'size-3.5'} />
-        ) : isSaved ? (
-          <BookmarkCheck className={cn(isSmall ? 'w-3 h-3' : 'w-3.5 h-3.5')} />
-        ) : (
-          <Bookmark className={cn(isSmall ? 'w-3 h-3' : 'w-3.5 h-3.5')} />
-        )}
-        {showLabel && (
-          <span>{isSaved ? 'Guardada' : 'Guardar'}</span>
-        )}
-      </button>
+        {isPending ? <Spinner className="size-3" /> : isSaved ? <BookmarkCheck /> : <Bookmark />}
+        {showLabel && <span>{isSaved ? 'Guardada' : 'Guardar'}</span>}
+      </Button>
 
       {showGate && (
         <AuthGateModal
