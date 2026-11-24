@@ -19,6 +19,15 @@ export default defineConfig([
       // General
       "no-console": ["warn", { allow: ["error", "warn"] }],
       "prefer-const": "error",
+      // Environment is read in one place only (src/config/env.ts); see the override below.
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "MemberExpression[object.name='process'][property.name='env']",
+          message: "Import what you need from '@/config/env' instead of reading process.env.",
+        },
+      ],
     },
   },
+  { files: ["src/config/env.ts"], rules: { "no-restricted-syntax": "off" } },
 ]);

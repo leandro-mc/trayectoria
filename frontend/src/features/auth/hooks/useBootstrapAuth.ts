@@ -3,17 +3,15 @@
 //   1. Wait for Zustand persist hydration to complete (onFinishHydration /
 //      hasHydrated) before reading auth state.
 //   2. Use getState() imperatively — always reflects current hydrated state.
-//   3. Use raw fetch() for the refresh call (not apiClient) to completely
+//   3. Refresh through refreshSession() (not apiClient) to completely
 //      bypass Axios interceptors during bootstrap.
 
 'use client'
 
 import { useEffect, useState } from 'react'
+import { refreshSession } from '@/lib/api/refresh-session'
 import { tokenStorage } from '@/lib/auth/token.storage'
 import { useAuthStore } from '@/stores/auth.store'
-import type { AuthResponse } from '@/types/api.types'
-
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8080/api'
 
 // Waits for Zustand's persist middleware to finish reading from localStorage.
 // For synchronous storage (localStorage) this is effectively a no-op — hasHydrated()
@@ -69,18 +67,10 @@ export function useBootstrapAuth(): boolean {
         return
       }
 
-      // Step 3 — silent refresh with raw fetch() — completely bypasses Axios
-      // interceptors so there's no risk of the 401 handler triggering during bootstrap.
+      // Step 3 — silent refresh, outside the Axios interceptors so there's no risk of
+      // the 401 handler triggering during bootstrap (see refreshSession).
       try {
-        const res = await fetch(`${API_BASE}/v1/auth/refresh`, {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify({ refreshToken }),
-        })
-
-        if (!res.ok) throw new Error(`Refresh failed: ${res.status}`)
-
-        const data = (await res.json()) as AuthResponse
+        const data = await refreshSession(refreshToken)
         if (!cancelled) {
           // setTokens writes to sessionStorage + localStorage + cookie
           setTokens({ accessToken: data.accessToken, refreshToken: data.refreshToken })

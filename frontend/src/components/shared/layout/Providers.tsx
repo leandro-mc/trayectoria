@@ -9,6 +9,7 @@ import '@/lib/api/interceptors'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { useEffect, useState, type ReactNode } from 'react'
+import { isDevelopment } from '@/config/env'
 import { useUIStore } from '@/stores/ui.store'
 import { useBootstrapAuth } from '@/features/auth/hooks/useBootstrapAuth'
 
@@ -91,7 +92,7 @@ export function Providers({ children }: ProvidersProps) {
       <AuthBootstrapGate>
         {children}
       </AuthBootstrapGate>
-      {process.env.NODE_ENV === 'development' && (
+      {isDevelopment && (
         <ReactQueryDevtools initialIsOpen={false} />
       )}
     </QueryClientProvider>
