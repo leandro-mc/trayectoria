@@ -29,7 +29,7 @@ export function Sidebar({ role }: { role: UserRole }) {
   return (
     <aside
       className={cn(
-        'sticky top-0 hidden h-screen shrink-0 flex-col border-r border-border bg-card transition-all duration-300 lg:flex',
+        'hidden shrink-0 flex-col border-r border-border bg-card transition-all duration-300 lg:flex',
         collapsed ? 'w-16' : 'w-60',
       )}
     >

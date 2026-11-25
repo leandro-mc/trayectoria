@@ -18,7 +18,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
   const isAuthPage = AUTH_PATHS.some((p) => pathname.startsWith(p))
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="flex flex-1 flex-col bg-background">
       <PublicNavbar hideAuthButtons={isAuthPage} />
 
       {/*  Content  */}

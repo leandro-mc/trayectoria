@@ -10,3 +10,6 @@ registerAllRoutes()
 export { handleDemoRequest } from './http/adapter'
 export { refreshTokens as demoRefresh } from './handlers/auth'
 export { resetDemoData } from './db/store'
+export { DemoBanner } from './ui/DemoBanner'
+export { DemoLoginShortcuts } from './ui/DemoLoginShortcuts'
+export { SimulatedAiNote } from './ui/SimulatedAiNote'
