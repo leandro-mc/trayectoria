@@ -43,7 +43,12 @@ apiClient.interceptors.response.use(
   async (error: AxiosError) => {
     const original = error.config as InternalAxiosRequestConfig & { _retry?: boolean }
 
-    if (error.response?.status !== 401 || original._retry) {
+    // /auth/* answers 401 for "wrong credentials" or "bad refresh token": that is a result for
+    // the form to show, not an expired session. Handling it here would reload the login page
+    // (losing the message), and a failing /auth/refresh would wait forever in its own queue.
+    const isAuthRequest = original.url?.startsWith('/auth/') ?? false
+
+    if (error.response?.status !== 401 || original._retry || isAuthRequest) {
       return Promise.reject(error)
     }
 
