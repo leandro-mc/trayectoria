@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { AppFrame } from '@/components/shared/layout/AppFrame'
 import { Providers } from '@/components/shared/layout/Providers'
 
 export const metadata: Metadata = {
@@ -19,10 +20,12 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className="font-sans antialiased bg-background text-foreground min-h-screen">
-        <Providers>
-          {children}
-        </Providers>
+      <body className="font-sans antialiased bg-background text-foreground min-h-dvh flex flex-col">
+        <AppFrame>
+          <Providers>
+            {children}
+          </Providers>
+        </AppFrame>
       </body>
     </html>
   )

@@ -16,7 +16,7 @@ export function SplitPanelShell({ children }: { children: ReactNode }) {
   if (role) return <AppShell role={role} layout="panels">{children}</AppShell>
 
   return (
-    <div className="flex h-screen flex-col overflow-hidden bg-background">
+    <div className="flex h-dvh max-h-full flex-col overflow-hidden bg-background">
       <PublicNavbar />
       <main className="flex min-w-0 flex-1 flex-col overflow-hidden">{children}</main>
     </div>

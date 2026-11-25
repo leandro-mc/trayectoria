@@ -16,6 +16,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { QUERY_KEYS } from '@/config/query-keys'
 import { Skeleton, SkeletonLines } from '@/components/ui/skeleton'
 import { IconTile } from '@/components/shared/brand/IconTile'
+import { SimulatedAiNote } from '@/components/shared/feedback/SimulatedAiNote'
 import { Button } from '@/components/ui/button'
 
 //  Module-level guard 
@@ -178,6 +179,7 @@ export function JobCVPanel() {
 
         {showContent && (
           <div className="px-5 py-4">
+            <SimulatedAiNote kind="cv" className="mb-3" />
             <CurriculumDisplay content={latestCV!.content} compact />
           </div>
         )}

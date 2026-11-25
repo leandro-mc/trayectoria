@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
@@ -13,8 +13,14 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { ErrorAlert } from '@/components/ui/error-alert'
 import { Input } from '@/components/ui/input'
+import { isDemoMode } from '@/config/env'
 import { ROUTES } from '@/config/routes'
 import { extractApiError } from '@/lib/utils/format'
+
+// Sample-account shortcuts only exist in demo mode, and stay out of the bundle otherwise.
+const DemoLoginShortcuts = isDemoMode
+  ? lazy(() => import('@/demo').then((m) => ({ default: m.DemoLoginShortcuts })))
+  : null
 
 export function LoginForm() {
   const [apiError, setApiError] = useState<string | null>(null)
@@ -25,7 +31,7 @@ export function LoginForm() {
     defaultValues: { email: '', password: '' },
   })
 
-  function onSubmit(data: LoginFormValues) {
+  function submit(data: LoginFormValues) {
     setApiError(null)
     login(data, { onError: (err) => setApiError(extractApiError(err)) })
   }
@@ -38,9 +44,15 @@ export function LoginForm() {
           <p className="text-sm text-muted-foreground">Ingresá a tu cuenta para continuar</p>
         </div>
 
+        {DemoLoginShortcuts && (
+          <Suspense fallback={null}>
+            <DemoLoginShortcuts onLogin={submit} disabled={isPending} />
+          </Suspense>
+        )}
+
         {apiError && <ErrorAlert className="mb-5">{apiError}</ErrorAlert>}
 
-        <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
+        <form onSubmit={handleSubmit(submit)} noValidate className="space-y-5">
           <Field label="Email" error={errors.email?.message}>
             {(a11y) => (
               <Input

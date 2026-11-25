@@ -17,7 +17,9 @@ interface AppShellProps {
 export function AppShell({ role, children, layout = 'scroll' }: AppShellProps) {
   return (
     // h-dvh, not h-screen: 100vh includes the mobile address bar and pushes the bottom nav off-screen.
-    <div className="flex h-dvh overflow-hidden bg-background">
+    // max-h-full: when AppFrame puts a banner above, the shell shrinks to the space left under it
+    // (a percentage is ignored when the parent has no fixed height, so without a banner nothing changes).
+    <div className="flex h-dvh max-h-full overflow-hidden bg-background">
       <Sidebar role={role} />
 
       <div className="flex min-w-0 flex-1 flex-col overflow-hidden">

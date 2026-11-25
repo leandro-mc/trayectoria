@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { Mic, Send } from 'lucide-react'
+import { SimulatedAiNote } from '@/components/shared/feedback/SimulatedAiNote'
 import { Button } from '@/components/ui/button'
 import { Spinner } from '@/components/ui/spinner'
 import { Textarea } from '@/components/ui/textarea'
@@ -56,6 +57,7 @@ export function ChatComposer({ sending, onSend }: ChatComposerProps) {
         </Button>
       </div>
       <p className="mt-1.5 px-1 text-[10px] text-muted-foreground">Shift+Enter para nueva línea · Enter para enviar</p>
+      <SimulatedAiNote kind="interview" className="mt-1 px-1" />
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react'
 import { AlertCircle, CheckCircle2, ThumbsUp, TrendingUp } from 'lucide-react'
 import { RecommendationBadge } from '@/components/shared/data/StatusBadge'
+import { SimulatedAiNote } from '@/components/shared/feedback/SimulatedAiNote'
 import type { InterviewFeedback } from '../types/interviews.types'
 
 function Note({ title, children }: { title: string; children: string }) {
@@ -58,6 +59,7 @@ export function FeedbackSection({ feedback }: { feedback: InterviewFeedback }) {
       <PointList title="Fortalezas" items={feedback.strengths} headIcon={ThumbsUp} itemIcon={CheckCircle2} tone="success" />
       <PointList title="Áreas a mejorar" items={feedback.areasForImprovement} headIcon={TrendingUp} itemIcon={AlertCircle} tone="warning" />
       <Note title="Feedback detallado">{feedback.details}</Note>
+      <SimulatedAiNote kind="feedback" />
     </div>
   )
 }

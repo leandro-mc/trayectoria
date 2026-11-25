@@ -19,6 +19,35 @@ export default defineConfig([
       // General
       "no-console": ["warn", { allow: ["error", "warn"] }],
       "prefer-const": "error",
+      // Environment is read in one place only (src/config/env.ts); see the override below.
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "MemberExpression[object.name='process'][property.name='env']",
+          message: "Import what you need from '@/config/env' instead of reading process.env.",
+        },
+      ],
+    },
+  },
+  { files: ["src/config/env.ts"], rules: { "no-restricted-syntax": "off" } },
+  {
+    // The demo layer must stay out of the production bundle: load it only with import('@/demo'),
+    // never with a static import (type-only imports are fine). See docs/demo-mode.md.
+    files: ["src/**/*.{ts,tsx}"],
+    ignores: ["src/demo/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/demo", "@/demo/*"],
+              allowTypeImports: true,
+              message: "Load the demo layer with a dynamic import('@/demo'); a static import puts it in every build.",
+            },
+          ],
+        },
+      ],
     },
   },
 ]);

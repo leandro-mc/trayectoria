@@ -3,7 +3,8 @@
 
 import type { InterviewFeedback } from '../types/interviews.types'
 
-const key = (id: number) => `tia-feedback-${id}`
+const PREFIX = 'tia-feedback-'
+const key = (id: number) => `${PREFIX}${id}`
 
 export function saveFeedback(interviewId: number, feedback: InterviewFeedback): void {
   try {
@@ -19,5 +20,16 @@ export function loadFeedback(interviewId: number): InterviewFeedback | null {
     return raw ? (JSON.parse(raw) as InterviewFeedback) : null
   } catch {
     return null
+  }
+}
+
+/** Removes every cached feedback (used by the demo mode when its data is reset). */
+export function clearFeedback(): void {
+  try {
+    for (const k of Object.keys(localStorage)) {
+      if (k.startsWith(PREFIX)) localStorage.removeItem(k)
+    }
+  } catch {
+    // Storage unavailable — nothing to clear
   }
 }

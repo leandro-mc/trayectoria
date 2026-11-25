@@ -3,6 +3,7 @@
 import { Suspense } from 'react'
 import { FileText, Trash2 } from 'lucide-react'
 import { DetailPlaceholder, MasterDetail } from '@/components/shared/layout/MasterDetail'
+import { SimulatedAiNote } from '@/components/shared/feedback/SimulatedAiNote'
 import { Button } from '@/components/ui/button'
 import { SkeletonLines } from '@/components/ui/skeleton'
 import { Spinner } from '@/components/ui/spinner'
@@ -42,6 +43,7 @@ function CurriculumPanel({ id, onClear }: { id: number; onClear: () => void }) {
         </Button>
       </div>
       <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4">
+        <SimulatedAiNote kind="cv" className="mb-3" />
         <CurriculumDisplay content={cv.content} compact />
       </div>
     </div>

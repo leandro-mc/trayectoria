@@ -34,6 +34,10 @@ npm run dev              # http://localhost:3000
 
 Other scripts: `npm run build`, `npm run lint`, `npm run type-check`.
 
+### Demo mode (no backend)
+
+Set `NEXT_PUBLIC_DEMO_MODE=true` and the app runs entirely in the browser with fictional data and a one-click sample login: no backend, nothing to host. That is how it can be published for free (e.g. on Vercel, Root Directory `frontend`, no `NEXT_PUBLIC_API_URL`). With it off, `NEXT_PUBLIC_API_URL` is required and the production build fails without it. Both variables are baked in at build time, so changing them means rebuilding. See [`docs/demo-mode.md`](docs/demo-mode.md).
+
 ## Structure
 
 ```

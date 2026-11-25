@@ -5,9 +5,12 @@
 #
 #  NEXT_PUBLIC_API_URL is baked into the client bundle at build time
 #  and is the URL the *browser* uses to reach the API.
+#  NEXT_PUBLIC_DEMO_MODE=true builds the backend-less demo instead (the API URL is then
+#  ignored); it is also baked at build time. See docs/demo-mode.md.
 #
 #  Standalone usage:
 #    docker build --build-arg NEXT_PUBLIC_API_URL=http://localhost:8080/api -t trayectoria-web .
+#    docker build --build-arg NEXT_PUBLIC_DEMO_MODE=true -t trayectoria-web-demo .
 #    docker run -p 3000:3000 trayectoria-web
 #  Recommended: use the docker-compose.yml at the repo root.
 # ================================================================
@@ -25,7 +28,9 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ARG NEXT_PUBLIC_API_URL=http://localhost:8080/api
+ARG NEXT_PUBLIC_DEMO_MODE=false
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL \
+    NEXT_PUBLIC_DEMO_MODE=$NEXT_PUBLIC_DEMO_MODE \
     NEXT_OUTPUT=standalone \
     NEXT_TELEMETRY_DISABLED=1
 
