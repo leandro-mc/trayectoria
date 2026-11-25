@@ -26,7 +26,7 @@ export const CURRICULA: readonly CurriculumFixture[] = [
   {
     candidate: 'sofia', offer: 'frontend-react', daysAgo: 6,
     content: {
-      summary: 'Desarrolladora full stack con 4 años de experiencia creando interfaces rápidas y accesibles con React, Next.js y TypeScript. Lideró la mejora del rendimiento del frontend en Pixelforge Studio (-35% en tiempo de carga) y disfruta colaborar de cerca con diseño en sistemas de componentes reutilizables.',
+      summary: 'Desarrolladora full stack con 6 años de experiencia creando interfaces rápidas y accesibles con React, Next.js y TypeScript. Lideró la mejora del rendimiento del frontend en Pixelforge Studio (-35% en tiempo de carga) y disfruta colaborar de cerca con diseño en sistemas de componentes reutilizables.',
       experience: [
         { company: 'Pixelforge Studio', position: 'Desarrolladora Full Stack', period: 'Mar 2022 – Presente',
           description: 'Desarrollo de aplicaciones web con React, Next.js y Node.js. Reducción del 35% en el tiempo de carga mediante renderizado en servidor y división de código. Mantenimiento de una biblioteca de componentes compartida con diseño.' },
@@ -101,7 +101,7 @@ export const INTERVIEWS: readonly InterviewFixture[] = [
     candidate: 'sofia', offer: 'frontend-react', status: 'COMPLETED', daysAgo: 7, durationMinutes: 22,
     messages: [
       { role: 'ASSISTANT', at: 10, content: '¡Hola, Sofía! Gracias por tu interés en el puesto de Frontend Developer en Nimbus Labs. Para empezar, cuéntame brevemente sobre ti y por qué te interesa esta posición.' },
-      { role: 'USER', at: 60, content: 'Hola, gracias. Soy desarrolladora full stack con 4 años de experiencia, sobre todo en React, Next.js y TypeScript. Me interesa el puesto porque trabajan con una consola usada por muchos desarrolladores y valoro mucho la accesibilidad y el rendimiento.' },
+      { role: 'USER', at: 60, content: 'Hola, gracias. Soy desarrolladora full stack con 6 años de experiencia, sobre todo en React, Next.js y TypeScript. Me interesa el puesto porque trabajan con una consola usada por muchos desarrolladores y valoro mucho la accesibilidad y el rendimiento.' },
       { role: 'ASSISTANT', at: 90, content: 'Muy bien. En Next.js, ¿cuándo elegirías renderizado en servidor frente a renderizado en cliente, y cómo lo has aplicado en un proyecto real?' },
       { role: 'USER', at: 240, content: 'Uso renderizado en servidor para páginas con contenido público o que dependen de SEO y para reducir el tiempo hasta el primer contenido útil. En Pixelforge migré el catálogo a renderizado en servidor y, junto con la división de código, bajamos el tiempo de carga un 35%. Dejo el cliente para partes muy interactivas o dependientes de la sesión.' },
       { role: 'ASSISTANT', at: 300, content: 'Excelente ejemplo con métrica. Cambiando de tema: ¿cómo abordas la accesibilidad al construir un componente reutilizable, por ejemplo un menú desplegable?' },

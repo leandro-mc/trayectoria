@@ -72,7 +72,7 @@ export const CANDIDATES: readonly CandidateFixture[] = [
   {
     key: 'sofia', email: 'sofia@demo.trayectoria.dev', firstName: 'Sofía', lastName: 'Ramírez',
     phone: '+52 55 5555 0101', location: 'Ciudad de México, México', birthdate: '1996-04-12',
-    bio: 'Desarrolladora full stack con 4 años de experiencia construyendo productos web con React, Next.js y Node.js. Me gusta trabajar cerca de diseño y cuidar la experiencia de usuario.',
+    bio: 'Desarrolladora full stack con 6 años de experiencia construyendo productos web con React, Next.js y Node.js. Me gusta trabajar cerca de diseño y cuidar la experiencia de usuario.',
     linkedinUrl: 'https://linkedin.com/in/demo-sofia-ramirez', githubUrl: 'https://github.com/demo-sofia',
     portfolioUrl: 'https://sofia-ramirez.example.com',
     skills: ['React', 'Next.js', 'TypeScript', 'JavaScript', 'Node.js', 'Git', 'Docker', 'PostgreSQL', 'Scrum', 'Trabajo en equipo', 'Comunicación efectiva'],

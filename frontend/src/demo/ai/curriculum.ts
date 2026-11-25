@@ -28,6 +28,12 @@ function educationPeriod(start: string | null, end: string | null): string {
 /** Declared level, in the CV's wording ("Native" is shown as "Nativo"). */
 const level = (value: string | null) => (value === 'Native' ? 'Nativo' : (value ?? ''))
 
+/** "Degree en Field", unless the degree already says it ("Ingeniería en Sistemas" + "Ingeniería de Software"). */
+function degreeLabel(degree: string | null, field: string | null): string {
+  if (!degree) return field ?? ''
+  return field && !degree.toLowerCase().includes(' en ') ? `${degree} en ${field}` : degree
+}
+
 /** The profile as a CV, with no tailoring. It is also what a company sees when no CV was attached. */
 export function buildBaseContent(profile: CandidateProfileResponse): CurriculumContent {
   return {
@@ -38,7 +44,7 @@ export function buildBaseContent(profile: CandidateProfileResponse): CurriculumC
     })),
     education: profile.educations.map((e) => ({
       institution: e.institution ?? '',
-      degree: e.degree && e.fieldOfStudy ? `${e.degree} en ${e.fieldOfStudy}` : (e.degree ?? ''),
+      degree: degreeLabel(e.degree, e.fieldOfStudy),
       period: educationPeriod(e.startDate, e.endDate),
     })),
     skills: profile.skills.map((s) => s.name).sort((a, b) => a.localeCompare(b)),
