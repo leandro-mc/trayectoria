@@ -8,9 +8,10 @@ import { jsonBody, pathId } from '../http/request'
 import { route } from '../http/router'
 import { Validator } from '../http/validation'
 import { toInterview, toSkills } from '../mappers'
+import { newestFirst } from './ordering'
 import { requireOffer } from './ownership'
 
-const newestFirst = (a: InterviewRecord, b: InterviewRecord) => b.createdAt.localeCompare(a.createdAt)
+const newest = newestFirst<InterviewRecord>((i) => i.createdAt)
 
 /** The offer facts the scripted interviewer needs. */
 function contextFor(interview: InterviewRecord): InterviewContext {
@@ -54,7 +55,7 @@ export function registerInterviewRoutes(): void {
 
   route('GET', '/interviews', 'CANDIDATE', (_req, user) => ({
     status: 200,
-    data: getDb().interviews.filter((i) => i.candidateId === user.id).sort(newestFirst).map((i) => toInterview(i, false)),
+    data: getDb().interviews.filter((i) => i.candidateId === user.id).sort(newest).map((i) => toInterview(i, false)),
   }))
 
   route('GET', '/interviews/:id', 'CANDIDATE', (req, user) => ({

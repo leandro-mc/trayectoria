@@ -8,9 +8,10 @@ import { jsonBody, pathId, requiredQueryNumber } from '../http/request'
 import { route } from '../http/router'
 import { Validator } from '../http/validation'
 import { toCandidateProfile, toCurriculum, toOffer } from '../mappers'
+import { newestFirst } from './ordering'
 import { requireOffer } from './ownership'
 
-const newestFirst = (a: CurriculumRecord, b: CurriculumRecord) => b.createdAt.localeCompare(a.createdAt)
+const newest = newestFirst<CurriculumRecord>((c) => c.createdAt)
 
 const candidateProfile = (id: number) => {
   const candidate = getDb().candidates.find((c) => c.userId === id)
@@ -34,7 +35,7 @@ export function registerCurriculumRoutes(): void {
 
   route('GET', '/curricula', 'CANDIDATE', (_req, user) => ({
     status: 200,
-    data: getDb().curricula.filter((c) => c.candidateId === user.id).sort(newestFirst).map(toCurriculum),
+    data: getDb().curricula.filter((c) => c.candidateId === user.id).sort(newest).map(toCurriculum),
   }))
 
   // Both literal paths come before '/curricula/:id'.
@@ -45,7 +46,7 @@ export function registerCurriculumRoutes(): void {
 
     const latest = getDb().curricula
       .filter((c) => c.candidateId === candidateId && c.jobOfferId === offerId)
-      .sort(newestFirst)[0]
+      .sort(newest)[0]
     if (!latest) throw notFound(`No curriculum found for candidateId=${candidateId} and offerId=${offerId}`)
     return { status: 200, data: toCurriculum(latest) }
   })

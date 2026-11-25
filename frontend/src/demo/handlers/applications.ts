@@ -7,10 +7,11 @@ import { jsonBody, pageParams, paginate, pathId } from '../http/request'
 import { route } from '../http/router'
 import { Validator } from '../http/validation'
 import { toApplication } from '../mappers'
+import { newestFirst } from './ordering'
 import { requireOffer, requireOwnOffer } from './ownership'
 
 const REVIEW_STATUSES = ['VIEWED', 'IN_REVIEW', 'ACCEPTED', 'REJECTED']
-const newestFirst = (a: ApplicationRecord, b: ApplicationRecord) => b.appliedAt.localeCompare(a.appliedAt)
+const newest = newestFirst<ApplicationRecord>((a) => a.appliedAt)
 
 export function registerApplicationRoutes(): void {
   route('POST', '/job-offers/:id/apply', 'CANDIDATE', (req, user) => {
@@ -37,7 +38,7 @@ export function registerApplicationRoutes(): void {
   })
 
   route('GET', '/applications/mine', 'CANDIDATE', (req, user) => {
-    const mine = getDb().applications.filter((a) => a.candidateId === user.id).sort(newestFirst)
+    const mine = getDb().applications.filter((a) => a.candidateId === user.id).sort(newest)
     return { status: 200, data: paginate(mine.map(toApplication), pageParams(req)) }
   })
 
@@ -57,7 +58,7 @@ export function registerApplicationRoutes(): void {
 
   route('GET', '/job-offers/:id/applications', 'COMPANY', (req, user) => {
     const offer = requireOwnOffer(pathId(req), user.id, "Job offer not found or you don't own it")
-    const received = getDb().applications.filter((a) => a.jobOfferId === offer.id).sort(newestFirst)
+    const received = getDb().applications.filter((a) => a.jobOfferId === offer.id).sort(newest)
     return { status: 200, data: paginate(received.map(toApplication), pageParams(req)) }
   })
 

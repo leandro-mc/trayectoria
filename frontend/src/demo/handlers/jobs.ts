@@ -8,10 +8,11 @@ import { jsonBody, pageParams, paginate, pathId, queryNumber, queryString } from
 import { publicRoute, route } from '../http/router'
 import { Validator } from '../http/validation'
 import { toOffer, toOfferSummary } from '../mappers'
+import { newestFirst } from './ordering'
 import { requireOffer, requireOwnOffer } from './ownership'
 
 const STATUSES: readonly JobStatus[] = ['ACTIVE', 'CLOSED', 'DRAFT']
-const newestFirst = (a: OfferRecord, b: OfferRecord) => b.createdAt.localeCompare(a.createdAt)
+const newest = newestFirst<OfferRecord>((o) => o.createdAt)
 
 /** Unknown skill ids are dropped silently, like `findAllByIdIn` does. */
 const knownSkillIds = (ids: readonly number[] = []) => ids.filter((id) => findSkill(id))
@@ -45,14 +46,14 @@ export function registerJobRoutes(): void {
       .filter((o) => !jobType || o.jobType === jobType)
       .filter((o) => skillId === undefined || o.skillIds.includes(skillId))
       .filter((o) => !keyword || o.title.toLowerCase().includes(keyword))
-      .sort(newestFirst)
+      .sort(newest)
 
     return { status: 200, data: paginate(matches.map(toOfferSummary), pageParams(req)) }
   })
 
   // Registered before '/job-offers/:id' so "mine" is not read as an id.
   route('GET', '/job-offers/mine', 'COMPANY', (req, user) => {
-    const own = getDb().offers.filter((o) => o.companyId === user.id).sort(newestFirst)
+    const own = getDb().offers.filter((o) => o.companyId === user.id).sort(newest)
     return { status: 200, data: paginate(own.map(toOfferSummary), pageParams(req)) }
   })
 
