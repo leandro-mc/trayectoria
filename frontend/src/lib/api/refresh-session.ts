@@ -1,4 +1,4 @@
-import { apiUrl } from '@/config/env'
+import { apiUrl, isDemoMode } from '@/config/env'
 import type { AuthResponse } from '@/types/api.types'
 
 /**
@@ -9,6 +9,9 @@ import type { AuthResponse } from '@/types/api.types'
  * session yet to protect, so a failure must simply bubble up to `useBootstrapAuth`.
  */
 export async function refreshSession(refreshToken: string): Promise<AuthResponse> {
+  // Demo mode: same refresh logic as POST /auth/refresh, answered locally.
+  if (isDemoMode) return (await import('@/demo')).demoRefresh(refreshToken)
+
   const res = await fetch(`${apiUrl}/v1/auth/refresh`, {
     method:  'POST',
     headers: { 'Content-Type': 'application/json' },
